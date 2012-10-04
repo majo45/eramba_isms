@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+			
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	      
+	<meta name="author" content="Adbee.sk, www.adbee.sk"/>
+	<meta name="Copyright" content="Copyright Adbee 2012" />
+	<meta http-equiv="X-UA-Compatible" content="IE=9" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/admin.scripts.js"></script>
+	<script type="text/javascript" src="js/chosen.jquery.js"></script>
+	<script type="text/javascript" src="js/accordion.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="css/styles.css" />
+	<link rel="stylesheet" type="text/css" href="css/chosen.css" />
+	
+	<title>Admin panel</title>
+	
+	<script>
+	$(document).ready(function() {
+		$("#accordion").accordion();
+	});
+	</script>
+</head>
+<body>
+	<section id="header-wrapper">
+		<div id="header-inner">
+			<a href="/" id="logo">
+				<!-- <img src="img/logo.png" alt="Admin logo" />-->
+			</a>
+			<div id="user-box">
+				<div id="user-links">
+					<a href="#" id="user-profile">Esteban Ribicic</a>
+					<a href="#" id="user-sign-out">Sign out</a>
+				</div>
+				<img src="img/profile-pic.png" alt="Profile pic"/>
+			</div>
+		</div>
+	</section>
+	<section id="menu-wrapper">
+		<nav id="menu-top">
+			<ul id="menu-items">
+				<li><a href="#" class="active">Organization</a></li>
+				<li><a href="#">Asset</a></li>
+				<li><a href="#">Risk</a></li>
+				<li><a href="#">Services</a></li>
+				<li><a href="#">Compliance</a></li>
+			</ul>
+			
+			<ul id="controls">
+				<li id="help-control">
+					<div id="help-control-icon"></div>
+				</li>
+				<li id="search-control">
+					<div id="search-control-icon"></div>
+				</li>
+				<li id="add-control">
+					<div id="add-control-icon"></div>
+				</li>
+			</ul>
+		</nav>
+		<nav id="menu-sub">
+			<ul>
+				<li><a href="#">Organization</a></li>
+				<li><a href="#">Third party</a></li>
+				<li><a href="#">Legal</a></li>
+				<li><a href="#">Process</a></li>
+			</ul>
+		</nav>
+	</section>
+	<section id="content-wrapper">
+		<h3>Third party</h3>
+		
+		<div class="controls-wrapper">
+			<a href="#" class="add-btn">
+				<span class="add-icon"></span>
+				Add new Third Party
+			</a>
+			
+			<a href="#" class="add-btn">
+				<span class="add-icon"></span>
+				Add Package
+			</a>
+			
+			<a href="#" class="add-btn">
+				<span class="add-icon"></span>
+				Add Item
+			</a>
+			
+			<a href="#" class="actions-btn">
+				Actions
+				<span class="select-icon"></span>
+			</a>
+		</div>
+		
+		<ul id="accordion">
+			<li>
+				<div class="header">
+					1. Regulator or Compliance Authority: PCI-DSS 2.0
+					<span class="actions">
+						<a class="edit" href="http://www.google.sk">edit</a>
+						&nbsp;|&nbsp;
+						<a class="delete" href="http://www.google.sk">delete</a>
+					</span>
+					<span class="icon"></span>
+				</div>
+				<div class="content table">
+					<table>
+						<tr>
+							<th></th>
+							<th>Package ID</th>
+							<th>Compliance package name</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td><input type="checkbox" /></td>
+							<td class="center">1</td>
+							<td class="action-cell">
+								<div class="cell-label">
+									Build and Maintain a Secure Network
+								</div>
+								<div class="cell-actions">
+									<a href="#" class="edit-action">edit</a> 
+									<a href="#" class="delete-action">delete</a>
+								</div>
+							</td>
+							<td>No description was written here</td>
+						</tr>
+					</table>
+					<div class="rounded">
+						<table class="sub-table">
+							<tr>
+								<th></th>
+								<th>Item ID</th>
+								<th>Item description</th>
+								<th>Notes</th>
+								<th>Status</th>
+							</tr>
+							<tr>
+								<td><input type="checkbox" /></td>
+								<td class="center">1</td>
+								<td class="action-cell">
+									<div class="cell-label">
+										Maintaine and configure firewalls
+									</div>
+									<div class="cell-actions">
+										<a href="#" class="edit-action">edit</a> 
+										<a href="#" class="delete-action">delete</a>
+									</div>
+								</td>
+								<td>No notes added</td>
+								<td class="center"><img src="img/ok-icon.png" alt=""/></td>
+							</tr>
+						</table>
+					</div>				
+				</div>
+			</li>
+			<li>
+				<div class="header">
+					2. Regulator or Compliance Authority: PCI-DSS 2.0
+					<span class="actions">
+						<a class="edit" href="http://www.google.sk">edit</a>
+						&nbsp;|&nbsp;
+						<a class="delete" href="http://www.google.sk">delete</a>
+					</span>
+					<span class="icon"></span>
+				</div>
+				<div class="content">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur placerat, elit nec feugiat elementum, diam nisi rutrum urna, et placerat mi metus vitae ante. Curabitur consectetur sodales mi a adipiscing. Mauris faucibus, lorem eget accumsan tristique, lacus leo sodales diam, non laoreet purus sapien at magna. Integer quis porttitor leo. Donec lacinia porta pharetra. Sed vulputate tincidunt odio eu accumsan. Cras ac purus at lacus interdum congue in sed eros. Etiam est erat, porta sit amet gravida eget, vulputate quis sapien. Nunc lobortis, orci tristique gravida gravida, nisi erat pellentesque tortor, eu feugiat augue nibh ut odio.
+				</div>
+			</li>
+			<li>
+				<div class="header">
+					3. Regulator or Compliance Authority: PCI-DSS 2.0
+					<span class="actions">
+						<a class="edit" href="http://www.google.sk">edit</a>
+						&nbsp;|&nbsp;
+						<a class="delete" href="http://www.google.sk">delete</a>
+					</span>
+					<span class="icon"></span>
+				</div>
+				<div class="content">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur placerat, elit nec feugiat elementum, diam nisi rutrum urna, et placerat mi metus vitae ante. Curabitur consectetur sodales mi a adipiscing. Mauris faucibus, lorem eget accumsan tristique, lacus leo sodales diam, non laoreet purus sapien at magna. Integer quis porttitor leo. Donec lacinia porta pharetra. Sed vulputate tincidunt odio eu accumsan. Cras ac purus at lacus interdum congue in sed eros. Etiam est erat, porta sit amet gravida eget, vulputate quis sapien. Nunc lobortis, orci tristique gravida gravida, nisi erat pellentesque tortor, eu feugiat augue nibh ut odio.
+				</div>
+			</li>
+			<li>
+				<div class="header">
+					4. Regulator or Compliance Authority: PCI-DSS 2.0
+					<span class="actions">
+						<a class="edit" href="http://www.google.sk">edit</a>
+						&nbsp;|&nbsp;
+						<a class="delete" href="http://www.google.sk">delete</a>
+					</span>
+					<span class="icon"></span>
+				</div>
+				<div class="content">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur placerat, elit nec feugiat elementum, diam nisi rutrum urna, et placerat mi metus vitae ante. Curabitur consectetur sodales mi a adipiscing. Mauris faucibus, lorem eget accumsan tristique, lacus leo sodales diam, non laoreet purus sapien at magna. Integer quis porttitor leo. Donec lacinia porta pharetra. Sed vulputate tincidunt odio eu accumsan. Cras ac purus at lacus interdum congue in sed eros. Etiam est erat, porta sit amet gravida eget, vulputate quis sapien. Nunc lobortis, orci tristique gravida gravida, nisi erat pellentesque tortor, eu feugiat augue nibh ut odio.
+				</div>
+			</li>
+		</ul>
+		
+		<br class="clear"/>
+		
+	</section>
+</body>
+</html>

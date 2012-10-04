@@ -1,0 +1,5 @@
+asset_classification_id,asset_classification_name,asset_classification_description,asset_classification_type, asset_classification_value, asset_classification_disabled
+1,Medium,,, 1,0
+2,Low,,sensibility, 1,0
+3,Medium,,sensibility, 3,0
+4,High,,Jamones, 1,0
