@@ -87,7 +87,6 @@
 
 	<section id="content-wrapper">
 		<h3>Security Services Audit Reviews</h3>
-		
 		<div class="controls-wrapper">
 <?
 echo "			<a href=\"$base_url&action=editsecurity_services_audit\" class=\"add-btn\">";
