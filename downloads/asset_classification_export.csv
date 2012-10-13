@@ -1,5 +1,15 @@
 asset_classification_id,asset_classification_name,asset_classification_description,asset_classification_type, asset_classification_value, asset_classification_disabled
-1,Medium,,, 1,0
-2,Low,,sensibility, 1,0
-3,Medium,,sensibility, 3,0
-4,High,,Jamones, 1,0
+1,Medium,,Confidentiality, 2,0
+2,Low,,Confidentiality, 1,0
+3,Medium,,Jamones, 3,1
+4,High,,Jamones, 2,1
+5,High,,Integrity, 3,0
+6,Medium,,Integrity, 2,0
+7,Low,,Integrity, 1,0
+8,High,,Confidentiality, 3,0
+9,High,,, 0,1
+10,High,,, 0,1
+11,High,,, 0,1
+12,High,,Availability, 3,0
+13,Medium,,Availability, 2,0
+14,Low,,Availability, 1,0

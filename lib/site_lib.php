@@ -2,6 +2,35 @@
 
 date_default_timezone_set('Europe/Bratislava');
 
+function give_me_date() {
+	
+	$unix_time = time();	
+	$date = date('Y-m-d', $unix_time); 
+	return $date;
+}
+
+function give_me_date_time() {
+	
+	$unix_time = time();	
+	$datetime = date('Y-m-d H:i:s', $unix_time); 
+	return $datetime;
+}
+
+function check_valid_date($date) {
+	$split_date = explode("-"  , $date);
+	#echo "DATE: $split_date[1] - $split_date[2] - $split_date[0]";
+	if (!is_numeric($split_date[0]) or !is_numeric($split_date[1]) or !is_numeric($split_date[2])) {
+		#echo "wrong date";
+		return 1;
+	}
+	if( !checkdate($split_date[1], $split_date[2], $split_date[0]) ) {
+		#echo "wrong date";
+		return 1;
+	}
+	#echo "date ok";
+	return;
+}
+
 function show_menu_sub($section) {
 	
 	if ($section == "organization") {

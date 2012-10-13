@@ -25,6 +25,18 @@
 	$security_services_status = $_GET["security_services_status"];
 	$security_services_audit_metric = $_GET["security_services_audit_metric"];
 	$security_services_audit_success_criteria = $_GET["security_services_audit_success_criteria"];
+	$security_services_audit_periodicity_start_date = $_GET["security_services_audit_periodicity_start_date"];
+
+	# if the date is wrong, it will assign today's date
+	if ($security_services_audit_periodicity_start_date == NULL) {
+		$security_services_audit_periodicity_start_date = give_me_date();
+	} else {
+		if (check_valid_date($security_services_audit_periodicity_start_date)) {
+			$security_services_audit_periodicity_start_date = give_me_date();
+		}
+	}
+	
+		
 	$security_services_audit_periodicity = $_GET["security_services_audit_periodicity"];
 	if ($security_services_audit_periodicity == NULL or !is_numeric($security_services_audit_periodicity)) {
 		$security_services_audit_periodicity = "12";
@@ -43,6 +55,7 @@
 			'security_services_status' => $security_services_status,
 			'security_services_audit_metric' => $security_services_audit_metric,
 			'security_services_audit_success_criteria' => $security_services_audit_success_criteria,
+			'security_services_audit_periodicity_start_date' => $security_services_audit_periodicity_start_date,
 			'security_services_audit_periodicity' => $security_services_audit_periodicity,
 			'security_services_cost_opex' => $security_services_cost_opex,
 			'security_services_cost_capex' => $security_services_cost_capex,
@@ -60,13 +73,17 @@
 			'security_services_status' => $security_services_status,
 			'security_services_audit_metric' => $security_services_audit_metric,
 			'security_services_audit_success_criteria' => $security_services_audit_success_criteria,
+			'security_services_audit_periodicity_start_date' => $security_services_audit_periodicity_start_date,
 			'security_services_audit_periodicity' => $security_services_audit_periodicity,
 			'security_services_cost_opex' => $security_services_cost_opex,
 			'security_services_cost_capex' => $security_services_cost_capex,
 			'security_services_cost_operational_resource' => $security_services_cost_operational_resource,
 			'security_services_cost_disabled' => $security_services_cost_disabled
 		);	
-		add_security_services($security_services_update);
+		$security_service_id = add_security_services($security_services_update);
+		# when inserting security catalogues i need to look at the asociated reviews (audit)
+		add_security_services_audit($security_service_id);	
+
 		add_system_records("security_services","security_catalogue","$security_services_id","","Insert","");
 	 }
 
@@ -151,11 +168,13 @@ echo "							<tr>";
 echo "								<th><center>Audit Metric</th>";
 echo "								<th><center>Metric Criteria</th>";
 echo "								<th><center>Audit Periodicity</th>";
+echo "								<th><center>Starting on...</th>";
 echo "							</tr>";
 echo "							<tr>";
 echo "								<td class=\"left\">$security_services_item[security_services_audit_metric]</td>";
 echo "								<td class=\"left\">$security_services_item[security_services_audit_success_criteria]</td>";
 echo "								<td class=\"center\">Every $security_services_item[security_services_audit_periodicity] Months</td>";
+echo "								<td class=\"center\">Starting on $security_services_item[security_services_audit_periodicity_start_date]</td>";
 echo "							</tr>";
 echo "						</table>";
 echo "					</div>";

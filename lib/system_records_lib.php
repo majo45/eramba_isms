@@ -6,12 +6,6 @@
 include_once("mysql_lib.php");
 include_once("site_lib.php");
 
-function give_me_date() {
-	
-	$unix_time = time();	
-	$datetime = date('Y-m-d H:i:s', $unix_time); 
-	return $datetime;
-}
 
 function list_system_records($arguments) {
 	# MUST EDIT
@@ -22,7 +16,7 @@ function list_system_records($arguments) {
 
 function add_system_records($system_records_section, $system_records_subsection, $system_records_item_id, $system_records_author, $system_records_action, $system_records_notes) {
 
-	$system_records_time = give_me_date();
+	$system_records_time = give_me_date_time();
 		
 	$sql = "INSERT INTO
 		system_records_tbl

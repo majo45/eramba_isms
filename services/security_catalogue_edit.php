@@ -96,9 +96,13 @@ echo "				<textarea id=\"\" name=\"security_services_audit_success_criteria\">$s
 				}
 ?>
 				<label for="name">Metric Regular Review (Audit)</label>
-				<span class="description">Trust but control. At regular intervals, it's very good idea to audit (internaly or by third parties) the metrics and their results. Specifiy who regular (in months) this review will be for this service. The default value is 12 (months).</span>
+				<span class="description">Trust but control, that's my mother in law piece of advice. At regular intervals, it's very good idea to audit (internaly or by third parties) the security services by the use of their metrics. You must specify how often (in months) and starting when (YYYY-MM-DD) you plan to audit this service. By default, the date will be the date of creation (not update) of this control.</span>
 <?
+echo "				<input type=\"text\" name=\"security_services_audit_periodicity_start_date\" id=\"\" value=\"$security_services_item[security_services_audit_periodicity_start_date]\"/>";
+echo "				<br><br>";	
+echo "				<span class=\"description\">How often from that date you plan to review this control?</span>";
 echo "				<input type=\"text\" name=\"security_services_audit_periodicity\" id=\"\" value=\"$security_services_item[security_services_audit_periodicity]\"/>";
+#echo "				<input type=\"checkbox\" name=\"security_services_audit_periodicity_update\" value=\"1\"><br>";
 ?>
 
 		<label for="name">Service Cost</label>
