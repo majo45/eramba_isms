@@ -3,6 +3,7 @@
 	include_once("lib/process_lib.php");
 	include_once("lib/site_lib.php");
 	include_once("lib/system_records_lib.php");
+	include_once("lib/security_services_audit_lib.php");
 
 	# general variables - YOU SHOULDNT NEED TO CHANGE THIS
 	$sort = $_GET["sort"];
@@ -26,6 +27,10 @@
 		$process_rto = 360;
 	}
 	$process_disabled = $_GET["process_disabled"];
+
+
+	# PROCEDURE
+	store_procedure_generate_security_services_audit();
 	 
 	#actions .. edit, update or disable - YOU MUST ADJUST THIS!
 	if ($action == "update_bu" & is_numeric($bu_id)) {

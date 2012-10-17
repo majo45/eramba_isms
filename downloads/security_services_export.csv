@@ -1,0 +1,32 @@
+security_services_id,security_services_name,security_services_objective,security_services_documentation_url,security_services_status,security_services_audit_metric,security_services_audit_success_criteria,security_services_audit_periodicity,security_services_cost_opex,security_services_cost_capex,security_services_cost_operational_resource,security_services_disabled
+1,Corporate Antivirus,Control virus, worms, etc.,http://localhost/isms_v2/?section=security_services&subsection=security_catalogue&action=edit&security_services_id=1,,Regla,Mas de 20cm,10,100,600,1.51,1
+2,Regular WebApp Scanning - External,Control technical vulnerabilities,,,Describe the metric,Describe the metric success criteria,6,0,0,0.00,1
+6,Regular WebApp Scanning - Internal,Control technical vulnerabilities,,,Describe the metric,Describe the metric success criteria,6,0,0,0.00,0
+7,CCTV - Laminar,Monitor access to facilities and offices,,,Describe the metric,Describe the metric success criteria,6,0,0,0.00,0
+8,Physical Doors Controls,Blah,Blah,,Describe the metric,Describe the metric success criteria,12,0,0,0.00,0
+9,Test Service,Not sure,Not Sure,,Describe the metric,Describe the metric success criteria,12,0,0,0.00,0
+10,Test 2,efwfe,fwfee,,Describe the metric,Describe the metric success criteria,8,0,0,0.00,1
+11,test,fwfwe,,,Describe the metric,Describe the metric success criteria,8,0,0,0.00,1
+12,test,fwfwe,,,Describe the metric,Describe the metric success criteria,8,0,0,0.00,1
+13,test,fwfwe,,,Describe the metric,Describe the metric success criteria,8,0,0,0.00,1
+14,test,fwfwe,,,Describe the metric,Describe the metric success criteria,8,0,0,0.00,1
+15,test,fwfwe,,,Describe the metric,Describe the metric success criteria,8,0,0,0.00,1
+16,test,fwfwe,,,Describe the metric,Describe the metric success criteria,8,0,0,0.00,1
+17,test,fwfwe,,,Describe the metric,Describe the metric success criteria,8,0,0,0.00,1
+18,test,fwfwe,,,Describe the metric,Describe the metric success criteria,8,0,0,0.00,1
+19,test,fwfwe,,,Describe the metric,Describe the metric success criteria,8,0,0,0.00,1
+20,test,fwfwe,,,Describe the metric,Describe the metric success criteria,8,0,0,0.00,1
+21,test,fwfwe,,,Describe the metric,Describe the metric success criteria,8,0,0,0.00,1
+22,test,fwfwe,,,Describe the metric,Describe the metric success criteria,8,0,0,0.00,1
+23,test,fwfwe,,,Describe the metric,Describe the metric success criteria,8,0,0,0.00,1
+24,test,fwfwe,,,Describe the metric,Describe the metric success criteria,8,0,0,0.00,1
+25,test,fwfwe,,,Describe the metric,Describe the metric success criteria,8,0,0,0.00,1
+26,test,fwfwe,,,Describe the metric,Describe the metric success criteria,8,0,0,0.00,1
+27,test,fwfwe,,,Describe the metric,Describe the metric success criteria,8,0,0,0.00,1
+28,test,fwfwe,,,Describe the metric,Describe the metric success criteria,8,0,0,0.00,1
+29,test,fwfwe,,,Describe the metric,Describe the metric success criteria,8,0,0,0.00,1
+30,Test Service,,,,Describe the metric,Describe the metric success criteria,12,0,0,0.00,0
+31,Test Service,,,,Describe the metric,Describe the metric success criteria,12,0,0,0.00,0
+32,Test Service,,,,Describe the metric,Describe the metric success criteria,12,0,0,0.00,0
+33,Test Service,,,,Describe the metric,Describe the metric success criteria,12,0,0,0.00,0
+34,Test Service,,,,Describe the metric,Describe the metric success criteria,12,0,0,0.00,0

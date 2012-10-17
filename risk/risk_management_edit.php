@@ -104,7 +104,7 @@ echo "						<input type=\"text\" name=\"risk_classification_score\" id=\"\" valu
 
 						<label for="legalType">Compensating Controls</label>
 						<span class="description">Choose the most suitable available compensating controls (you can select multiple)</span>
-						<select name="security_services_id[]" id="" class="chzn-select" multiple="multiple">
+						<select name="security_services_id[]" id="" class="" multiple="multiple">
 						<option value="-1">Select a Compensating Control...</option>
 <?
 			$pre_selected_security_services_list = list_risk_security_services_join(" WHERE risk_security_services_join_risk_id = \"$risk_item[risk_id]\"");	

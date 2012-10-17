@@ -2,6 +2,13 @@
 
 date_default_timezone_set('Europe/Bratislava');
 
+function give_me_this_year() {
+	
+	$unix_time = time();	
+	$date = date('Y', $unix_time); 
+	return $date;
+}
+
 function give_me_date() {
 	
 	$unix_time = time();	

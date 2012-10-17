@@ -2,6 +2,8 @@
 <?
 
 	include_once("lib/security_services_status_lib.php");
+	include_once("lib/security_services_audit_calendar_lib.php");
+	include_once("lib/security_services_catalogue_audit_calendar_join_lib.php");
 	include_once("lib/security_services_lib.php");
 	include_once("lib/general_classification_lib.php");
 	include_once("lib/bu_lib.php");
@@ -96,14 +98,17 @@ echo "				<textarea id=\"\" name=\"security_services_audit_success_criteria\">$s
 				}
 ?>
 				<label for="name">Metric Regular Review (Audit)</label>
-				<span class="description">Trust but control, that's my mother in law piece of advice. At regular intervals, it's very good idea to audit (internaly or by third parties) the security services by the use of their metrics. You must specify how often (in months) and starting when (YYYY-MM-DD) you plan to audit this service. By default, the date will be the date of creation (not update) of this control.</span>
+				<span class="description">Trust but control, that's my mother in law piece of advice was for my wife... At regular intervals, it's a very good idea to audit (internaly or by third parties) the security services by the use of their metrics. Choose one or many months on which you'll each year review this service.</span>
+						<select name="security_services_audit_calendar[]" id="" class="" multiple="multiple">
 <?
-echo "				<input type=\"text\" name=\"security_services_audit_periodicity_start_date\" id=\"\" value=\"$security_services_item[security_services_audit_periodicity_start_date]\"/>";
-echo "				<br><br>";	
-echo "				<span class=\"description\">How often from that date you plan to review this control?</span>";
-echo "				<input type=\"text\" name=\"security_services_audit_periodicity\" id=\"\" value=\"$security_services_item[security_services_audit_periodicity]\"/>";
-#echo "				<input type=\"checkbox\" name=\"security_services_audit_periodicity_update\" value=\"1\"><br>";
+	$pre_selected_list = list_security_services_catalogue_audit_calendar_join(" WHERE security_service_catalogue_id = \"$security_services_item[security_services_id]\""); 
+	$pre_selected_items = array();
+	foreach($pre_selected_list as $pre_selected_audits) {
+			array_push($pre_selected_items,$pre_selected_audits[security_services_audit_calendar_id]);
+	}
+	list_drop_menu_security_services_audit_calendar($pre_selected_items, "");	
 ?>
+						</select>
 
 		<label for="name">Service Cost</label>
 		<span class="description">For those of you who must keep budgets tidy, it's important to keep as clear as possible how much effort is required to operate the service in financial (OPEX, CAPEX) and human terms (operational resource utilization).</span>

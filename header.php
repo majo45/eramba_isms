@@ -1,4 +1,4 @@
-<?
+<?php
 include_once("lib/site_lib.php");
 ?>
 
@@ -15,7 +15,7 @@ include_once("lib/site_lib.php");
 	<meta http-equiv="X-UA-Compatible" content="IE=9" />
 	<meta http-equiv="Pragma" content="no-cache" />
 	
-<?
+<?php
 echo "	<script type=\"text/javascript\" src=\"js/jquery.min.js\"></script>";
 echo "	<script type=\"text/javascript\" src=\"js/admin.scripts.js\"></script>";
 echo "	<script type=\"text/javascript\" src=\"js/chosen.jquery.js\"></script>";
@@ -61,18 +61,18 @@ echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/chosen.css\" />";
 				placeholder_text: "Select Some Options..."
 			});
 			
-			$(".tab-wrapper ul li a").click(function(event){
+			$(".tab-wrapper > ul li a").click(function(event) {
 				event.preventDefault();
-				$(".tab-wrapper ul li").each(function(){
-					$(this).removeClass("active");
+				$(".tab-wrapper > ul li").each(function() {
+				    $(this).removeClass("active");
 				});
 				$(this).parent().addClass("active");
 
-				$(".tab-content div").hide();
+				$(".tab-content > div").hide();
 				var content = "#" + $(this).attr("href");
 				$(content).show();
 			});
-			
+	
 			$(".tab-content div.tab").hide();
 			$(".tab-content div.tab:first").show();
 			
@@ -90,7 +90,7 @@ echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/chosen.css\" />";
 					<a href="#" id="user-profile">Esteban Ribicic</a>
 					<a href="#" id="user-sign-out">Sign out</a>
 				</div>
-<?
+<?php
 echo "				<img src=\"img/profile-pic.png\" alt=\"Profile pic\"/>";
 ?>
 			</div>
@@ -99,18 +99,18 @@ echo "				<img src=\"img/profile-pic.png\" alt=\"Profile pic\"/>";
 	<section id="menu-wrapper">
 		<nav id="menu-top">
 			<ul id="menu-items">
-				<li><a href="?section=organization&category=NULL" <?is_this_menu_active($_GET["section"], "organization")?>>Organization</a></li>
-				<li><a href="?section=asset&category=NULL" <?is_this_menu_active($_GET["section"], "asset")?>>Asset Management</a></li>
-				<li><a href="?section=risk&category=NULL" <?is_this_menu_active($_GET["section"], "risk")?>>Risk Management</a></li>
-				<li><a href="?section=security_services&category=NULL" <?is_this_menu_active($_GET["section"], "services")?>>Services</a></li>
-				<li><a href="?section=compliance&category=NULL" <?is_this_menu_active($_GET["section"], "compliance")?>>Compliance</a></li>
-				<li><a href="?section=system&category=system_records" <?is_this_menu_active($_GET["section"], "system")?>>System</a></li>
+				<li><a href="?section=organization&category=NULL" <?php is_this_menu_active($_GET["section"], "organization")?>>Organization</a></li>
+				<li><a href="?section=asset&category=NULL" <?php is_this_menu_active($_GET["section"], "asset")?>>Asset Management</a></li>
+				<li><a href="?section=risk&category=NULL" <?php is_this_menu_active($_GET["section"], "risk")?>>Risk Management</a></li>
+				<li><a href="?section=security_services&category=NULL" <?php is_this_menu_active($_GET["section"], "services")?>>Services</a></li>
+				<li><a href="?section=compliance&category=NULL" <?php is_this_menu_active($_GET["section"], "compliance")?>>Compliance</a></li>
+				<li><a href="?section=system&category=system_records" <?php is_this_menu_active($_GET["section"], "system")?>>System</a></li>
 			</ul>
 			
 		</nav>
 		<nav id="menu-sub">
 			<ul>
-			<?
+			<?php
 				show_menu_sub($_GET["section"]);
 			?>
 			</ul>

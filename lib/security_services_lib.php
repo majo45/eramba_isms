@@ -24,8 +24,6 @@ function add_security_services($security_services_data) {
 		\"$security_services_data[security_services_status]\",
 		\"$security_services_data[security_services_audit_metric]\",
 		\"$security_services_data[security_services_audit_success_criteria]\",
-		\"$security_services_data[security_services_audit_periodicity_start_date]\",
-		\"$security_services_data[security_services_audit_periodicity]\",
 		\"$security_services_data[security_services_cost_opex]\",
 		\"$security_services_data[security_services_cost_capex]\",
 		\"$security_services_data[security_services_cost_operational_resource]\",
@@ -46,8 +44,6 @@ function update_security_services($security_services_data, $security_services_id
 		security_services_status = \"$security_services_data[security_services_status]\",
 		security_services_audit_metric = \"$security_services_data[security_services_audit_metric]\",
 		security_services_audit_success_criteria = \"$security_services_data[security_services_audit_success_criteria]\",
-		security_services_audit_periodicity_start_date = \"$security_services_data[security_services_audit_periodicity_start_date]\",
-		security_services_audit_periodicity = \"$security_services_data[security_services_audit_periodicity]\",
 		security_services_cost_opex = \"$security_services_data[security_services_cost_opex]\",
 		security_services_cost_capex = \"$security_services_data[security_services_cost_capex]\",
 		security_services_cost_operational_resource = \"$security_services_data[security_services_cost_operational_resource]\"

@@ -55,7 +55,7 @@ echo "					<form name=\"bu_edit\" method=\"GET\" action=\"$base_url\">";
 				    <INPUT type="hidden" name="subsection" value="bu">
 <? echo " 			    <INPUT type=\"hidden\" name=\"bu_id\" value=\"$bu_item[bu_id]\">"; ?>
 
-			    <INPUT type="submit" value="Send"> 
+			    <INPUT type="submit" value="Send" class="cancel-btn"> 
 			</a>
 			
 <?

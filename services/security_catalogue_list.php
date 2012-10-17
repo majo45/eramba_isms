@@ -8,6 +8,7 @@
 	include_once("lib/security_services_lib.php");
 	include_once("lib/security_services_status_lib.php");
 	include_once("lib/system_records_lib.php");
+	include_once("lib/security_services_catalogue_audit_calendar_join_lib.php");
 
 	# general variables - YOU SHOULDNT NEED TO CHANGE THIS
 	$sort = $_GET["sort"];
@@ -25,22 +26,9 @@
 	$security_services_status = $_GET["security_services_status"];
 	$security_services_audit_metric = $_GET["security_services_audit_metric"];
 	$security_services_audit_success_criteria = $_GET["security_services_audit_success_criteria"];
-	$security_services_audit_periodicity_start_date = $_GET["security_services_audit_periodicity_start_date"];
-
-	# if the date is wrong, it will assign today's date
-	if ($security_services_audit_periodicity_start_date == NULL) {
-		$security_services_audit_periodicity_start_date = give_me_date();
-	} else {
-		if (check_valid_date($security_services_audit_periodicity_start_date)) {
-			$security_services_audit_periodicity_start_date = give_me_date();
-		}
-	}
-	
+	$security_services_audit_calendar = $_GET["security_services_audit_calendar"];
 		
-	$security_services_audit_periodicity = $_GET["security_services_audit_periodicity"];
-	if ($security_services_audit_periodicity == NULL or !is_numeric($security_services_audit_periodicity)) {
-		$security_services_audit_periodicity = "12";
-	}
+
 	$security_services_cost_capex = $_GET["security_services_cost_capex"];
 	$security_services_cost_opex = $_GET["security_services_cost_opex"];
 	$security_services_cost_operational_resource = $_GET["security_services_cost_operational_resource"];
@@ -55,8 +43,6 @@
 			'security_services_status' => $security_services_status,
 			'security_services_audit_metric' => $security_services_audit_metric,
 			'security_services_audit_success_criteria' => $security_services_audit_success_criteria,
-			'security_services_audit_periodicity_start_date' => $security_services_audit_periodicity_start_date,
-			'security_services_audit_periodicity' => $security_services_audit_periodicity,
 			'security_services_cost_opex' => $security_services_cost_opex,
 			'security_services_cost_capex' => $security_services_cost_capex,
 			'security_services_cost_operational_resource' => $security_services_cost_operational_resource,
@@ -64,6 +50,20 @@
 		);	
 		update_security_services($security_services_update,$security_services_id);
 		add_system_records("security_services","security_catalogue","$security_services_id","","Update","");
+	
+		# delete all audit reviews for this service 
+		delete_security_services_catalogue_audit_calendar_join($security_services_id);
+		# add all selected PLANNED audits for this service
+		if (is_array($security_services_audit_calendar)) {
+			$count_security_services_audit_calendar = count($security_services_audit_calendar);
+			for($count = 0 ; $count < $count_security_services_audit_calendar; $count++) {
+				# now i insert this stuff
+				add_security_services_catalogue_audit_calendar_join($security_services_id, $security_services_audit_calendar[$count]);
+			}
+		}
+	
+		# now i add the audits if they didnt exist before 
+		add_security_services_audit_v2($security_services_id);
 
 	} elseif ($action == "update") {
 		$security_services_update = array(
@@ -73,8 +73,6 @@
 			'security_services_status' => $security_services_status,
 			'security_services_audit_metric' => $security_services_audit_metric,
 			'security_services_audit_success_criteria' => $security_services_audit_success_criteria,
-			'security_services_audit_periodicity_start_date' => $security_services_audit_periodicity_start_date,
-			'security_services_audit_periodicity' => $security_services_audit_periodicity,
 			'security_services_cost_opex' => $security_services_cost_opex,
 			'security_services_cost_capex' => $security_services_cost_capex,
 			'security_services_cost_operational_resource' => $security_services_cost_operational_resource,
@@ -82,9 +80,24 @@
 		);	
 		$security_service_id = add_security_services($security_services_update);
 		# when inserting security catalogues i need to look at the asociated reviews (audit)
-		add_security_services_audit($security_service_id);	
+		# add_security_services_audit_v2($security_service_id);	
 
 		add_system_records("security_services","security_catalogue","$security_services_id","","Insert","");
+		
+		# delete all audit reviews for this service 
+		delete_security_services_catalogue_audit_calendar_join($security_services_id);
+
+		# add all selected PLANNED audits for this service
+		if (is_array($security_services_audit_calendar)) {
+			$count_security_services_audit_calendar = count($security_services_audit_calendar);
+			for($count = 0 ; $count < $count_security_services_audit_calendar; $count++) {
+				# now i insert this stuff
+				add_security_services_catalogue_audit_calendar_join($security_services_id, $security_services_audit_calendar[$count]);
+			}
+		}
+	
+		# now i add the audits if they didnt exist before 
+		add_security_services_audit_v2($security_services_id);
 	 }
 
 	if ($action == "disable" & is_numeric($security_services_id)) {
@@ -113,11 +126,26 @@ echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
 				Add new Service 
 			</a>
 			
-			<a href="#" class="actions-btn">
-				Actions
-				<span class="select-icon"></span>
-			</a>
+			<div class="actions-wraper">
+				<a href="#" class="actions-btn">
+					Actions
+					<span class="select-icon"></span>
+				</a>
+				<ul class="action-submenu">
+					<li><a href="#">Delete</a></li>
+<?
+# -------- TEMPLATE! YOU MUST ADJUST THIS ------------
+if ($action == "csv") {
+echo "					<li><a href=\"downloads/legal_export.csv\">Dowload</a></li>";
+} else { 
+echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
+}
+?>
+				</ul>
+			</div>
+
 		</div>
+			
 		
 		<ul id="accordion">
 			
@@ -168,13 +196,11 @@ echo "							<tr>";
 echo "								<th><center>Audit Metric</th>";
 echo "								<th><center>Metric Criteria</th>";
 echo "								<th><center>Audit Periodicity</th>";
-echo "								<th><center>Starting on...</th>";
 echo "							</tr>";
 echo "							<tr>";
 echo "								<td class=\"left\">$security_services_item[security_services_audit_metric]</td>";
 echo "								<td class=\"left\">$security_services_item[security_services_audit_success_criteria]</td>";
 echo "								<td class=\"center\">Every $security_services_item[security_services_audit_periodicity] Months</td>";
-echo "								<td class=\"center\">Starting on $security_services_item[security_services_audit_periodicity_start_date]</td>";
 echo "							</tr>";
 echo "						</table>";
 echo "					</div>";

@@ -95,10 +95,29 @@ echo "			<a href=\"$base_url&action=edit_bu\" class=\"add-btn\">";
 				Add new Business Unit 
 			</a>
 			
-			<a href="#" class="actions-btn">
+			<!--<a href="#" class="actions-btn">
 				Actions
 				<span class="select-icon"></span>
-			</a>
+			</a>-->
+
+			<div class="actions-wraper">
+				<a href="#" class="actions-btn">
+					Actions
+					<span class="select-icon"></span>
+				</a>
+				<ul class="action-submenu">
+					<li><a href="#">Delete</a></li>
+<?
+# -------- TEMPLATE! YOU MUST ADJUST THIS ------------
+if ($action == "csv") {
+echo "					<li><a href=\"downloads/legal_export.csv\">Dowload</a></li>";
+} else { 
+echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
+}
+?>
+				</ul>
+			</div>
+
 		</div>
 		
 		<ul id="accordion">

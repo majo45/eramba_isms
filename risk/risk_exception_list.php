@@ -118,7 +118,7 @@ echo "						</div>";
 echo "						<div class=\"cell-actions\">";
 echo "					<a href=\"$base_url&action=edit&risk_exception_id=$risk_exception_item[risk_exception_id]\" class=\"edit-action\">edit</a> ";
 echo "					<a href=\"$base_url&action=disable&risk_exception_id=$risk_exception_item[risk_exception_id]\" class=\"delete-action\">delete</a>";
-echo "					<a href=\"?section=system&subsection=system_records&system_records_lookup_section=risk&system_records_lookup_subsection=risk_exception&system_records_lookup_item_id=$risk_exception_item[risk_exception_id]\" class=\"delete-action\">records</a>";
+echo "					<a href=\"?section=system&subsection=system_records&system_records_lookup_section=risk&system_records_lookup_subsection=risk_exception&system_records_lookup_item_id=$risk_exception_item[risk_exception_id]\" class=\"edit-action delete-action\">records</a>";
 echo "					<a href=\"?action=edit&section=system&subsection=system_records&system_records_lookup_section=risk&system_records_lookup_subsection=risk_exception&system_records_lookup_item_id=$risk_exception_item[risk_exception_id]\" class=\"delete-action\">add a note</a>";
 echo "						</div>";
 echo "					</td>";

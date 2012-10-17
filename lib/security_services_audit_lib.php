@@ -5,6 +5,7 @@
 
 include_once("mysql_lib.php");
 include_once("security_services_lib.php");
+include_once("site_lib.php");
 
 function list_security_services_audit($arguments) {
 	# MUST EDIT
@@ -13,88 +14,66 @@ function list_security_services_audit($arguments) {
 	return $results;
 }
 
-# this is a custom function, when called (security_service_id) will check on the list of audits
-# which are not initiated and are due and will create audits according to the details provided
-# IMPORTANT: the rule is i create as many audits as needed to ensure the next audit is AFTER todays date
-# IMPORTANT: the metric and metric success is copied from the security service information so is not lost if this changes in the future. 
-
-# EXAMPLES WHEN THE AUDIT IS AFTER TODAY's DATE
-# example: if today is 2012-10-13, and i receive service id 1, start date 2012-08-01 (before 2012-10-13) and regular review 5
-# example response: i should create audit reports for: 2013-01-01 (which is after today's date)
-
-# EXAMPLES WHEN THE AUDIT IS BEFORE TODAY's DATE
-# example: if today is 2012-10-13, and i receive service id 1, start date 2012-01-01 (before 2012-10-13) and regular review 5
-# example response: i should create audit reports for: 2012-06-01 and another for 2012-11-01 (which is after today's date)
-
-function add_security_services_audit($security_services_id) {
+# the objective is to ensure that there's an audit record for future times starting today.
+# so if i get called, i need to make sure that there will be an audit in the future for this service, when? well, the planned started date + periodicity.
+# if the planned start date is after today, then i do nothing! i wait until the planned start date is in the PAST and then i will eventually create one
+function add_security_services_audit_v2($security_services_id) {
 	
-	# first i need information about this security_service
-	if (is_numeric($security_services_id)) {	
-	
-		$service_information = lookup_security_services("security_services_id", $security_services_id);
-		if ($service_information[security_services_id] == $security_services_id) {
-
-			$today = give_me_date();
-
-			# if we have this, it means we have the right service 
-			# echo "add_security_services_audit: we have the right service id<br>";
-			# echo "add_security_services_audit: Metric: $service_information[security_services_audit_metric]<br>";
-			# echo "add_security_services_audit: Success Criteria: $service_information[security_services_audit_success_criteria]<br>";
-			# echo "add_security_services_audit: Periodicity: $service_information[security_services_audit_periodicity]<br>";
-			# echo "add_security_services_audit: Starting...: $service_information[security_services_audit_periodicity_start_date]<br>";
-			# echo "add_security_services_audit: Today is: $today<br>"; 
-			# echo "<br>";
-
-			# if the date for the start of audit is after today, i just create an audit and leave all this messs
-			if (strtotime($service_information[security_services_audit_periodicity_start_date]) > time()) {
-					$date = date_create($service_information[security_services_audit_periodicity_start_date]);
-					date_add($date, date_interval_create_from_date_string("$service_information[security_services_audit_periodicity] months"));
-					$calculated_date = date_format($date, 'Y-m-d');
-					# echo "this is the last audit after today: $calculated_date<br>";
-					real_add_security_services_audit($service_information[security_services_id], $calculated_date, $service_information[security_services_audit_metric], $service_information[security_services_audit_success_criteria]);
-			}
-
-			# while the calculated date is before today, we create new audits
-			while (!$stop) {
-				if (!$calculated_date) {
-					$date = date_create($service_information[security_services_audit_periodicity_start_date]);
-				} else {
-					$date = date_create($calculated_date);
-				}	
-			
-				date_add($date, date_interval_create_from_date_string("$service_information[security_services_audit_periodicity] months"));
-				$calculated_date = date_format($date, 'Y-m-d');
-			
-				# today + periodicity (in months)
-				#$today_plus_periodicity = strtotime(give_me_date() +$service_information[security_services_audit_periodicity] months); 
-				$today_plus_periodicity = strtotime("$today +$service_information[security_services_audit_periodicity] months"); 
-				# echo "WEWFWE: $today_plus_periodicity";
-
-				if (strtotime($calculated_date) < $today_plus_periodicity) {
-					# echo "i need to create an adudit on: $calculated_date -- ".strtotime($calculated_date)." vs target: $today_plus_periodicity<br>";
-					real_add_security_services_audit($service_information[security_services_id], $calculated_date, $service_information[security_services_audit_metric], $service_information[security_services_audit_success_criteria]);
-				} else {
-					$stop = 1;
-				}
-			}
-
-		} else {
-			# we couldnt find the service so we exit
-			echo "add_security_services_audit: we have the WRONG right service id<br>";
-			return 1;
-		}
-	
-	# if i dont have a security_service then i need to scan all services and make this check ... not fun!
-	# this might be needed when the checks are performed when a user logs in on the system
-	} else {
-		echo "for the time being, i need a security service";
+	# first i need to know if this service is valid
+	$service_information = lookup_security_services("security_services_id", $security_services_id); 
+	if (empty($service_information[security_services_id])) {
+		echo "DEBUG: Not a valid service<br>";
+		return 1;
 	}
 
-	return;
+	# then i need to check which audits i have PLANNED for this service (this will give me the list of months ids) for EVERY YEAR 
+	$service_planned_audits_list = list_security_services_catalogue_audit_calendar_join( " WHERE security_service_catalogue_id = \"$service_information[security_services_id]\""); 
+	if (!count($service_planned_audits_list)) {
+		echo "DEBUG: no tiene audits planned ($service_information[security_services_id]) <br>";
+		return;
+	}
 	
+	# then i need to check which audits i have CREATED for this service THIS YEAR
+	# then i need to make sure all what was planned is created
+	$this_year = give_me_this_year();
+
+	$service_created_audit_list = list_security_services_audit(" WHERE security_services_audit_security_service_id = \"$service_information[security_services_id]\" and security_services_audit_disabled = \"0\" and security_services_audit_planned_year = \"$this_year\""); 
+
+	if (!count($service_created_audit_list)) {
+		echo "DE  BUG: tenes que crear audits papa<br>";
+		foreach($service_planned_audits_list as $planned_audit) {
+			real_add_security_services_audit($service_information[security_services_id], $planned_audit[security_services_audit_calendar_id], $this_year, $service_information[security_services_audit_metric], $service_informatio[security_services_audit_success_criteria]);
+		}
+		return;
+	}
+	
+	foreach($service_planned_audits_list as $planned_month_audit) {
+
+		echo "DEBUG: stargin to compare what audits PLANNED against CREATED<br>";
+		
+		# here i search if i have an audit planned with that ID
+		foreach($service_created_audit_list as $created_audit) {
+
+			echo "DEBUG: Comparing .. $planned_month_audit[security_services_audit_calendar_id] == $created_audit[security_services_audit_calendar_id] <br>";
+	
+			if ($planned_month_audit[security_services_audit_calendar_id] == $created_audit[security_services_audit_calendar_id]) {
+				$find = 1;
+			}	
+		}
+
+		if (!$find) {
+			echo "DEBUG: I need to create a new audit, for $this_year and calendarid = $planned_month_audit[security_services_audit_calendar_id]<br>";
+			real_add_security_services_audit($service_information[security_services_id], $planned_audit[security_services_audit_calendar_id], $this_year, $service_information[security_services_audit_metric], $service_informatio[security_services_audit_success_criteria]);
+		}
+
+		empty($find);
+
+	}
+
 }
 
-function real_add_security_services_audit($security_services_id, $plan_date, $metric, $metric_success) {
+
+function real_add_security_services_audit($security_services_id, $plan_date, $year, $metric, $metric_success) {
 	 $sql = "INSERT INTO
 	security_services_audit_tbl
 	VALUES (
@@ -102,6 +81,7 @@ function real_add_security_services_audit($security_services_id, $plan_date, $me
 	\"$security_services_id\",
 		\"1\",
 		\"$plan_date\",
+		\"$year\",
 		\"$metric\",
 		\"$metric_success\",
 		\"\",
