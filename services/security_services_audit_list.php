@@ -94,7 +94,7 @@
 
 
 	<section id="content-wrapper">
-		<h3>Security Audit Reviews</h3>
+		<h3>Security Services Reviews</h3>
 		
 			<div class="actions-wraper">
 				<a href="#" class="actions-btn">
@@ -148,10 +148,10 @@ echo "						<tr>";
 echo "							<th><center>Status</th>";
 echo "							<th>Review Metric</th>";
 echo "							<th>Success Criteria</th>";
-echo "							<th><center>Planned Start</th>";
-echo "							<th><center>Result</th>";
-echo "							<th><center>Start</th>";
+echo "							<th><center>Planned Actual Start</th>";
+echo "							<th><center>Actual Start</th>";
 echo "							<th><center>End</th>";
+echo "							<th><center>Result</th>";
 echo "						</tr>";
 
 display_html_audit_items($security_service_data[security_services_id]);
@@ -197,10 +197,10 @@ echo "						<tr>";
 echo "							<th><center>Status</th>";
 echo "							<th>Review Metric</th>";
 echo "							<th>Success Criteria</th>";
-echo "							<th><center>Planned Start</th>";
-echo "							<th><center>Result</th>";
-echo "							<th><center>Start</th>";
+echo "							<th><center>Planned Actual Start</th>";
+echo "							<th><center>Actual Start</th>";
 echo "							<th><center>End</th>";
+echo "							<th><center>Result</th>";
 echo "						</tr>";
 
 display_html_audit_items($security_service_data[security_services_id]);
@@ -242,10 +242,10 @@ echo "						<tr>";
 echo "							<th><center>Status</th>";
 echo "							<th>Review Metric</th>";
 echo "							<th>Success Criteria</th>";
-echo "							<th><center>Planned Start</th>";
-echo "							<th><center>Result</center></th>";
-echo "							<th><center>Start</th>";
+echo "							<th><center>Planned Actual Start</th>";
+echo "							<th><center>Actual Start</th>";
 echo "							<th><center>End</th>";
+echo "							<th><center>Result</center></th>";
 echo "						</tr>";
 
 display_html_audit_items($security_service_data[security_services_id]);

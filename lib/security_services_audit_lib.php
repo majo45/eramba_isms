@@ -241,12 +241,12 @@ echo "							<td><center>$audit_item[security_services_audit_criteria]</td>";
 echo "							<td><center>$month_name[security_services_audit_calendar_name]-$audit_item[security_services_audit_planned_year]</td>";
 
 	
-				$result_name = lookup_security_services_audit_result("security_services_audit_result_id",$audit_item[security_services_audit_result]);	
-
-echo "							<td><center>$result_name[security_services_audit_result_name]</td>";
 
 echo "							<td><center>$audit_item[security_services_audit_start_audit_date]</td>";
 echo "							<td><center>$audit_item[security_services_audit_end_audit_date]</td>";
+				$result_name = lookup_security_services_audit_result("security_services_audit_result_id",$audit_item[security_services_audit_result]);	
+
+echo "							<td><center>$result_name[security_services_audit_result_name]</td>";
 echo "						</tr>";
 	}
 

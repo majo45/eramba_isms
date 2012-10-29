@@ -102,7 +102,7 @@ echo "				<img src=\"img/profile-pic.png\" alt=\"Profile pic\"/>";
 				<li><a href="?section=organization&category=NULL" <?php is_this_menu_active($_GET["section"], "organization")?>>Organization</a></li>
 				<li><a href="?section=asset&category=NULL" <?php is_this_menu_active($_GET["section"], "asset")?>>Asset Management</a></li>
 				<li><a href="?section=risk&category=NULL" <?php is_this_menu_active($_GET["section"], "risk")?>>Risk Management</a></li>
-				<li><a href="?section=security_services&category=NULL" <?php is_this_menu_active($_GET["section"], "services")?>>Services</a></li>
+				<li><a href="?section=security_services&category=NULL" <?php is_this_menu_active($_GET["section"], "security_services")?>>Services</a></li>
 				<li><a href="?section=compliance&category=NULL" <?php is_this_menu_active($_GET["section"], "compliance")?>>Compliance</a></li>
 				<li><a href="?section=system&category=system_records" <?php is_this_menu_active($_GET["section"], "system")?>>System</a></li>
 			</ul>
