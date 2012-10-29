@@ -4,6 +4,9 @@
 	include_once("lib/site_lib.php");
 	include_once("lib/system_records_lib.php");
 	include_once("lib/security_services_audit_lib.php");
+	include_once("lib/security_services_audit_status_lib.php");
+	include_once("lib/security_services_audit_calendar_lib.php");
+	include_once("lib/security_services_audit_audit_result_lib.php");
 
 	# general variables - YOU SHOULDNT NEED TO CHANGE THIS
 	$sort = $_GET["sort"];
@@ -12,6 +15,7 @@
 	$action = $_GET["action"];
 	
 	$base_url = build_base_url($section,$subsection);
+	$service_catalogue_url = build_base_url($section,"security_catalogue");
 	
 	# local variables - YOU MUST ADJUST THIS! 
 	$bu_id = $_GET["bu_id"];
@@ -30,22 +34,22 @@
 
 
 	# PROCEDURE
-	store_procedure_generate_security_services_audit();
-	 
+	# store_procedure_generate_security_services_audit();
+	
 	#actions .. edit, update or disable - YOU MUST ADJUST THIS!
-	if ($action == "update_bu" & is_numeric($bu_id)) {
+	if ($action == "update_security_services_audit" & is_numeric($bu_id)) {
 		$bu_update = array(
 			'bu_name' => $bu_name,
 			'bu_description' => $bu_description
 		);	
-		update_bu($bu_update,$bu_id);
+		update_security_services_audit($bu_update,$bu_id);
 		add_system_records("organization","bu","$bu_id","","Update","");
-	} elseif ($action == "update_bu") {
+	} elseif ($action == "update_security_services_audit") {
 		$bu_update = array(
 			'bu_name' => $bu_name,
 			'bu_description' => $bu_description
 		);	
-		add_bu($bu_update);
+		add_security_services_audit($bu_update);
 		add_system_records("organization","bu","$bu_id","","Insert","");
 	 }
 
@@ -70,8 +74,8 @@
 	}
 
 
-	if ($action == "disable_bu" & is_numeric($bu_id)) {
-		disable_bu($bu_id);
+	if ($action == "disable_security_services_audit" & is_numeric($bu_id)) {
+		disable_security_services_audit($bu_id);
 		add_system_records("organization","bu","$bu_id","","Disable","");
 	}
 	if ($action == "disable_process" & is_numeric($process_id)) {
@@ -80,7 +84,7 @@
 	}
 
 	if ($action == "csv") {
-		export_bu_csv();
+		export_security_services_audit_csv();
 		add_system_records("organization","bu","","","Export","");
 	}
 
@@ -92,71 +96,170 @@
 	<section id="content-wrapper">
 		<h3>Security Audit Reviews</h3>
 		
-		<div class="controls-wrapper">
-			<a href="#" class="actions-btn">
-				Actions
-				<span class="select-icon"></span>
-			</a>
-		</div>
+			<div class="actions-wraper">
+				<a href="#" class="actions-btn">
+					Actions
+					<span class="select-icon"></span>
+				</a>
+				<ul class="action-submenu">
+<?
+echo "					<li><a href=\"$base_url&sort=this_month\">This Month Audits</a></li>";
+echo "					<li><a href=\"$base_url&sort=future_months\">Comming Audits</a></li>";
+echo "					<li><a href=\"$base_url&sort=past_months\">Past Audits</a></li>";
+?>
+				</ul>
+			</div>
 		
 		<ul id="accordion">
+	
+<br>
 			
 <?
-	$bu_list = list_bu(" WHERE bu_disabled=\"0\"");
-	foreach($bu_list as $bu_item) {
+
+	### ATTENTION ###
+	if ($sort=="this_month" or !$sort) {
+
+	echo "<h4>Planned Audits for this Month</h4>";
+
+	$this_month = give_me_this_month();
+
+	$list_of_planned_audits = list_security_services_audit_unique(" WHERE security_services_audit_disabled =\"0\" and security_services_audit_calendar_id = \"$this_month\"");
+
+	if ( !count($list_of_planned_audits) ) { 
+		echo "<span class=\"description\">Good! No planned audits for this month</span>";
+	} else {
+		echo "<span class=\"description\">This is the list of planned audits</span>";
+
+	foreach($list_of_planned_audits as $planned_audit) {
+
+			$security_service_data = lookup_security_services("security_services_id",$planned_audit[security_services_audit_security_service_id]);
+
 echo "			<li>";
 echo "				<div class=\"header\">";
-echo "					Business Unit: $bu_item[bu_name]";
+echo "					Service Name: $security_service_data[security_services_name]";
 echo "					<span class=\"actions\">";
-echo "						<a class=\"edit\" href=\"$base_url&action=edit_bu&bu_id=$bu_item[bu_id]\">edit</a>";
-echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"delete\" href=\"$base_url&action=disable_bu&bu_id=$bu_item[bu_id]\">delete</a>";
-echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"delete\" href=\"$base_url&action=edit_process&bu_id=$bu_item[bu_id]\">Add New Business Process Here</a>";
-echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"delete\" href=\"?section=system&subsection=system_records&system_records_lookup_section=organization&system_records_lookup_subsection=bu&system_records_lookup_item_id=$bu_item[bu_id]\">records</a>";
-echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"delete\" href=\"?section=system&subsection=system_records&action=edit&system_records_lookup_section=organization&system_records_lookup_subsection=bu&system_records_lookup_item_id=$bu_item[bu_id]\">add a note</a>";
+echo "						<a class=\"edit\" href=\"$service_catalogue_url&sort=$security_service_data[security_services_id]\">view this service</a>";
 echo "					</span>";
 echo "					<span class=\"icon\"></span>";
 echo "				</div>";
 echo "				<div class=\"content table\">";
 echo "					<table>";
 echo "						<tr>";
-echo "							<th><center><input type=\"checkbox\" name=\"check-all\" class=\"checkAll\" /></th>";
-echo "							<th>Process Name</th>";
-echo "							<th>Description</th>";
-echo "							<th><center>RTO</th>";
+echo "							<th><center>Status</th>";
+echo "							<th>Review Metric</th>";
+echo "							<th>Success Criteria</th>";
+echo "							<th><center>Planned Start</th>";
+echo "							<th><center>Result</th>";
+echo "							<th><center>Start</th>";
+echo "							<th><center>End</th>";
 echo "						</tr>";
 
-	$process_list = list_process(" WHERE bu_id = $bu_item[bu_id] AND process_disabled = \"0\"");
-	foreach($process_list as $process_item) {
-echo "						<tr>";
-echo "							<td><center><input type=\"checkbox\" name=\"action\" class=\"check-elem\"/></td>";
-echo "							<td class=\"action-cell\">";
-echo "								<div class=\"cell-label\">";
-echo "								 	$process_item[process_name]";
-echo "								</div>";
-echo "								<div class=\"cell-actions\">";
-echo "							<a href=\"$base_url&action=edit_process&process_id=$process_item[process_id]&bu_id=$bu_item[bu_id]\" class=\"edit-action\">edit</a> ";
-echo "							<a href=\"$base_url&action=disable_process&process_id=$process_item[process_id]\" class=\"delete-action\">delete</a>";
-echo "							<a href=\"?section=system&subsection=system_records&system_records_lookup_section=organization&system_records_lookup_subsection=bu-process&system_records_lookup_item_id=$process_item[process_id]\" class=\"delete-action\">records</a>";
-echo "							<a href=\"?section=system&subsection=system_records&action=edit&system_records_lookup_section=organization&system_records_lookup_subsection=bu-process&system_records_lookup_item_id=$process_item[process_id]\" class=\"delete-action\">add a note</a>";
-
-echo "								</div>";
-echo "							</td>";
-echo "							<td>$process_item[process_description]</td>";
-echo "							<td><center>$process_item[process_rto] Days</td>";
-echo "						</tr>";
-	}
+display_html_audit_items($security_service_data[security_services_id]);
 
 echo "					</table>";
 echo "				</div>";
 echo "			</li>";
 	}
+
+	}
+
+	### ATTENTION ###
+	} elseif ($sort=="future_months") {
+	
+	echo "<h4>Planned Audits for the Comming Months</h4>";
+
+
+	$this_month = give_me_this_month();
+	$this_month++;
+	$three_months = $this_month+3;
+
+	$list_of_planned_audits = list_security_services_audit_unique(" WHERE security_services_audit_disabled =\"0\" and security_services_audit_calendar_id > \"$this_month\" and security_services_audit_calendar_id < \"$three_months\"");
+
+	if ( !count($list_of_planned_audits) ) { 
+		echo "<span class=\"description\">Good! No planned audits for this month</span>";
+	} else {
+		echo "<span class=\"description\">This is the list of planned audits</span>";
+
+	foreach($list_of_planned_audits as $planned_audit) {
+			$security_service_data = lookup_security_services("security_services_id",$planned_audit[security_services_audit_security_service_id]);
+
+echo "			<li>";
+echo "				<div class=\"header\">";
+echo "					Service Name: $security_service_data[security_services_name]";
+echo "					<span class=\"actions\">";
+echo "						<a class=\"edit\" href=\"$service_catalogue_url&sort=$security_service_data[security_services_id]\">view this service</a>";
+echo "					</span>";
+echo "					<span class=\"icon\"></span>";
+echo "				</div>";
+echo "				<div class=\"content table\">";
+echo "					<table>";
+echo "						<tr>";
+echo "							<th><center>Status</th>";
+echo "							<th>Review Metric</th>";
+echo "							<th>Success Criteria</th>";
+echo "							<th><center>Planned Start</th>";
+echo "							<th><center>Result</th>";
+echo "							<th><center>Start</th>";
+echo "							<th><center>End</th>";
+echo "						</tr>";
+
+display_html_audit_items($security_service_data[security_services_id]);
+
+echo "					</table>";
+echo "				</div>";
+echo "			</li>";
+	}
+
+	}
+
+	### ATTENTION ###
+	} elseif ($sort=="past_months") {
+	
+	echo "<h4>Past Audits</h4>";
+
+	$this_month = give_me_this_month();
+	$list_of_planned_audits = list_security_services_audit_unique(" WHERE security_services_audit_disabled =\"0\" and security_services_audit_calendar_id <  \"$this_month\"");
+
+	if ( !count($list_of_planned_audits) ) { 
+		echo "<span class=\"description\">Good! No planned audits for this month</span>";
+	} else {
+		echo "<span class=\"description\">This is the list of planned audits</span>";
+
+	foreach($list_of_planned_audits as $planned_audit) {
+			$security_service_data = lookup_security_services("security_services_id",$planned_audit[security_services_audit_security_service_id]);
+
+echo "			<li>";
+echo "				<div class=\"header\">";
+echo "					Service Name: $security_service_data[security_services_name]";
+echo "					<span class=\"actions\">";
+echo "						<a class=\"edit\" href=\"$service_catalogue_url&sort=$security_service_data[security_services_id]\">view this service</a>";
+echo "					</span>";
+echo "					<span class=\"icon\"></span>";
+echo "				</div>";
+echo "				<div class=\"content table\">";
+echo "					<table>";
+echo "						<tr>";
+echo "							<th><center>Status</th>";
+echo "							<th>Review Metric</th>";
+echo "							<th>Success Criteria</th>";
+echo "							<th><center>Planned Start</th>";
+echo "							<th><center>Result</center></th>";
+echo "							<th><center>Start</th>";
+echo "							<th><center>End</th>";
+echo "						</tr>";
+
+display_html_audit_items($security_service_data[security_services_id]);
+
+echo "					</table>";
+echo "				</div>";
+echo "			</li>";
+	}
+
+	}
+
+	} else {
+	echo "end";
+	}
+	
 ?>
-		</ul>
-		
-		<br class="clear"/>
-		
-	</section>
+

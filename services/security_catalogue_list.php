@@ -53,6 +53,7 @@
 	
 		# delete all audit reviews for this service 
 		delete_security_services_catalogue_audit_calendar_join($security_services_id);
+
 		# add all selected PLANNED audits for this service
 		if (is_array($security_services_audit_calendar)) {
 			$count_security_services_audit_calendar = count($security_services_audit_calendar);
@@ -150,7 +151,12 @@ echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
 		<ul id="accordion">
 			
 <?
-	$security_services_list = list_security_services(" WHERE security_services_disabled=\"0\"");
+	if ($sort) {
+		$security_services_list = list_security_services(" WHERE security_services_disabled=\"0\" AND security_services_id =\"$sort\"");
+	} else {
+		$security_services_list = list_security_services(" WHERE security_services_disabled=\"0\"");
+	}
+
 	foreach($security_services_list as $security_services_item) {
 
 	$status_name = lookup_security_services_status("security_services_status_id", $security_services_item[security_services_status]);	

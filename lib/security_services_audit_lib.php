@@ -14,23 +14,32 @@ function list_security_services_audit($arguments) {
 	return $results;
 }
 
+function list_security_services_audit_unique($arguments) {
+	# MUST EDIT
+	$sql = "SELECT DISTINCT security_services_audit_security_service_id  FROM security_services_audit_tbl".$arguments;
+	$results = runQuery($sql);
+	return $results;
+}
+
 # the objective is to ensure that there's an audit record for future times starting today.
 # so if i get called, i need to make sure that there will be an audit in the future for this service, when? well, the planned started date + periodicity.
 # if the planned start date is after today, then i do nothing! i wait until the planned start date is in the PAST and then i will eventually create one
 function add_security_services_audit_v2($security_services_id) {
 	
+	echo "add_security_services_audit_v2<br>";
+
 	# first i need to know if this service is valid
 	$service_information = lookup_security_services("security_services_id", $security_services_id); 
 	if (empty($service_information[security_services_id])) {
-		echo "DEBUG: Not a valid service<br>";
+		# echo "DEBUG: Not a valid service<br>";
 		return 1;
 	}
 
 	# then i need to check which audits i have PLANNED for this service (this will give me the list of months ids) for EVERY YEAR 
 	$service_planned_audits_list = list_security_services_catalogue_audit_calendar_join( " WHERE security_service_catalogue_id = \"$service_information[security_services_id]\""); 
 	if (!count($service_planned_audits_list)) {
-		echo "DEBUG: no tiene audits planned ($service_information[security_services_id]) <br>";
-		return;
+		#echo "DEBUG: no tiene audits planned ($service_information[security_services_id]) <br>";
+		return 1;
 	}
 	
 	# then i need to check which audits i have CREATED for this service THIS YEAR
@@ -40,7 +49,7 @@ function add_security_services_audit_v2($security_services_id) {
 	$service_created_audit_list = list_security_services_audit(" WHERE security_services_audit_security_service_id = \"$service_information[security_services_id]\" and security_services_audit_disabled = \"0\" and security_services_audit_planned_year = \"$this_year\""); 
 
 	if (!count($service_created_audit_list)) {
-		echo "DE  BUG: tenes que crear audits papa<br>";
+		# echo "DEBUG: tenes que crear audits papa<br>";
 		foreach($service_planned_audits_list as $planned_audit) {
 			real_add_security_services_audit($service_information[security_services_id], $planned_audit[security_services_audit_calendar_id], $this_year, $service_information[security_services_audit_metric], $service_informatio[security_services_audit_success_criteria]);
 		}
@@ -49,24 +58,25 @@ function add_security_services_audit_v2($security_services_id) {
 	
 	foreach($service_planned_audits_list as $planned_month_audit) {
 
-		echo "DEBUG: stargin to compare what audits PLANNED against CREATED<br>";
+		# echo "DEBUG: stargin to compare what audits PLANNED against CREATED<br>";
 		
 		# here i search if i have an audit planned with that ID
 		foreach($service_created_audit_list as $created_audit) {
 
-			echo "DEBUG: Comparing .. $planned_month_audit[security_services_audit_calendar_id] == $created_audit[security_services_audit_calendar_id] <br>";
+			# echo "DEBUG: Comparing .. $planned_month_audit[security_services_audit_calendar_id] == $created_audit[security_services_audit_calendar_id] <br>";
 	
 			if ($planned_month_audit[security_services_audit_calendar_id] == $created_audit[security_services_audit_calendar_id]) {
+				# echo "DEBUG: Matched<br>";
 				$find = 1;
 			}	
 		}
 
-		if (!$find) {
-			echo "DEBUG: I need to create a new audit, for $this_year and calendarid = $planned_month_audit[security_services_audit_calendar_id]<br>";
-			real_add_security_services_audit($service_information[security_services_id], $planned_audit[security_services_audit_calendar_id], $this_year, $service_information[security_services_audit_metric], $service_informatio[security_services_audit_success_criteria]);
+		if (empty($find)) {
+			# echo "DEBUG: I need to create a new audit, for $this_year and calendarid = $planned_month_audit[security_services_audit_calendar_id]<br>";
+			real_add_security_services_audit($service_information[security_services_id], $planned_month_audit[security_services_audit_calendar_id], $this_year, $service_information[security_services_audit_metric], $service_informatio[security_services_audit_success_criteria]);
 		}
 
-		empty($find);
+		unset($find);
 
 	}
 
@@ -195,6 +205,50 @@ function export_security_services_audit_csv() {
 	}
 	
 	fclose($handler);
+
+}
+
+function display_html_audit_items($service_id) {
+	
+	# here i need to start listing all the audits for this particular service_id
+	$audit_list = list_security_services_audit(" WHERE security_services_audit_security_service_id = \"$service_id\" 
+			AND
+			security_services_audit_disabled = \"0\"
+			");
+	foreach($audit_list as $audit_item) {
+
+	$status_name = lookup_security_services_audit_status("security_services_audit_status_id",$audit_item[security_services_audit_status]); 	
+
+echo "						<tr>";
+echo "							<td class=\"action-cell\">";
+echo "										$status_name[security_services_audit_status_name]";
+echo "								<div class=\"cell-label\">";
+echo "								 	$process_item[process_name]";
+echo "								</div>";
+echo "								<div class=\"cell-actions\">";
+echo "							<a href=\"$base_url&action=edit_process&process_id=$audit_item[security_services_audit_id]\" class=\"edit-action\">start review</a> ";
+echo "							<a href=\"$base_url&action=disable_process&process_id=$audit_item[security_services_audit_id]\" class=\"edit-action delete-action\">delete</a>";
+echo "							<a href=\"?section=system&subsection=system_records&system_records_lookup_section=organization&system_records_lookup_subsection=bu-process&system_records_lookup_item_id=$audit_item[security_services_audit_id]\" class=\"edit-action delete-action\">see records</a>";
+echo "							<a href=\"?section=system&subsection=system_records&action=edit&system_records_lookup_section=organization&system_records_lookup_subsection=bu-process&system_records_lookup_item_id=$audit_item[security_services_audit_id]\" class=\"delete-action\">add record</a>";
+
+echo "								</div>";
+echo "							</td>";
+echo "							<td>$audit_item[security_services_audit_metric]</td>";
+echo "							<td><center>$audit_item[security_services_audit_criteria]</td>";
+
+				$month_name = lookup_security_services_audit_calendar("security_services_audit_calendar_id",$audit_item[security_services_audit_calendar_id]); 
+	
+echo "							<td><center>$month_name[security_services_audit_calendar_name]-$audit_item[security_services_audit_planned_year]</td>";
+
+	
+				$result_name = lookup_security_services_audit_result("security_services_audit_result_id",$audit_item[security_services_audit_result]);	
+
+echo "							<td><center>$result_name[security_services_audit_result_name]</td>";
+
+echo "							<td><center>$audit_item[security_services_audit_start_audit_date]</td>";
+echo "							<td><center>$audit_item[security_services_audit_end_audit_date]</td>";
+echo "						</tr>";
+	}
 
 }
 
