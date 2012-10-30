@@ -66,7 +66,8 @@ echo "					<form name=\"risk_classification_edit\" method=\"GET\" action=\"$base
 				    <INPUT type="hidden" name="subsection" value="risk_classification">
 <? echo " 			    <INPUT type=\"hidden\" name=\"risk_classification_id\" value=\"$risk_classification_item[risk_classification_id]\">"; ?>
 
-			    <INPUT type="submit" value="Send"> 
+			<a>
+			    <INPUT type="submit" value="Submit" class="add-btn"> 
 			</a>
 			
 <?

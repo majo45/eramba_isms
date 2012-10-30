@@ -57,7 +57,8 @@ echo "					<form name=\"risk_exception_edit\" method=\"GET\" action=\"$base_url\
 				    <INPUT type="hidden" name="subsection" value="risk_exception">
 <? echo " 			    <INPUT type=\"hidden\" name=\"risk_exception_id\" value=\"$risk_exception_item[risk_exception_id]\">"; ?>
 
-			    <INPUT type="submit" value="Send"> 
+			<a>
+			    <INPUT type="submit" value="Submit" class="add-btn"> 
 			</a>
 			
 <?

@@ -4,12 +4,26 @@
 # IF YOU WANT TO USE, YOU MUST RENAME FUNCTIONS!! :s/risk/risk/ - SAMEPLE
 
 include_once("mysql_lib.php");
+include_once("risk_classification_lib.php");
 
 function list_risk($arguments) {
 	# MUST EDIT
 	$sql = "SELECT * FROM risk_tbl".$arguments;
 	$results = runQuery($sql);
 	return $results;
+}
+
+function add_risk_asset_join($risk_asset_join_data) {
+	$sql = "INSERT INTO
+		risk_asset_join	
+		VALUES (
+		\"$risk_asset_join_data[risk_asset_join_risk_id]\",
+		\"$risk_asset_join_data[risk_asset_join_asset_id]\"
+		)
+		";	
+	$result = runUpdateQuery($sql);
+	return $result;
+	
 }
 
 function add_risk($risk_data) {
@@ -121,19 +135,83 @@ function export_risk_csv() {
 
 	# this will dump the table risk_tbl on CSV format
 	$sql = "SELECT * from risk_tbl";
-	$result = runQuery($sql);
-	
+	$result_risk = runQuery($sql);
+
+	# este es el join entre risks y assets
+	$sql = "SELECT * FROM risk_asset_join";
+	$risk_asset_join= runQuery($sql);
+
+	# el header del archivo es "dinamico" porque depende el numero de classificciones que usne, etc..
+	$header_static = "asset_name, asset_description, threats, vulnerabilities, risk review,";
+
+	# i need to push all the classifictions available for risks in the header too!
+	$risk_classification_list = list_risk_classification_distinct();
+	$risk_classification_list_2 = array();
+	foreach($risk_classification_list as $classification_item) {
+		array_push($risk_classification_list_2, $classification_item[risk_classification_type]);
+	}
+	$header_dinamic = implode(",", $risk_classification_list_2);
+
+	# ahora el header, pero la segunda parte
+	$header_static_part_two = ",risk score, mitigation strategy, compensating controls name, compensating controls id, risk_exceptions, residual_risk";
+
+	$full_header = "$header_static $header_dinamic $header_static_part_two";
+
 	# open file
 	$export_file = "downloads/risk_export.csv";
 	$handler = fopen($export_file, 'w');
 	
-	fwrite($handler, "risk_id,risk_name,risk_description,risk_disabled\n");
-	foreach($result as $line) {
-		fwrite($handler,"$line[risk_id],$line[risk_name],$line[risk_descripion],$line[risk_disabled]\n");
-	}
-	
-	fclose($handler);
+	fwrite($handler, "$full_header\n");
 
+	foreach($risk_asset_join as $risk_asset_join_item) {
+
+	$asset_data = lookup_asset("asset_id", $risk_asset_join_item[risk_asset_join_asset_id]);
+	$risk_data = lookup_risk("risk_id", $risk_asset_join_item[risk_asset_join_risk_id]);
+
+	$line_first_part = "$asset_data[asset_name], $asset_data[asset_description], $risk_data[risk_threat], $risk_data[risk_vulnerabilities], $risk_data[risk_periodicity_review]";
+	
+	# this inputs the values for the dinamyc part
+	$risk_dinamyc_values = array();
+	$risk_classification_list = list_risk_classification_distinct();
+	foreach($risk_classification_list as $risk_classification_item) {
+		$value = pre_selected_risk_classification_values($risk_classification_item[risk_classification_type], $risk_data[risk_id]);	
+		$name = lookup_risk_classification("risk_classification_id", $value);
+		array_push($risk_dinamyc_values, $name[risk_classification_name]);
+	}
+
+	$line_dinamyc_part = implode(",",$risk_dinamyc_values);
+	$mitigation_strategy = lookup_risk_mitigation_strategy("risk_mitigation_strategy_id",$risk_data[risk_mitigation_strategy_id]); 
+	
+	#i try to gather security controls data
+	$service_data_name=array();
+	$service_data_id=array();
+	$security_services_for_this_risk_list = list_risk_security_services_join(" WHERE risk_security_services_join_risk_id = \"$risk_data[risk_id]\""); 
+	foreach($security_services_for_this_risk_list as $security_services_for_this_risk_item) {
+		$security_service_data = lookup_security_services("security_services_id",$security_services_for_this_risk_item[risk_security_services_join_security_services_id]);	
+		array_push($service_data_name, $security_service_data[security_services_name]);
+		array_push($service_data_id, $security_service_data[security_services_id]);
+	}
+
+	$service_data_name_line=implode(";",$service_data_name);
+	$service_data_id_line=implode(";",$service_data_id);
+
+	# try to gather some sec exceptions data
+	$risk_exception_data_information = array();
+	$risk_exception_for_this_risk_list = list_risk_risk_exception_join(" WHERE risk_risk_exception_join_risk_id = \"$risk_data[risk_id]\""); 
+	foreach($risk_exception_for_this_risk_list as $risk_exception_for_this_risk_item) {
+		$risk_exception_data = lookup_risk_exception("risk_exception_id",$risk_exception_for_this_risk_item[risk_risk_exception_join_risk_exception_id]);	
+		array_push($risk_exception_data_information, $risk_exception_data[risk_exception_title]);
+	}
+
+	$risk_exception_line = implode(";",$risk_exception_data_information);
+
+	$line_third_part = "$risk_data[risk_classification_score], $mitigation_strategy[risk_mitigation_strategy_name], $service_data_name_line, $service_data_id_line,  $risk_exception_line, $risk_data[risk_residual_score]";
+	
+	fwrite($handler,"$line_first_part, $line_dinamyc_part, $line_third_part\n");
+
+	}
+
+	fclose($handler);
 }
 
 function lookup_risk_asset_join($asset_id) {

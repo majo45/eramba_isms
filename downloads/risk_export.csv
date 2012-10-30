@@ -1,0 +1,4 @@
+asset_name, asset_description, threats, vulnerabilities, risk review, Confidentiality Impact,Likelihood,Integrity Impact,Availability Impact ,risk score, mitigation strategy, compensating controls name, compensating controls id, risk_exceptions, residual_risk
+Financial Data, Globant financial data, srobos, candado locos, 13, Medium,High,Low,High, 34, Mitigate with Compensating Controls, CCTV - Laminar;Physical Doors Controls;Regular WebApp Scanning - Int, 7;8;6,  test, 34
+SAP FI, SAP Finance System, fewwe, wfewfe, 12, Medium,Low,Low,Low, 3, Transfer Risk, CCTV - Laminar;Physical Doors Controls, 7;8,  , 3
+SAP HR, SAP Module for HR Department, efewfwefe, fewffwefwe, 12, ,Low,,, 0, , CCTV - Laminar;Regular WebApp Scanning - Int, 7;6,  test, 0

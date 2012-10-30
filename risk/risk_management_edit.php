@@ -20,6 +20,7 @@
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
 	$risk_id= $_GET["risk_id"];
+	$asset_id= $_GET["asset_id"];
 	
 	$base_url = build_base_url($section,$subsection);
 
@@ -158,10 +159,13 @@ echo "						<input type=\"text\" name=\"risk_periodicity_review\" id=\"\" value=
 				    <INPUT type="hidden" name="action" value="update">
 				    <INPUT type="hidden" name="section" value="risk">
 				    <INPUT type="hidden" name="subsection" value="risk_management">
+<? echo "			    <INPUT type=\"hidden\" name=\"asset_id\" value=\"$asset_id\">"; ?>
 <? echo " 			    <INPUT type=\"hidden\" name=\"risk_id\" value=\"$risk_item[risk_id]\">"; ?>
 <? echo " 			    <INPUT type=\"hidden\" name=\"risk_id\" value=\"$risk_item[risk_id]\">"; ?>
 
-			    <INPUT type="submit" value="Send"> 
+			<a>
+			    <INPUT type="submit" value="Submit" class="add-btn"> 
+			</a>
 			
 <?
 echo "			<a href=\"$base_url\" class=\"cancel-btn\">";

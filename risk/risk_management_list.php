@@ -10,6 +10,7 @@
 	include_once("lib/security_services_lib.php");
 	include_once("lib/security_services_status_lib.php");
 	include_once("lib/risk_risk_exception_join_lib.php");
+	include_once("lib/risk_mitigation_strategy_lib.php");
 	include_once("lib/system_records_lib.php");
 
 	# general variables - YOU SHOULDNT NEED TO CHANGE THIS
@@ -21,6 +22,7 @@
 	$base_url = build_base_url($section,$subsection);
 	
 	# local variables - YOU MUST ADJUST THIS! 
+	$asset_id = $_GET["asset_id"];
 	$risk_id = $_GET["risk_id"];
 	$risk_threat = $_GET["risk_threat"];
 	$risk_vulnerabilities = $_GET["risk_vulnerabilities"];
@@ -92,7 +94,8 @@
 			}
 		}
 
-	} elseif ($action == "update") {
+	} elseif ($action == "update" & !empty($asset_id)) {
+
 		$risk_update = array(
 			'risk_threat' => $risk_threat,
 			'risk_vulnerabilities' => $risk_vulnerabilities,
@@ -101,9 +104,39 @@
 			'risk_periodicity_review' => $risk_periodicity_review,
 			'risk_residual_score' => $risk_residual_score
 		);	
-		add_risk($risk_update);
+		$risk_id = add_risk($risk_update);
+
+		$risk_asset_join_update = array(
+			'risk_asset_join_risk_id' => $risk_id,
+			'risk_asset_join_asset_id' => $asset_id
+		);	
+
+		add_risk_asset_join($risk_asset_join_update);
+
 		add_system_records("risk","risk_management","$risk_id","","Insert","");
 		
+		# delete all security services for this risk
+		delete_risk_security_services_join($risk_id);
+		# add all selected security services for this risk
+		if (is_array($security_services_id)) {
+			$count_security_services_id_item = count($security_services_id);
+			for($count = 0 ; $count < $count_security_services_id_item ; $count++) {
+				# now i insert this stuff
+				add_risk_security_services_join($risk_id, $security_services_id[$count]);
+			}
+		}
+		
+		# delete all risk_exceptions for this risk
+		delete_risk_risk_exception_join($risk_id);
+		# add all selected security services for this risk
+		if (is_array($risk_exception_id)) {
+			$count_risk_exception_id_item = count($risk_exception_id);
+			for($count = 0 ; $count < $count_risk_exception_id_item ; $count++) {
+				# now i insert this stuff
+				add_risk_risk_exception_join($risk_id, $risk_exception_id[$count]);
+			}
+		}
+
 		# 1) delete all classifications for this risk
 		delete_risk_classification_join($risk_id);
 		# 2) insert all classification for this risk
@@ -136,12 +169,6 @@
 		<h3>Risk Management</h3>
 		
 		<div class="controls-wrapper">
-<?
-echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
-?>
-				<span class="add-icon"></span>
-				Add new Risk 
-			</a>
 			
 			<div class="actions-wraper">
 				<a href="#" class="actions-btn">
@@ -153,7 +180,7 @@ echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 if ($action == "csv") {
-echo "					<li><a href=\"downloads/legal_export.csv\">Dowload</a></li>";
+echo "					<li><a href=\"downloads/risk_export.csv\">Dowload</a></li>";
 } else { 
 echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
 }
@@ -172,13 +199,14 @@ echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
 
 	$risk_item = lookup_risk_asset_join("$asset_item[asset_id]");
 	$risk_data = lookup_risk("risk_id",$risk_item[risk_asset_join_risk_id]);
+	$risk_mitigation = lookup_risk_mitigation_strategy("risk_mitigation_strategy_id",$risk_data[risk_mitigation_strategy_id]); 
 
 
 echo "			<li>";
 echo "				<div class=\"header\">";
 echo "					Asset being Risk Analysed: $asset_item[asset_name]";
 echo "					<span class=\"actions\">";
-echo "						<a class=\"edit\" href=\"$base_url&action=edit&risk_id=$risk_data[risk_id]\">edit</a>";
+echo "						<a class=\"edit\" href=\"$base_url&action=edit&risk_id=$risk_data[risk_id]&asset_id=$asset_item[asset_id]\">edit</a>";
 echo "						&nbsp;|&nbsp;";
 echo "						<a class=\"delete\" href=\"?section=system&subsection=system_records&system_records_lookup_section=risk&system_records_lookup_subsection=risk_management&system_records_lookup_item_id=$risk_data[risk_id]\">records</a>";
 echo "						&nbsp;|&nbsp;";
@@ -202,10 +230,10 @@ echo "							<td class=\"action-cell\">";
 echo "								 	$risk_data[risk_threat]";
 echo "							</td>";
 echo "							<td>$risk_data[risk_vulnerabilities]</td>";
-echo "							<td>$risk_data[risk_classification_score]</td>";
-echo "							<td>$risk_data[risk_mitigation_strategy]</td>";
-echo "							<td>$risk_data[risk_periodicity_review]</td>";
-echo "							<td>$risk_data[risk_residual_score]</td>";
+echo "							<td><center>$risk_data[risk_classification_score]</td>";
+echo "							<td><center>$risk_mitigation[risk_mitigation_strategy_name]</td>";
+echo "							<td><center>$risk_data[risk_periodicity_review]</td>";
+echo "							<td><center>$risk_data[risk_residual_score]</td>";
 echo "						</tr>";
 	#}
 

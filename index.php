@@ -81,7 +81,7 @@ if ($section == "organization") {
 	}
 	
 	if ($subsection == "security_services_audit") {
-		if ($action == "edit") {
+		if ($action == "edit_security_services_audit") {
 			include("services/security_services_audit_edit.php");
 		} else { 
 			include("services/security_services_audit_list.php");

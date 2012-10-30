@@ -59,8 +59,9 @@ echo "					<form name=\"process_edit\" method=\"GET\" action=\"$base_url\">";
 				    <INPUT type="hidden" name="subsection" value="process">
 <? echo " 			    <INPUT type=\"hidden\" name=\"bu_id\" value=\"$bu_id\">"; ?>
 <? echo " 			    <INPUT type=\"hidden\" name=\"process_id\" value=\"$process_id\">"; ?>
+			<a>
 
-			    <INPUT type="submit" value="Send"> 
+			    <INPUT type="submit" value="Submit" class="add-btn"> 
 			</a>
 			
 <?

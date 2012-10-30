@@ -165,8 +165,9 @@ echo "				<input type=\"text\" name=\"security_services_cost_operational_resourc
 				    <INPUT type="hidden" name="section" value="security_services">
 				    <INPUT type="hidden" name="subsection" value="security_catalogue">
 <? echo " 			    <INPUT type=\"hidden\" name=\"security_services_id\" value=\"$security_services_item[security_services_id]\">"; ?>
-
-			    <INPUT type="submit" value="Send"> 
+			<a>
+			    <INPUT type="submit" value="Submit" class="add-btn"> 
+			</a>
 			
 <?
 echo "			<a href=\"$base_url\" class=\"cancel-btn\">";

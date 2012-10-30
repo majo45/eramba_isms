@@ -148,7 +148,9 @@ foreach($asset_classification_types as $asset_classification_types_item) {
 				    <INPUT type="hidden" name="subsection" value="asset_identification">
 <? echo " 			    <INPUT type=\"hidden\" name=\"asset_id\" value=\"$asset_item[asset_id]\">"; ?>
 
-			    <INPUT type="submit" value="Send"> 
+			<a>
+			    <INPUT type="submit" value="Submit" class="add-btn"> 
+			</a>
 			
 <?
 echo "			<a href=\"$base_url\" class=\"cancel-btn\">";

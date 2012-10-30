@@ -18,74 +18,83 @@
 	$service_catalogue_url = build_base_url($section,"security_catalogue");
 	
 	# local variables - YOU MUST ADJUST THIS! 
-	$bu_id = $_GET["bu_id"];
-	$bu_name = $_GET["bu_name"];
-	$bu_description = $_GET["bu_description"];
-	$bu_disabled = $_GET["bu_disabled"];
-	
-	$process_id = $_GET["process_id"];
-	$process_name = $_GET["process_name"];
-	$process_description = $_GET["process_description"];
-	$process_rto = $_GET["process_rto"];
-	if (!is_numeric($process_rto)) {
-		$process_rto = 360;
-	}
-	$process_disabled = $_GET["process_disabled"];
-
-
-	# PROCEDURE
-	# store_procedure_generate_security_services_audit();
+	$security_services_audit_id = $_GET["security_services_audit_id"];
+	$security_services_audit_status = $_GET["security_services_audit_status"];
+	$security_services_audit_disabled = $_GET["security_services_audit_disabled"];
+	$security_services_audit_auditor = $_GET["security_services_audit_auditor"];
+	$security_services_audit_start_audit_date = $_GET["security_services_audit_start_audit_date"];
+	$security_services_audit_end_audit_date = $_GET["security_services_audit_end_audit_date"];
+	$security_services_audit_result = $_GET["security_services_audit_result"];
+	$security_services_audit_result_description = $_GET["security_services_audit_result_description"];
 	
 	#actions .. edit, update or disable - YOU MUST ADJUST THIS!
-	if ($action == "update_security_services_audit" & is_numeric($bu_id)) {
-		$bu_update = array(
-			'bu_name' => $bu_name,
-			'bu_description' => $bu_description
-		);	
-		update_security_services_audit($bu_update,$bu_id);
-		add_system_records("organization","bu","$bu_id","","Update","");
-	} elseif ($action == "update_security_services_audit") {
-		$bu_update = array(
-			'bu_name' => $bu_name,
-			'bu_description' => $bu_description
-		);	
-		add_security_services_audit($bu_update);
-		add_system_records("organization","bu","$bu_id","","Insert","");
-	 }
+	if ($action == "change_status" & is_numeric($security_services_audit_status) & is_numeric($security_services_audit_id)) {
 
-	if ($action == "update_process" & is_numeric($process_id)) {
-		$process_update = array(
-			'process_name' => $process_name,
-			'bu_id' => $bu_id,
-			'process_description' => $process_description,
-			'process_rto' => $process_rto
+		# today's audit
+		$today = give_me_date();		
+
+		# if they want to close this audit, i need to make sure the audit response is there! if theres no response, then i need to set it to "Inconclusive"
+		$audit_item = lookup_security_services_audit("security_services_audit_id", $security_services_audit_id);
+
+		if (empty($audit_item[security_services_audit_result]) and $security_services_audit_status == "3") {
+			$security_services_audit_result = 4;	
+			$audit_end = $today;
+			$audit_start = $audit_item[security_services_audit_start_audit_date];
+			$status_name = lookup_security_services_audit_status("security_services_audit_status_id","3"); 	
+		# if they want to close and audit which had a result choosen...
+		} elseif ($security_services_audit_status == "3") {
+			$audit_end = $today;
+			$audit_start = $audit_item[security_services_audit_start_audit_date];
+			$security_services_audit_result = $audit_item[security_services_audit_result];
+			$status_name = lookup_security_services_audit_status("security_services_audit_status_id","3"); 	
+		# i'm not sure why this is here...
+		} elseif ($security_services_audit_status == "2") {
+			$security_services_audit_result = 2;	
+			$security_services_audit_result = $audit_item[security_services_audit_result];	
+			$audit_start = $today;
+			$audit_end = $audit_item[security_services_audit_start_audit_date];
+			$status_name = lookup_security_services_audit_status("security_services_audit_status_id","2"); 	
+		}
+
+		# echo "ready to change status to: $security_services_audit_status";
+		$security_services_audit_update = array(
+			'security_services_audit_status' => $security_services_audit_status,
+			'security_services_audit_start_audit_date' => $audit_start,
+			'security_services_audit_end_audit_date' => $audit_end,
+			'security_services_audit_auditor' => $audit_item[security_services_audit_auditor],
+			'security_services_audit_result' => $security_services_audit_result,
+			'security_services_audit_result_description' => $audit_item[security_services_audit_result_description],
 		);	
-		update_process($process_update,$process_id);
-		add_system_records("organization","bu-process","$process_id","","Update","");
-	} elseif ($action == "update_process") {
-		$process_update = array(
-			'process_name' => $process_name,
-			'bu_id' => $bu_id,
-			'process_description' => $process_description,
-			'process_rto' => $process_rto
-		);	
-		add_process($process_update);
-		add_system_records("organization","bu-process","$process_id","","Insert","");
+
+		update_security_services_audit($security_services_audit_update,$security_services_audit_id);
+		add_system_records("security_services","security_services_audit","$security_services_audit_id","","Review Status Changed to: $status_name[security_services_audit_status_name]","");
 	}
 
+	if ($action == "update" & is_numeric($security_services_audit_id)) {
+		
+		# echo "ready to change status to: $security_services_audit_status";
+		$security_services_audit_update = array(
+			'security_services_audit_status' => $security_services_audit_status,
+			'security_services_audit_start_audit_date' => $security_services_audit_start_audit_date,
+			'security_services_audit_end_audit_date' => $security_services_audit_end_audit_date,
+			'security_services_audit_auditor' => $security_services_audit_auditor,
+			'security_services_audit_result' => $security_services_audit_result,
+			'security_services_audit_result_description' => $security_services_audit_result_description,
+		);	
 
-	if ($action == "disable_security_services_audit" & is_numeric($bu_id)) {
-		disable_security_services_audit($bu_id);
-		add_system_records("organization","bu","$bu_id","","Disable","");
+		update_security_services_audit($security_services_audit_update,$security_services_audit_id);
+		$status_name = lookup_security_services_audit_status("security_services_audit_status_id",$audit_item[security_services_audit_status]); 	
+		add_system_records("security_services","security_services_audit","$security_services_audit_id","","Evidence Addition","");
 	}
-	if ($action == "disable_process" & is_numeric($process_id)) {
-		disable_process($process_id);
-		add_system_records("organization","bu-process","$process_id","","Disable","");
+
+	if ($action == "disable_security_services_audit" & is_numeric($security_services_audit_id)) {
+		disable_security_services_audit($security_services_audit_id);
+		add_system_records("security_services","security_services_audit","$security_services_audit_id","","Disable","");
 	}
 
 	if ($action == "csv") {
 		export_security_services_audit_csv();
-		add_system_records("organization","bu","","","Export","");
+		add_system_records("security_services","security_services_audit","$security_services_audit_id","","Export","");
 	}
 
 	# ---- END TEMPLATE ------
@@ -95,6 +104,8 @@
 
 	<section id="content-wrapper">
 		<h3>Security Services Reviews</h3>
+		
+	<div class="controls-wrapper">
 		
 			<div class="actions-wraper">
 				<a href="#" class="actions-btn">
@@ -108,6 +119,7 @@ echo "					<li><a href=\"$base_url&sort=future_months\">Comming Audits</a></li>"
 echo "					<li><a href=\"$base_url&sort=past_months\">Past Audits</a></li>";
 ?>
 				</ul>
+			</div>
 			</div>
 		
 		<ul id="accordion">

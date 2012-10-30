@@ -109,9 +109,16 @@ function real_add_security_services_audit($security_services_id, $plan_date, $ye
 
 function update_security_services_audit($security_services_audit_data, $security_services_audit_id) {
 	$sql = "UPDATE security_services_audit_tbl
+
 		SET
-		security_services_audit_name=\"$security_services_audit_data[security_services_audit_name]\",
-		security_services_audit_description=\"$security_services_audit_data[security_services_audit_description]\"
+
+		security_services_audit_status=\"$security_services_audit_data[security_services_audit_status]\",
+		security_services_audit_start_audit_date=\"$security_services_audit_data[security_services_audit_start_audit_date]\",
+		security_services_audit_end_audit_date=\"$security_services_audit_data[security_services_audit_end_audit_date]\",
+		security_services_audit_auditor=\"$security_services_audit_data[security_services_audit_auditor]\",
+		security_services_audit_result=\"$security_services_audit_data[security_services_audit_result]\",
+		security_services_audit_result_description=\"$security_services_audit_data[security_services_audit_result_description]\"
+
 		WHERE
 		security_services_audit_id=\"$security_services_audit_id\"
 		";	
@@ -191,24 +198,33 @@ function disable_security_services_audit($item_id) {
 
 function export_security_services_audit_csv() {
 
-	# this will dump the table security_services_audit_tbl on CSV format
-	$sql = "SELECT * from security_services_audit_tbl";
-	$result = runQuery($sql);
+# this will dump the table security_services_audit_tbl on CSV format
+$sql = "SELECT * from security_services_audit_tbl";
+$result = runQuery($sql);
+
+# open file
+$export_file = "downloads/security_services_audit_export.csv";
+$handler = fopen($export_file, 'w');
 	
-	# open file
-	$export_file = "downloads/security_services_audit_export.csv";
-	$handler = fopen($export_file, 'w');
+fwrite($handler, "security_services_audit_id,security_service_name,security_services_audit_status,planned_execution,security_services_audit_metric,security_services_audit_criteria,security_services_audit_start_audit_date,security_services_audit_end_audit_date,security_services_audit_auditor,security_services_audit_result,security_services_audit_result_description,security_services_audit_disabled\n");
+
+foreach($result as $line) {
 	
-	fwrite($handler, "security_services_audit_id,security_services_audit_name,security_services_audit_description,security_services_audit_disabled\n");
-	foreach($result as $line) {
-		fwrite($handler,"$line[security_services_audit_id],$line[security_services_audit_name],$line[security_services_audit_descripion],$line[security_services_audit_disabled]\n");
+	$status_name = lookup_security_services_audit_status("security_services_audit_status_id",$line[security_services_audit_status]); 	
+	$result_name = lookup_security_services_audit_result("security_services_audit_result_id",$line[security_services_audit_result]);	
+	$service_name = lookup_security_services("security_services_id",$line[security_services_audit_security_service_id]);	
+			
+	fwrite($handler,"$line[security_services_audit_id],$service_name,$status_name,$planned_execution,$line[security_services_audit_metric],$line[security_services_audit_criteria], $line[security_services_audit_start_audit_date],$line[security_services_audit_end_audit_date],$line[security_services_audit_auditor],$line[security_services_audit_result],$line[security_services_audit_result_description],$line[security_services_audit_disabled]\n");
+
 	}
 	
-	fclose($handler);
+fclose($handler);
 
 }
 
 function display_html_audit_items($service_id) {
+
+	$base_url = build_base_url("security_services","security_services_audit");
 	
 	# here i need to start listing all the audits for this particular service_id
 	$audit_list = list_security_services_audit(" WHERE security_services_audit_security_service_id = \"$service_id\" 
@@ -226,10 +242,19 @@ echo "								<div class=\"cell-label\">";
 echo "								 	$process_item[process_name]";
 echo "								</div>";
 echo "								<div class=\"cell-actions\">";
-echo "							<a href=\"$base_url&action=edit_process&process_id=$audit_item[security_services_audit_id]\" class=\"edit-action\">start review</a> ";
-echo "							<a href=\"$base_url&action=disable_process&process_id=$audit_item[security_services_audit_id]\" class=\"edit-action delete-action\">delete</a>";
-echo "							<a href=\"?section=system&subsection=system_records&system_records_lookup_section=organization&system_records_lookup_subsection=bu-process&system_records_lookup_item_id=$audit_item[security_services_audit_id]\" class=\"edit-action delete-action\">see records</a>";
-echo "							<a href=\"?section=system&subsection=system_records&action=edit&system_records_lookup_section=organization&system_records_lookup_subsection=bu-process&system_records_lookup_item_id=$audit_item[security_services_audit_id]\" class=\"delete-action\">add record</a>";
+
+if ($audit_item[security_services_audit_status] == "1") {
+	echo "<a href=\"$base_url&action=change_status&security_services_audit_status=2&security_services_audit_id=$audit_item[security_services_audit_id]\" class=\"edit-action\">start review</a> ";
+} elseif ($audit_item[security_services_audit_status] == "2") {
+	echo "<a href=\"$base_url&action=edit_security_services_audit&security_services_audit_id=$audit_item[security_services_audit_id]\" class=\"edit-action\">add evidence</a> ";
+	echo "<a href=\"$base_url&action=change_status&security_services_audit_status=3&security_services_audit_id=$audit_item[security_services_audit_id]\" class=\"edit-action\">finish review</a> ";
+} elseif ($audit_item[security_services_audit_status] == "3") {
+	echo "<a href=\"$base_url&action=view_evidence&security_services_audit_id=$audit_item[security_services_audit_id]\" class=\"edit-action\">view evidence</a> ";
+}
+
+echo "							<a href=\"$base_url&action=disable_security_services_audit&security_services_audit_id=$audit_item[security_services_audit_id]\" class=\"edit-action delete-action\">delete</a>";
+echo "							<a href=\"?section=system&subsection=system_records&system_records_lookup_section=security_services&system_records_lookup_subsection=security_services_audit&system_records_lookup_item_id=$audit_item[security_services_audit_id]\" class=\"edit-action delete-action\">see records</a>";
+echo "							<a href=\"?section=system&subsection=system_records&action=edit&system_records_lookup_section=security_services&system_records_lookup_subsection=security_services_audit&system_records_lookup_item_id=$audit_item[security_services_audit_id]\" class=\"delete-action\">add record</a>";
 
 echo "								</div>";
 echo "							</td>";
