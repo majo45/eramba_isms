@@ -66,6 +66,12 @@ function show_menu_sub($section) {
 	if ($section == "security_services") {
 		echo "<li><a href=\"$base_url?section=security_services&subsection=security_catalogue\">Security Catalogue</a></li>";
 		echo "<li><a href=\"$base_url?section=security_services&subsection=security_services_audit\">Audits & Reviews</a></li>";
+		echo "<li><a href=\"$base_url?section=security_services&subsection=providers\">Support Contracts</a></li>";
+	}
+	
+	if ($section == "compliance") {
+		echo "<li><a href=\"$base_url?section=compliance&subsection=compliance_packages\">Compliance Packages</a></li>";
+		echo "<li><a href=\"$base_url?section=compliance&subsection=\">Compliance Management</a></li>";
 	}
 
 	if ($section == "system") {

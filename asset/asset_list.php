@@ -150,7 +150,7 @@ echo "						<a class=\"delete\" href=\"$base_url&action=disable&asset_id=$asset_
 echo "						&nbsp;|&nbsp;";
 echo "						<a class=\"delete\" href=\"?section=system&subsection=system_records&system_records_lookup_section=asset&system_records_lookup_subsection=asset_identification&system_records_lookup_item_id=$asset_item[asset_id]\">records</a>";
 echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"delete\" href=\"?action=edit&section=system&subsection=system_records&system_records_lookup_section=asset&system_records_lookup_subsection=asset_identification&system_records_lookup_item_id=$asset_item[asset_id]\">add a note</a>";
+echo "						<a class=\"delete\" href=\"?action=edit&section=system&subsection=ciso_pmo&ciso_pmo_lookup_section=asset&ciso_pmo_lookup_subsection=asset_identification&ciso_pmo_lookup_item_id=$asset_item[asset_id]\">improve</a>";
 echo "					</span>";
 echo "					<span class=\"icon\"></span>";
 echo "				</div>";

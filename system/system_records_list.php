@@ -47,7 +47,8 @@
 		<h3>System Records</h3>
 		<div class="controls-wrapper">
 <?
-echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
+#echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
+echo "			<a href=\"$base_url&action=edit&system_records_lookup_section=$system_records_lookup_section&system_records_lookup_subsection=$system_records_lookup_subsection&system_records_lookup_item_id=$system_records_lookup_item_id\" class=\"add-btn\">";
 ?>
 				<span class="add-icon"></span>
 				Add a New Note	

@@ -137,7 +137,7 @@ echo "						<a class=\"delete\" href=\"$base_url&action=edit_process&bu_id=$bu_i
 echo "						&nbsp;|&nbsp;";
 echo "						<a class=\"delete\" href=\"?section=system&subsection=system_records&system_records_lookup_section=organization&system_records_lookup_subsection=bu&system_records_lookup_item_id=$bu_item[bu_id]\">records</a>";
 echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"delete\" href=\"?section=system&subsection=system_records&action=edit&system_records_lookup_section=organization&system_records_lookup_subsection=bu&system_records_lookup_item_id=$bu_item[bu_id]\">add a note</a>";
+echo "						<a class=\"delete\" href=\"?section=ciso&subsection=pmo&ciso_pmo_lookup_section=organization&ciso_pmo_lookup_subsection=bu&ciso_pmo_lookup_item_id=$bu_item[bu_id]\">improve</a>";
 echo "					</span>";
 echo "					<span class=\"icon\"></span>";
 echo "				</div>";
@@ -161,9 +161,10 @@ echo "								</div>";
 echo "								<div class=\"cell-actions\">";
 echo "							<a href=\"$base_url&action=edit_process&process_id=$process_item[process_id]&bu_id=$bu_item[bu_id]\" class=\"edit-action\">edit</a> ";
 echo "							<a href=\"$base_url&action=disable_process&process_id=$process_item[process_id]\" class=\"delete-action\">delete</a>";
+echo "						&nbsp;|&nbsp;";
 echo "							<a href=\"?section=system&subsection=system_records&system_records_lookup_section=organization&system_records_lookup_subsection=bu-process&system_records_lookup_item_id=$process_item[process_id]\" class=\"delete-action\">records</a>";
-echo "							<a href=\"?section=system&subsection=system_records&action=edit&system_records_lookup_section=organization&system_records_lookup_subsection=bu-process&system_records_lookup_item_id=$process_item[process_id]\" class=\"delete-action\">add a note</a>";
-
+echo "						&nbsp;|&nbsp;";
+echo "						<a class=\"delete\" href=\"?section=ciso&subsection=pmo&ciso_pmo_lookup_section=asset&ciso_pmo_lookup_subsection=asset_identification&ciso_pmo_lookup_item_id=$process_item[process_id]\">improve</a>";
 echo "								</div>";
 echo "							</td>";
 echo "							<td>$process_item[process_description]</td>";

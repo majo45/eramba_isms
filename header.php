@@ -17,13 +17,22 @@ include_once("lib/site_lib.php");
 	
 <?php
 echo "	<script type=\"text/javascript\" src=\"js/jquery.min.js\"></script>";
+echo "	<script type=\"text/javascript\" src=\"js/jquery-ui.min.js\"></script>";
 echo "	<script type=\"text/javascript\" src=\"js/admin.scripts.js\"></script>";
 echo "	<script type=\"text/javascript\" src=\"js/chosen.jquery.js\"></script>";
 echo "	<script type=\"text/javascript\" src=\"js/accordion.js\"></script>";
 echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/normalize.css\" />";
 echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/styles.css\" />";
 echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/chosen.css\" />";
+echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/chosen.css\" />";
 ?>
+
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.2/themes/base/jquery-ui.css" />
+	<script>
+		$(function() {
+			$( "#datepicker" ).datepicker();
+		});
+	</script>
 	
 	<title>ERAMBA</title>
 	
@@ -83,9 +92,9 @@ echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/chosen.css\" />";
 	<section id="header-wrapper">
 		<div id="header-inner">
 			<a href="/" id="logo">
-				<!-- <img src="img/logo.png" alt="Admin logo" />-->
+				<img src="img/logo.png" alt="Admin logo" />
 			</a>
-			<div id="user-box">
+			<!--<div id="user-box">
 				<div id="user-links">
 					<a href="#" id="user-profile">Esteban Ribicic</a>
 					<a href="#" id="user-sign-out">Sign out</a>
@@ -93,7 +102,22 @@ echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/chosen.css\" />";
 <?php
 echo "				<img src=\"img/profile-pic.png\" alt=\"Profile pic\"/>";
 ?>
+			</div>-->
+
+			<div id="login-box">
+				<form name="login" method="POST" action="">
+					<div class="login-form">
+						
+							<span>Login <input type="text" name="username" /></span>
+							<span>Password <input type="password" name="password" /></span>
+						
+					</div>
+						
+					<input type="submit" class="login-button" value="Log in" />
+				</form>
 			</div>
+
+
 		</div>
 	</section>
 	<section id="menu-wrapper">
@@ -102,7 +126,7 @@ echo "				<img src=\"img/profile-pic.png\" alt=\"Profile pic\"/>";
 				<li><a href="?section=organization&category=NULL" <?php is_this_menu_active($_GET["section"], "organization")?>>Organization</a></li>
 				<li><a href="?section=asset&category=NULL" <?php is_this_menu_active($_GET["section"], "asset")?>>Asset Management</a></li>
 				<li><a href="?section=risk&category=NULL" <?php is_this_menu_active($_GET["section"], "risk")?>>Risk Management</a></li>
-				<li><a href="?section=security_services&category=NULL" <?php is_this_menu_active($_GET["section"], "security_services")?>>Services</a></li>
+				<li><a href="?section=security_services&category=NULL" <?php is_this_menu_active($_GET["section"], "services")?>>Services</a></li>
 				<li><a href="?section=compliance&category=NULL" <?php is_this_menu_active($_GET["section"], "compliance")?>>Compliance</a></li>
 				<li><a href="?section=system&category=system_records" <?php is_this_menu_active($_GET["section"], "system")?>>System</a></li>
 			</ul>

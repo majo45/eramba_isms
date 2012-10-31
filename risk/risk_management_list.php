@@ -210,7 +210,7 @@ echo "						<a class=\"edit\" href=\"$base_url&action=edit&risk_id=$risk_data[ri
 echo "						&nbsp;|&nbsp;";
 echo "						<a class=\"delete\" href=\"?section=system&subsection=system_records&system_records_lookup_section=risk&system_records_lookup_subsection=risk_management&system_records_lookup_item_id=$risk_data[risk_id]\">records</a>";
 echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"delete\" href=\"?action=edit&section=system&subsection=system_records&system_records_lookup_section=risk&system_records_lookup_subsection=risk_management&system_records_lookup_item_id=$risk_data[risk_id]\">add a note</a>";
+echo "						<a class=\"delete\" href=\"?action=edit&section=ciso&subsection=ciso_pmo&ciso_pmo_lookup_section=risk&ciso_pmo_lookup_subsection=risk_management&ciso_pmo_lookup_item_id=$risk_data[risk_id]\">improve</a>";
 echo "					</span>";
 echo "					<span class=\"icon\"></span>";
 echo "				</div>";
@@ -240,6 +240,7 @@ echo "						</tr>";
 echo "					</table>";
 echo "<br>";
 ### INJERTO STARTS
+echo "	<h4>Heading Text</h4>";
 echo "					<div class=\"rounded\">";
 echo "						<table class=\"sub-table\">";
 echo "							<tr>";

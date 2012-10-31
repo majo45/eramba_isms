@@ -35,6 +35,7 @@
 				<div class="tab" id="tab1">
 <?
 echo "					<form name=\"system_records_edit\" method=\"GET\" action=\"$base_url\">";
+echo "		<span class=\"description\">You are adding a record to the following: $system_records_lookup_section/$system_records_lookup_subsection: id #$system_records_lookup_item_id</span>";
 ?>
 						<label for="description">Notes</label>
 						<span class="description">Write down a note!</span>
