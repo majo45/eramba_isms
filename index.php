@@ -44,6 +44,14 @@ if ($section == "organization") {
 			include("asset/asset_classification_list.php");
 		}
 	}
+	
+	if ($subsection == "data_asset") {
+		if ($action == "edit") {
+			include("asset/data_asset_edit.php");
+		} else { 
+			include("asset/data_asset_list.php");
+		}
+	}
 
 } elseif ($section == "risk") {
 

@@ -133,7 +133,7 @@ echo "						<a class=\"edit\" href=\"$base_url&action=edit_bu&bu_id=$bu_item[bu_
 echo "						&nbsp;|&nbsp;";
 echo "						<a class=\"delete\" href=\"$base_url&action=disable_bu&bu_id=$bu_item[bu_id]\">delete</a>";
 echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"delete\" href=\"$base_url&action=edit_process&bu_id=$bu_item[bu_id]\">Add New Business Process Here</a>";
+echo "						<a class=\"delete\" href=\"$base_url&action=edit_process&bu_id=$bu_item[bu_id]\">add new business process here</a>";
 echo "						&nbsp;|&nbsp;";
 echo "						<a class=\"delete\" href=\"?section=system&subsection=system_records&system_records_lookup_section=organization&system_records_lookup_subsection=bu&system_records_lookup_item_id=$bu_item[bu_id]\">records</a>";
 echo "						&nbsp;|&nbsp;";

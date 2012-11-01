@@ -116,7 +116,7 @@ echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 if ($action == "csv") {
-echo "					<li><a href=\"downloads/legal_export.csv\">Dowload</a></li>";
+echo "					<li><a href=\"downloads/asset_export.csv\">Dowload</a></li>";
 } else { 
 echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
 }
@@ -129,7 +129,13 @@ echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
 		<ul id="accordion">
 			
 <?
+
+	if ($sort) {
+	$asset_list = list_asset(" WHERE asset_disabled=\"0\" AND asset_id = \"$sort\"");
+	} else {
 	$asset_list = list_asset(" WHERE asset_disabled=\"0\"");
+	}
+
 	foreach($asset_list as $asset_item) {
 
 		$asset_owner_id = lookup_bu("bu_id",$asset_item[asset_owner_id]);
@@ -160,7 +166,7 @@ echo "						<tr>";
 echo "							<th>Description</th>";
 echo "							<th>Type</th>";
 echo "							<th>Legal Constrains</th>";
-echo "							<th>Container</th>";
+echo "							<th>Main Container</th>";
 echo "							<th><Owner</th>";
 echo "							<th><Guardian</th>";
 echo "							<th><User</th>";

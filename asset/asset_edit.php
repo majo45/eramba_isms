@@ -35,13 +35,6 @@
 					<a href="tab1">General</a>
 					<span class="right"></span>
 				</li>
-				<li>
-<?
-#echo "					<a href=\"$base_url&action=edit&asset_id=$asset_item[asset_id]\">Classification</a>";
-?>
-					<a href="tab2">Classification</a>
-					<span class="right"></span>
-				</li>
 			</ul>
 			
 			<div class="tab-content">
@@ -121,7 +114,7 @@ foreach($asset_classification_types as $asset_classification_types_item) {
 
 ?>
 
-						<label for="legalType">Container Asset</label>
+						<label for="legalType">Main Container Asset</label>
 						<span class="description">Most assets are contained at some point in time within another asset. Example: Financial Data might be contained in another asset, called "Financial SpreadSheets".</span>
 						<select name="asset_container_id" id="" class="chzn-select">
 						<option value="-1">Select a Container...</option>
@@ -137,7 +130,18 @@ foreach($asset_classification_types as $asset_classification_types_item) {
 				</div>
 				
 				<div class="tab" id="tab2">
-					advanced tab
+
+						<label for="name">Name</label>
+						<span class="description">Give a name to the asset your program is intended to protect.</span>
+<?
+echo "						<input type=\"text\" name=\"asset_name\" id=\"\" value=\"$asset_item[asset_name]\"/>";
+?>
+						
+						<label for="description">Description</label>
+						<span class="description">Give a brief description on what the asset is.</span>
+<?
+echo "						<textarea id=\"\" name=\"asset_description\">$asset_item[asset_description]</textarea>";
+?>
 				</div>
 			</div>
 		</div>

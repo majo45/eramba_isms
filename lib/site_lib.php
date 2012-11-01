@@ -55,6 +55,7 @@ function show_menu_sub($section) {
 	if ($section == "asset") {
 		echo "<li><a href=\"$base_url?section=asset&subsection=asset_classification\">Classification Scheme</a></li>";
 		echo "<li><a href=\"$base_url?section=asset&subsection=asset_identification\">Asset Identification</a></li>";
+		echo "<li><a href=\"$base_url?section=asset&subsection=data_asset\">Data Asset Analysis</a></li>";
 	}
 	
 	if ($section == "risk") {

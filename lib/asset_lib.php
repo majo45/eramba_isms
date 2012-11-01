@@ -154,15 +154,16 @@ function export_asset_csv() {
 		$asset_container_id = lookup_asset("asset_id",$asset_item[asset_container_id]);
 	
 		$asset_classification_list = list_asset_classification_distinct();
+		$classification_values=array();
 		foreach($asset_classification_list as $asset_classification_item) {
 			$value = pre_selected_asset_classification_values($asset_classification_item[asset_classification_type], $asset_item[asset_id]);	
 			$name = lookup_asset_classification("asset_classification_id", $value);
-			array_push($classification_values, $name);
+			array_push($classification_values, $name[asset_classification_name]);
 		}
 
 		$comma_separated = implode(",", $classification_values);
 
-		$line = "$asset_item[asset_id],$asset_item[asset_name],$asset_item[asset_descripion],$asset_media_type_id, $asset_legal_id, $asset_owner_id, $asset_guardian_id, $asset_user_id, $comma_separated";
+		$line = "$asset_item[asset_id],$asset_item[asset_name],$asset_item[asset_descripion],$asset_media_type_id[asset_media_type_name], $asset_legal_id[legal_name], $asset_owner_id[bu_name], $asset_guardian_id[bu_name], $asset_user_id[bu_name],$asset_item[asset_name],$asset_item[asset_disabled],$comma_separated\n";
 		fwrite($handler,$line);
 	}
 	
