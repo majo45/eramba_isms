@@ -50,6 +50,7 @@ function show_menu_sub($section) {
 	if ($section == "organization") {
 		echo "<li><a href=\"$base_url?section=organization&subsection=bu\">Bussiness Units</a></li>";
 		echo "<li><a href=\"$base_url?section=organization&subsection=legal\">Legal</a></li>";
+		echo "<li><a href=\"$base_url?section=organization&subsection=tp\">Third Parties</a></li>";
 	}
 	
 	if ($section == "asset") {
@@ -67,7 +68,7 @@ function show_menu_sub($section) {
 	if ($section == "security_services") {
 		echo "<li><a href=\"$base_url?section=security_services&subsection=security_catalogue\">Security Catalogue</a></li>";
 		echo "<li><a href=\"$base_url?section=security_services&subsection=security_services_audit\">Audits & Reviews</a></li>";
-		echo "<li><a href=\"$base_url?section=security_services&subsection=providers\">Support Contracts</a></li>";
+		echo "<li><a href=\"$base_url?section=security_services&subsection=service_contracts\">Support Contracts</a></li>";
 	}
 	
 	if ($section == "compliance") {

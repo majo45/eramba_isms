@@ -5,10 +5,13 @@
 	include_once("lib/asset_classification_lib.php");
 	include_once("lib/asset_type_lib.php");
 	include_once("lib/site_lib.php");
+	include_once("lib/tp_lib.php");
 	include_once("lib/security_services_lib.php");
+	include_once("lib/service_contracts_lib.php");
 	include_once("lib/security_services_status_lib.php");
 	include_once("lib/system_records_lib.php");
 	include_once("lib/security_services_catalogue_audit_calendar_join_lib.php");
+	include_once("lib/service_contracts_security_service_join_lib.php");
 
 	# general variables - YOU SHOULDNT NEED TO CHANGE THIS
 	$sort = $_GET["sort"];
@@ -27,6 +30,7 @@
 	$security_services_audit_metric = $_GET["security_services_audit_metric"];
 	$security_services_audit_success_criteria = $_GET["security_services_audit_success_criteria"];
 	$security_services_audit_calendar = $_GET["security_services_audit_calendar"];
+	$service_contracts_id = $_GET["service_contracts_id"];
 		
 
 	$security_services_cost_capex = $_GET["security_services_cost_capex"];
@@ -66,6 +70,16 @@
 		# now i add the audits if they didnt exist before 
 		add_security_services_audit_v2($security_services_id);
 
+		# delete all the service contracts
+		delete_service_contracts_security_services($security_services_id);	
+
+		# add all service contracts
+		if (is_array($service_contracts_id)) {
+		foreach($service_contracts_id as $service_contracts_item) {
+			add_service_contracts_security_services($service_contracts_item, $security_services_id);
+		}
+		}
+
 	} elseif ($action == "update") {
 		$security_services_update = array(
 			'security_services_name' => $security_services_name,
@@ -99,6 +113,12 @@
 	
 		# now i add the audits if they didnt exist before 
 		add_security_services_audit_v2($security_services_id);
+		
+		# add all service contracts
+		foreach($service_contracts_id as $service_contracts_item) {
+			echo "puta .. agregando: $service_contracts_item, $security_services_id<br>";
+			add_service_contracts_security_services($service_contracts_item, $security_services_id);
+		}
 	 }
 
 	if ($action == "disable" & is_numeric($security_services_id)) {
@@ -227,6 +247,38 @@ echo "							</tr>";
 echo "						</table>";
 echo "					</div>";
 echo "<br>";
+
+echo "					<div class=\"rounded\">";
+echo "						<table class=\"sub-table\">";
+echo "							<tr>";
+echo "								<th><center>Provider</th>";
+echo "								<th><center>Contract Name</th>";
+echo "								<th><center>Value</th>";
+echo "								<th><center>Start</th>";
+echo "								<th><center>End</th>";
+echo "							</tr>";
+
+$service_contracts_security_services_join_list = list_service_contracts_security_services(" WHERE security_services_id =\"$security_services_item[security_services_id]\"");
+foreach ($service_contracts_security_services_join_list as $service_contracts_security_services_join_item) {
+
+$service_contracts_item = lookup_service_contracts("service_contracts_id","$service_contracts_security_services_join_item[service_contracts_id]");
+$service_provider_name = lookup_tp("tp_id", $service_contracts_item[service_contracts_provider_id]); 
+
+echo "							<tr>";
+echo "								<td class=\"center\">$service_provider_name[tp_name]</td>";
+echo "								<td class=\"center\">$service_contracts_item[service_contracts_name]</td>";
+echo "								<td class=\"center\">$service_contracts_item[service_contracts_value]</td>";
+echo "								<td class=\"center\">$service_contracts_item[service_contracts_start]</td>";
+echo "								<td class=\"center\">$service_contracts_item[service_contracts_end]</td>";
+echo "							</tr>";
+
+}
+
+echo "						</table>";
+echo "					</div>";
+echo "<br>";
+
+
 	}
 ?>
 </div>

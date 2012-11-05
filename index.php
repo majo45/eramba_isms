@@ -17,15 +17,19 @@ if ($section == "organization") {
 			include("organization/bu_list.php");
 		}
 	}
-	if ($subsection == "tp") {
-		include("organization/tp_list.php");
-	}
 	# template for each section
 	if ($subsection == "legal") {
 		if ($action == "edit") {
 			include("organization/legal_edit.php");
 		} else { 
 			include("organization/legal_list.php");
+		}
+	}
+	if ($subsection == "tp") {
+		if ($action == "edit") {
+			include("organization/tp_edit.php");
+		} else { 
+			include("organization/tp_list.php");
 		}
 	}
 } elseif ($section == "asset") {
@@ -93,6 +97,14 @@ if ($section == "organization") {
 			include("services/security_services_audit_edit.php");
 		} else { 
 			include("services/security_services_audit_list.php");
+		}
+	}
+	
+	if ($subsection == "service_contracts") {
+		if ($action == "edit_service_contracts") {
+			include("services/service_contracts_edit.php");
+		} else { 
+			include("services/service_contracts_list.php");
 		}
 	}
 

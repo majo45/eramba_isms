@@ -26,7 +26,7 @@ function list_security_services_audit_unique($arguments) {
 # if the planned start date is after today, then i do nothing! i wait until the planned start date is in the PAST and then i will eventually create one
 function add_security_services_audit_v2($security_services_id) {
 	
-	echo "add_security_services_audit_v2<br>";
+	# echo "add_security_services_audit_v2<br>";
 
 	# first i need to know if this service is valid
 	$service_information = lookup_security_services("security_services_id", $security_services_id); 
@@ -103,7 +103,7 @@ function real_add_security_services_audit($security_services_id, $plan_date, $ye
 		)
 		";	
 
-	echo "$sql<br>";
+	# echo "$sql<br>";
 	$result = runUpdateQuery($sql);
 }
 

@@ -12,6 +12,8 @@
 	include_once("lib/legal_lib.php");
 	include_once("lib/asset_classification_lib.php");
 	include_once("lib/site_lib.php");
+	include_once("lib/service_contracts_lib.php");
+	include_once("lib/service_contracts_security_service_join_lib.php");
 
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
@@ -37,13 +39,6 @@
 #echo "					<a href=\"$base_url&action=edit&security_services_id=$security_services_item[security_services_id]\">General</a>";
 ?>
 					<a href="tab1">General</a>
-					<span class="right"></span>
-				</li>
-				<li>
-<?
-#echo "					<a href=\"$base_url&action=edit&security_services_id=$security_services_item[security_services_id]\">Classification</a>";
-?>
-					<a href="tab2">Classification</a>
 					<span class="right"></span>
 				</li>
 			</ul>
@@ -135,28 +130,27 @@ echo "				<input type=\"text\" name=\"security_services_cost_operational_resourc
 echo "				<input type=\"text\" name=\"security_services_cost_operational_resource\" value=\"$security_services_item[security_services_cost_operational_resource]\"/>";
 				}
 ?>
+		
+		<label for="name">Service Contracts</label>
+		<span class="description">You are able to choose service contracts that are related to this security service.</span>
+		<select name="service_contracts_id[]" id="" class="" multiple="multiple">
 
 <?
-#$security_services_classification_types = list_security_services_classification_distinct();
-#
-#foreach($security_services_classification_types as $security_services_classification_types_item) {
-#	echo "<select name=\"security_services_classification[]\" class=\"chzn-select\">";
-#	echo "<option value=\"-1\">Classification: $security_services_classification_types_item[security_services_classification_type]</option>";
-#
-#	$pre_selected_value = pre_selected_security_services_classification_values($security_services_classification_types_item[security_services_classification_type], $security_services_item[security_services_id]);	
-#
-#	# llamar una funcion que me liste un html drop menu por cada classification type que yo le diga										
-#	list_drop_menu_security_services_classification($pre_selected_value,"security_services_classification_name","$security_services_classification_types_item[security_services_classification_type]");
-#	echo "</select>";
-#	echo "</br>";
-#}
+
+	$pre_selected_list = list_service_contracts_security_services(" WHERE security_services_id = \"$security_services_item[security_services_id]\""); 
+	$pre_selected_items = array();
+	foreach($pre_selected_list as $pre_selected_service_contracts) {
+			array_push($pre_selected_items,$pre_selected_service_contracts[service_contracts_id]);
+	}
+	print_r($pre_selected_items);
+	list_drop_menu_service_contracts($pre_selected_items, "");	
 ?>
+						</select>
+	
+
 
 				</div>
 				
-				<div class="tab" id="tab2">
-					advanced tab
-				</div>
 			</div>
 		</div>
 		
