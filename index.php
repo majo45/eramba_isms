@@ -122,8 +122,10 @@ if ($section == "organization") {
 
 	
 	if ($subsection == "compliance_package") {
-		if ($action == "edit") {
-			include("compliance/compliance_edit.php");
+		if ($action == "edit_compliance_package") {
+			include("compliance/compliance_package_edit.php");
+		} elseif ($action == "edit_compliance_package_item") {
+			include("compliance/compliance_package_item_edit.php");
 		} else { 
 			include("compliance/compliance_list.php");
 		}
