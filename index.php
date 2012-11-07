@@ -118,6 +118,17 @@ if ($section == "organization") {
 		}
 	}
 
+} elseif ($section == "compliance") {
+
+	
+	if ($subsection == "compliance_package") {
+		if ($action == "edit") {
+			include("compliance/compliance_edit.php");
+		} else { 
+			include("compliance/compliance_list.php");
+		}
+	}
+
 }
 
 include_once("footer.php");

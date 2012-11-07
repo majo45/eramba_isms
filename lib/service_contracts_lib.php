@@ -4,6 +4,7 @@
 # IF YOU WANT TO USE, YOU MUST RENAME FUNCTIONS!! :s/service_contracts/service_contracts/ - SAMEPLE
 
 include_once("mysql_lib.php");
+include_once("tp_lib.php");
 
 function list_service_contracts($arguments) {
 	# MUST EDIT
@@ -130,9 +131,14 @@ function export_service_contracts_csv() {
 	$export_file = "downloads/service_contracts_export.csv";
 	$handler = fopen($export_file, 'w');
 	
-	fwrite($handler, "service_contracts_id,service_contracts_name,service_contracts_description,service_contracts_disabled\n");
+	fwrite($handler, "service_contracts_provider_name,service_contracts_id,service_contracts_name,service_contracts_description,service_contracts_value,service_contracts_start,service_contracts_end,service_contracts_disabled\n");
+
 	foreach($result as $line) {
-		fwrite($handler,"$line[service_contracts_id],$line[service_contracts_name],$line[service_contracts_descripion],$line[service_contracts_disabled]\n");
+
+		$service_provider_name = lookup_tp("tp_id","$line[service_contracts_provider_id]");
+
+		fwrite($handler,"$service_provider_name[tp_name],$line[service_contracts_id],$line[service_contracts_name],$line[service_contracts_description],$line[service_contracts_value],$line[service_contracts_start], $line[service_contracts_end],$line[service_contracts_disabled]\n");
+
 	}
 	
 	fclose($handler);

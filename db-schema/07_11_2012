@@ -1,0 +1,926 @@
+-- MySQL dump 10.13  Distrib 5.5.15, for osx10.6 (i386)
+--
+-- Host: localhost    Database: isms_v2
+-- ------------------------------------------------------
+-- Server version	5.5.15
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `asset_classification_join`
+--
+
+DROP TABLE IF EXISTS `asset_classification_join`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `asset_classification_join` (
+  `asset_classification_join_asset_id` int(11) DEFAULT NULL,
+  `asset_classification_join_asset_classification_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `asset_classification_join`
+--
+
+LOCK TABLES `asset_classification_join` WRITE;
+/*!40000 ALTER TABLE `asset_classification_join` DISABLE KEYS */;
+INSERT INTO `asset_classification_join` VALUES (3,8),(3,7),(3,14),(7,8),(7,5),(7,13),(8,-1),(8,7),(8,-1),(2,8),(2,6),(2,14);
+/*!40000 ALTER TABLE `asset_classification_join` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `asset_classification_tbl`
+--
+
+DROP TABLE IF EXISTS `asset_classification_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `asset_classification_tbl` (
+  `asset_classification_id` int(11) NOT NULL AUTO_INCREMENT,
+  `asset_classification_name` varchar(100) DEFAULT NULL,
+  `asset_classification_criteria` text,
+  `asset_classification_type` varchar(45) DEFAULT NULL,
+  `asset_classification_value` int(11) DEFAULT NULL,
+  `asset_classification_disabled` int(11) DEFAULT '1',
+  PRIMARY KEY (`asset_classification_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `asset_classification_tbl`
+--
+
+LOCK TABLES `asset_classification_tbl` WRITE;
+/*!40000 ALTER TABLE `asset_classification_tbl` DISABLE KEYS */;
+INSERT INTO `asset_classification_tbl` VALUES (1,'Medium','','Confidentiality',2,0),(2,'Low','','Confidentiality',1,0),(3,'Medium','','Jamones',3,1),(4,'High','','Jamones',2,1),(5,'High','','Integrity',3,0),(6,'Medium','','Integrity',2,0),(7,'Low','','Integrity',1,0),(8,'High','','Confidentiality',3,0),(9,'High','','',0,1),(10,'High','','',0,1),(11,'High','','',0,1),(12,'High','','Availability',3,0),(13,'Medium','','Availability',2,0),(14,'Low','','Availability',1,0);
+/*!40000 ALTER TABLE `asset_classification_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `asset_media_type_tbl`
+--
+
+DROP TABLE IF EXISTS `asset_media_type_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `asset_media_type_tbl` (
+  `asset_media_type_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `asset_media_type_name` varchar(100) DEFAULT NULL,
+  `asset_media_type_disabled` int(11) DEFAULT NULL,
+  PRIMARY KEY (`asset_media_type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `asset_media_type_tbl`
+--
+
+LOCK TABLES `asset_media_type_tbl` WRITE;
+/*!40000 ALTER TABLE `asset_media_type_tbl` DISABLE KEYS */;
+INSERT INTO `asset_media_type_tbl` VALUES (1,'Data Asset',0),(2,'Information System Asset',0),(3,'Human Assets',0);
+/*!40000 ALTER TABLE `asset_media_type_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `asset_tbl`
+--
+
+DROP TABLE IF EXISTS `asset_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `asset_tbl` (
+  `asset_id` int(11) NOT NULL AUTO_INCREMENT,
+  `asset_name` varchar(100) DEFAULT NULL,
+  `asset_description` text,
+  `asset_media_type_id` int(11) DEFAULT NULL,
+  `asset_legal_id` int(11) DEFAULT NULL,
+  `asset_owner_id` int(11) DEFAULT NULL,
+  `asset_guardian_id` int(11) DEFAULT NULL,
+  `asset_user_id` int(11) DEFAULT NULL,
+  `asset_container_id` int(11) DEFAULT NULL,
+  `asset_disabled` int(11) DEFAULT '1',
+  PRIMARY KEY (`asset_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `asset_tbl`
+--
+
+LOCK TABLES `asset_tbl` WRITE;
+/*!40000 ALTER TABLE `asset_tbl` DISABLE KEYS */;
+INSERT INTO `asset_tbl` VALUES (1,'Laptop','End-Point Computerrrrrrrr',1,1,3,6,3,2,1),(2,'Financial Data','Globant financial data',1,11,6,6,6,2,0),(3,'SAP FI','SAP Module for Finance',2,1,3,6,2,-1,1),(4,'SAP FI','SAP Finance System',2,1,6,6,3,-1,1),(5,'SAP FI','SAP Finance System',2,1,6,6,3,-1,1),(6,'SAP FI','SAP Finance System',2,1,6,6,3,-1,1),(7,'SAP FI','SAP Finance System',2,1,6,6,3,-1,0),(8,'SAP HR','SAP Module for HR Department',2,11,3,2,6,-1,0),(9,'Customer Code','Code being developed for our Customers',1,1,6,3,3,-1,0),(10,'Customer Code','Code being developed for our Customers',1,1,6,3,3,-1,1),(11,'','',0,0,0,0,0,0,1),(12,'','',0,0,0,0,0,0,1);
+/*!40000 ALTER TABLE `asset_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bu_tbl`
+--
+
+DROP TABLE IF EXISTS `bu_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bu_tbl` (
+  `bu_id` int(11) NOT NULL AUTO_INCREMENT,
+  `bu_name` varchar(100) DEFAULT NULL,
+  `bu_description` text,
+  `bu_disabled` int(11) DEFAULT '1',
+  PRIMARY KEY (`bu_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bu_tbl`
+--
+
+LOCK TABLES `bu_tbl` WRITE;
+/*!40000 ALTER TABLE `bu_tbl` DISABLE KEYS */;
+INSERT INTO `bu_tbl` VALUES (1,'IT - Syseng','They manage Servers',1),(2,'Security','Escobar',1),(3,'Accountingg','',1),(4,'New Bu','New Bu Description',1),(5,'New Bu','New Bu Description',1),(6,'Berracaa','Descripcion',0),(7,'Finance','manejan los porotos',0);
+/*!40000 ALTER TABLE `bu_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `compliance_package_tbl`
+--
+
+DROP TABLE IF EXISTS `compliance_package_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `compliance_package_tbl` (
+  `compliance_package_id` int(11) NOT NULL AUTO_INCREMENT,
+  `compliance_package_tp_id` int(11) DEFAULT NULL,
+  `compliance_package_original_id` varchar(45) DEFAULT NULL,
+  `compliance_package_name` varchar(100) DEFAULT NULL,
+  `compliance_package_text` text,
+  `compliance_package_item_id` varchar(45) DEFAULT NULL,
+  `compliance_package_item_name` varchar(100) DEFAULT NULL,
+  `compliance_package_item_description` text,
+  `compliance_package_disabled` int(11) DEFAULT '1',
+  PRIMARY KEY (`compliance_package_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `compliance_package_tbl`
+--
+
+LOCK TABLES `compliance_package_tbl` WRITE;
+/*!40000 ALTER TABLE `compliance_package_tbl` DISABLE KEYS */;
+INSERT INTO `compliance_package_tbl` VALUES (1,1,'1.0','Governance','Nothing',NULL,NULL,NULL,0),(2,1,'2.0','Physical Security','Nothing',NULL,NULL,NULL,0),(3,3,'1.0','Financial Compliance','Nothing',NULL,NULL,NULL,0),(5,3,'2.0','Human Resources','Nothing',NULL,NULL,NULL,0),(6,1,'2.0',NULL,NULL,'2.1','Employee Life-Cycle','Ensure employees are tracked down',0),(7,1,'2.0',NULL,NULL,'2.2','Asset Tracking','Ensure employees are not robbing us',0);
+/*!40000 ALTER TABLE `compliance_package_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `data_asset_security_services_join`
+--
+
+DROP TABLE IF EXISTS `data_asset_security_services_join`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `data_asset_security_services_join` (
+  `data_asset_security_services_join_data_asset_id` int(11) DEFAULT NULL,
+  `data_asset_security_services_join_security_services_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `data_asset_security_services_join`
+--
+
+LOCK TABLES `data_asset_security_services_join` WRITE;
+/*!40000 ALTER TABLE `data_asset_security_services_join` DISABLE KEYS */;
+INSERT INTO `data_asset_security_services_join` VALUES (4,7),(4,8),(4,6),(2,6),(6,8);
+/*!40000 ALTER TABLE `data_asset_security_services_join` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `data_asset_status_tbl`
+--
+
+DROP TABLE IF EXISTS `data_asset_status_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `data_asset_status_tbl` (
+  `data_asset_status_id` int(11) NOT NULL AUTO_INCREMENT,
+  `data_asset_status_name` varchar(100) DEFAULT NULL,
+  `data_asset_status_disabled` int(11) DEFAULT '1',
+  PRIMARY KEY (`data_asset_status_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `data_asset_status_tbl`
+--
+
+LOCK TABLES `data_asset_status_tbl` WRITE;
+/*!40000 ALTER TABLE `data_asset_status_tbl` DISABLE KEYS */;
+INSERT INTO `data_asset_status_tbl` VALUES (1,'Created',0),(2,'Modified',0),(3,'Stored',0),(4,'Transit',0),(5,'Deleted',0),(6,'Tainted / Broken',0),(7,'Unnecessary',0);
+/*!40000 ALTER TABLE `data_asset_status_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `data_asset_tbl`
+--
+
+DROP TABLE IF EXISTS `data_asset_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `data_asset_tbl` (
+  `data_asset_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `data_asset_asset_id` int(11) DEFAULT NULL,
+  `data_asset_status_id` int(11) DEFAULT NULL,
+  `data_asset_description` text,
+  `data_asset_disabled` int(11) DEFAULT '1',
+  PRIMARY KEY (`data_asset_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `data_asset_tbl`
+--
+
+LOCK TABLES `data_asset_tbl` WRITE;
+/*!40000 ALTER TABLE `data_asset_tbl` DISABLE KEYS */;
+INSERT INTO `data_asset_tbl` VALUES (2,2,1,'jamon',1),(3,0,-1,'perra',0),(4,2,5,'perra',0),(5,2,6,'ni diea',0),(6,2,6,'ni diea',0);
+/*!40000 ALTER TABLE `data_asset_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `legal_tbl`
+--
+
+DROP TABLE IF EXISTS `legal_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `legal_tbl` (
+  `legal_id` int(11) NOT NULL AUTO_INCREMENT,
+  `legal_name` varchar(100) DEFAULT NULL,
+  `legal_description` text,
+  `legal_disabled` int(11) DEFAULT '1',
+  PRIMARY KEY (`legal_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `legal_tbl`
+--
+
+LOCK TABLES `legal_tbl` WRITE;
+/*!40000 ALTER TABLE `legal_tbl` DISABLE KEYS */;
+INSERT INTO `legal_tbl` VALUES (1,'Customer Contractual Agreements','Not Available',0),(2,'Personal Information Legislation','Refers to the legislation in place to protect personal data',1),(3,'Reputation','to the potential loss of reputation',1),(6,'Reputation','to the potential loss of reputation',1),(7,'Reputation','A Refers to the potential loss of reputation',1),(8,'Reputationnnn','to the potential loss of reputation',1),(9,'New Legal Item','Not sure',1),(10,'New Legal Item','Wow!',1),(11,'PCI-DSS','Un Bardo',0);
+/*!40000 ALTER TABLE `legal_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `process_legal_join`
+--
+
+DROP TABLE IF EXISTS `process_legal_join`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `process_legal_join` (
+  `process_legal_join_id` int(11) NOT NULL AUTO_INCREMENT,
+  `process_id` int(11) DEFAULT NULL,
+  `legal_id` int(11) DEFAULT NULL,
+  `process_legal_join_disabled` int(11) DEFAULT '1',
+  PRIMARY KEY (`process_legal_join_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `process_legal_join`
+--
+
+LOCK TABLES `process_legal_join` WRITE;
+/*!40000 ALTER TABLE `process_legal_join` DISABLE KEYS */;
+/*!40000 ALTER TABLE `process_legal_join` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `process_tbl`
+--
+
+DROP TABLE IF EXISTS `process_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `process_tbl` (
+  `process_id` int(11) NOT NULL AUTO_INCREMENT,
+  `process_name` varchar(100) DEFAULT NULL,
+  `bu_id` int(11) DEFAULT NULL,
+  `process_description` text,
+  `process_rto` int(11) DEFAULT NULL,
+  `process_disabled` int(11) DEFAULT '1',
+  PRIMARY KEY (`process_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `process_tbl`
+--
+
+LOCK TABLES `process_tbl` WRITE;
+/*!40000 ALTER TABLE `process_tbl` DISABLE KEYS */;
+INSERT INTO `process_tbl` VALUES (1,'Deploy Servers',1,'Servers build, Etc',5,0),(2,'Deploy Patches',1,'Review Patches, Deploy them, Etc',10,0),(3,'',0,'',0,0),(4,'',0,'',0,0),(5,'pablo',3,'kjnkjn',360,1),(6,'Jamonn',3,'del ',360,0),(7,'Test',3,'fwefewf',360,0);
+/*!40000 ALTER TABLE `process_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `risk_asset_join`
+--
+
+DROP TABLE IF EXISTS `risk_asset_join`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `risk_asset_join` (
+  `risk_asset_join_risk_id` int(11) NOT NULL,
+  `risk_asset_join_asset_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`risk_asset_join_risk_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `risk_asset_join`
+--
+
+LOCK TABLES `risk_asset_join` WRITE;
+/*!40000 ALTER TABLE `risk_asset_join` DISABLE KEYS */;
+INSERT INTO `risk_asset_join` VALUES (1,2),(53,7),(54,8);
+/*!40000 ALTER TABLE `risk_asset_join` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `risk_classification_join`
+--
+
+DROP TABLE IF EXISTS `risk_classification_join`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `risk_classification_join` (
+  `risk_classification_join_risk_id` int(11) DEFAULT NULL,
+  `risk_classification_join_risk_classification_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `risk_classification_join`
+--
+
+LOCK TABLES `risk_classification_join` WRITE;
+/*!40000 ALTER TABLE `risk_classification_join` DISABLE KEYS */;
+INSERT INTO `risk_classification_join` VALUES (53,2),(53,6),(53,9),(53,12),(54,-1),(54,6),(54,-1),(54,-1),(1,2),(1,4),(1,9),(1,10);
+/*!40000 ALTER TABLE `risk_classification_join` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `risk_classification_tbl`
+--
+
+DROP TABLE IF EXISTS `risk_classification_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `risk_classification_tbl` (
+  `risk_classification_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `risk_classification_name` varchar(100) DEFAULT NULL,
+  `risk_classification_criteria` text,
+  `risk_classification_type` varchar(45) DEFAULT NULL,
+  `risk_classification_value` int(11) DEFAULT NULL,
+  `risk_classification_disabled` int(11) DEFAULT NULL,
+  PRIMARY KEY (`risk_classification_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `risk_classification_tbl`
+--
+
+LOCK TABLES `risk_classification_tbl` WRITE;
+/*!40000 ALTER TABLE `risk_classification_tbl` DISABLE KEYS */;
+INSERT INTO `risk_classification_tbl` VALUES (1,'High','Not sure','Confidentiality Impact',3,0),(2,'Medium','Not sure','Confidentiality Impact',2,0),(3,'Low','Not Sure','Confidentiality Impact',1,0),(4,'High','Not sure','Likelihood',3,0),(5,'Medium','Not Sure','Likelihood',2,0),(6,'Low','Not sure','Likelihood',1,0),(7,'High','Not sure','Integrity Impact',3,0),(8,'Medium','Not sure','Integrity Impact',2,0),(9,'Low','Not sure','Integrity Impact',1,0),(10,'High','Not sure','Availability Impact',3,0),(11,'Medium','Not sure','Availability Impact',2,0),(12,'Low','Not sure','Availability Impact',1,0);
+/*!40000 ALTER TABLE `risk_classification_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `risk_exception_tbl`
+--
+
+DROP TABLE IF EXISTS `risk_exception_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `risk_exception_tbl` (
+  `risk_exception_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `risk_exception_title` varchar(100) DEFAULT NULL,
+  `risk_exception_description` text,
+  `risk_exception_author` varchar(100) DEFAULT NULL,
+  `risk_exception_status` int(11) DEFAULT NULL,
+  `risk_exception_disabled` int(11) DEFAULT '1',
+  PRIMARY KEY (`risk_exception_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `risk_exception_tbl`
+--
+
+LOCK TABLES `risk_exception_tbl` WRITE;
+/*!40000 ALTER TABLE `risk_exception_tbl` DISABLE KEYS */;
+INSERT INTO `risk_exception_tbl` VALUES (1,'Mac OS End-Point Security','We have decided not to invest heavily in the integration of OS systems into the end-point security controls (AD, AV, Patching, Etc) given the cost and the excellent security baseline OS provides.','adriana.ribicic',0,1),(2,'CCTV Coverage','We have not covered %100 of the space give the cost asociated.','esteban.ribicic',0,1),(3,'test','Test','esteban.ribicic',0,0);
+/*!40000 ALTER TABLE `risk_exception_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `risk_mitigation_strategy_tbl`
+--
+
+DROP TABLE IF EXISTS `risk_mitigation_strategy_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `risk_mitigation_strategy_tbl` (
+  `risk_mitigation_strategy_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `risk_mitigation_strategy_name` varchar(100) DEFAULT NULL,
+  `risk_mitigation_strategy_disabled` int(11) DEFAULT '1',
+  PRIMARY KEY (`risk_mitigation_strategy_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `risk_mitigation_strategy_tbl`
+--
+
+LOCK TABLES `risk_mitigation_strategy_tbl` WRITE;
+/*!40000 ALTER TABLE `risk_mitigation_strategy_tbl` DISABLE KEYS */;
+INSERT INTO `risk_mitigation_strategy_tbl` VALUES (1,'Accept Risk',0),(2,'Mitigate with Compensating Controls',0),(3,'Transfer Risk',0),(4,'Avoid Risk',0);
+/*!40000 ALTER TABLE `risk_mitigation_strategy_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `risk_risk_exception_join`
+--
+
+DROP TABLE IF EXISTS `risk_risk_exception_join`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `risk_risk_exception_join` (
+  `risk_risk_exception_join_risk_id` int(11) DEFAULT NULL,
+  `risk_risk_exception_join_risk_exception_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `risk_risk_exception_join`
+--
+
+LOCK TABLES `risk_risk_exception_join` WRITE;
+/*!40000 ALTER TABLE `risk_risk_exception_join` DISABLE KEYS */;
+INSERT INTO `risk_risk_exception_join` VALUES (54,3);
+/*!40000 ALTER TABLE `risk_risk_exception_join` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `risk_security_services_join`
+--
+
+DROP TABLE IF EXISTS `risk_security_services_join`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `risk_security_services_join` (
+  `risk_security_services_join_risk_id` int(11) DEFAULT NULL,
+  `risk_security_services_join_security_services_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `risk_security_services_join`
+--
+
+LOCK TABLES `risk_security_services_join` WRITE;
+/*!40000 ALTER TABLE `risk_security_services_join` DISABLE KEYS */;
+INSERT INTO `risk_security_services_join` VALUES (0,0),(53,7),(53,8),(54,7),(54,6),(1,7),(1,8),(1,6);
+/*!40000 ALTER TABLE `risk_security_services_join` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `risk_tbl`
+--
+
+DROP TABLE IF EXISTS `risk_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `risk_tbl` (
+  `risk_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `risk_threat` text,
+  `risk_vulnerabilities` text,
+  `risk_classification_score` int(11) DEFAULT NULL,
+  `risk_mitigation_strategy_id` int(11) DEFAULT NULL,
+  `risk_periodicity_review` int(11) DEFAULT NULL,
+  `risk_residual_score` int(11) DEFAULT NULL,
+  `risk_disabled` int(11) DEFAULT '1',
+  PRIMARY KEY (`risk_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `risk_tbl`
+--
+
+LOCK TABLES `risk_tbl` WRITE;
+/*!40000 ALTER TABLE `risk_tbl` DISABLE KEYS */;
+INSERT INTO `risk_tbl` VALUES (1,'srobos','candado locos',34,2,13,34,0),(2,'virus','no usar av',NULL,NULL,NULL,NULL,0),(3,'','',0,0,0,0,0),(4,'','',0,0,0,0,0),(5,'','',0,0,0,0,0),(6,'','',0,0,0,0,0),(7,'','',0,0,0,0,0),(8,'','',0,0,0,0,0),(9,'','',0,0,0,0,0),(10,'','',0,0,0,0,0),(11,'','',0,0,0,0,0),(12,'','',0,0,0,0,0),(13,'','',0,0,0,0,0),(14,'','',0,0,0,0,0),(15,'','',0,0,0,0,0),(16,'','',0,0,0,0,0),(17,'','',0,0,0,0,0),(18,'','',0,0,0,0,0),(19,'','',0,0,0,0,0),(20,'','',0,0,0,0,0),(21,'','',0,0,0,0,0),(22,'','',0,0,0,0,0),(23,'','',0,0,0,0,0),(24,'','',0,0,0,0,0),(25,'','',0,0,0,0,0),(26,'','',0,0,0,0,0),(27,'','',0,0,0,0,0),(28,'','',0,0,0,0,0),(29,'','',0,0,0,0,0),(30,'','',0,0,0,0,0),(31,'','',0,0,0,0,0),(32,'','',0,0,0,0,0),(33,'','',0,0,0,0,0),(34,'','',0,0,0,0,0),(35,'','',0,0,0,0,0),(36,'','',0,0,0,0,0),(37,'','',0,0,0,0,0),(38,'','',0,0,0,0,0),(39,'','',0,0,0,0,0),(40,'','',0,0,0,0,0),(41,'','',0,0,0,0,0),(42,'','',0,0,0,0,0),(43,'','',0,0,0,0,0),(44,'','',0,0,0,0,0),(45,'','',0,0,0,0,0),(46,'','',0,0,0,0,0),(47,'','',0,0,0,0,0),(48,'peligro;fuego;etc','y;muchas;cosas',32,1,12,23,0),(49,'peligro;fuego;etc','y;muchas;cosas',32,1,12,23,0),(50,'fwfnwkjfnkwjefnj','kjnelwfnweljfwe',32,2,12,23,0),(51,'','',0,-1,12,0,0),(52,'fewwe','wfewfe',0,-1,12,0,0),(53,'fewwe','wfewfe',3,3,12,3,0),(54,'efewfwefe','fewffwefwe',0,-1,12,0,0);
+/*!40000 ALTER TABLE `risk_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `security_services_audit_calendar_tbl`
+--
+
+DROP TABLE IF EXISTS `security_services_audit_calendar_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `security_services_audit_calendar_tbl` (
+  `security_services_audit_calendar_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `security_services_audit_calendar_name` varchar(45) DEFAULT NULL,
+  `security_services_audit_calendar_value` int(11) DEFAULT NULL,
+  PRIMARY KEY (`security_services_audit_calendar_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `security_services_audit_calendar_tbl`
+--
+
+LOCK TABLES `security_services_audit_calendar_tbl` WRITE;
+/*!40000 ALTER TABLE `security_services_audit_calendar_tbl` DISABLE KEYS */;
+INSERT INTO `security_services_audit_calendar_tbl` VALUES (1,'Jan',1),(2,'Feb',2),(3,'Mar',3),(4,'Apr',4),(5,'May',5),(6,'Jun',6),(7,'Jul',7),(8,'Aug',8),(9,'Sep',9),(10,'Oct',10),(11,'Nov',11),(12,'Dec',12);
+/*!40000 ALTER TABLE `security_services_audit_calendar_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `security_services_audit_result_tbl`
+--
+
+DROP TABLE IF EXISTS `security_services_audit_result_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `security_services_audit_result_tbl` (
+  `security_services_audit_result_id` int(11) NOT NULL AUTO_INCREMENT,
+  `security_services_audit_result_name` varchar(100) DEFAULT NULL,
+  `security_services_audit_result_disabled` int(11) DEFAULT '1',
+  PRIMARY KEY (`security_services_audit_result_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `security_services_audit_result_tbl`
+--
+
+LOCK TABLES `security_services_audit_result_tbl` WRITE;
+/*!40000 ALTER TABLE `security_services_audit_result_tbl` DISABLE KEYS */;
+INSERT INTO `security_services_audit_result_tbl` VALUES (1,'NA',1),(2,'Pass',0),(3,'Fail',0),(4,'Inconclusive',1);
+/*!40000 ALTER TABLE `security_services_audit_result_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `security_services_audit_status_tbl`
+--
+
+DROP TABLE IF EXISTS `security_services_audit_status_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `security_services_audit_status_tbl` (
+  `security_services_audit_status_id` int(11) NOT NULL AUTO_INCREMENT,
+  `security_services_audit_status_name` varchar(100) DEFAULT NULL,
+  `security_services_audit_status_disabled` int(11) DEFAULT '1',
+  PRIMARY KEY (`security_services_audit_status_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `security_services_audit_status_tbl`
+--
+
+LOCK TABLES `security_services_audit_status_tbl` WRITE;
+/*!40000 ALTER TABLE `security_services_audit_status_tbl` DISABLE KEYS */;
+INSERT INTO `security_services_audit_status_tbl` VALUES (1,'Not Initiated',0),(2,'Initiated',0),(3,'Completed',0);
+/*!40000 ALTER TABLE `security_services_audit_status_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `security_services_audit_tbl`
+--
+
+DROP TABLE IF EXISTS `security_services_audit_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `security_services_audit_tbl` (
+  `security_services_audit_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `security_services_audit_security_service_id` int(11) DEFAULT NULL,
+  `security_services_audit_status` int(11) DEFAULT NULL,
+  `security_services_audit_calendar_id` int(11) DEFAULT NULL,
+  `security_services_audit_planned_year` int(11) DEFAULT NULL,
+  `security_services_audit_metric` text,
+  `security_services_audit_criteria` text,
+  `security_services_audit_start_audit_date` date DEFAULT NULL,
+  `security_services_audit_end_audit_date` date DEFAULT NULL,
+  `security_services_audit_auditor` varchar(100) DEFAULT NULL,
+  `security_services_audit_result` int(11) DEFAULT '1',
+  `security_services_audit_result_description` text,
+  `security_services_audit_disabled` int(11) DEFAULT '1',
+  PRIMARY KEY (`security_services_audit_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14672 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `security_services_audit_tbl`
+--
+
+LOCK TABLES `security_services_audit_tbl` WRITE;
+/*!40000 ALTER TABLE `security_services_audit_tbl` DISABLE KEYS */;
+INSERT INTO `security_services_audit_tbl` VALUES (14641,6,1,1,2012,'Describe the metric','','0000-00-00','0000-00-00','',0,'',0),(14642,6,1,4,2012,'Describe the metric','','0000-00-00','0000-00-00','Example: johny.walker',0,'Document audit conclusions',0),(14643,6,1,9,2012,'Describe the metric','','0000-00-00','0000-00-00','Example: johny.walker',0,'Document audit conclusions',0),(14644,7,1,2,2012,'Describe the metric','','0000-00-00','0000-00-00','',0,'',1),(14645,7,1,3,2012,'Describe the metric','','0000-00-00','0000-00-00','',0,'',1),(14646,7,1,4,2012,'Describe the metric','','0000-00-00','0000-00-00','',0,'',1),(14647,8,3,2,2012,'Describe the metric','','2012-10-30','2012-10-30','esteban.ribicic',4,'Una cagada',0),(14648,8,1,12,2012,'Describe the metric','','0000-00-00','0000-00-00','',0,'',1),(14653,9,3,10,2012,'Describe the metric','','2012-10-30','2012-10-30','esteban',2,'Blah',0),(14659,6,1,10,2012,'Describe the metric','','0000-00-00','0000-00-00','',0,'',0),(14660,7,1,1,2012,'Describe the metric','','0000-00-00','0000-00-00','',0,'',1),(14661,7,1,2,2012,'Describe the metric','','0000-00-00','0000-00-00','',0,'',1),(14662,7,1,3,2012,'Describe the metric','','0000-00-00','0000-00-00','',0,'',0),(14663,7,1,4,2012,'Describe the metric','','0000-00-00','0000-00-00','',0,'',1),(14664,7,1,5,2012,'Describe the metric','','0000-00-00','0000-00-00','',0,'',1),(14665,7,1,6,2012,'Describe the metric','','0000-00-00','0000-00-00','',0,'',1),(14666,7,1,7,2012,'Describe the metric','','0000-00-00','0000-00-00','',0,'',1),(14667,7,1,8,2012,'Describe the metric','','0000-00-00','0000-00-00','',0,'',1),(14668,7,1,9,2012,'Describe the metric','','0000-00-00','0000-00-00','',0,'',1),(14669,7,1,10,2012,'Describe the metric','','0000-00-00','0000-00-00','',0,'',0),(14670,7,1,11,2012,'Describe the metric','','0000-00-00','0000-00-00','',0,'',1),(14671,7,1,12,2012,'Describe the metric','','0000-00-00','0000-00-00','',0,'',0);
+/*!40000 ALTER TABLE `security_services_audit_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `security_services_catalogue_audit_calendar_join`
+--
+
+DROP TABLE IF EXISTS `security_services_catalogue_audit_calendar_join`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `security_services_catalogue_audit_calendar_join` (
+  `security_service_catalogue_id` int(11) NOT NULL DEFAULT '0',
+  `security_services_audit_calendar_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `security_services_catalogue_audit_calendar_join`
+--
+
+LOCK TABLES `security_services_catalogue_audit_calendar_join` WRITE;
+/*!40000 ALTER TABLE `security_services_catalogue_audit_calendar_join` DISABLE KEYS */;
+INSERT INTO `security_services_catalogue_audit_calendar_join` VALUES (9,10),(8,1),(8,2),(6,10),(7,1),(7,2),(7,3),(7,4),(7,5),(7,6),(7,7),(7,8),(7,9),(7,10),(7,11),(7,12);
+/*!40000 ALTER TABLE `security_services_catalogue_audit_calendar_join` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `security_services_status_tbl`
+--
+
+DROP TABLE IF EXISTS `security_services_status_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `security_services_status_tbl` (
+  `security_services_status_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `security_services_status_name` varchar(100) DEFAULT NULL,
+  `security_services_status_disabled` int(11) DEFAULT NULL,
+  PRIMARY KEY (`security_services_status_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `security_services_status_tbl`
+--
+
+LOCK TABLES `security_services_status_tbl` WRITE;
+/*!40000 ALTER TABLE `security_services_status_tbl` DISABLE KEYS */;
+INSERT INTO `security_services_status_tbl` VALUES (1,'Proposed',0),(2,'Design',0),(3,'Transition',0),(4,'Production',0),(5,'Retired',0);
+/*!40000 ALTER TABLE `security_services_status_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `security_services_tbl`
+--
+
+DROP TABLE IF EXISTS `security_services_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `security_services_tbl` (
+  `security_services_id` int(11) NOT NULL AUTO_INCREMENT,
+  `security_services_name` varchar(100) DEFAULT NULL,
+  `security_services_objective` text,
+  `security_services_documentation_url` text,
+  `security_services_status` int(11) DEFAULT NULL,
+  `security_services_audit_metric` text,
+  `security_services_audit_success_criteria` text,
+  `security_services_cost_opex` int(11) DEFAULT NULL,
+  `security_services_cost_capex` int(11) DEFAULT NULL,
+  `security_services_cost_operational_resource` decimal(10,2) DEFAULT NULL,
+  `security_services_disabled` int(11) DEFAULT '1',
+  PRIMARY KEY (`security_services_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `security_services_tbl`
+--
+
+LOCK TABLES `security_services_tbl` WRITE;
+/*!40000 ALTER TABLE `security_services_tbl` DISABLE KEYS */;
+INSERT INTO `security_services_tbl` VALUES (1,'Corporate Antivirus','Control virus, worms, etc.','http://localhost/isms_v2/?section=security_services&subsection=security_catalogue&action=edit&security_services_id=1',2,'Regla','Mas de 20cm',100,600,1.51,1),(2,'Regular WebApp Scanning - External','Control technical vulnerabilities','',3,'Describe the metric','Describe the metric success criteria',0,0,0.00,1),(6,'Regular WebApp Scanning - Int','Control technical vulnerabilities','',4,'Describe the metric','Describe the metric success criteria',0,0,0.00,0),(7,'CCTV - Laminar','Monitor access to facilities and offices','',1,'Describe the metric','Describe the metric success criteria',0,0,0.00,0),(8,'Physical Doors Controls','Blah','Blah',1,'Describe the metric','Describe the metric success criteria',0,0,0.00,0),(9,'Test Service','Not sure','Not Sure',2,'Describe the metric','Describe the metric success criteria',0,0,0.00,0),(10,'Test 2','efwfe','fwfee',2,'Describe the metric','Describe the metric success criteria',0,0,0.00,1),(11,'test','fwfwe','',-1,'Describe the metric','Describe the metric success criteria',0,0,0.00,1),(12,'test','fwfwe','',-1,'Describe the metric','Describe the metric success criteria',0,0,0.00,1),(13,'test','fwfwe','',-1,'Describe the metric','Describe the metric success criteria',0,0,0.00,1),(14,'test','fwfwe','',-1,'Describe the metric','Describe the metric success criteria',0,0,0.00,1),(15,'test','fwfwe','',-1,'Describe the metric','Describe the metric success criteria',0,0,0.00,1),(16,'test','fwfwe','',-1,'Describe the metric','Describe the metric success criteria',0,0,0.00,1),(17,'test','fwfwe','',-1,'Describe the metric','Describe the metric success criteria',0,0,0.00,1),(18,'test','fwfwe','',-1,'Describe the metric','Describe the metric success criteria',0,0,0.00,1),(19,'test','fwfwe','',-1,'Describe the metric','Describe the metric success criteria',0,0,0.00,1),(20,'test','fwfwe','',-1,'Describe the metric','Describe the metric success criteria',0,0,0.00,1),(21,'test','fwfwe','',-1,'Describe the metric','Describe the metric success criteria',0,0,0.00,1),(22,'test','fwfwe','',-1,'Describe the metric','Describe the metric success criteria',0,0,0.00,1),(23,'test','fwfwe','',-1,'Describe the metric','Describe the metric success criteria',0,0,0.00,1),(24,'test','fwfwe','',-1,'Describe the metric','Describe the metric success criteria',0,0,0.00,1),(25,'test','fwfwe','',-1,'Describe the metric','Describe the metric success criteria',0,0,0.00,1),(26,'test','fwfwe','',-1,'Describe the metric','Describe the metric success criteria',0,0,0.00,1),(27,'test','fwfwe','',-1,'Describe the metric','Describe the metric success criteria',0,0,0.00,1),(28,'test','fwfwe','',-1,'Describe the metric','Describe the metric success criteria',0,0,0.00,1),(29,'test','fwfwe','',-1,'Describe the metric','Describe the metric success criteria',0,0,0.00,1),(30,'Test Service','','',-1,'Describe the metric','Describe the metric success criteria',0,0,0.00,1),(31,'Test Service','','',-1,'Describe the metric','Describe the metric success criteria',0,0,0.00,1),(32,'Test Service','','',-1,'Describe the metric','Describe the metric success criteria',0,0,0.00,1),(33,'Test Service','','',-1,'Describe the metric','Describe the metric success criteria',0,0,0.00,1),(34,'Test Service','','',-1,'Describe the metric','Describe the metric success criteria',0,0,0.00,1);
+/*!40000 ALTER TABLE `security_services_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `service_contracts_security_services_join`
+--
+
+DROP TABLE IF EXISTS `service_contracts_security_services_join`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `service_contracts_security_services_join` (
+  `security_services_id` int(11) DEFAULT NULL,
+  `service_contracts_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `service_contracts_security_services_join`
+--
+
+LOCK TABLES `service_contracts_security_services_join` WRITE;
+/*!40000 ALTER TABLE `service_contracts_security_services_join` DISABLE KEYS */;
+INSERT INTO `service_contracts_security_services_join` VALUES (1,6),(9,6),(1,6),(9,6),(6,1),(7,1);
+/*!40000 ALTER TABLE `service_contracts_security_services_join` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `service_contracts_tbl`
+--
+
+DROP TABLE IF EXISTS `service_contracts_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `service_contracts_tbl` (
+  `service_contracts_id` int(11) NOT NULL AUTO_INCREMENT,
+  `service_contracts_name` varchar(100) DEFAULT NULL,
+  `service_contracts_description` text,
+  `service_contracts_value` int(11) DEFAULT NULL,
+  `service_contracts_start` date DEFAULT NULL,
+  `service_contracts_end` date DEFAULT NULL,
+  `service_contracts_provider_id` int(11) DEFAULT NULL,
+  `service_contracts_disabled` int(11) DEFAULT '1',
+  PRIMARY KEY (`service_contracts_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `service_contracts_tbl`
+--
+
+LOCK TABLES `service_contracts_tbl` WRITE;
+/*!40000 ALTER TABLE `service_contracts_tbl` DISABLE KEYS */;
+INSERT INTO `service_contracts_tbl` VALUES (1,'Envision Hardware Support','This support contract covers hardware replace on 24x7x365 within 4 hours of the reported incident',3450,'0000-00-00','0000-00-00',8,0),(9,'fkewlkfmweflk','lkmel;kmfwe;kmfw;kfmwe;klm',23432,'0000-00-00','0000-00-00',0,0);
+/*!40000 ALTER TABLE `service_contracts_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `system_records_tbl`
+--
+
+DROP TABLE IF EXISTS `system_records_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `system_records_tbl` (
+  `system_records_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `system_records_section` varchar(100) DEFAULT NULL,
+  `system_records_subsection` varchar(100) DEFAULT NULL,
+  `system_records_item_id` varchar(100) DEFAULT NULL,
+  `system_records_author` varchar(100) DEFAULT NULL,
+  `system_records_action` varchar(100) DEFAULT NULL,
+  `system_records_notes` text,
+  `system_records_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`system_records_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=409 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `system_records_tbl`
+--
+
+LOCK TABLES `system_records_tbl` WRITE;
+/*!40000 ALTER TABLE `system_records_tbl` DISABLE KEYS */;
+INSERT INTO `system_records_tbl` VALUES (5,'asset','asset_classification','12','','Update','','2012-09-29 19:56:53'),(6,'risk','risk_management','1','','Update','','2012-09-29 21:09:38'),(7,'risk','risk_exception','3','','Update','','2012-09-29 21:11:05'),(8,'risk','risk_exception','2','','Disable','','2012-09-29 21:11:15'),(9,'security_services','security_catalogue','1','','Update','','2012-09-29 21:13:30'),(10,'security_services','security_catalogue','1','','Disable','','2012-09-29 21:13:40'),(11,'organization','bu-process','6','','Update','','2012-09-29 21:53:43'),(12,'organization','bu','2','','Update','','2012-09-29 21:54:12'),(13,'organization','bu','2','','Disable','','2012-09-29 21:54:49'),(14,'organization','bu','2','','Disable','','2012-09-29 21:56:30'),(15,'organization','bu-process','7','','Update','','2012-09-29 22:01:14'),(16,'Array','','','','','','2012-09-30 09:49:02'),(17,'organization','bu','3','','Note','','2012-09-30 10:00:19'),(18,'organization','bu','3','','Note','','2012-09-30 10:02:18'),(19,'organization','bu','3','','Note','','2012-09-30 10:02:26'),(20,'organization','bu','3','TBD','Note','Test Note','2012-09-30 10:03:59'),(21,'organization','bu-process','6','TBD','Note','Test Note','2012-09-30 10:04:19'),(22,'organization','legal','1','TBD','Note','Test','2012-09-30 10:06:40'),(23,'asset','asset_identification','2','TBD','Note','Test','2012-09-30 10:09:25'),(24,'risk','risk_management','1','TBD','Note','Test','2012-09-30 10:13:25'),(25,'risk','risk_exception','3','TBD','Note','TEst','2012-09-30 10:15:22'),(26,'security_services','security_catalogue','6','TBD','Note','Test','2012-09-30 10:18:17'),(27,'asset','asset_classification','','','Export','','2012-10-12 13:31:06'),(28,'risk','risk_exception','','','Export','','2012-10-12 13:43:16'),(29,'security_services','security_catalogue','6','','Update','','2012-10-13 20:55:04'),(30,'security_services','security_catalogue','6','','Update','','2012-10-13 20:55:37'),(31,'security_services','security_catalogue','6','','Update','','2012-10-13 21:12:37'),(32,'security_services','security_catalogue','6','','Update','','2012-10-13 21:13:29'),(33,'security_services','security_catalogue','6','','Update','','2012-10-13 21:13:43'),(34,'security_services','security_catalogue','6','','Update','','2012-10-13 21:14:22'),(35,'security_services','security_catalogue','6','','Update','','2012-10-13 21:16:18'),(36,'security_services','security_catalogue','6','','Update','','2012-10-13 21:16:19'),(37,'security_services','security_catalogue','6','','Update','','2012-10-13 21:16:20'),(38,'security_services','security_catalogue','6','','Update','','2012-10-13 21:16:27'),(39,'security_services','security_catalogue','6','','Update','','2012-10-13 21:16:31'),(40,'security_services','security_catalogue','6','','Update','','2012-10-13 21:16:47'),(41,'security_services','security_catalogue','6','','Update','','2012-10-13 21:18:01'),(42,'security_services','security_catalogue','6','','Update','','2012-10-13 21:18:02'),(43,'security_services','security_catalogue','7','','Update','','2012-10-13 21:18:13'),(44,'security_services','security_catalogue','7','','Update','','2012-10-13 21:19:28'),(45,'security_services','security_catalogue','7','','Update','','2012-10-13 21:19:45'),(46,'security_services','security_catalogue','7','','Update','','2012-10-13 21:20:15'),(47,'security_services','security_catalogue','7','','Update','','2012-10-13 21:20:41'),(48,'security_services','security_catalogue','6','','Update','','2012-10-13 21:21:24'),(49,'security_services','security_catalogue','6','','Update','','2012-10-13 21:21:40'),(50,'security_services','security_catalogue','6','','Update','','2012-10-13 21:21:55'),(51,'security_services','security_catalogue','6','','Update','','2012-10-13 21:22:20'),(52,'security_services','security_catalogue','','','Insert','','2012-10-13 21:27:40'),(53,'security_services','security_catalogue','10','','Disable','','2012-10-13 22:27:00'),(54,'security_services','security_catalogue','','','Insert','','2012-10-13 22:27:13'),(55,'security_services','security_catalogue','','','Insert','','2012-10-13 22:36:19'),(56,'security_services','security_catalogue','','','Insert','','2012-10-13 22:37:14'),(57,'security_services','security_catalogue','','','Insert','','2012-10-13 22:37:15'),(58,'security_services','security_catalogue','','','Insert','','2012-10-13 22:37:52'),(59,'security_services','security_catalogue','','','Insert','','2012-10-13 22:38:41'),(60,'security_services','security_catalogue','','','Insert','','2012-10-13 22:39:03'),(61,'security_services','security_catalogue','','','Insert','','2012-10-13 22:39:29'),(62,'security_services','security_catalogue','','','Insert','','2012-10-13 22:39:42'),(63,'security_services','security_catalogue','','','Insert','','2012-10-13 22:40:04'),(64,'security_services','security_catalogue','','','Insert','','2012-10-13 22:42:39'),(65,'security_services','security_catalogue','','','Insert','','2012-10-13 22:42:50'),(66,'security_services','security_catalogue','','','Insert','','2012-10-13 22:49:26'),(67,'security_services','security_catalogue','','','Insert','','2012-10-13 22:50:39'),(68,'security_services','security_catalogue','','','Insert','','2012-10-13 22:51:41'),(69,'security_services','security_catalogue','','','Insert','','2012-10-13 22:52:27'),(70,'security_services','security_catalogue','23','','Disable','','2012-10-13 22:52:37'),(71,'security_services','security_catalogue','11','','Disable','','2012-10-13 22:52:39'),(72,'security_services','security_catalogue','12','','Disable','','2012-10-13 22:52:40'),(73,'security_services','security_catalogue','13','','Disable','','2012-10-13 22:52:41'),(74,'security_services','security_catalogue','14','','Disable','','2012-10-13 22:52:41'),(75,'security_services','security_catalogue','15','','Disable','','2012-10-13 22:52:42'),(76,'security_services','security_catalogue','16','','Disable','','2012-10-13 22:52:42'),(77,'security_services','security_catalogue','17','','Disable','','2012-10-13 22:52:42'),(78,'security_services','security_catalogue','18','','Disable','','2012-10-13 22:52:43'),(79,'security_services','security_catalogue','19','','Disable','','2012-10-13 22:52:43'),(80,'security_services','security_catalogue','19','','Disable','','2012-10-13 22:52:43'),(81,'security_services','security_catalogue','20','','Disable','','2012-10-13 22:52:43'),(82,'security_services','security_catalogue','21','','Disable','','2012-10-13 22:52:44'),(83,'security_services','security_catalogue','22','','Disable','','2012-10-13 22:52:44'),(84,'security_services','security_catalogue','24','','Disable','','2012-10-13 22:52:45'),(85,'security_services','security_catalogue','25','','Disable','','2012-10-13 22:52:45'),(86,'security_services','security_catalogue','26','','Disable','','2012-10-13 22:52:46'),(87,'security_services','security_catalogue','27','','Disable','','2012-10-13 22:52:46'),(88,'security_services','security_catalogue','28','','Disable','','2012-10-13 22:52:47'),(89,'security_services','security_catalogue','','','Insert','','2012-10-13 22:57:41'),(90,'security_services','security_catalogue','29','','Disable','','2012-10-13 22:57:57'),(91,'security_services','security_catalogue','28','','Disable','','2012-10-14 00:06:25'),(92,'organization','bu','3','','Update','','2012-10-15 10:25:56'),(93,'organization','bu','3','','Update','','2012-10-15 10:26:19'),(94,'risk','risk_management','1','','Update','','2012-10-15 10:46:11'),(95,'risk','risk_management','1','','Update','','2012-10-15 10:46:29'),(96,'risk','risk_management','1','','Update','','2012-10-15 10:46:38'),(97,'security_services','security_catalogue','27','','Disable','','2012-10-15 11:38:01'),(98,'security_services','security_catalogue','','','Insert','','2012-10-15 11:38:09'),(99,'security_services','security_catalogue','','','Insert','','2012-10-15 11:38:25'),(100,'security_services','security_catalogue','','','Insert','','2012-10-15 11:55:37'),(101,'organization','bu','','','Export','','2012-10-15 16:03:40'),(102,'asset','asset_identification','','','Export','','2012-10-15 16:05:08'),(103,'security_services','security_catalogue','','','Export','','2012-10-15 16:07:20'),(104,'security_services','security_catalogue','6','','Update','','2012-10-17 10:07:37'),(105,'security_services','security_catalogue','6','','Update','','2012-10-17 10:07:43'),(106,'security_services','security_catalogue','6','','Update','','2012-10-17 10:08:40'),(107,'security_services','security_catalogue','6','','Update','','2012-10-17 10:13:16'),(108,'security_services','security_catalogue','6','','Update','','2012-10-17 10:14:48'),(109,'security_services','security_catalogue','6','','Update','','2012-10-17 10:17:41'),(110,'security_services','security_catalogue','6','','Update','','2012-10-17 10:18:06'),(111,'security_services','security_catalogue','6','','Update','','2012-10-17 10:18:19'),(112,'security_services','security_catalogue','6','','Update','','2012-10-17 10:34:19'),(113,'security_services','security_catalogue','6','','Update','','2012-10-17 10:34:30'),(114,'security_services','security_catalogue','6','','Update','','2012-10-17 10:34:38'),(115,'security_services','security_catalogue','6','','Update','','2012-10-17 10:59:17'),(116,'security_services','security_catalogue','6','','Update','','2012-10-17 11:00:03'),(117,'security_services','security_catalogue','6','','Update','','2012-10-17 11:00:06'),(118,'security_services','security_catalogue','6','','Update','','2012-10-17 11:00:15'),(119,'security_services','security_catalogue','6','','Update','','2012-10-17 11:00:16'),(120,'security_services','security_catalogue','6','','Update','','2012-10-17 11:00:16'),(121,'security_services','security_catalogue','6','','Update','','2012-10-17 11:00:27'),(122,'security_services','security_catalogue','6','','Update','','2012-10-17 11:00:49'),(123,'security_services','security_catalogue','6','','Update','','2012-10-17 11:01:37'),(124,'security_services','security_catalogue','6','','Update','','2012-10-17 11:02:20'),(125,'security_services','security_catalogue','6','','Update','','2012-10-17 11:02:31'),(126,'security_services','security_catalogue','6','','Update','','2012-10-17 11:04:00'),(127,'security_services','security_catalogue','6','','Update','','2012-10-17 11:04:51'),(128,'security_services','security_catalogue','6','','Update','','2012-10-17 11:05:35'),(129,'security_services','security_catalogue','6','','Update','','2012-10-17 11:06:00'),(130,'security_services','security_catalogue','6','','Update','','2012-10-17 11:06:08'),(131,'security_services','security_catalogue','6','','Update','','2012-10-17 11:06:09'),(132,'security_services','security_catalogue','6','','Update','','2012-10-17 11:06:25'),(133,'security_services','security_catalogue','6','','Update','','2012-10-17 11:07:21'),(134,'security_services','security_catalogue','6','','Update','','2012-10-17 11:11:22'),(135,'security_services','security_catalogue','6','','Update','','2012-10-17 11:12:37'),(136,'security_services','security_catalogue','6','','Update','','2012-10-17 11:13:11'),(137,'security_services','security_catalogue','6','','Update','','2012-10-17 11:13:12'),(138,'security_services','security_catalogue','6','','Update','','2012-10-17 11:13:29'),(139,'security_services','security_catalogue','6','','Update','','2012-10-17 11:14:00'),(140,'security_services','security_catalogue','6','','Update','','2012-10-17 11:14:58'),(141,'security_services','security_catalogue','6','','Update','','2012-10-17 11:15:14'),(142,'security_services','security_catalogue','6','','Update','','2012-10-17 11:15:35'),(143,'security_services','security_catalogue','7','','Update','','2012-10-17 11:15:46'),(144,'security_services','security_catalogue','7','','Update','','2012-10-17 11:15:52'),(145,'security_services','security_catalogue','8','','Update','','2012-10-17 12:24:04'),(146,'security_services','security_catalogue','6','','Update','','2012-10-17 13:27:38'),(147,'security_services','security_catalogue','6','','Update','','2012-10-17 13:28:04'),(148,'security_services','security_catalogue','33','','Disable','','2012-10-17 13:29:27'),(149,'security_services','security_catalogue','30','','Disable','','2012-10-17 13:29:29'),(150,'security_services','security_catalogue','31','','Disable','','2012-10-17 13:29:30'),(151,'security_services','security_catalogue','32','','Disable','','2012-10-17 13:29:30'),(152,'security_services','security_catalogue','34','','Disable','','2012-10-17 13:29:32'),(153,'security_services','security_catalogue','7','','Update','','2012-10-17 13:29:45'),(154,'security_services','security_catalogue','7','','Update','','2012-10-17 13:30:35'),(155,'security_services','security_catalogue','6','','Update','','2012-10-17 13:34:18'),(156,'security_services','security_catalogue','6','','Update','','2012-10-17 13:34:58'),(157,'security_services','security_catalogue','6','','Update','','2012-10-17 13:35:55'),(158,'security_services','security_catalogue','6','','Update','','2012-10-17 13:35:57'),(159,'security_services','security_catalogue','6','','Update','','2012-10-17 13:35:57'),(160,'security_services','security_catalogue','6','','Update','','2012-10-17 13:35:58'),(161,'security_services','security_catalogue','6','','Update','','2012-10-17 13:35:58'),(162,'security_services','security_catalogue','6','','Update','','2012-10-17 13:36:56'),(163,'security_services','security_catalogue','6','','Update','','2012-10-17 13:37:42'),(164,'security_services','security_catalogue','6','','Update','','2012-10-17 13:38:03'),(165,'security_services','security_catalogue','6','','Update','','2012-10-17 13:38:04'),(166,'security_services','security_catalogue','6','','Update','','2012-10-17 13:38:06'),(167,'security_services','security_catalogue','6','','Update','','2012-10-17 13:38:18'),(168,'security_services','security_catalogue','6','','Update','','2012-10-17 13:38:24'),(169,'security_services','security_catalogue','6','','Update','','2012-10-17 13:38:53'),(170,'security_services','security_catalogue','6','','Update','','2012-10-17 13:39:08'),(171,'security_services','security_catalogue','6','','Update','','2012-10-17 13:39:19'),(172,'security_services','security_catalogue','6','','Update','','2012-10-17 13:39:20'),(173,'security_services','security_catalogue','6','','Update','','2012-10-17 13:39:21'),(174,'security_services','security_catalogue','6','','Update','','2012-10-17 13:39:21'),(175,'security_services','security_catalogue','6','','Update','','2012-10-17 13:40:12'),(176,'security_services','security_catalogue','9','','Update','','2012-10-17 13:40:35'),(177,'security_services','security_catalogue','8','','Update','','2012-10-17 13:44:34'),(178,'security_services','security_catalogue','8','','Update','','2012-10-17 13:45:51'),(179,'security_services','security_catalogue','8','','Update','','2012-10-17 13:46:59'),(180,'security_services','security_catalogue','6','','Update','','2012-10-17 13:47:09'),(181,'security_services','security_catalogue','6','','Update','','2012-10-17 13:49:46'),(182,'security_services','security_services_audit','14644','','Disable','','2012-10-30 11:57:56'),(183,'security_services','security_services_audit','14645','','Disable','','2012-10-30 11:58:14'),(184,'security_services','security_services_audit','14646','','Disable','','2012-10-30 11:58:21'),(185,'security_services','security_services_audit','14644','','Disable','','2012-10-30 11:58:26'),(186,'security_services','security_services_audit','14653','TBD','Note','Test','2012-10-30 12:02:43'),(187,'security_services','security_services_audit','14653','','Review Status Changed to: 2','','2012-10-30 12:28:02'),(188,'security_services','security_services_audit','14653','','Review Status Changed to: ','','2012-10-30 14:26:58'),(189,'security_services','security_services_audit','14653','','Review Status Changed to: ','','2012-10-30 14:27:53'),(190,'security_services','security_services_audit','14653','','Review Status Changed to: ','','2012-10-30 14:29:15'),(191,'security_services','security_services_audit','14653','','Review Status Changed to: ','','2012-10-30 14:30:08'),(192,'security_services','security_services_audit','14653','','Review Status Changed to: ','','2012-10-30 14:30:26'),(193,'security_services','security_services_audit','14653','','Review Status Changed to: ','','2012-10-30 14:33:00'),(194,'security_services','security_services_audit','14653','','Review Status Changed to: ','','2012-10-30 14:33:21'),(195,'security_services','security_services_audit','14647','','Review Status Changed to: ','','2012-10-30 14:35:33'),(196,'security_services','security_services_audit','14653','','Review Status Changed to: ','','2012-10-30 15:44:12'),(197,'security_services','security_services_audit','14648','','Review Status Changed to: ','','2012-10-30 16:15:21'),(198,'security_services','security_services_audit','14641','','Review Status Changed to: ','','2012-10-30 16:17:17'),(199,'security_services','security_services_audit','14641','','Review Status Changed to: ','','2012-10-30 16:17:47'),(200,'security_services','security_services_audit','14642','','Review Status Changed to: Array','','2012-10-30 16:22:40'),(201,'security_services','security_services_audit','14642','','Review Status Changed to: Array','','2012-10-30 16:22:48'),(202,'security_services','security_services_audit','14648','','Evidence Addition','','2012-10-30 16:40:13'),(203,'security_services','security_services_audit','14648','','Review Status Changed to: Array','','2012-10-30 16:44:23'),(204,'security_services','security_services_audit','14648','','Evidence Addition','','2012-10-30 16:46:41'),(205,'security_services','security_services_audit','14648','','Evidence Addition','','2012-10-30 16:51:17'),(206,'security_services','security_services_audit','14648','','Evidence Addition','','2012-10-30 16:55:33'),(207,'security_services','security_services_audit','14647','','Review Status Changed to: Array','','2012-10-30 16:56:15'),(208,'security_services','security_services_audit','14643','','Review Status Changed to: Array','','2012-10-30 16:56:26'),(209,'security_services','security_services_audit','14643','','Evidence Addition','','2012-10-30 16:56:47'),(210,'security_services','security_services_audit','14643','','Evidence Addition','','2012-10-30 16:57:07'),(211,'security_services','security_services_audit','14643','','Review Status Changed to: Array','','2012-10-30 16:57:25'),(212,'security_services','security_services_audit','14653','','Review Status Changed to: Array','','2012-10-30 17:08:27'),(213,'security_services','security_services_audit','14653','','Review Status Changed to: Array','','2012-10-30 17:08:33'),(214,'security_services','security_services_audit','14653','','Review Status Changed to: Array','','2012-10-30 17:10:21'),(215,'security_services','security_services_audit','14653','','Review Status Changed to: Array','','2012-10-30 17:10:28'),(216,'security_services','security_services_audit','14648','','Disable','','2012-10-30 17:10:41'),(217,'security_services','security_services_audit','14647','','Review Status Changed to: Array','','2012-10-30 17:11:01'),(218,'security_services','security_services_audit','14647','','Evidence Addition','','2012-10-30 17:11:16'),(219,'security_services','security_services_audit','14647','','Evidence Addition','','2012-10-30 17:11:35'),(220,'security_services','security_services_audit','14647','','Review Status Changed to: Array','','2012-10-30 17:11:49'),(221,'security_services','security_services_audit','14643','','Review Status Changed to: Array','','2012-10-30 18:00:57'),(222,'security_services','security_services_audit','14643','','Review Status Changed to: Array','','2012-10-30 18:01:05'),(223,'security_services','security_services_audit','14642','','Review Status Changed to: Array','','2012-10-30 18:01:10'),(224,'security_services','security_services_audit','14642','','Evidence Addition','','2012-10-30 18:01:21'),(225,'security_services','security_services_audit','14642','','Review Status Changed to: Array','','2012-10-30 18:01:31'),(226,'security_services','security_services_audit','14642','','Review Status Changed to: Array','','2012-10-30 18:08:12'),(227,'security_services','security_services_audit','14642','','Review Status Changed to: Array','','2012-10-30 18:08:49'),(228,'security_services','security_services_audit','14642','','Review Status Changed to: Array','','2012-10-30 18:08:56'),(229,'security_services','security_services_audit','14642','','Review Status Changed to: Array','','2012-10-30 18:10:20'),(230,'security_services','security_services_audit','14641','','Review Status Changed to: Array','','2012-10-30 18:10:52'),(231,'security_services','security_services_audit','14641','','Review Status Changed to: Array','','2012-10-30 18:11:02'),(232,'security_services','security_services_audit','14653','','Review Status Changed to: Array','','2012-10-30 18:13:24'),(233,'security_services','security_services_audit','14653','','Evidence Addition','','2012-10-30 18:13:40'),(234,'security_services','security_services_audit','14653','','Review Status Changed to: Array','','2012-10-30 18:17:03'),(235,'security_services','security_services_audit','14641','','Review Status Changed to: Array','','2012-10-30 18:21:48'),(236,'security_services','security_services_audit','14641','','Review Status Changed to: Array','','2012-10-30 18:21:54'),(237,'security_services','security_services_audit','14642','','Review Status Changed to: Array','','2012-10-30 18:22:46'),(238,'security_services','security_services_audit','14642','','Review Status Changed to: Array','','2012-10-30 18:22:55'),(239,'security_services','security_services_audit','14643','','Review Status Changed to: Not Initiated','','2012-10-30 18:28:43'),(240,'security_services','security_services_audit','14643','','Evidence Addition','','2012-10-30 18:28:53'),(241,'security_services','security_services_audit','14643','','Evidence Addition','','2012-10-30 18:30:28'),(242,'security_services','security_services_audit','14643','','Review Status Changed to: Initiated','','2012-10-30 18:30:38'),(243,'security_services','security_services_audit','14647','','Review Status Changed to: ','','2012-10-30 18:36:39'),(244,'security_services','security_services_audit','14647','','Evidence Addition','','2012-10-30 18:37:20'),(245,'security_services','security_services_audit','14647','','Review Status Changed to: ','','2012-10-30 18:37:27'),(246,'security_services','security_services_audit','14653','','Review Status Changed to: ','','2012-10-30 18:40:23'),(247,'security_services','security_services_audit','14653','','Review Status Changed to: Initiated','','2012-10-30 18:41:35'),(248,'security_services','security_services_audit','14653','','Evidence Addition','','2012-10-30 18:42:30'),(249,'security_services','security_services_audit','14653','','Review Status Changed to: Completed','','2012-10-30 18:42:44'),(250,'security_services','security_services_audit','14647','','Review Status Changed to: Initiated','','2012-10-30 18:43:02'),(251,'security_services','security_services_audit','14647','','Review Status Changed to: Completed','','2012-10-30 18:43:09'),(252,'organization','bu','3','','Update','','2012-10-30 20:28:20'),(253,'organization','bu-process','6','','Update','','2012-10-30 20:30:28'),(254,'asset','asset_identification','2','','Update','','2012-10-30 20:31:39'),(255,'risk','risk_management','1','','Update','','2012-10-30 20:32:58'),(256,'risk','risk_classification','','','Export','','2012-10-30 21:21:11'),(257,'risk','risk_management','','','Export','','2012-10-30 21:21:19'),(258,'risk','risk_management','1','','Update','','2012-10-30 21:32:23'),(259,'risk','risk_management','1','','Update','','2012-10-30 21:38:21'),(260,'risk','risk_management','','','Export','','2012-10-30 21:38:24'),(261,'risk','risk_management','','','Export','','2012-10-30 21:39:30'),(262,'risk','risk_management','','','Export','','2012-10-30 21:39:37'),(263,'risk','risk_management','','','Export','','2012-10-30 21:40:19'),(264,'risk','risk_management','','','Export','','2012-10-30 21:40:47'),(265,'risk','risk_management','','','Export','','2012-10-30 21:42:56'),(266,'risk','risk_exception','','','Export','','2012-10-30 21:44:59'),(267,'risk','risk_management','','','Export','','2012-10-30 23:09:40'),(268,'risk','risk_management','','','Export','','2012-10-30 23:11:57'),(269,'risk','risk_management','','','Export','','2012-10-30 23:14:39'),(270,'risk','risk_management','','','Export','','2012-10-30 23:15:45'),(271,'risk','risk_management','','','Export','','2012-10-30 23:16:35'),(272,'risk','risk_management','','','Export','','2012-10-30 23:17:57'),(273,'risk','risk_management','','','Export','','2012-10-30 23:20:11'),(274,'risk','risk_management','','','Export','','2012-10-30 23:20:28'),(275,'risk','risk_management','','','Export','','2012-10-30 23:20:32'),(276,'risk','risk_management','','','Export','','2012-10-30 23:22:36'),(277,'risk','risk_management','','','Export','','2012-10-30 23:24:48'),(278,'risk','risk_management','','','Export','','2012-10-30 23:24:50'),(279,'risk','risk_management','','','Export','','2012-10-30 23:25:09'),(280,'risk','risk_management','','','Insert','','2012-10-30 23:28:46'),(281,'risk','risk_management','','','Insert','','2012-10-30 23:29:39'),(282,'risk','risk_management','','','Insert','','2012-10-30 23:30:12'),(283,'risk','risk_management','1','','Update','','2012-10-30 23:30:35'),(284,'risk','risk_management','','','Export','','2012-10-30 23:32:16'),(285,'risk','risk_management','','','Export','','2012-10-30 23:35:16'),(286,'risk','risk_management','','','Export','','2012-10-30 23:35:55'),(287,'risk','risk_management','','','Export','','2012-10-30 23:36:05'),(288,'risk','risk_management','','','Insert','','2012-10-30 23:39:30'),(289,'risk','risk_management','53','','Insert','','2012-10-31 00:03:16'),(290,'risk','risk_management','53','','Update','','2012-10-31 00:04:54'),(291,'risk','risk_management','54','','Insert','','2012-10-31 00:05:12'),(292,'risk','risk_management','54','','Update','','2012-10-31 00:05:33'),(293,'risk','risk_management','54','','Update','','2012-10-31 00:06:09'),(294,'risk','risk_management','54','','Update','','2012-10-31 00:06:22'),(295,'risk','risk_management','','','Export','','2012-10-31 00:06:28'),(296,'risk','risk_management','','','Export','','2012-10-31 00:07:18'),(297,'risk','risk_management','1','','Update','','2012-10-31 08:57:20'),(298,'risk','risk_management','1','','Update','','2012-10-31 08:57:50'),(299,'risk','risk_management','1','','Update','','2012-10-31 08:58:15'),(300,'risk','risk_management','1','','Update','','2012-10-31 08:58:16'),(301,'asset','asset_identification','','','Export','','2012-10-31 10:02:25'),(302,'risk','risk_management','1','TBD','Note','test para el id1 de risk','2012-10-31 11:08:17'),(303,'asset','asset_identification','','','Export','','2012-11-01 09:52:49'),(304,'asset','asset_identification','','','Export','','2012-11-01 09:54:02'),(305,'asset','asset_identification','','','Export','','2012-11-01 09:54:25'),(306,'asset','asset_identification','','','Export','','2012-11-01 09:55:33'),(307,'asset','asset_identification','','','Export','','2012-11-01 09:57:24'),(308,'asset','asset_identification','','','Export','','2012-11-01 09:58:32'),(309,'asset','asset_identification','','','Export','','2012-11-01 10:00:47'),(310,'organization','bu','3','','Disable','','2012-11-01 21:03:20'),(311,'organization','bu','6','','Update','','2012-11-01 22:19:49'),(312,'asset','data_asset','2','','Update','','2012-11-01 22:29:03'),(313,'asset','data_asset','2','','Update','','2012-11-01 22:29:19'),(314,'asset','data_asset','2','','Update','','2012-11-01 22:29:52'),(315,'asset','data_asset','2','','Update','','2012-11-01 22:30:39'),(316,'asset','data_asset','2','','Update','','2012-11-01 22:38:00'),(317,'asset','data_asset','2','','Update','','2012-11-01 22:38:09'),(318,'asset','data_asset','','','Insert','','2012-11-01 22:38:21'),(319,'asset','data_asset','','','Insert','','2012-11-01 22:39:10'),(320,'asset','data_asset','4','','Update','','2012-11-01 22:39:21'),(321,'asset','data_asset','2','','Update','','2012-11-01 22:43:06'),(322,'asset','data_asset','2','','Update','','2012-11-01 22:45:20'),(323,'asset','data_asset','2','','Update','','2012-11-01 22:45:33'),(324,'asset','data_asset','4','','Update','','2012-11-01 22:45:44'),(325,'asset','data_asset','4','','Update','','2012-11-01 22:45:53'),(326,'asset','data_asset','4','','Update','','2012-11-01 22:50:29'),(327,'asset','data_asset','4','','Update','','2012-11-01 22:50:58'),(328,'asset','data_asset','2','','Update','','2012-11-01 22:51:29'),(329,'asset','data_asset','2','','Update','','2012-11-01 22:59:52'),(330,'asset','data_asset','2','','Disable','','2012-11-01 22:59:59'),(331,'asset','data_asset','','','Insert','','2012-11-01 23:02:16'),(332,'asset','data_asset','6','','Insert','','2012-11-01 23:03:07'),(333,'asset','data_asset','6','TBD','Note','perro loco','2012-11-01 23:03:25'),(334,'asset','data_asset','6','','Update','','2012-11-01 23:03:42'),(335,'asset','data_asset','','','Export','','2012-11-01 23:07:26'),(336,'asset','data_asset','','','Export','','2012-11-01 23:12:05'),(337,'asset','data_asset','','','Export','','2012-11-01 23:15:43'),(338,'organization','tp','2','','Disable','','2012-11-05 10:56:36'),(339,'organization','tp','1','TBD','Note','test for the first tp','2012-11-05 10:56:46'),(340,'organization','tp','3','','Insert','','2012-11-05 11:10:46'),(341,'organization','tp','3','','Update','','2012-11-05 11:13:23'),(342,'organization','tp','3','','Update','','2012-11-05 11:13:30'),(343,'organization','tp','3','','Update','','2012-11-05 11:13:57'),(344,'organization','tp','3','','Update','','2012-11-05 11:14:10'),(345,'organization','tp','1','','Update','','2012-11-05 11:15:00'),(346,'organization','tp','4','','Insert','','2012-11-05 11:15:10'),(347,'organization','tp','5','','Insert','','2012-11-05 11:15:39'),(348,'organization','tp','6','','Insert','','2012-11-05 11:15:50'),(349,'organization','tp','7','','Insert','','2012-11-05 11:18:26'),(350,'organization','tp','6','','Disable','','2012-11-05 11:18:30'),(351,'organization','tp','4','','Disable','','2012-11-05 11:18:31'),(352,'organization','tp','5','','Disable','','2012-11-05 11:18:32'),(353,'organization','tp','7','','Update','','2012-11-05 11:18:37'),(354,'organization','tp','7','','Update','','2012-11-05 11:37:52'),(355,'organization','tp','1','','Update','','2012-11-05 11:37:58'),(356,'organization','tp','8','','Insert','','2012-11-05 11:38:13'),(357,'organization','tp','','','Export','','2012-11-05 11:39:25'),(358,'organization','tp','','','Export','','2012-11-05 11:40:00'),(359,'organization','tp','3','','Update','','2012-11-05 11:40:18'),(360,'organization','tp','3','','Update','','2012-11-05 11:40:54'),(361,'organization','tp','8','','Update','','2012-11-05 12:09:59'),(362,'security_catalogue','service_contracts','2','','Insert','','2012-11-05 18:16:57'),(363,'security_catalogue','service_contracts','3','','Insert','','2012-11-05 18:19:08'),(364,'security_catalogue','service_contracts','4','','Insert','','2012-11-05 18:19:31'),(365,'security_catalogue','service_contracts','5','','Insert','','2012-11-05 18:19:32'),(366,'security_catalogue','service_contracts','6','','Insert','','2012-11-05 18:29:59'),(367,'security_catalogue','service_contracts','7','','Insert','','2012-11-05 18:31:18'),(368,'security_catalogue','service_contracts','8','','Insert','','2012-11-05 18:32:32'),(369,'security_catalogue','service_contracts','9','','Insert','','2012-11-05 18:35:01'),(370,'security_catalogue','service_contracts','8','','Update','','2012-11-05 18:39:51'),(371,'security_catalogue','service_contracts','8','','Update','','2012-11-05 18:40:09'),(372,'security_catalogue','service_contracts','8','','Update','','2012-11-05 18:41:47'),(373,'security_catalogue','service_contracts','8','','Update','','2012-11-05 18:41:56'),(374,'security_catalogue','service_contracts','8','','Update','','2012-11-05 18:42:59'),(375,'service_contracts','security_catalogue','1','','Disable','','2012-11-05 18:44:54'),(376,'security_services','service_contracts','8','TBD','Note','test note','2012-11-05 18:45:53'),(377,'security_services','security_catalogue','6','','Update','','2012-11-05 19:55:32'),(378,'security_services','security_catalogue','6','','Update','','2012-11-05 19:56:44'),(379,'security_services','security_catalogue','6','','Update','','2012-11-05 20:06:36'),(380,'security_services','security_catalogue','6','','Update','','2012-11-05 20:06:45'),(381,'security_services','security_catalogue','6','','Update','','2012-11-05 20:07:28'),(382,'security_services','security_catalogue','6','','Update','','2012-11-05 20:07:46'),(383,'security_services','security_catalogue','6','','Update','','2012-11-05 20:08:06'),(384,'security_services','security_catalogue','6','','Update','','2012-11-05 20:08:54'),(385,'security_services','security_catalogue','6','','Update','','2012-11-05 20:09:16'),(386,'security_services','security_catalogue','6','','Update','','2012-11-05 20:11:26'),(387,'security_services','security_catalogue','6','','Update','','2012-11-05 20:11:38'),(388,'security_services','security_catalogue','6','','Update','','2012-11-05 20:11:57'),(389,'security_services','security_catalogue','6','','Update','','2012-11-05 20:12:09'),(390,'security_services','security_catalogue','7','','Update','','2012-11-05 20:12:17'),(391,'organization','tp','7','','Disable','','2012-11-05 20:13:46'),(392,'organization','tp','3','','Update','','2012-11-05 20:36:15'),(393,'security_services','security_services_audit','14661','','Disable','','2012-11-05 22:11:44'),(394,'security_services','security_services_audit','14660','','Disable','','2012-11-05 22:11:49'),(395,'security_services','security_services_audit','14663','','Disable','','2012-11-05 22:11:51'),(396,'security_services','security_services_audit','14664','','Disable','','2012-11-05 22:11:53'),(397,'security_services','security_services_audit','14665','','Disable','','2012-11-05 22:11:56'),(398,'security_services','security_services_audit','14666','','Disable','','2012-11-05 22:11:59'),(399,'security_services','security_services_audit','14667','','Disable','','2012-11-05 22:12:02'),(400,'security_services','security_services_audit','14668','','Disable','','2012-11-05 22:12:05'),(401,'security_services','security_services_audit','14670','','Disable','','2012-11-05 22:12:08'),(402,'asset','data_asset','','','Export','','2012-11-05 22:20:21'),(403,'security_services','security_catalogue','','','Export','','2012-11-07 12:53:44'),(404,'security_services','security_catalogue','','','Export','','2012-11-07 13:05:05'),(405,'security_services','security_catalogue','','','Export','','2012-11-07 13:06:08'),(406,'organization','bu','','','Insert','','2012-11-07 13:10:49'),(407,'organization','tp','3','','Update','','2012-11-07 13:55:05'),(408,'organization','tp','1','','Update','','2012-11-07 13:55:10');
+/*!40000 ALTER TABLE `system_records_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `threat_tbl`
+--
+
+DROP TABLE IF EXISTS `threat_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `threat_tbl` (
+  `threat_id` int(11) NOT NULL AUTO_INCREMENT,
+  `threat_name` varchar(100) DEFAULT NULL,
+  `threat_description` text,
+  `threat_disabled` int(11) DEFAULT '1',
+  PRIMARY KEY (`threat_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `threat_tbl`
+--
+
+LOCK TABLES `threat_tbl` WRITE;
+/*!40000 ALTER TABLE `threat_tbl` DISABLE KEYS */;
+/*!40000 ALTER TABLE `threat_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tp_tbl`
+--
+
+DROP TABLE IF EXISTS `tp_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tp_tbl` (
+  `tp_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tp_name` varchar(100) DEFAULT NULL,
+  `tp_description` text,
+  `tp_type_id` int(11) DEFAULT NULL,
+  `tp_disabled` int(11) DEFAULT '1',
+  PRIMARY KEY (`tp_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tp_tbl`
+--
+
+LOCK TABLES `tp_tbl` WRITE;
+/*!40000 ALTER TABLE `tp_tbl` DISABLE KEYS */;
+INSERT INTO `tp_tbl` VALUES (1,'JP Morgan','Customer for mobile studio',3,0),(2,'Trend Argentina','A Provider of AV Solutions',2,1),(3,'Pepe','es un buen tipo, labura pa\' nostoros',3,0),(4,'fwefwef','fwefwe',0,1),(5,'fwefwef','fwefwe',0,1),(6,'fwefwef','fwefwe',0,1),(7,'fwefwef','fwefwe',3,1),(8,'Trend Argentina','de la rioja',2,0);
+/*!40000 ALTER TABLE `tp_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tp_type_tbl`
+--
+
+DROP TABLE IF EXISTS `tp_type_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tp_type_tbl` (
+  `tp_type_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tp_type_name` varchar(100) DEFAULT NULL,
+  `tp_type_disabled` int(11) DEFAULT '1',
+  PRIMARY KEY (`tp_type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tp_type_tbl`
+--
+
+LOCK TABLES `tp_type_tbl` WRITE;
+/*!40000 ALTER TABLE `tp_type_tbl` DISABLE KEYS */;
+INSERT INTO `tp_type_tbl` VALUES (1,'Customers',0),(2,'Providers',0),(3,'Regulators',0);
+/*!40000 ALTER TABLE `tp_type_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `vul_tbl`
+--
+
+DROP TABLE IF EXISTS `vul_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vul_tbl` (
+  `vul_id` int(11) NOT NULL,
+  `vul_name` varchar(100) DEFAULT NULL,
+  `vul_description` text,
+  `vul_disabled` int(11) DEFAULT '1',
+  PRIMARY KEY (`vul_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vul_tbl`
+--
+
+LOCK TABLES `vul_tbl` WRITE;
+/*!40000 ALTER TABLE `vul_tbl` DISABLE KEYS */;
+/*!40000 ALTER TABLE `vul_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2012-11-07 18:09:55

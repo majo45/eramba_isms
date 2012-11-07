@@ -72,7 +72,7 @@ function show_menu_sub($section) {
 	}
 	
 	if ($section == "compliance") {
-		echo "<li><a href=\"$base_url?section=compliance&subsection=compliance_packages\">Compliance Packages</a></li>";
+		echo "<li><a href=\"$base_url?section=compliance&subsection=compliance_package\">Compliance Packages DB</a></li>";
 		echo "<li><a href=\"$base_url?section=compliance&subsection=\">Compliance Management</a></li>";
 	}
 
