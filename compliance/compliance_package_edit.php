@@ -7,6 +7,7 @@
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
 	$compliance_package_id = $_GET["compliance_package_id"];
+	$compliance_package_tp_id = $_GET["compliance_package_tp_id"];
 	
 	$base_url = build_base_url($section,$subsection);
 
@@ -54,7 +55,11 @@ echo "					<form name=\"compliance_package_edit\" method=\"GET\" action=\"$base_
 				    <INPUT type="hidden" name="action" value="update">
 				    <INPUT type="hidden" name="section" value="compliance">
 				    <INPUT type="hidden" name="subsection" value="compliance_package">
-<? echo " 			    <INPUT type=\"hidden\" name=\"compliance_package_id\" value=\"$compliance_package_item[compliance_package_id]\">"; ?>
+<? echo " 			    
+					<INPUT type=\"hidden\" name=\"compliance_package_id\" value=\"$compliance_package_id\">
+					<INPUT type=\"hidden\" name=\"compliance_package_tp_id\" value=\"$compliance_package_tp_id\">
+
+"; ?>
 
 			    <INPUT type="submit" value="Send"> 
 			</a>

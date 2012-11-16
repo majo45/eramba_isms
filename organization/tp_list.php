@@ -100,14 +100,12 @@ echo "					<th><a href=\"$base_url&sort=tp_description\">Description</a></th>";
 			<tbody>
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
-	if ($sort == "tp_description" OR $sort == "tp_name" OR $sort == "tp_tp_id") {
+	if (is_numeric($sort)) {
+	$tp_list = list_tp(" WHERE tp_disabled = 0 AND tp_id = \"$sort\"");
+	} elseif ($sort == "tp_description" OR $sort == "tp_name" OR $sort == "tp_tp_id") {
 	$tp_list = list_tp(" WHERE tp_disabled = 0 ORDER by $sort");
 	} else {
 	$tp_list = list_tp(" WHERE tp_disabled = 0 ORDER by tp_name");
-	}
-
-	if (is_numeric($sort)) {
-	$tp_list = list_tp(" WHERE tp_disabled = 0 AND tp_id = \"$sort\"");
 	}
 
 	foreach($tp_list as $tp_item) {

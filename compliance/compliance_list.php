@@ -15,33 +15,66 @@
 	
 	# local variables - YOU MUST ADJUST THIS! 
 	$compliance_package_id = $_GET["compliance_package_id"];
+	$compliance_package_tp_id = $_GET["compliance_package_tp_id"];
+	$compliance_package_original_id = $_GET["compliance_package_original_id"];
 	$compliance_package_name = $_GET["compliance_package_name"];
 	$compliance_package_description = $_GET["compliance_package_description"];
 	$compliance_package_type_id = $_GET["compliance_package_type_id"];
 	$compliance_package_disabled = $_GET["compliance_package_disabled"];
+	
+	$compliance_package_item_id = $_GET["compliance_package_item_id"];
+	$compliance_package_item_original_id = $_GET["compliance_package_item_original_id"];
+	$compliance_package_item_name = $_GET["compliance_package_item_name"];
+	$compliance_package_item_description = $_GET["compliance_package_item_description"];
 	 
 	#actions .. edit, update or disable - YOU MUST ADJUST THIS!
 	if ($action == "update" & is_numeric($compliance_package_id)) {
 		$compliance_package_update = array(
+			'compliance_package_original_id' => $compliance_package_original_id,
 			'compliance_package_name' => $compliance_package_name,
 			'compliance_package_description' => $compliance_package_description,
 			'compliance_package_type_id' => $compliance_package_type_id
 		);	
 		update_compliance_package($compliance_package_update,$compliance_package_id);
-		add_system_records("organization","tp","$compliance_package_id","","Update","");
+		add_system_records("organization","compliance_package","$compliance_package_id","","Update","");
 	} elseif ($action == "update") {
 		$compliance_package_update = array(
+			'compliance_package_tp_id' => $compliance_package_tp_id,
+			'compliance_package_original_id' => $compliance_package_original_id,
 			'compliance_package_name' => $compliance_package_name,
 			'compliance_package_description' => $compliance_package_description,
 			'compliance_package_type_id' => $compliance_package_type_id
 		);	
 		$compliance_package_id = add_compliance_package($compliance_package_update);
-		add_system_records("organization","tp","$compliance_package_id","","Insert","");
+		add_system_records("organization","compliance_package","$compliance_package_id","","Insert","");
+	} elseif ($action == "update_compliance_package_item_id" & is_numeric($compliance_package_item_id)) {
+		$compliance_package_update = array(
+			'compliance_package_id' => $compliance_package_id,
+			'compliance_package_item_original_id' => $compliance_package_item_original_id,
+			'compliance_package_item_name' => $compliance_package_item_name,
+			'compliance_package_item_description' => $compliance_package_item_description
+		);	
+		$compliance_package_item_id = update_compliance_package_item($compliance_package_update, $compliance_package_item_id);
+		add_system_records("organization","compliance_package_item","$compliance_package_item_id","","Update","");
+	} elseif ($action == "update_compliance_package_item_id") {
+		$compliance_package_update = array(
+			'compliance_package_id' => $compliance_package_id,
+			'compliance_package_item_original_id' => $compliance_package_item_original_id,
+			'compliance_package_item_name' => $compliance_package_item_name,
+			'compliance_package_item_description' => $compliance_package_item_description
+		);	
+		$compliance_package_item_id = add_compliance_package_item($compliance_package_update);
+		add_system_records("organization","compliance_package_item","$compliance_package_item_id","","Insert","");
 	}
 
-	if ($action == "disable") {
+	if ($action == "disable_compliance_package") {
 		disable_compliance_package($compliance_package_id);
-		add_system_records("organization","tp","$compliance_package_id","","Disable","");
+		add_system_records("organization","compliance_package","$compliance_package_id","","Disable","");
+	}
+	
+	if ($action == "disable_compliance_package_item") {
+		disable_compliance_package_item($compliance_package_item_id);
+		add_system_records("organization","compliance_package_item","$compliance_package_item_id","","Disable","");
 	}
 
 	if ($action == "csv") {
@@ -56,12 +89,6 @@
 	<section id="content-wrapper">
 		<h3>Compliance Package Database</h3>
 		<div class="controls-wrapper">
-<?
-echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
-?>
-				<span class="add-icon"></span>
-				Add new Third Party 
-			</a>
 			
 			<div class="actions-wraper">
 				<a href="#" class="actions-btn">
@@ -69,13 +96,13 @@ echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
 					<span class="select-icon"></span>
 				</a>
 				<ul class="action-submenu">
-					<li><a href="#">Delete</a></li>
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 if ($action == "csv") {
 echo "					<li><a href=\"downloads/compliance_package_export.csv\">Dowload</a></li>";
 } else { 
 echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
+echo "					<li><a href=\"$base_url&action=upload_csv\">Upload</a></li>";
 }
 ?>
 				</ul>
@@ -96,7 +123,7 @@ echo "					1. Regulator or Compliance Authority: $provider_id[compliance_package
 echo "					<span class=\"actions\">";
 echo "						<a class=\"edit\" href=\"$compliance_package_url&sort=$provider_id[compliance_package_id]\">view this third party regulator</a>";
 echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"edit\" href=\"$base_url&service_contracts_id=$compliance_package_item[compliance_package_id]&action=edit_compliance_package\">add a new compliance package</a>";
+echo "						<a class=\"edit\" href=\"$base_url&compliance_package_tp_id=$compliance_package_provider_name_item[compliance_package_tp_id]&action=edit_compliance_package\">add a new compliance package</a>";
 echo "					</span>";
 echo "					<span class=\"icon\"></span>";
 echo "				</div>";
@@ -105,6 +132,8 @@ echo "				<div class=\"content table\">";
 echo "";
 
 	$compliance_package_list = list_compliance_package(" WHERE compliance_package_tp_id = \"$compliance_package_provider_name_item[compliance_package_tp_id]\" AND compliance_package_disabled = \"0\"");
+
+
 	foreach($compliance_package_list as $compliance_package_item) {
 
 echo "					<table>";
@@ -133,6 +162,7 @@ echo "						</tr>";
 echo "";
 echo "					</table>";
 echo "";
+echo "<br>";
 echo "					<div class=\"rounded\">";
 
 			$compliance_package_item_list = list_compliance_package_item(" WHERE compliance_package_id = \"$compliance_package_item[compliance_package_id]\" 
@@ -158,7 +188,7 @@ echo "									<div class=\"cell-label\">";
 echo "										$compliance_package_item_item[compliance_package_item_name]";
 echo "									</div>";
 echo "									<div class=\"cell-actions\">";
-echo "<a href=\"$base_url&action=edit_compliance_package_item&compliance_package_item_id=$compliance_package_item_item[compliance_package_item_id]\" class=\"edit-action\">edit</a> ";
+echo "<a href=\"$base_url&action=edit_compliance_package_item&compliance_package_id=$compliance_package_item[compliance_package_id]&compliance_package_item_id=$compliance_package_item_item[compliance_package_item_id]\" class=\"edit-action\">edit</a> ";
 echo "	<a href=\"$base_url&action=disable_compliance_package_item&compliance_package_item_id=$compliance_package_item_item[compliance_package_item_id]\" class=\"delete-action\">delete</a>";
 echo "									</div>";
 echo "								</td>";
@@ -169,6 +199,7 @@ echo "							</tr>";
 echo "						</table>";
 			}
 echo "					</div>				";
+echo "<br>";
 
 					}
 

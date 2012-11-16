@@ -1,13 +1,13 @@
-asset_id,asset_name,asset_description,asset_media_type, asset_legal_constrains, asset_owner, asset_guardian, asset_user, asset_container, asset_disabled, Confidentiality,Integrity,Availability
-1,Laptop,,Data Asset, Customer Contractual Agreements, Accountingg, Berraca, Accountingg,Laptop,1,,,
-2,Financial Data,,Data Asset, PCI-DSS, Berraca, Berraca, Berraca,Financial Data,0,High,Medium,Low
-3,SAP FI,,Information System Asset, Customer Contractual Agreements, Accountingg, Berraca, Security,SAP FI,1,High,Low,Low
-4,SAP FI,,Information System Asset, Customer Contractual Agreements, Berraca, Berraca, Accountingg,SAP FI,1,,,
-5,SAP FI,,Information System Asset, Customer Contractual Agreements, Berraca, Berraca, Accountingg,SAP FI,1,,,
-6,SAP FI,,Information System Asset, Customer Contractual Agreements, Berraca, Berraca, Accountingg,SAP FI,1,,,
-7,SAP FI,,Information System Asset, Customer Contractual Agreements, Berraca, Berraca, Accountingg,SAP FI,0,High,High,Medium
-8,SAP HR,,Information System Asset, PCI-DSS, Accountingg, Security, Berraca,SAP HR,0,,Low,
-9,Customer Code,,Data Asset, Customer Contractual Agreements, Berraca, Accountingg, Accountingg,Customer Code,0,,,
-10,Customer Code,,Data Asset, Customer Contractual Agreements, Berraca, Accountingg, Accountingg,Customer Code,1,,,
-11,,,, , , , ,,1,,,
-12,,,, , , , ,,1,,,
+asset_id,asset_name,asset_description,asset_media_type, asset_legal_constrains, asset_owner, asset_guardian, asset_user, asset_container, asset_disabled, Confidentiality,Integrity,Availability,1
+1,Laptop,,Data Asset, Customer Contractual Agreements, Accountingg, Berracaa, Accountingg,Laptop,1,,,,
+2,Financial Data,,Data Asset, PCI-DSS, Berracaa, Berracaa, Berracaa,Financial Data,1,High,Medium,,
+3,SAP FI,,Information System Asset, Customer Contractual Agreements, Accountingg, Berracaa, Security,SAP FI,1,High,Low,,
+4,SAP FI,,Information System Asset, Customer Contractual Agreements, Berracaa, Berracaa, Accountingg,SAP FI,1,,,,
+5,SAP FI,,Information System Asset, Customer Contractual Agreements, Berracaa, Berracaa, Accountingg,SAP FI,1,,,,
+6,SAP FI,,Information System Asset, Customer Contractual Agreements, Berracaa, Berracaa, Accountingg,SAP FI,1,,,,
+7,SAP FI,,Information System Asset, Customer Contractual Agreements, Berracaa, Berracaa, Accountingg,SAP FI,1,High,High,,
+8,SAP HR,,Information System Asset, PCI-DSS, Accountingg, Security, Berracaa,SAP HR,0,,Low,,
+9,Customer Code,,Data Asset, Customer Contractual Agreements, Berracaa, Accountingg, Accountingg,Customer Code,0,,,,
+10,Customer Code,,Data Asset, Customer Contractual Agreements, Berracaa, Accountingg, Accountingg,Customer Code,1,,,,
+11,,,, , , , ,,1,,,,
+12,,,, , , , ,,1,,,,

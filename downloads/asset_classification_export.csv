@@ -11,5 +11,5 @@ asset_classification_id,asset_classification_name,asset_classification_descripti
 10,High,,, 0,1
 11,High,,, 0,1
 12,High,,Availability, 3,0
-13,Medium,,Availability, 2,0
+13,Medium,,Availability, 2,1
 14,Low,,Availability, 1,0

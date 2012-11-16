@@ -16,7 +16,9 @@ function add_compliance_package_item($compliance_package_item_data) {
 	$sql = "INSERT INTO
 		compliance_package_item_tbl
 		VALUES (
-		\"$compliance_package_item_data[compliance_package_item_id]\",
+		\"\",
+		\"$compliance_package_item_data[compliance_package_id]\",
+		\"$compliance_package_item_data[compliance_package_item_original_id]\",
 		\"$compliance_package_item_data[compliance_package_item_name]\",
 		\"$compliance_package_item_data[compliance_package_item_description]\",
 		\"0\"
@@ -30,6 +32,7 @@ function add_compliance_package_item($compliance_package_item_data) {
 function update_compliance_package_item($compliance_package_item_data, $compliance_package_item_id) {
 	$sql = "UPDATE compliance_package_item_tbl
 		SET
+		compliance_package_item_original_id=\"$compliance_package_item_data[compliance_package_item_original_id]\",
 		compliance_package_item_name=\"$compliance_package_item_data[compliance_package_item_name]\",
 		compliance_package_item_description=\"$compliance_package_item_data[compliance_package_item_description]\"
 		WHERE

@@ -1,8 +1,10 @@
 legal_id,legal_name,legal_description,legal_disabled
 1,Customer Contractual Agreements,,0
-2,Personal Information Legislation,,0
+2,Personal Information Legislation,,1
 3,Reputation,,1
 6,Reputation,,1
-7,Reputation,,0
+7,Reputation,,1
 8,Reputationnnn,,1
-9,New Legal Item,,0
+9,New Legal Item,,1
+10,New Legal Item,,1
+11,PCI-DSS,,1

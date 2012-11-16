@@ -8,8 +8,13 @@
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
 	$compliance_package_item_id = $_GET["compliance_package_item_id"];
+	$compliance_package_id = $_GET["compliance_package_id"];
 	
 	$base_url = build_base_url($section,$subsection);
+	
+	if (is_numeric($compliance_package_id)) {
+		$compliance_package_item = lookup_compliance_package("compliance_package_id",$compliance_package_id);
+	}
 
 	if (is_numeric($compliance_package_item_id)) {
 		$compliance_package_item_item = lookup_compliance_package_item("compliance_package_item_id",$compliance_package_item_id);
@@ -36,10 +41,10 @@ echo "					<form name=\"compliance_package_edit\" method=\"GET\" action=\"$base_
 ?>
 						<label for="name">Compliance Package Id</label>
 						<span class="description"></span>
-<? echo "						<input disabled type=\"text\" name=\"compliance_package_item_original_id\" id=\"\" value=\"$compliance_package_item_item[compliance_package_item_original_id]\"/>";?>
+<? echo "						<input disabled type=\"text\" name=\"compliance_package_id\" id=\"\" value=\"$compliance_package_item[compliance_package_original_id]\"/>";?>
 						<label for="name">Compliance Package Name</label>
 						<span class="description"></span>
-<? echo "						<input disabled type=\"text\" name=\"compliance_package_item_original_id\" id=\"\" value=\"$compliance_package_item_item[compliance_package_item_original_id]\"/>";?>
+<? echo "						<input disabled type=\"text\" name=\"compliance_package_name\" id=\"\" value=\"$compliance_package_item[compliance_package_name]\"/>";?>
 						<label for="name">Compliance Package Item Id</label>
 						<span class="description"></span>
 <? echo "						<input type=\"text\" name=\"compliance_package_item_original_id\" id=\"\" value=\"$compliance_package_item_item[compliance_package_item_original_id]\"/>";?>
@@ -58,11 +63,13 @@ echo "					<form name=\"compliance_package_edit\" method=\"GET\" action=\"$base_
 		
 		<div class="controls-wrapper">
 
-				    <INPUT type="hidden" name="action" value="update">
+				    <INPUT type="hidden" name="action" value="update_compliance_package_item_id">
 				    <INPUT type="hidden" name="section" value="compliance">
 				    <INPUT type="hidden" name="subsection" value="compliance_package">
-<? echo " 			    <INPUT type=\"hidden\" name=\"compliance_package_id\" value=\"$compliance_package_item_item[compliance_package_id]\">"; ?>
-<? echo " 			    <INPUT type=\"hidden\" name=\"compliance_package_item_id\" value=\"$compliance_package_item_item[compliance_package_item_id]\">"; ?>
+<? echo "    
+	 <INPUT type=\"hidden\" name=\"compliance_package_item_id\" value=\"$compliance_package_item_item[compliance_package_item_id]\">
+	 <INPUT type=\"hidden\" name=\"compliance_package_id\" value=\"$compliance_package_id\">
+"; ?>
 
 			    <INPUT type="submit" value="Send"> 
 			</a>
