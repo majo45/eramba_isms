@@ -126,6 +126,8 @@ if ($section == "organization") {
 			include("compliance/compliance_package_edit.php");
 		} elseif ($action == "edit_compliance_package_item") {
 			include("compliance/compliance_package_item_edit.php");
+		} elseif ($action == "show_upload_form") {
+			include("compliance/compliance_package_upload.php");
 		} else { 
 			include("compliance/compliance_list.php");
 		}

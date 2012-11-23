@@ -89,6 +89,12 @@
 	<section id="content-wrapper">
 		<h3>Compliance Package Database</h3>
 		<div class="controls-wrapper">
+<?
+echo "			<a href=\"$base_url&action=edit_compliance_package\" class=\"add-btn\">";
+?>
+				<span class="add-icon"></span>
+				Add new Compliance Package 
+			</a>
 			
 			<div class="actions-wraper">
 				<a href="#" class="actions-btn">
@@ -102,7 +108,7 @@ if ($action == "csv") {
 echo "					<li><a href=\"downloads/compliance_package_export.csv\">Dowload</a></li>";
 } else { 
 echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
-echo "					<li><a href=\"$base_url&action=upload_csv\">Upload</a></li>";
+echo "					<li><a href=\"$base_url&action=show_upload_form\">Upload</a></li>";
 }
 ?>
 				</ul>
@@ -115,13 +121,14 @@ echo "					<li><a href=\"$base_url&action=upload_csv\">Upload</a></li>";
 
 		foreach($compliance_package_provider_name_list as $compliance_package_provider_name_item) {
 
-			$provider_id = lookup_compliance_package("compliance_package_id",$compliance_package_provider_name_item[compliance_package_tp_id]);
+			# $provider_id = lookup_compliance_package("compliance_package_id",$compliance_package_provider_name_item[compliance_package_tp_id]);
+			$provider_id = lookup_tp("tp_id",$compliance_package_provider_name_item[compliance_package_tp_id]);
 
 echo "			<li>";
 echo "				<div class=\"header\">";
-echo "					1. Regulator or Compliance Authority: $provider_id[compliance_package_name]";
+echo "					1. Regulator or Compliance Authority: $provider_id[tp_name]";
 echo "					<span class=\"actions\">";
-echo "						<a class=\"edit\" href=\"$compliance_package_url&sort=$provider_id[compliance_package_id]\">view this third party regulator</a>";
+echo "						<a class=\"edit\" href=\"$compliance_package_url&sort=$provider_id[tp_id]\">view this third party regulator</a>";
 echo "						&nbsp;|&nbsp;";
 echo "						<a class=\"edit\" href=\"$base_url&compliance_package_tp_id=$compliance_package_provider_name_item[compliance_package_tp_id]&action=edit_compliance_package\">add a new compliance package</a>";
 echo "					</span>";

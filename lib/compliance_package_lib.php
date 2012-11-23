@@ -4,6 +4,7 @@
 # IF YOU WANT TO USE, YOU MUST RENAME FUNCTIONS!! :s/compliance_package/compliance_package/ - SAMEPLE
 
 include_once("mysql_lib.php");
+include_once("tp_lib.php");
 
 function list_compliance_package($arguments) {
 	# MUST EDIT
@@ -122,16 +123,23 @@ function disable_compliance_package($item_id) {
 function export_compliance_package_csv() {
 
 	# this will dump the table compliance_package_tbl on CSV format
-	$sql = "SELECT * from compliance_package_tbl";
+	# $sql = "SELECT * from compliance_package_tbl";
+	# this query merges both tables
+	$sql = "select * from compliance_package_tbl left join compliance_package_item_tbl on compliance_package_item_tbl.compliance_package_id = compliance_package_tbl.compliance_package_id";
 	$result = runQuery($sql);
 	
 	# open file
 	$export_file = "downloads/compliance_package_export.csv";
 	$handler = fopen($export_file, 'w');
 	
-	fwrite($handler, "compliance_package_id,compliance_package_name,compliance_package_description,compliance_package_disabled\n");
+	fwrite($handler, "compliance_package_third_party_name,compliance_package_tp_id, compliance_package_original_id, compliance_package_name,compliance_package_description,compliance_package_disabled, compliance_package_item_original_id, compliance_package_item_name, compliance_package_item_description, compliance_package_item_disabled\n");
+
 	foreach($result as $line) {
-		fwrite($handler,"$line[compliance_package_id],$line[compliance_package_name],$line[compliance_package_descripion],$line[compliance_package_disabled]\n");
+
+		$compliance_package_tp_item = lookup_tp("tp_id", $line[compliance_package_tp_id]);
+
+		fwrite($handler,"$compliance_package_tp_item[tp_name], $line[compliance_package_tp_id],$line[compliance_package_original_id],$line[compliance_package_name],$line[compliance_package_descripion],$line[compliance_package_disabled]\n");
+
 	}
 	
 	fclose($handler);

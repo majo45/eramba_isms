@@ -1,8 +1,8 @@
 <?
 
 	include_once("lib/compliance_package_lib.php");
-	include_once("lib/site_lib.php");
 	include_once("lib/tp_lib.php");
+	include_once("lib/site_lib.php");
 
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
@@ -14,15 +14,14 @@
 
 	if (is_numeric($compliance_package_id)) {
 		$compliance_package_item = lookup_compliance_package("compliance_package_id",$compliance_package_id);
-		echo "Mam: $compliance_package_item[compliance_package_tp_id]";
 	}
-	
+
 ?>
 
 
 	<section id="content-wrapper">
-		<h3>Edit or Create a Compliance Package</h3>
-		<span class="description"></span>
+		<h3>Upload a Complete Compliance Package</h3>
+		<span class="description">You can upload a complete compliance package from your computer using a Comma Separated File (CSV). You need to be carefull on how you setup the columns of your CSV tough!</span>
 		<div class="tab-wrapper"> 
 			<ul class="tabs">
 				<li class="first active">
@@ -36,26 +35,20 @@
 <?
 echo "					<form name=\"compliance_package_edit\" method=\"GET\" action=\"$base_url\">";
 ?>
-						<label for="name">Third Party</label>
-						<span class="description"></span>
-
-						<select name="compliance_package_tp_id" id="" class="chzn-select">
-						<option value="-1">Select a Third Party</option>
+						<label for="name">To which Third Party you'll associate this Package?</label>
+						<span class="description">Select one third party with whom you'll asociate this compliance package. If you dont have what you want, you can always create a new Third Party</span>
+						<select name="tp_type_id" id="" class="chzn-select">
+						<option value="-1">Select one third party</option>
 <?
-						list_drop_menu_tp($compliance_package_tp_id,"tp_name");	
+						list_drop_menu_tp(NULL,"tp_name");	
 ?>
 						</select>
-						<label for="name">Compliance Package Id</label>
-						<span class="description"></span>
-<? echo "						<input type=\"text\" name=\"compliance_package_original_id\" id=\"\" value=\"$compliance_package_item[compliance_package_original_id]\"/>";?>
 						
-						<label for="name">Name</label>
-						<span class="description"></span>
-<? echo "						<input type=\"text\" name=\"compliance_package_name\" id=\"\" value=\"$compliance_package_item[compliance_package_name]\"/>";?>
-						
-						<label for="description">Description</label>
-						<span class="description"></span>
-<? echo "						<textarea name=\"compliance_package_description\">$compliance_package_item[compliance_package_description]</textarea>";?>
+						<label for="description">Upload File</label>
+						<span class="description">Right, you can select a CSV file and upload it. WARNING!: follow this instructions or use this sample CSV to understand how the formating works! </span>
+<? 
+	echo "<input type=\"file\" name=\"compliance_package_csv_file\"><br>";
+?>
 				</div>
 				
 			</div>
@@ -68,14 +61,9 @@ echo "					<form name=\"compliance_package_edit\" method=\"GET\" action=\"$base_
 				    <INPUT type="hidden" name="subsection" value="compliance_package">
 <? echo " 			    
 					<INPUT type=\"hidden\" name=\"compliance_package_id\" value=\"$compliance_package_id\">
-";
-?>
-<?
-	if ($compliance_package_tp_id) {
-				echo "<INPUT type=\"hidden\" name=\"compliance_package_tp_id\" value=\"$compliance_package_tp_id\">";
-	}
+					<INPUT type=\"hidden\" name=\"compliance_package_tp_id\" value=\"$compliance_package_tp_id\">
 
- ?>
+"; ?>
 
 			    <INPUT type="submit" value="Send"> 
 			</a>

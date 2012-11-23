@@ -1,11 +1,7 @@
-compliance_package_id,compliance_package_name,compliance_package_description,compliance_package_disabled
-1,Governancee,,0
-2,Test,,0
-3,Financial Compliancec,,0
-5,Human Resources,,0
-6,fwe,,0
-7,fwe,,0
-8,fwe,,0
-9,fwe,,0
-10,Not Sure,,0
-11,Test,,1
+compliance_package_third_party_name,compliance_package_tp_id, compliance_package_original_id, compliance_package_name,compliance_package_description,compliance_package_disabled, compliance_package_item_original_id, compliance_package_item_name, compliance_package_item_description, compliance_package_item_disabled
+JP Morgan, 1,1.011,Governancee,,0
+JP Morgan, 1,1.0,Test,,0
+Pepe, 3,1.0,Financial Compliancec,,1
+Pepe, 3,2.0,Human Resources,,1
+Pepe, 3,3.0,Not Sure,,0
+JP Morgan, 1,1.0,Test,,1
