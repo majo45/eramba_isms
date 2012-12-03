@@ -6,7 +6,6 @@
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
-	$asset_classification_id = $_GET["asset_classification_id"];
 	
 	$base_url = build_base_url($section,$subsection);
 

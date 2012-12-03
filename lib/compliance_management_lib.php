@@ -16,10 +16,10 @@ function add_compliance_management($compliance_management_data) {
 	$sql = "INSERT INTO
 		compliance_management_tbl
 		VALUES (
-		\"$compliance_management_data[compliance_management_id]\",
-		\"$compliance_management_data[compliance_management_name]\",
-		\"$compliance_management_data[compliance_management_description]\",
-		\"0\"
+		\"\",
+		\"$compliance_management_data[compliance_management_item_id]\",
+		\"$compliance_management_data[compliance_management_response_id]\",
+		\"$compliance_management_data[compliance_management_status_id]\"
 		)
 		";	
 	$result = runUpdateQuery($sql);
@@ -30,8 +30,8 @@ function add_compliance_management($compliance_management_data) {
 function update_compliance_management($compliance_management_data, $compliance_management_id) {
 	$sql = "UPDATE compliance_management_tbl
 		SET
-		compliance_management_name=\"$compliance_management_data[compliance_management_name]\",
-		compliance_management_description=\"$compliance_management_data[compliance_management_description]\"
+		compliance_management_response_id=\"$compliance_management_data[compliance_management_response_id]\",
+		compliance_management_status_id=\"$compliance_management_data[compliance_management_status_id]\"
 		WHERE
 		compliance_management_id=\"$compliance_management_id\"
 		";	

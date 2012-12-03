@@ -140,6 +140,8 @@ if ($section == "organization") {
 			include("compliance/compliance_management_list_step_two.php");
 		} elseif ($action == "edit") {
 			include("compliance/compliance_management_edit.php");
+		} elseif ($action == "update") {
+			include("compliance/compliance_management_list_step_two.php");
 		} else { 
 			include("compliance/compliance_management_list.php");
 		}

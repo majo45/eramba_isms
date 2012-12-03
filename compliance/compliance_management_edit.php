@@ -11,6 +11,7 @@
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
+	$tp_id = $_GET["tp_id"];
 	$compliance_package_item= $_GET["compliance_package_item"];
 	
 	$base_url = build_base_url($section,$subsection);
@@ -40,7 +41,7 @@ echo "					<form name=\"risk_edit\" method=\"GET\" action=\"$base_url\">";
 ?>
 						<label for="legalType">Compliance Response Strategy</label>
 						<span class="description">What's your mitigation strategy for this compliance item</span>
-						<select name="compliance_response_strategy_id" id="" class="chzn-select">
+						<select name="compliance_management_response_id" id="" class="chzn-select">
 						<option value="-1">Select a Strategy...</option>
 <?
 						list_drop_menu_compliance_response_strategy($compliance_management_item[compliance_management_response_id],"compliance_response_strategy_name");	
@@ -49,14 +50,14 @@ echo "					<form name=\"risk_edit\" method=\"GET\" action=\"$base_url\">";
 
 						<label for="legalType">Compensating Controls</label>
 						<span class="description">Choose the most suitable available compensating controls (you can select multiple)</span>
-						<select name="security_services_id[]" id="" class="" multiple="multiple">
+						<select name="compliance_security_services_join_security_services_id[]" id="" class="" multiple="multiple">
 						<option value="-1">Select a Compensating Control...</option>
 <?
-	$pre_selected_security_services_list = list_compliance_item_security_service_join(" WHERE compliance_item_security_service_join_compliance_id = \"$compliance_management_item[compliance_management_id]\"");	
+	$pre_selected_security_services_list = list_compliance_item_security_services_join(" WHERE compliance_security_services_join_compliance_id = \"$compliance_management_item[compliance_management_id]\"");	
 	$pre_selected_items = array();
 
 	foreach($pre_selected_security_services_list as $pre_selected_security_services_item) {
-	array_push($pre_selected_items,$pre_selected_security_services_item[compliance_item_security_service_join_service_id]);
+		array_push($pre_selected_items,$pre_selected_security_services_item[compliance_security_services_join_security_services_id]);
 	}
 
 	list_drop_menu_security_services($pre_selected_items,"security_services_name");	
@@ -65,10 +66,10 @@ echo "					<form name=\"risk_edit\" method=\"GET\" action=\"$base_url\">";
 						
 						<label for="legalType">Compliance Status</label>
 						<span class="description">What's the agreed (with the regulator) status of this compliance item?</span>
-						<select name="compliance_status_id" id="" class="chzn-select">
+						<select name="compliance_management_status_id" id="" class="chzn-select">
 						<option value="-1">Select Status</option>
 <?
-			list_drop_menu_compliance_status($pre_selected_items,"compliance_status_id");	
+			list_drop_menu_compliance_status($compliance_management_item[compliance_management_status_id],"compliance_status_id");	
 ?>
 						</select>
 
@@ -82,11 +83,11 @@ echo "					<form name=\"risk_edit\" method=\"GET\" action=\"$base_url\">";
 		
 		<div class="controls-wrapper">
 				    <INPUT type="hidden" name="action" value="update">
-				    <INPUT type="hidden" name="section" value="risk">
-				    <INPUT type="hidden" name="subsection" value="risk_management">
-<? echo "			    <INPUT type=\"hidden\" name=\"asset_id\" value=\"$asset_id\">"; ?>
-<? echo " 			    <INPUT type=\"hidden\" name=\"risk_id\" value=\"$risk_item[risk_id]\">"; ?>
-<? echo " 			    <INPUT type=\"hidden\" name=\"risk_id\" value=\"$risk_item[risk_id]\">"; ?>
+				    <INPUT type="hidden" name="section" value="compliance">
+				    <INPUT type="hidden" name="subsection" value="compliance_management">
+<? echo "			    <INPUT type=\"hidden\" name=\"compliance_management_id\" value=\"$compliance_management_item[compliance_management_id]\">"; ?>
+<? echo "			    <INPUT type=\"hidden\" name=\"compliance_management_item_id\" value=\"$compliance_package_item\">"; ?>
+<? echo "			    <INPUT type=\"hidden\" name=\"tp_id\" value=\"$tp_id\">"; ?>
 
 			<a>
 			    <INPUT type="submit" value="Submit" class="add-btn"> 

@@ -1,25 +1,25 @@
 <?
 
 # WARNING! This is a TEMPLATE
-# IF YOU WANT TO USE, YOU MUST RENAME FUNCTIONS!! :s/compliance_item_security_service_join/compliance_item_security_service_join/ - SAMEPLE
+# IF YOU WANT TO USE, YOU MUST RENAME FUNCTIONS!! :s/compliance_item_security_services_join/compliance_item_security_services_join/ - SAMEPLE
 
 include_once("mysql_lib.php");
 
-function list_compliance_item_security_service_join($arguments) {
+function list_compliance_item_security_services_join($arguments) {
 	# MUST EDIT
-	$sql = "SELECT * FROM compliance_item_security_service_join".$arguments;
-	echo "$sql<br>";
+	$sql = "SELECT * FROM compliance_security_services_join".$arguments;
+	# echo "$sql<br>";
 	$results = runQuery($sql);
 	return $results;
 }
 
-function add_compliance_item_security_service_join($compliance_item_security_service_join_data) {
+function add_compliance_item_security_services_join($compliance_item_security_services_join_data) {
 	$sql = "INSERT INTO
-		compliance_item_security_service_join_tbl
+		compliance_item_security_services_join_tbl
 		VALUES (
-		\"$compliance_item_security_service_join_data[compliance_item_security_service_join_id]\",
-		\"$compliance_item_security_service_join_data[compliance_item_security_service_join_name]\",
-		\"$compliance_item_security_service_join_data[compliance_item_security_service_join_description]\",
+		\"$compliance_item_security_services_join_data[compliance_item_security_services_join_id]\",
+		\"$compliance_item_security_services_join_data[compliance_item_security_services_join_name]\",
+		\"$compliance_item_security_services_join_data[compliance_item_security_services_join_description]\",
 		\"0\"
 		)
 		";	
@@ -28,25 +28,25 @@ function add_compliance_item_security_service_join($compliance_item_security_ser
 	
 }
 
-function update_compliance_item_security_service_join($compliance_item_security_service_join_data, $compliance_item_security_service_join_id) {
-	$sql = "UPDATE compliance_item_security_service_join_tbl
+function update_compliance_item_security_services_join($compliance_item_security_services_join_data, $compliance_item_security_services_join_id) {
+	$sql = "UPDATE compliance_item_security_services_join_tbl
 		SET
-		compliance_item_security_service_join_name=\"$compliance_item_security_service_join_data[compliance_item_security_service_join_name]\",
-		compliance_item_security_service_join_description=\"$compliance_item_security_service_join_data[compliance_item_security_service_join_description]\"
+		compliance_item_security_services_join_name=\"$compliance_item_security_services_join_data[compliance_item_security_services_join_name]\",
+		compliance_item_security_services_join_description=\"$compliance_item_security_services_join_data[compliance_item_security_services_join_description]\"
 		WHERE
-		compliance_item_security_service_join_id=\"$compliance_item_security_service_join_id\"
+		compliance_item_security_services_join_id=\"$compliance_item_security_services_join_id\"
 		";	
 	$result = runUpdateQuery($sql);
 	return $result;
 }
 
-function lookup_compliance_item_security_service_join($search_parameter, $item_id) {
+function lookup_compliance_item_security_services_join($search_parameter, $item_id) {
 	if (!$item_id or !$search_parameter) {
 		return;
 	}
 
 	# MUST EDIT
-	$sql = "SELECT * from compliance_item_security_service_join_tbl WHERE $search_parameter = \"$item_id\""; 
+	$sql = "SELECT * from compliance_item_security_services_join_tbl WHERE $search_parameter = \"$item_id\""; 
 	$result = runSmallQuery($sql);
 	return $result;
 }
@@ -54,14 +54,14 @@ function lookup_compliance_item_security_service_join($search_parameter, $item_i
 # he needs to return a whole html ready to drop a menu
 # he receives an array with an item of pre-selected items that must be pre-selected
 # he receives a second argument which is the order by lookup
-function list_drop_menu_compliance_item_security_service_join($pre_selected_items='', $order_clause='') {
+function list_drop_menu_compliance_item_security_services_join($pre_selected_items='', $order_clause='') {
 
 	if ($order_clause) {
 		$order_clause = " ORDER BY ".$order_clause."";
 	}
 
 	# MUST EDIT
-	$sql = "SELECT * FROM compliance_item_security_service_join_tbl WHERE compliance_item_security_service_join_disabled = \"0\"".$order_clause."";
+	$sql = "SELECT * FROM compliance_item_security_services_join_tbl WHERE compliance_item_security_services_join_disabled = \"0\"".$order_clause."";
 	$results = runQuery($sql);
 
 	foreach($results as $results_item) {
@@ -69,60 +69,60 @@ function list_drop_menu_compliance_item_security_service_join($pre_selected_item
 			$match = NULL;
 			foreach($pre_selected_items as $preselected) {
 				# MUST EDIT
-				if ($results_item[compliance_item_security_service_join_id] == $preselected) {
-					echo "<option selected=\"selected\" value=\"$results_item[compliance_item_security_service_join_id]\">$results_item[compliance_item_security_service_join_name]</option>\n";
+				if ($results_item[compliance_item_security_services_join_id] == $preselected) {
+					echo "<option selected=\"selected\" value=\"$results_item[compliance_item_security_services_join_id]\">$results_item[compliance_item_security_services_join_name]</option>\n";
 					$match = 1;
 				} 
 			}
 
 			# MUST EDIT
 			if (!$match) { 
-				echo "<option value=\"$results_item[compliance_item_security_service_join_id]\">$results_item[compliance_item_security_service_join_name]</option>\n"; 
+				echo "<option value=\"$results_item[compliance_item_security_services_join_id]\">$results_item[compliance_item_security_services_join_name]</option>\n"; 
 			}
 
 		} elseif ($pre_selected_items) {
 			$match = NULL;
 			# MUST EDIT
-			if ($results_item[compliance_item_security_service_join_id] == $pre_selected_items) {
-				echo "<option selected=\"selected\" value=\"$results_item[compliance_item_security_service_join_id]\">$results_item[compliance_item_security_service_join_name]</option>\n";
+			if ($results_item[compliance_item_security_services_join_id] == $pre_selected_items) {
+				echo "<option selected=\"selected\" value=\"$results_item[compliance_item_security_services_join_id]\">$results_item[compliance_item_security_services_join_name]</option>\n";
 				$match = 1;
 			} 
 
 			# MUST EDIT
 			if (!$match) { 
-				echo "<option value=\"$results_item[compliance_item_security_service_join_id]\">$results_item[compliance_item_security_service_join_name]</option>\n"; 
+				echo "<option value=\"$results_item[compliance_item_security_services_join_id]\">$results_item[compliance_item_security_services_join_name]</option>\n"; 
 			}
 		} else {
 			# MUST EDIT
-			echo "<option value=\"$results_item[compliance_item_security_service_join_id]\">$results_item[compliance_item_security_service_join_name]</option>\n"; 
+			echo "<option value=\"$results_item[compliance_item_security_services_join_id]\">$results_item[compliance_item_security_services_join_name]</option>\n"; 
 		}
 	}
 
 }
 
-function disable_compliance_item_security_service_join($item_id) {
+function disable_compliance_item_security_services_join($item_id) {
 	if (!is_numeric($item_id)) {
 		return;
 	}
 	# MUST EDIT
-	$sql = "UPDATE compliance_item_security_service_join_tbl SET compliance_item_security_service_join_disabled=\"1\" WHERE compliance_item_security_service_join_id = \"$item_id\""; 
+	$sql = "UPDATE compliance_item_security_services_join_tbl SET compliance_item_security_services_join_disabled=\"1\" WHERE compliance_item_security_services_join_id = \"$item_id\""; 
 	$result = runUpdateQuery($sql);
 	return;
 }
 
-function export_compliance_item_security_service_join_csv() {
+function export_compliance_item_security_services_join_csv() {
 
-	# this will dump the table compliance_item_security_service_join_tbl on CSV format
-	$sql = "SELECT * from compliance_item_security_service_join_tbl";
+	# this will dump the table compliance_item_security_services_join_tbl on CSV format
+	$sql = "SELECT * from compliance_item_security_services_join_tbl";
 	$result = runQuery($sql);
 	
 	# open file
-	$export_file = "downloads/compliance_item_security_service_join_export.csv";
+	$export_file = "downloads/compliance_item_security_services_join_export.csv";
 	$handler = fopen($export_file, 'w');
 	
-	fwrite($handler, "compliance_item_security_service_join_id,compliance_item_security_service_join_name,compliance_item_security_service_join_description,compliance_item_security_service_join_disabled\n");
+	fwrite($handler, "compliance_item_security_services_join_id,compliance_item_security_services_join_name,compliance_item_security_services_join_description,compliance_item_security_services_join_disabled\n");
 	foreach($result as $line) {
-		fwrite($handler,"$line[compliance_item_security_service_join_id],$line[compliance_item_security_service_join_name],$line[compliance_item_security_service_join_descripion],$line[compliance_item_security_service_join_disabled]\n");
+		fwrite($handler,"$line[compliance_item_security_services_join_id],$line[compliance_item_security_services_join_name],$line[compliance_item_security_services_join_descripion],$line[compliance_item_security_services_join_disabled]\n");
 	}
 	
 	fclose($handler);
