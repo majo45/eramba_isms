@@ -2,6 +2,7 @@
 	include_once("lib/compliance_package_lib.php");
 	include_once("lib/compliance_package_item_lib.php");
 	include_once("lib/site_lib.php");
+	include_once("lib/tp_lib.php");
 	include_once("lib/system_records_lib.php");
 
 	# general variables - YOU SHOULDNT NEED TO CHANGE THIS
@@ -9,6 +10,16 @@
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
+	
+	# i might need post as well
+	if ($_POST["action"] == "upload_compliance_package") {
+		$sort = $_POST["sort"];
+		$section = $_POST["section"];
+		$subsection = $_POST["subsection"];
+		$action = $_POST["action"];
+		# this is needed for uplodas .. which uses POST
+		$tp_id= $_POST["tp_id"];
+	}
 	
 	$base_url = build_base_url($section,$subsection);
 	$compliance_package_url = build_base_url("organization","tp");
@@ -26,6 +37,32 @@
 	$compliance_package_item_original_id = $_GET["compliance_package_item_original_id"];
 	$compliance_package_item_name = $_GET["compliance_package_item_name"];
 	$compliance_package_item_description = $_GET["compliance_package_item_description"];
+	
+
+	# i need to make sure i have a tp_id where to asociate whatever compliance package i'm been trown
+	if ($action == "upload_compliance_package") {	
+		if ($tp_id) {
+			$tp_search = lookup_tp("tp_id",$tp_id);
+			if (empty($tp_search)){
+				echo "error, cant do this witohut a tp";
+				exit;
+			} else {
+				if ($tp_search[tp_disabled] == "1") {
+				echo "error, cant do this witohut an enabled tp";
+				}
+			}
+		} else {
+			echo "error, cant do this witohut a tp";
+			exit;
+		}
+
+		# here i start the upload calls
+		$uploaded_file = $_FILES['compliance_package_csv_file']['tmp_name'];
+		
+		# send this csv for parsing ..
+		parse_compliance_package_csv($uploaded_file);
+
+	}
 	 
 	#actions .. edit, update or disable - YOU MUST ADJUST THIS!
 	if ($action == "update" & is_numeric($compliance_package_id)) {

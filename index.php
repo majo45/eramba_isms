@@ -133,6 +133,17 @@ if ($section == "organization") {
 		}
 	}
 
+	if ($subsection == "compliance_management") {
+		if ($action == "list_compliance_management") {
+			include("compliance/compliance_management_list.php");
+		} elseif ($action == "start_compliance_management") {
+			include("compliance/compliance_management_list_step_two.php");
+		} elseif ($action == "edit") {
+			include("compliance/compliance_management_edit.php");
+		} else { 
+			include("compliance/compliance_management_list.php");
+		}
+	}
 }
 
 include_once("footer.php");

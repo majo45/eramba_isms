@@ -7,14 +7,9 @@
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
-	$compliance_package_id = $_GET["compliance_package_id"];
-	$compliance_package_tp_id = $_GET["compliance_package_tp_id"];
+	$tp_id = $_GET["tp_id"];
 	
 	$base_url = build_base_url($section,$subsection);
-
-	if (is_numeric($compliance_package_id)) {
-		$compliance_package_item = lookup_compliance_package("compliance_package_id",$compliance_package_id);
-	}
 
 ?>
 
@@ -33,11 +28,11 @@
 			<div class="tab-content">
 				<div class="tab" id="tab1">
 <?
-echo "					<form name=\"compliance_package_edit\" method=\"GET\" action=\"$base_url\">";
+echo "					<form name=\"compliance_package_edit\" method=\"POST\" action=\"$base_url\" enctype=\"multipart/form-data\">";
 ?>
 						<label for="name">To which Third Party you'll associate this Package?</label>
 						<span class="description">Select one third party with whom you'll asociate this compliance package. If you dont have what you want, you can always create a new Third Party</span>
-						<select name="tp_type_id" id="" class="chzn-select">
+						<select name="tp_id" id="" class="chzn-select">
 						<option value="-1">Select one third party</option>
 <?
 						list_drop_menu_tp(NULL,"tp_name");	
@@ -56,14 +51,9 @@ echo "					<form name=\"compliance_package_edit\" method=\"GET\" action=\"$base_
 		
 		<div class="controls-wrapper">
 
-				    <INPUT type="hidden" name="action" value="update">
+				    <INPUT type="hidden" name="action" value="upload_compliance_package">
 				    <INPUT type="hidden" name="section" value="compliance">
 				    <INPUT type="hidden" name="subsection" value="compliance_package">
-<? echo " 			    
-					<INPUT type=\"hidden\" name=\"compliance_package_id\" value=\"$compliance_package_id\">
-					<INPUT type=\"hidden\" name=\"compliance_package_tp_id\" value=\"$compliance_package_tp_id\">
-
-"; ?>
 
 			    <INPUT type="submit" value="Send"> 
 			</a>

@@ -146,6 +146,20 @@ function export_compliance_package_csv() {
 
 }
 
+function parse_compliance_package_csv($filename) {
+
+	# just make sure you can read the tmp file
+	$file_handle = fopen($filename, "r");
+	if (!$file_handle) {
+		echo "Cant open csv file";
+	}
+
+	# right .. now parse it and create the structure in the db
+
+	fclose($file_handle);
+
+}
+
 ?>
 
 
