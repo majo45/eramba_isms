@@ -146,6 +146,14 @@ if ($section == "organization") {
 			include("compliance/compliance_management_list.php");
 		}
 	}
+	
+	if ($subsection == "compliance_exception") {
+		if ($action == "edit_compliance_exception") {
+			include("compliance/compliance_exception_edit.php");
+		} else { 
+			include("compliance/compliance_exception_list.php");
+		}
+	}
 }
 
 include_once("footer.php");

@@ -8,6 +8,8 @@
 	include_once("lib/compliance_package_item_lib.php");
 	include_once("lib/compliance_response_strategy_lib.php");
 	include_once("lib/compliance_status_lib.php");
+	include_once("lib/compliance_item_security_service_join_lib.php");
+	include_once("lib/security_services_lib.php");
 
 	# general variables - YOU SHOULDNT NEED TO CHANGE THIS
 	$sort = $_GET["sort"];
@@ -16,6 +18,7 @@
 	$action = $_GET["action"];
 	
 	$base_url = build_base_url($section,$subsection);
+	$security_services_url = build_base_url("security_services","security_catalogue");
 	
 	# local variables - YOU MUST ADJUST THIS! 
 	$tp_id = $_GET["tp_id"];
@@ -33,6 +36,15 @@
 		);	
 		update_compliance_management($compliance_management_update,$compliance_management_id);
 		add_system_records("compliance","compliance_management","$compliance_management_id","","Update","");
+
+		# remove all security services for this compliance management item and then add the ones i just got.
+		delete_compliance_item_security_services_join($compliance_management_item_id);
+		foreach($compliance_security_services_join_security_services_id as $security_service_id) {
+			if ($security_service_id > 0) {
+			add_compliance_item_security_services_join($compliance_management_item_id, $security_service_id);
+			}
+		}
+
 	} elseif ($action == "update") {
 		$compliance_management_update = array(
 			'compliance_management_item_id' => $compliance_management_item_id,
@@ -102,6 +114,7 @@ echo "					<th>Item Name & Id</th>";
 echo "					<th>Item Description</th>";
 echo "					<th>Response</th>";
 echo "					<th>Compensating Controls</a></th>";
+echo "					<th>Compliance Exception</a></th>";
 echo "					<th><center>Regulator Status</center></a></th>";
 echo "				</tr>";
 echo "			</thead>";
@@ -113,6 +126,8 @@ echo "			<tbody>";
 		$compliance_management_item = lookup_compliance_management("compliance_management_item_id", $compliance_package_item_item[compliance_package_item_id]);
 		$lookup_response_id = lookup_compliance_response_strategy("compliance_response_strategy_id",$compliance_management_item[compliance_management_response_id]);
 		$lookup_status_id = lookup_compliance_status("compliance_status_id",$compliance_management_item[compliance_management_status_id]);
+		$applicable_security_services = array();
+		$applicable_security_services = list_compliance_item_security_services_join(" WHERE compliance_security_services_join_compliance_id = \"$compliance_package_item_item[compliance_package_item_id]\"");	
 
 echo "	<tr class=\"even\">";
 echo "		<td class=\"action-cell\">";
@@ -129,6 +144,12 @@ echo "			</div>";
 echo "		</td>";
 echo "			<td>$compliance_package_item_item[compliance_package_item_description]</td>";
 echo "			<td>$lookup_response_id[compliance_response_strategy_name]</td>";
+echo "			<td>";
+			foreach($applicable_security_services as $service_item) {
+				$security_services_details = lookup_security_services("security_services_id",$service_item[compliance_security_services_join_security_services_id]);	
+				echo "- <a href=\"$security_services_url&sort=$security_services_details[security_services_id]\">$security_services_details[security_services_name]<br></a>";
+			}
+echo "   </td>";
 echo "			<td></td>";
 echo "			<td>$lookup_status_id[compliance_status_name]</td>";
 echo "		</tr>";

@@ -13,14 +13,18 @@ function list_compliance_item_security_services_join($arguments) {
 	return $results;
 }
 
-function add_compliance_item_security_services_join($compliance_item_security_services_join_data) {
+function delete_compliance_item_security_services_join($compliance_security_services_join_compliance_id) {
+	$sql = "DELETE from compliance_security_services_join where compliance_security_services_join_compliance_id = \"$compliance_security_services_join_compliance_id\"";
+	$result = runUpdateQuery($sql);
+	return $result;
+}
+
+function add_compliance_item_security_services_join($compliance_management_item_id, $security_service_id) {
 	$sql = "INSERT INTO
-		compliance_item_security_services_join_tbl
+		compliance_security_services_join	
 		VALUES (
-		\"$compliance_item_security_services_join_data[compliance_item_security_services_join_id]\",
-		\"$compliance_item_security_services_join_data[compliance_item_security_services_join_name]\",
-		\"$compliance_item_security_services_join_data[compliance_item_security_services_join_description]\",
-		\"0\"
+		\"$compliance_management_item_id\",
+		\"$security_service_id\"
 		)
 		";	
 	$result = runUpdateQuery($sql);

@@ -53,7 +53,7 @@ echo "					<form name=\"risk_edit\" method=\"GET\" action=\"$base_url\">";
 						<select name="compliance_security_services_join_security_services_id[]" id="" class="" multiple="multiple">
 						<option value="-1">Select a Compensating Control...</option>
 <?
-	$pre_selected_security_services_list = list_compliance_item_security_services_join(" WHERE compliance_security_services_join_compliance_id = \"$compliance_management_item[compliance_management_id]\"");	
+	$pre_selected_security_services_list = list_compliance_item_security_services_join(" WHERE compliance_security_services_join_compliance_id = \"$compliance_management_item[compliance_management_item_id]\"");	
 	$pre_selected_items = array();
 
 	foreach($pre_selected_security_services_list as $pre_selected_security_services_item) {
