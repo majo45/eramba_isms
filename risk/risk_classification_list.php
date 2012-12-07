@@ -66,6 +66,9 @@
 
 	<section id="content-wrapper">
 		<h3>Asset Classification Scheme</h3>
+		<span class=description>As part of the process of managing Risks, the classification of them is a critical componenent to set clear priorities and leverage from the Risk analsys. Define your Risk classification criterias in a usefull way!
+		<br>
+		<br>
 		<div class="controls-wrapper">
 <?
 echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
@@ -97,7 +100,6 @@ echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
 		<table class="main-table">
 			<thead>
 				<tr>
-					<th class="col-center"><input type="checkbox" name="check-all" class="checkAll" /></th>
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 echo "					<th><a class=\"asc\" href=\"$base_url&sort=risk_classification_name\">Classification Name</a></th>";
@@ -119,7 +121,6 @@ echo "					<th><center><a href=\"$base_url&sort=risk_classification_value\">Valu
 
 	foreach($risk_classification_list as $risk_classification_item) {
 echo "				<tr class=\"even\">";
-echo "					<td class=\"col-center\"><input type=\"checkbox\" name=\"action\" class=\"check-elem\"/></td>";
 echo "					<td class=\"action-cell\">";
 echo "						<div class=\"cell-label\">";
 echo "							$risk_classification_item[risk_classification_name]";

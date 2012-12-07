@@ -66,6 +66,9 @@
 
 	<section id="content-wrapper">
 		<h3>Asset Classification Scheme</h3>
+		<span class=description>You'll be classifying assets very soon, it's very important you decide a classification method that fits you the best. Keep in mind it must be usefull! </span>
+		<br>
+		<br>
 		<div class="controls-wrapper">
 <?
 echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
@@ -80,7 +83,6 @@ echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
 					<span class="select-icon"></span>
 				</a>
 				<ul class="action-submenu">
-					<li><a href="#">Delete</a></li>
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 if ($action == "csv") {
@@ -97,7 +99,6 @@ echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
 		<table class="main-table">
 			<thead>
 				<tr>
-					<th class="col-center"><input type="checkbox" name="check-all" class="checkAll" /></th>
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 echo "					<th><a class=\"asc\" href=\"$base_url&sort=asset_classification_name\">Classification Name</a></th>";
@@ -119,7 +120,6 @@ echo "					<th><center><a href=\"$base_url&sort=asset_classification_value\">Val
 
 	foreach($asset_classification_list as $asset_classification_item) {
 echo "				<tr class=\"even\">";
-echo "					<td class=\"col-center\"><input type=\"checkbox\" name=\"action\" class=\"check-elem\"/></td>";
 echo "					<td class=\"action-cell\">";
 echo "						<div class=\"cell-label\">";
 echo "							$asset_classification_item[asset_classification_name]";

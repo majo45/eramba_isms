@@ -104,7 +104,9 @@
 
 	<section id="content-wrapper">
 		<h3>Security Services Reviews</h3>
-		
+		<span class=description>It's really important to keep Security Controls well audited in order to ensure any error or deviation is spotted out. It will provide inmediate  visibility of what other components of the program might be affected (Risks, Regulators, Compliance, Etc) and give plenty of work to your team.</span>
+		<br>
+		<br>
 	<div class="controls-wrapper">
 		
 			<div class="actions-wraper">

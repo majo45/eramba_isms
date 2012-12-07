@@ -86,7 +86,9 @@
 
 	<section id="content-wrapper">
 		<h3>Business Units</h3>
-		
+		<span class=description>Describing the organiational units and their main processes is a basic component on any Security Program. After all it might be a good idea to know what is that you are protecting!</span>
+		<br>
+		<br>
 		<div class="controls-wrapper">
 <?
 echo "			<a href=\"$base_url&action=edit_bu\" class=\"add-btn\">";
@@ -106,7 +108,6 @@ echo "			<a href=\"$base_url&action=edit_bu\" class=\"add-btn\">";
 					<span class="select-icon"></span>
 				</a>
 				<ul class="action-submenu">
-					<li><a href="#">Delete</a></li>
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 if ($action == "csv") {
@@ -144,7 +145,6 @@ echo "				</div>";
 echo "				<div class=\"content table\">";
 echo "					<table>";
 echo "						<tr>";
-echo "							<th><center><input type=\"checkbox\" name=\"check-all\" class=\"checkAll\" /></th>";
 echo "							<th>Process Name</th>";
 echo "							<th>Description</th>";
 echo "							<th><center>RTO</th>";
@@ -153,7 +153,6 @@ echo "						</tr>";
 	$process_list = list_process(" WHERE bu_id = $bu_item[bu_id] AND process_disabled = \"0\"");
 	foreach($process_list as $process_item) {
 echo "						<tr>";
-echo "							<td><center><input type=\"checkbox\" name=\"action\" class=\"check-elem\"/></td>";
 echo "							<td class=\"action-cell\">";
 echo "								<div class=\"cell-label\">";
 echo "								 	$process_item[process_name]";

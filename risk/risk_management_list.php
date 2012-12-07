@@ -167,7 +167,9 @@
 
 	<section id="content-wrapper">
 		<h3>Risk Management</h3>
-		
+		<span class=description>Identifying and analysing Risks can be usefull if executed in a simple and practical way.</span>
+		<br>
+		<br>
 		<div class="controls-wrapper">
 			
 			<div class="actions-wraper">

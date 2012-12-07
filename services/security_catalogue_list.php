@@ -138,7 +138,9 @@
 
 	<section id="content-wrapper">
 		<h3>Security Services Catalogue</h3>
-		
+		<span class=description>If Security Controls are one of the main deliverables of a Security Organization, it's highgly recommended to keep them well identified.</span>
+		<br>
+		<br>
 		<div class="controls-wrapper">
 <?
 echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";

@@ -57,6 +57,9 @@
 
 	<section id="content-wrapper">
 		<h3>Compliance Exception Management</h3>
+		<span class=description>Sometimes compliance is not possible and Compliance Exceptions are required in order to assess the impact of non-compliance.</span>
+		<br>
+		<br>
 		<span class="description">Blah</span>
 	<br>
 	<br>

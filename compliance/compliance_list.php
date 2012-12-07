@@ -125,6 +125,9 @@
 
 	<section id="content-wrapper">
 		<h3>Compliance Package Database</h3>
+		<span class=description>Most security organizations are subject to multiple compliances (or they set regulations to other partners). A key starting point in defining a Compliance Program is defining what exact regulations (compliance packages) and requirements (compliance packages items) your security program is subject to.</span>
+		<br>
+		<br>
 		<div class="controls-wrapper">
 <?
 echo "			<a href=\"$base_url&action=edit_compliance_package\" class=\"add-btn\">";

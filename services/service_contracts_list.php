@@ -68,7 +68,9 @@
 
 	<section id="content-wrapper">
 		<h3>Service Contracts</h3>
-		
+		<span class=description>Of particular importance for those Security Organizations with many controls and providers, keeping an inventory of support contracts is vital at the times of budget planning! </span>
+		<br>
+		<br>
 		<div class="controls-wrapper">
 			
 			<!--<a href="#" class="actions-btn">

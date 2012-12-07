@@ -97,6 +97,9 @@
 
 	<section id="content-wrapper">
 		<h3>Asset Identification</h3>
+		<span class=description>Build a list of significant assets for your security program.</span>
+		<br>
+		<br>
 		
 		<div class="controls-wrapper">
 <?
@@ -112,7 +115,6 @@ echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
 					<span class="select-icon"></span>
 				</a>
 				<ul class="action-submenu">
-					<li><a href="#">Delete</a></li>
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 if ($action == "csv") {

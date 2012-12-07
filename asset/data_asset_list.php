@@ -72,6 +72,9 @@
 
 	<section id="content-wrapper">
 		<h3>Data Asset Analysis</h3>
+		<span class=description>For those sensitive data assets, describe the process on how they are created, used, transmited and disposed in order to ensure correct controls are in place for each one of those phases of the lifecycle of an asset.</span>
+		<br>
+		<br>
 		
 		<div class="controls-wrapper">
 			
@@ -86,7 +89,6 @@
 					<span class="select-icon"></span>
 				</a>
 				<ul class="action-submenu">
-					<li><a href="#">Delete</a></li>
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 if ($action == "csv") {
@@ -119,7 +121,6 @@ echo "				</div>";
 echo "				<div class=\"content table\">";
 echo "					<table>";
 echo "						<tr>";
-echo "							<th><center><input type=\"checkbox\" name=\"check-all\" class=\"checkAll\" /></th>";
 echo "							<th>Data State</th>";
 echo "							<th>State Description</th>";
 echo "							<th>Applicable Security Controls</th>";
@@ -128,7 +129,6 @@ echo "						</tr>";
 	$data_asset_list = list_data_asset(" WHERE data_asset_asset_id = \"$asset_item[asset_id]\" AND data_asset_disabled = \"0\"");
 	foreach($data_asset_list as $data_asset_item) {
 echo "						<tr>";
-echo "							<td><center><input type=\"checkbox\" name=\"action\" class=\"check-elem\"/></td>";
 echo "							<td class=\"action-cell\">";
 echo "								<div class=\"cell-label\">";
 						$data_asset_status_name = lookup_data_asset_status("data_asset_status_id", $data_asset_item[data_asset_status_id]);

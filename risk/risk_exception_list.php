@@ -57,6 +57,9 @@
 
 	<section id="content-wrapper">
 		<h3>Risk Exception Management</h3>
+		<span class=description>Defining Risk Exceptions is one way to accept Risks when their mitigation is not viable.</span>
+		<br>
+		<br>
 		<div class="controls-wrapper">
 <?
 echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
@@ -88,7 +91,6 @@ echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
 		<table class="main-table">
 			<thead>
 				<tr>
-					<th class="col-center"><input type="checkbox" name="check-all" class="checkAll" /></th>
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 echo "					<th><a class=\"asc\" href=\"$base_url&sort=risk_exception_title\">Risk Exception Title</a></th>";
@@ -110,7 +112,6 @@ echo "					<th><center><a href=\"$base_url&sort=risk_exception_author\">Author</
 
 	foreach($risk_exception_list as $risk_exception_item) {
 echo "				<tr class=\"even\">";
-echo "					<td class=\"col-center\"><input type=\"checkbox\" name=\"action\" class=\"check-elem\"/></td>";
 echo "					<td class=\"action-cell\">";
 echo "						<div class=\"cell-label\">";
 echo "							$risk_exception_item[risk_exception_title]";

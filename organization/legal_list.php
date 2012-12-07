@@ -50,6 +50,9 @@
 
 	<section id="content-wrapper">
 		<h3>Legal Constrains</h3>
+		<span class=description>Most businesses deal with Legal requirement, either from customers, providers, regulators, etc. Compliance to this requirements is a good idea.</span>
+		<br>
+		<br>
 		<div class="controls-wrapper">
 <?
 echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
@@ -64,7 +67,6 @@ echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
 					<span class="select-icon"></span>
 				</a>
 				<ul class="action-submenu">
-					<li><a href="#">Delete</a></li>
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 if ($action == "csv") {
@@ -81,7 +83,6 @@ echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
 		<table class="main-table">
 			<thead>
 				<tr>
-					<th class="col-center"><input type="checkbox" name="check-all" class="checkAll" /></th>
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 echo "					<th><a class=\"asc\" href=\"$base_url&sort=legal_name\">Legal name</a></th>";
@@ -103,7 +104,6 @@ echo "					<th><a href=\"$base_url&sort=legal_description\">Description</a></th>
 
 	foreach($legal_list as $legal_item) {
 echo "				<tr class=\"even\">";
-echo "					<td class=\"col-center\"><input type=\"checkbox\" name=\"action\" class=\"check-elem\"/></td>";
 echo "					<td class=\"action-cell\">";
 echo "						<div class=\"cell-label\">";
 echo "							$legal_item[legal_name]";
