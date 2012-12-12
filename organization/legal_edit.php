@@ -55,7 +55,8 @@ echo "					<form name=\"legal_edit\" method=\"GET\" action=\"$base_url\">";
 				    <INPUT type="hidden" name="subsection" value="legal">
 <? echo " 			    <INPUT type=\"hidden\" name=\"legal_id\" value=\"$legal_item[legal_id]\">"; ?>
 
-			    <INPUT type="submit" value="Send"> 
+			<a>
+			    <INPUT type="submit" value="Submit" class="add-btn"> 
 			</a>
 			
 <?

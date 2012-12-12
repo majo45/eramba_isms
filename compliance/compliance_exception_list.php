@@ -37,7 +37,7 @@
 			'compliance_exception_author' => $compliance_exception_author,
 			'compliance_exception_status' => $compliance_exception_status
 		);	
-		add_compliance_exception($compliance_exception_update);
+		$compliance_exception_id = add_compliance_exception($compliance_exception_update);
 		add_system_records("compliance","compliance_exception","$compliance_exception_id","","Insert","");
 	}
 
@@ -60,9 +60,6 @@
 		<span class=description>Sometimes compliance is not possible and Compliance Exceptions are required in order to assess the impact of non-compliance.</span>
 		<br>
 		<br>
-		<span class="description">Blah</span>
-	<br>
-	<br>
 		<div class="controls-wrapper">
 <?
 echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";

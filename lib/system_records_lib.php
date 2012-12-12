@@ -31,6 +31,7 @@ function add_system_records($system_records_section, $system_records_subsection,
 		\"$system_records_time\"
 		)
 		";	
+
 	$result = runUpdateQuery($sql);
 	return $result;
 	

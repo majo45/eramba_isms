@@ -79,6 +79,8 @@ function show_menu_sub($section) {
 
 	if ($section == "system") {
 		echo "<li><a href=\"$base_url?section=system&subsection=system_records\">System Records</a></li>";
+		echo "<li><a href=\"$base_url?section=system&subsection=system_authorization\">Authorization</a></li>";
+		echo "<li><a href=\"$base_url?section=system&subsection=system_roles\">Roles</a></li>";
 	}
 }
 

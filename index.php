@@ -117,6 +117,20 @@ if ($section == "organization") {
 			include("system/system_records_list.php");
 		}
 	}
+	if ($subsection == "system_authorization") {
+		if ($action == "edit") {
+			include("system/system_authorization_edit.php");
+		} else { 
+			include("system/system_authorization_list.php");
+		}
+	}
+	if ($subsection == "system_roles") {
+		if ($action == "edit") {
+			include("system/system_roles_edit.php");
+		} else { 
+			include("system/system_roles_list.php");
+		}
+	}
 
 } elseif ($section == "compliance") {
 
@@ -148,7 +162,7 @@ if ($section == "organization") {
 	}
 	
 	if ($subsection == "compliance_exception") {
-		if ($action == "edit_compliance_exception") {
+		if ($action == "edit") {
 			include("compliance/compliance_exception_edit.php");
 		} else { 
 			include("compliance/compliance_exception_list.php");
