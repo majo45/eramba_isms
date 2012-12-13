@@ -37,7 +37,7 @@
 	$risk_exception_id = $_GET["risk_exception_id"];
 
 	$risk_periodicity_review = $_GET["risk_periodicity_review"];
-	if (!is_numeric($risk_periodicity_review)) {
+	if (!is_numeric($risk_periodicity_review) OR $risk_periodicity_review>12 OR $risk_periodicity_review<0) {
 		$risk_periodicity_review = 12;
 	}
 	$risk_residual_score = $_GET["risk_residual_score"];

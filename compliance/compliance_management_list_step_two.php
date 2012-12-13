@@ -4,6 +4,7 @@
 	include_once("lib/site_lib.php");
 	include_once("lib/system_records_lib.php");
 	include_once("lib/compliance_management_lib.php");
+	include_once("lib/compliance_exception_lib.php");
 	include_once("lib/compliance_package_lib.php");
 	include_once("lib/compliance_package_item_lib.php");
 	include_once("lib/compliance_response_strategy_lib.php");
@@ -19,6 +20,7 @@
 	
 	$base_url = build_base_url($section,$subsection);
 	$security_services_url = build_base_url("security_services","security_catalogue");
+	$compliance_exception_url = build_base_url("compliance","compliance_exception");
 	
 	# local variables - YOU MUST ADJUST THIS! 
 	$tp_id = $_GET["tp_id"];
@@ -26,30 +28,37 @@
 	$compliance_management_id = $_GET["compliance_management_id"];
 	$compliance_management_response_id = $_GET["compliance_management_response_id"];
 	$compliance_management_status_id = $_GET["compliance_management_status_id"];
+	$compliance_management_exception_id = $_GET["compliance_management_exception_id"];
 	$compliance_security_services_join_security_services_id = $_GET["compliance_security_services_join_security_services_id"];
 
 	#actions .. edit, update or disable - YOU MUST ADJUST THIS!
 	if ($action == "update" & is_numeric($compliance_management_id)) {
 		$compliance_management_update = array(
 			'compliance_management_response_id' => $compliance_management_response_id,
-			'compliance_management_status_id' => $compliance_management_status_id
+			'compliance_management_status_id' => $compliance_management_status_id,
+			'compliance_management_status_id' => $compliance_management_status_id,
+			'compliance_management_exception_id' => $compliance_management_exception_id
 		);	
 		update_compliance_management($compliance_management_update,$compliance_management_id);
 		add_system_records("compliance","compliance_management","$compliance_management_id","","Update","");
 
 		# remove all security services for this compliance management item and then add the ones i just got.
 		delete_compliance_item_security_services_join($compliance_management_item_id);
+
+		if (count($compliance_security_services_join_security_services_id)>0) {
 		foreach($compliance_security_services_join_security_services_id as $security_service_id) {
 			if ($security_service_id > 0) {
 			add_compliance_item_security_services_join($compliance_management_item_id, $security_service_id);
 			}
+		}
 		}
 
 	} elseif ($action == "update") {
 		$compliance_management_update = array(
 			'compliance_management_item_id' => $compliance_management_item_id,
 			'compliance_management_response_id' => $compliance_management_response_id,
-			'compliance_management_status_id' => $compliance_management_status_id
+			'compliance_management_status_id' => $compliance_management_status_id,
+			'compliance_management_exception_id' => $compliance_management_exception_id
 		);	
 		$compliance_management_id = add_compliance_management($compliance_management_update);
 		add_system_records("compliance","compliance_management","$compliance_management_id","","Insert","");
@@ -113,9 +122,9 @@ echo "				<tr>";
 echo "					<th>Item Name & Id</th>";
 echo "					<th>Item Description</th>";
 echo "					<th>Response</th>";
-echo "					<th>Compensating Controls</a></th>";
-echo "					<th>Compliance Exception</a></th>";
-echo "					<th><center>Regulator Status</center></a></th>";
+echo "					<th>Compensating Controls</th>";
+echo "					<th>Compliance Exception</th>";
+echo "					<th><center>Regulator Status</center></th>";
 echo "				</tr>";
 echo "			</thead>";
 echo "			<tbody>";
@@ -150,7 +159,8 @@ echo "			<td>";
 				echo "- <a href=\"$security_services_url&sort=$security_services_details[security_services_id]\">$security_services_details[security_services_name]<br></a>";
 			}
 echo "   </td>";
-echo "			<td></td>";
+			$exception_item = lookup_compliance_exception("compliance_exception_id",$compliance_management_item[compliance_management_exception_id]);
+echo "			<td><a href=\"$compliance_exception_url&sort=$compliance_management_item[compliance_management_exception_id]\">$exception_item[compliance_exception_title]</a></td>";
 echo "			<td>$lookup_status_id[compliance_status_name]</td>";
 echo "		</tr>";
 

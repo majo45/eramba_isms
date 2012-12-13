@@ -4,6 +4,7 @@
 	include_once("lib/security_services_lib.php");
 	include_once("lib/compliance_item_security_service_join_lib.php");
 	include_once("lib/compliance_management_lib.php");
+	include_once("lib/compliance_exception_lib.php");
 	include_once("lib/site_lib.php");
 	include_once("lib/compliance_response_strategy_lib.php");
 	include_once("lib/compliance_status_lib.php");
@@ -61,6 +62,16 @@ echo "					<form name=\"risk_edit\" method=\"GET\" action=\"$base_url\">";
 	}
 
 	list_drop_menu_security_services($pre_selected_items,"security_services_name");	
+?>
+						</select>
+						
+						<label for="legalType">Compliance Exception</label>
+						<span class="description">When no compensating control has been identified for this requirement, it's recomended to asociate a compliance exception</span>
+						<select name="compliance_management_exception_id" id="" class="">
+						<option value="-1">Select a Compensating Control...</option>
+<?
+
+			list_drop_menu_compliance_exception($compliance_management_item[compliance_management_exception_id],"compliance_exception_id");	
 ?>
 						</select>
 						

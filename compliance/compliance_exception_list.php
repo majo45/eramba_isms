@@ -105,6 +105,8 @@ echo "					<th><center><a href=\"$base_url&sort=compliance_exception_author\">Au
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 	if ($sort == "compliance_exception_title" OR $sort == "compliance_exception_description" OR $sort == "compliance_exception_author" OR $sort == "compliance_exception_status") {
 	$compliance_exception_list = list_compliance_exception(" WHERE compliance_exception_disabled = 0 ORDER by $sort");
+	} elseif (is_numeric($sort)) {
+	$compliance_exception_list = list_compliance_exception(" WHERE compliance_exception_disabled = 0 AND compliance_exception_id = \"$sort\" ORDER by $sort");
 	} else {
 	$compliance_exception_list = list_compliance_exception(" WHERE compliance_exception_disabled = 0 ORDER by compliance_exception_title");
 	}

@@ -19,7 +19,8 @@ function add_compliance_management($compliance_management_data) {
 		\"\",
 		\"$compliance_management_data[compliance_management_item_id]\",
 		\"$compliance_management_data[compliance_management_response_id]\",
-		\"$compliance_management_data[compliance_management_status_id]\"
+		\"$compliance_management_data[compliance_management_status_id]\",
+		\"$compliance_management_data[compliance_management_exception_id]\"
 		)
 		";	
 	$result = runUpdateQuery($sql);
@@ -31,10 +32,12 @@ function update_compliance_management($compliance_management_data, $compliance_m
 	$sql = "UPDATE compliance_management_tbl
 		SET
 		compliance_management_response_id=\"$compliance_management_data[compliance_management_response_id]\",
-		compliance_management_status_id=\"$compliance_management_data[compliance_management_status_id]\"
+		compliance_management_status_id=\"$compliance_management_data[compliance_management_status_id]\",
+		compliance_management_exception_id=\"$compliance_management_data[compliance_management_exception_id]\"
 		WHERE
 		compliance_management_id=\"$compliance_management_id\"
 		";	
+	echo "$sql";
 	$result = runUpdateQuery($sql);
 	return $result;
 }

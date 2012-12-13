@@ -43,13 +43,6 @@
 					<a href="tab1">General</a>
 					<span class="right"></span>
 				</li>
-				<li>
-<?
-#echo "					<a href=\"$base_url&action=edit&risk_id=$risk_item[risk_id]\">Classification</a>";
-?>
-					<a href="tab2">Classification</a>
-					<span class="right"></span>
-				</li>
 			</ul>
 			
 			<div class="tab-content">
