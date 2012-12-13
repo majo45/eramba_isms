@@ -84,6 +84,10 @@ if ($section == "organization") {
 
 } elseif ($section == "security_services") {
 	
+	if ($subsection == "dashboard") {
+		include("services/dashboard.php");
+	}
+	
 	if ($subsection == "security_catalogue") {
 		if ($action == "edit") {
 			include("services/security_catalogue_edit.php");
@@ -116,6 +120,9 @@ if ($section == "organization") {
 		} else { 
 			include("system/system_records_list.php");
 		}
+	}
+	if ($subsection == "system_authentication") {
+			include("system/system_authentication_edit.php");
 	}
 	if ($subsection == "system_authorization") {
 		if ($action == "edit") {

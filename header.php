@@ -1,5 +1,6 @@
 <?php
-include_once("lib/site_lib.php");
+	include_once("lib/site_lib.php");
+	$base_url = build_base_url("main","land_site");
 ?>
 
 <!DOCTYPE html>
@@ -105,11 +106,11 @@ echo "				<img src=\"img/profile-pic.png\" alt=\"Profile pic\"/>";
 			</div>-->
 
 			<div id="login-box">
-				<form name="login" method="POST" action="">
+				<form name="login" method="POST" action="<?echo "$base_url"?>">
 					<div class="login-form">
 						
-							<span>Login <input type="text" name="username" /></span>
-							<span>Password <input type="password" name="password" /></span>
+							<span>Login <input type="text" name="system_login" /></span>
+							<span>Password <input type="password" name="system_passwd" /></span>
 						
 					</div>
 						
@@ -123,12 +124,12 @@ echo "				<img src=\"img/profile-pic.png\" alt=\"Profile pic\"/>";
 	<section id="menu-wrapper">
 		<nav id="menu-top">
 			<ul id="menu-items">
-				<li><a href="?section=organization&category=NULL" <?php is_this_menu_active($_GET["section"], "organization")?>>Organization</a></li>
-				<li><a href="?section=asset&category=NULL" <?php is_this_menu_active($_GET["section"], "asset")?>>Asset Management</a></li>
-				<li><a href="?section=risk&category=NULL" <?php is_this_menu_active($_GET["section"], "risk")?>>Risk Management</a></li>
-				<li><a href="?section=security_services&category=NULL" <?php is_this_menu_active($_GET["section"], "security_services")?>>Security Services</a></li>
-				<li><a href="?section=compliance&category=NULL" <?php is_this_menu_active($_GET["section"], "compliance")?>>Compliance</a></li>
-				<li><a href="?section=system&category=system_records" <?php is_this_menu_active($_GET["section"], "system")?>>System</a></li>
+				<li><a href="?section=organization&subsection=dashboard" <?php is_this_menu_active($_GET["section"], "organization")?>>Organization</a></li>
+				<li><a href="?section=asset&subsection=dashboard" <?php is_this_menu_active($_GET["section"], "asset")?>>Asset Management</a></li>
+				<li><a href="?section=risk&subsection=dashboard" <?php is_this_menu_active($_GET["section"], "risk")?>>Risk Management</a></li>
+				<li><a href="?section=security_services&subsection=dashboard" <?php is_this_menu_active($_GET["section"], "security_services")?>>Security Services</a></li>
+				<li><a href="?section=compliance&subsection=dashboard" <?php is_this_menu_active($_GET["section"], "compliance")?>>Compliance</a></li>
+				<li><a href="?section=system&subsection=system_records" <?php is_this_menu_active($_GET["section"], "system")?>>System</a></li>
 			</ul>
 			
 		</nav>

@@ -1,5 +1,6 @@
 <?
 	include_once("lib/system_users_lib.php");
+	include_once("lib/system_conf_pwd_lib.php");
 	include_once("lib/site_lib.php");
 	include_once("lib/system_records_lib.php");
 	include_once("lib/system_users_lib.php");
@@ -19,6 +20,7 @@
 	$system_users_surname = $_GET["system_users_surname"];
 	$system_users_group_role_id = $_GET["system_users_group_role_id"];
 	$system_users_login = $_GET["system_users_login"];
+	$system_conf_admin_pwd = $_GET["system_conf_admin_pwd"];
 	$system_users_disabled = $_GET["system_users_disabled"];
 	 
 	#actions .. edit, update or disable - YOU MUST ADJUST THIS!
@@ -31,6 +33,16 @@
 		);	
 		update_system_users($system_users_update,$system_users_id);
 		add_system_records("organization","system_users","$system_users_id","","Update","");
+
+		# now i have to update his SHA1 password
+		$time = time();
+		$system_conf_pwd = array(
+			'system_conf_timestamp' => $time,
+			'system_conf_login_id' => $system_users_id,
+			'system_conf_pwd' => $system_conf_admin_pwd
+		);	
+		add_system_conf_pwd($system_conf_pwd);
+
 	} elseif ($action == "update") {
 		$system_users_update = array(
 			'system_users_name' => $system_users_name,
