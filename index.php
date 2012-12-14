@@ -177,6 +177,17 @@ if ($section == "organization") {
 			include("compliance/compliance_exception_list.php");
 		}
 	}
+
+} elseif ($section == "operations") {
+	
+	if ($subsection == "project_improvements") {
+		if ($action == "edit") {
+			include("operations/project_improvements_list.php");
+		} else { 
+			include("operations/project_improvements_edit.php");
+		}
+	}
+
 }
 
 include_once("footer.php");

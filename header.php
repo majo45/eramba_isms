@@ -129,6 +129,7 @@ echo "				<img src=\"img/profile-pic.png\" alt=\"Profile pic\"/>";
 				<li><a href="?section=risk&subsection=dashboard" <?php is_this_menu_active($_GET["section"], "risk")?>>Risk Management</a></li>
 				<li><a href="?section=security_services&subsection=dashboard" <?php is_this_menu_active($_GET["section"], "security_services")?>>Security Services</a></li>
 				<li><a href="?section=compliance&subsection=dashboard" <?php is_this_menu_active($_GET["section"], "compliance")?>>Compliance</a></li>
+				<li><a href="?section=operations&subsection=dashboard" <?php is_this_menu_active($_GET["section"], "operations")?>>Security Operations</a></li>
 				<li><a href="?section=system&subsection=dashboard" <?php is_this_menu_active($_GET["section"], "system")?>>System</a></li>
 			</ul>
 			

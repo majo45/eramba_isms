@@ -77,6 +77,10 @@ function show_menu_sub($section) {
 		echo "<li><a href=\"$base_url?section=compliance&subsection=compliance_exception\">Compliance Exception</a></li>";
 	}
 
+	if ($section == "operations") {
+		echo "<li><a href=\"$base_url?section=operations&subsection=project_improvements\">Improvement Projects</a></li>";
+	}
+
 	if ($section == "system") {
 		echo "<li><a href=\"$base_url?section=system&subsection=system_records\">System Records</a></li>";
 		echo "<li><a href=\"$base_url?section=system&subsection=system_authorization\">Authorization</a></li>";
