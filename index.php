@@ -182,9 +182,9 @@ if ($section == "organization") {
 	
 	if ($subsection == "project_improvements") {
 		if ($action == "edit") {
-			include("operations/project_improvements_list.php");
-		} else { 
 			include("operations/project_improvements_edit.php");
+		} else { 
+			include("operations/project_improvements_list.php");
 		}
 	}
 
