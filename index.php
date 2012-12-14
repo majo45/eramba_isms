@@ -159,6 +159,8 @@ if ($section == "organization") {
 			include("compliance/compliance_management_list.php");
 		} elseif ($action == "start_compliance_management") {
 			include("compliance/compliance_management_list_step_two.php");
+		} elseif ($action == "csv") {
+			include("compliance/compliance_management_list_step_two.php");
 		} elseif ($action == "edit") {
 			include("compliance/compliance_management_edit.php");
 		} elseif ($action == "update") {

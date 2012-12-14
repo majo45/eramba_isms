@@ -119,6 +119,12 @@
 echo "					<li><a href=\"$base_url&sort=this_month\">This Month Audits</a></li>";
 echo "					<li><a href=\"$base_url&sort=future_months\">Comming Audits</a></li>";
 echo "					<li><a href=\"$base_url&sort=past_months\">Past Audits</a></li>";
+# -------- TEMPLATE! YOU MUST ADJUST THIS ------------
+if ($action == "csv") {
+echo "					<li><a href=\"downloads/security_services_audit_export.csv\">Dowload</a></li>";
+} else { 
+echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
+}
 ?>
 				</ul>
 			</div>

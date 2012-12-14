@@ -1,4 +1,0 @@
-risk_exception_id,risk_exception_title,risk_exception_description,risk_exception_author, risk_exception_status,risk_exception_disabled
-1,Mac OS End-Point Security,We have decided not to invest heavily in the integration of OS systems into the end-point security controls (AD, AV, Patching, Etc) given the cost and the excellent security baseline OS provides.,adriana.ribicic,0,1
-2,CCTV Coverage,We have not covered %100 of the space give the cost asociated.,esteban.ribicic,0,1
-3,test,Test,esteban.ribicic,0,1

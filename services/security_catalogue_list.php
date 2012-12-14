@@ -1,7 +1,6 @@
 <?
 	include_once("lib/bu_lib.php");
 	include_once("lib/asset_lib.php");
-	include_once("lib/legal_lib.php");
 	include_once("lib/asset_classification_lib.php");
 	include_once("lib/asset_type_lib.php");
 	include_once("lib/site_lib.php");
@@ -158,7 +157,7 @@ echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 if ($action == "csv") {
-echo "					<li><a href=\"downloads/legal_export.csv\">Dowload</a></li>";
+echo "					<li><a href=\"downloads/security_services_export.csv\">Dowload</a></li>";
 } else { 
 echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
 }

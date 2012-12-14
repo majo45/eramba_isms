@@ -1,0 +1,4 @@
+compliance_package_original_id,compliance_package_name,compliance_package_description,compliance_package_item_original_id,compliance_package_item_name,compliance_package_item_description,compliance_management_response_id,mitigation_controls_name,compliance_exception_name,compliance_management_status_id
+3,Network controls, Network controls to secure acess thorug networks.,3.1, Firewalls, How firewalls are deployed, Not Applicable,,Test 2,On-Going
+3,Network controls, Network controls to secure acess thorug networks.,3.1, Network Access, how access is limited, Mitigate,CCTV - Laminar - Physical Doors Controls - ,Test Non-compliance,On-Going
+4,Logical Access controls, not phsical but logical,4.1, Unique User Id's, for all employees, Mitigate,Regular WebApp Scanning - Int - Test Service - ,,On-Going

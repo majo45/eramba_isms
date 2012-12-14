@@ -213,8 +213,9 @@ foreach($result as $line) {
 	$status_name = lookup_security_services_audit_status("security_services_audit_status_id",$line[security_services_audit_status]); 	
 	$result_name = lookup_security_services_audit_result("security_services_audit_result_id",$line[security_services_audit_result]);	
 	$service_name = lookup_security_services("security_services_id",$line[security_services_audit_security_service_id]);	
+	$planned_execution = lookup_security_services_audit_calendar("security_services_audit_calendar_id", $line[security_services_audit_calendar_id]); 
 			
-	fwrite($handler,"$line[security_services_audit_id],$service_name,$status_name,$planned_execution,$line[security_services_audit_metric],$line[security_services_audit_criteria], $line[security_services_audit_start_audit_date],$line[security_services_audit_end_audit_date],$line[security_services_audit_auditor],$line[security_services_audit_result],$line[security_services_audit_result_description],$line[security_services_audit_disabled]\n");
+	fwrite($handler,"$line[security_services_audit_id],$service_name[security_services_name],$status_name[security_services_audit_status_name],$planned_execution[security_services_audit_calendar_name],$line[security_services_audit_metric],$line[security_services_audit_criteria], $line[security_services_audit_start_audit_date],$line[security_services_audit_end_audit_date],$line[security_services_audit_auditor],$result_name[security_services_audit_result_name],$line[security_services_audit_result_description],$line[security_services_audit_disabled]\n");
 
 	}
 	

@@ -65,7 +65,7 @@
 	}
 
 	if ($action == "csv") {
-		export_tp_csv();
+		export_compliance_management_csv($tp_id);
 		add_system_records("organization","tp","$tp_id","","Export","");
 	}
 
@@ -92,9 +92,9 @@
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 if ($action == "csv") {
-echo "					<li><a href=\"downloads/tp_export.csv\">Dowload</a></li>";
+echo "					<li><a href=\"downloads/compliance_management_export.csv\">Dowload</a></li>";
 } else { 
-echo "					<li><a href=\"$base_url&action=csv\">Export</a></li>";
+echo "					<li><a href=\"$base_url&action=csv&tp_id=$tp_id\">Export</a></li>";
 }
 ?>
 				</ul>

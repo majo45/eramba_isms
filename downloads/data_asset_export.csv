@@ -1,6 +1,0 @@
-data_asset_id,data_asset_name,data_asset_status,data_asset_status_description,security_controls,data_asset_disabled
-2,Financial Data,Created,jamon,Regular WebApp Scanning - Int,1
-3,,,perra,Regular WebApp Scanning - Int,0
-4,Financial Data,Deleted,perra,Regular WebApp Scanning - Int;CCTV - Laminar;Physical Doors Controls;Regular WebApp Scanning - Int,1
-5,Financial Data,Tainted / Broken,ni diea,Regular WebApp Scanning - Int;CCTV - Laminar;Physical Doors Controls;Regular WebApp Scanning - Int,1
-6,Financial Data,Tainted / Broken,ni diea,Regular WebApp Scanning - Int;CCTV - Laminar;Physical Doors Controls;Regular WebApp Scanning - Int;Physical Doors Controls,1

@@ -123,9 +123,9 @@ function export_compliance_exception_csv() {
 	$export_file = "downloads/compliance_exception_export.csv";
 	$handler = fopen($export_file, 'w');
 	
-	fwrite($handler, "compliance_exception_id,compliance_exception_title,compliance_exception_description,compliance_exception_author, compliance_exception_status,compliance_exception_disabled\n");
+	fwrite($handler, "compliance_exception_id,compliance_exception_title,compliance_exception_description,compliance_exception_author, compliance_exception_disabled\n");
 	foreach($result as $line) {
-		fwrite($handler,"$line[compliance_exception_id],$line[compliance_exception_title],$line[compliance_exception_description],$line[compliance_exception_author],$line[compliance_exception_status],$line[compliance_exception_disabled]\n");
+		fwrite($handler,"$line[compliance_exception_id],$line[compliance_exception_title],$line[compliance_exception_description],$line[compliance_exception_author],$line[compliance_exception_disabled]\n");
 	}
 	
 	fclose($handler);

@@ -135,11 +135,12 @@ function export_security_services_csv() {
 	$handler = fopen($export_file, 'w');
 	
 	fwrite($handler, "security_services_id,security_services_name,security_services_objective,security_services_documentation_url,security_services_status,security_services_audit_metric,security_services_audit_success_criteria,security_services_audit_periodicity,security_services_cost_opex,security_services_cost_capex,security_services_cost_operational_resource,security_services_disabled\n");
+
 	foreach($result as $line) {
 
-		$status_name = lookup_security_services_status("security_services_status_id", $security_services_item[security_services_status]);	
+		$status_name = lookup_security_services_status("security_services_status_id", $line[security_services_status]);	
 
-		fwrite($handler,"$line[security_services_id],$line[security_services_name],$line[security_services_objective],$line[security_services_documentation_url],$status_name,$line[security_services_audit_metric],$line[security_services_audit_success_criteria],$line[security_services_audit_periodicity],$line[security_services_cost_opex],$line[security_services_cost_capex],$line[security_services_cost_operational_resource],$line[security_services_disabled]\n");
+		fwrite($handler,"$line[security_services_id],$line[security_services_name],$line[security_services_objective],$line[security_services_documentation_url],$status_name[security_services_status_name],$line[security_services_audit_metric],$line[security_services_audit_success_criteria],$line[security_services_audit_periodicity],$line[security_services_cost_opex],$line[security_services_cost_capex],$line[security_services_cost_operational_resource],$line[security_services_disabled]\n");
 	}
 	
 	fclose($handler);

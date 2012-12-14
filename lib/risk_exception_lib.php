@@ -123,9 +123,14 @@ function export_risk_exception_csv() {
 	$export_file = "downloads/risk_exception_export.csv";
 	$handler = fopen($export_file, 'w');
 	
-	fwrite($handler, "risk_exception_id,risk_exception_title,risk_exception_description,risk_exception_author, risk_exception_status,risk_exception_disabled\n");
+	fwrite($handler, "risk_exception_id,risk_exception_title,risk_exception_description,risk_exception_author, risk_exception_disabled\n");
+
 	foreach($result as $line) {
-		fwrite($handler,"$line[risk_exception_id],$line[risk_exception_title],$line[risk_exception_description],$line[risk_exception_author],$line[risk_exception_status],$line[risk_exception_disabled]\n");
+		
+		# $risk_exception_status = lookup_risk_exception("risk_exception_id", $line[risk_exception_status]); 
+
+		fwrite($handler,"$line[risk_exception_id],$line[risk_exception_title],$line[risk_exception_description],$line[risk_exception_author],$line[risk_exception_disabled]\n");
+
 	}
 	
 	fclose($handler);
