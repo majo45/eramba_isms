@@ -55,7 +55,8 @@ echo "					<form name=\"compliance_package_edit\" method=\"POST\" action=\"$base
 				    <INPUT type="hidden" name="section" value="compliance">
 				    <INPUT type="hidden" name="subsection" value="compliance_package">
 
-			    <INPUT type="submit" value="Send"> 
+			<a>
+			    <INPUT type="submit" value="Submit" class="add-btn"> 
 			</a>
 			
 <?

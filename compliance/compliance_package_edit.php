@@ -14,7 +14,6 @@
 
 	if (is_numeric($compliance_package_id)) {
 		$compliance_package_item = lookup_compliance_package("compliance_package_id",$compliance_package_id);
-		echo "Mam: $compliance_package_item[compliance_package_tp_id]";
 	}
 	
 ?>
@@ -77,7 +76,8 @@ echo "					<form name=\"compliance_package_edit\" method=\"GET\" action=\"$base_
 
  ?>
 
-			    <INPUT type="submit" value="Send"> 
+			<a>
+			    <INPUT type="submit" value="Submit" class="add-btn"> 
 			</a>
 			
 <?

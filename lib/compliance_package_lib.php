@@ -146,7 +146,7 @@ function export_compliance_package_csv() {
 
 }
 
-function parse_compliance_package_csv($filename) {
+function parse_compliance_package_csv($filename,$tp_id) {
 
 	# just make sure you can read the tmp file
 	$file_handle = fopen($filename, "r");
@@ -155,6 +155,29 @@ function parse_compliance_package_csv($filename) {
 	}
 
 	# right .. now parse it and create the structure in the db
+	while (($data = fgetcsv($file_handle, 1000)) !== FALSE) {
+
+		echo "$data[0][0]<br>";
+		echo "$data[1][0]<br>";
+
+		# first i need to add a compliance package
+		$compliance_package_update = array(
+			'compliance_package_tp_id' => $tp_id,
+			'compliance_package_original_id' => $data[0],
+			'compliance_package_name' => $data[1],
+			'compliance_package_description' => $data[2]
+		);	
+		$compliance_package_id = add_compliance_package($compliance_package_update);
+
+		# then i need to add a compliance_package_item
+		$compliance_package_item_update = array(
+			'compliance_package_id' => $compliance_package_id,
+			'compliance_package_item_original_id' => $data[3],
+			'compliance_package_item_name' => $data[4],
+			'compliance_package_item_description' => $data[5]
+		);	
+		$compliance_package_item_id = add_compliance_package_item($compliance_package_item_update);
+	}
 
 	fclose($file_handle);
 

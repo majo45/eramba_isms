@@ -60,7 +60,7 @@
 		$uploaded_file = $_FILES['compliance_package_csv_file']['tmp_name'];
 		
 		# send this csv for parsing ..
-		parse_compliance_package_csv($uploaded_file);
+		parse_compliance_package_csv($uploaded_file,$tp_id);
 
 	}
 	 
@@ -147,7 +147,6 @@ echo "			<a href=\"$base_url&action=edit_compliance_package\" class=\"add-btn\">
 if ($action == "csv") {
 echo "					<li><a href=\"downloads/compliance_package_export.csv\">Dowload</a></li>";
 } else { 
-echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
 echo "					<li><a href=\"$base_url&action=show_upload_form\">Upload</a></li>";
 }
 ?>
