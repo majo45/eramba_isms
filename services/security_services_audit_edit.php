@@ -32,13 +32,6 @@
 					<a href="tab1">General</a>
 					<span class="right"></span>
 				</li>
-				<li>
-<?
-#echo "					<a href=\"$base_url&action=edit&audit_id=$audit_item[audit_id]\">Classification</a>";
-?>
-					<a href="tab2">Classification</a>
-					<span class="right"></span>
-				</li>
 			</ul>
 			
 			<div class="tab-content">
