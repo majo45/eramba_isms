@@ -95,16 +95,16 @@ echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/chosen.css\" />";
 			<a href="/" id="logo">
 				<img src="img/logo.png" alt="Admin logo" />
 			</a>
-			<!--<div id="user-box">
+			<div id="user-box">
 				<div id="user-links">
-					<a href="#" id="user-profile">Esteban Ribicic</a>
-					<a href="#" id="user-sign-out">Sign out</a>
+					<a href="#" id="user-profile"><?php echo $logged_user_data['system_users_name'] . ' ' . $logged_user_data['system_users_surname']; ?></a>
+					<a href="?logout=1" id="user-sign-out">Sign out</a>
 				</div>
 <?php
 echo "				<img src=\"img/profile-pic.png\" alt=\"Profile pic\"/>";
 ?>
-			</div>-->
-
+			</div>
+<!--
 			<div id="login-box">
 				<form name="login" method="POST" action="<?echo "$base_url"?>">
 					<div class="login-form">
@@ -117,20 +117,22 @@ echo "				<img src=\"img/profile-pic.png\" alt=\"Profile pic\"/>";
 					<input type="submit" class="login-button" value="Log in" />
 				</form>
 			</div>
-
+-->
 
 		</div>
 	</section>
 	<section id="menu-wrapper">
 		<nav id="menu-top">
+
 			<ul id="menu-items">
-				<li><a href="?section=organization&subsection=dashboard" <?php is_this_menu_active($_GET["section"], "organization")?>>Organization</a></li>
+				<?php show_menu_main(); ?>
+				<!--<li><a href="?section=organization&subsection=dashboard" <?php is_this_menu_active($_GET["section"], "organization")?>>Organization</a></li>
 				<li><a href="?section=asset&subsection=dashboard" <?php is_this_menu_active($_GET["section"], "asset")?>>Asset Management</a></li>
 				<li><a href="?section=risk&subsection=dashboard" <?php is_this_menu_active($_GET["section"], "risk")?>>Risk Management</a></li>
 				<li><a href="?section=security_services&subsection=dashboard" <?php is_this_menu_active($_GET["section"], "security_services")?>>Security Services</a></li>
 				<li><a href="?section=compliance&subsection=dashboard" <?php is_this_menu_active($_GET["section"], "compliance")?>>Compliance</a></li>
 				<li><a href="?section=operations&subsection=dashboard" <?php is_this_menu_active($_GET["section"], "operations")?>>Security Operations</a></li>
-				<li><a href="?section=system&subsection=dashboard" <?php is_this_menu_active($_GET["section"], "system")?>>System</a></li>
+				<li><a href="?section=system&subsection=dashboard" <?php is_this_menu_active($_GET["section"], "system")?>>System</a></li>-->
 			</ul>
 			
 		</nav>

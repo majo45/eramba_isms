@@ -45,8 +45,55 @@ function check_valid_date($date) {
 	return;
 }
 
+/* <li><a href="?section=organization&subsection=dashboard" <?php is_this_menu_active($_GET["section"], "organization")?>>Organization</a></li> */
+function show_menu_main() {
+	$user_access = getUserAccess();
+
+	$query = "SELECT * FROM `system_authorization_tbl` WHERE `system_authorization_action_type`='r' ORDER BY `system_authorization_section_cute_name`";
+
+	$result = mysql_query($query);
+	if (!$result) {
+		die("Invalid query (runQuery) ($query): " . mysql_error());
+	}
+
+	if (mysql_num_rows($result) > 0) {
+		$used_section = '';
+		while($row = mysql_fetch_assoc($result)) {
+
+			if ($used_section != $row['system_authorization_section_name']) {
+				if ( (!is_array($user_access) && $user_access == 'admin') || (is_array($user_access) && in_array($row['system_authorization_id'], $user_access)) ) {
+					echo '<li><a href="?section='.$row['system_authorization_section_name'].'&subsection=dashboard" ' . (is_this_menu_active($_GET["section"], $row['system_authorization_section_name'])) . '>'.$row['system_authorization_section_cute_name'].'</a></li>';
+					$used_section = $row['system_authorization_section_name'];
+				}
+			}
+		}
+	}
+
+}
+
 function show_menu_sub($section) {
+
+	$user_access = getUserAccess();
 	
+	$query = "SELECT * FROM `system_authorization_tbl` WHERE `system_authorization_section_name`='" . $section . "' AND `system_authorization_action_name`='list'";
+
+	$result = mysql_query($query);
+	if (!$result) {
+		die("Invalid query (runQuery) ($query): " . mysql_error());
+	}
+	
+	//$sub_menu = array();
+
+	if (mysql_num_rows($result) > 0) {
+		while($row = mysql_fetch_assoc($result)) {
+			if ( (!is_array($user_access) && $user_access == 'admin') || (is_array($user_access) && in_array($row['system_authorization_id'], $user_access)) ) {
+				echo "<li><a href=\"$base_url?section=" . $section . "&subsection=" . $row['system_authorization_subsection_name'] . "\">" . $row['system_authorization_subsection_cute_name'] . "</a></li>";
+			}
+		}
+	}
+
+	//var_dump($sub_menu);
+	/*
 	if ($section == "organization") {
 		echo "<li><a href=\"$base_url?section=organization&subsection=bu\">Bussiness Units</a></li>";
 		echo "<li><a href=\"$base_url?section=organization&subsection=legal\">Legal</a></li>";
@@ -86,12 +133,13 @@ function show_menu_sub($section) {
 		echo "<li><a href=\"$base_url?section=system&subsection=system_authorization\">Authorization</a></li>";
 		echo "<li><a href=\"$base_url?section=system&subsection=system_roles\">Roles</a></li>";
 	}
+	*/
 }
 
 function is_this_menu_active($section_received, $section) {
 	
 	if ($section_received == $section) {
-		echo "class=\"active\"";	
+		return "class=\"active\"";	
 	}
 	return;
 }
@@ -109,6 +157,64 @@ function shorten_string($string, $limit = 100) {
 
 function local_domain() {
 	return "".$_SERVER["SERVER_NAME"]."/isms_v2";
+}
+
+/**
+ * Reads data from database about what file needs to be included
+ * @return [type] [description]
+ */
+function include_from_db($section = null, $subsection = 'dashboard', $action = 'list') {
+	if ( $action == 'update' )
+		$action = 'list';
+
+	$query = runSmallQuery( 
+		"SELECT * FROM `system_authorization_tbl` WHERE 
+		`system_authorization_section_name`='" . $section . "' AND 
+		`system_authorization_subsection_name`='" . $subsection . "' AND 
+		`system_authorization_action_name`='" . $action . "' AND 
+		`system_authorization_disabled`=0" 
+	);
+
+	echo '<pre>';
+	//print_r($query);
+	echo '</pre>';
+	
+	$user_access = getUserAccess();
+
+	if ( (!is_array($user_access) && $user_access == 'admin') || (is_array($user_access) && in_array($query['system_authorization_id'], $user_access)) ) {
+		include_once( $query['system_authorization_target_url'] );
+	}
+	else if ($subsection != "dashboard") {
+		include_once( 'tpl/permissions_error.php' );
+	}
+}
+
+
+function getUserAccess() {
+	$logged_user_data = runSmallQuery( 
+		"SELECT * FROM `system_users_tbl` WHERE 
+		`system_users_id`='" . $_SESSION['logged_user_id'] . "'"
+	);
+
+	if ( $logged_user_data['system_users_group_role_id'] == -1 ) {
+		return 'admin';
+	}
+
+	$query = "SELECT `system_authorization_group_auth_id` FROM `system_authorization_group_role_join` WHERE `system_authorization_group_role_role_id`='" . $logged_user_data['system_users_group_role_id'] . "'";
+
+	$result = mysql_query($query);
+	if (!$result) {
+		die("Invalid query (runQuery) ($query): " . mysql_error());
+	}
+	
+	$system_authorization_roles = array();
+
+	if (mysql_num_rows($result) > 0) {
+		while($row = mysql_fetch_assoc($result)) 
+		array_push($system_authorization_roles, $row['system_authorization_group_auth_id']);
+	}
+
+	return $system_authorization_roles;
 }
 
 ?>
