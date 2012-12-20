@@ -22,6 +22,9 @@
 	<section id="content-wrapper">
 		<h3>Edit or Create a Group Role</h3>
 		<span class="description">Group permissions and give them a name ... you will need this to ensure the right level of access to the system users.</span>
+		<?
+echo "					<form name=\"system_group_role_edit\" method=\"GET\" action=\"$base_url\">";
+?>
 		<div class="tab-wrapper"> 
 			<ul class="tabs">
 				<li class="first active">
@@ -32,9 +35,7 @@
 			
 			<div class="tab-content">
 				<div class="tab" id="tab1">
-<?
-echo "					<form name=\"system_group_role_edit\" method=\"GET\" action=\"$base_url\">";
-?>
+
 						<label for="name">Name</label>
 						<span class="description">Give a name to the system_group_role constrain. Examples: Data Privacy Regulations, Customer Contractual Agreements, Etc. </span>
 <? echo "						<input type=\"text\" name=\"system_group_role_name\" id=\"system_group_role_name\" value=\"$system_group_role_item[system_group_role_name]\"/>";?>
@@ -83,9 +84,9 @@ echo "					<form name=\"system_group_role_edit\" method=\"GET\" action=\"$base_u
 				    <INPUT type="hidden" name="action" value="update">
 				    <INPUT type="hidden" name="section" value="system">
 				    <INPUT type="hidden" name="subsection" value="system_roles">
-<? echo " 			    <INPUT type=\"hidden\" name=\"system_group_role_id\" value=\"$system_group_role_item[system_group_role_id]\">"; ?>
+<? echo " 			<INPUT type=\"hidden\" name=\"system_group_role_id\" value=\"$system_group_role_item[system_group_role_id]\">"; ?>
 
-		<a>
+			<a>
 			    <INPUT type="submit" value="Submit" class="add-btn"> 
 			</a>
 			
@@ -95,9 +96,9 @@ echo "			<a href=\"$base_url\" class=\"cancel-btn\">";
 				Cancel
 				<span class="select-icon"></span>
 			</a>
-					</form>
+			
 		</div>
-		
+		</form>
 		<br class="clear"/>
 		
 	</section>

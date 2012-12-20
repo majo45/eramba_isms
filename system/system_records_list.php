@@ -90,10 +90,15 @@ echo "					<th><a href=\"$base_url&sort=NULL\"></a>Notes</th>";
 			<tbody>
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
+
+$page_limit = 40;
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$page_offset = ($page-1)*$page_limit;
+
 	if ($sort == "system_records_description" OR $sort == "system_records_section" OR $sort == "system_records_action" OR $sort == "system_records_author") {
-	$system_records_list = list_system_records(" $speficic_query ORDER by $sort");
+	$system_records_list = list_system_records(" $speficic_query ORDER by $sort LIMIT {$page_limit} OFFSET {$page_offset}");
 	} else {
-	$system_records_list = list_system_records(" $specific_query ORDER by system_records_date DESC");
+	$system_records_list = list_system_records(" $specific_query ORDER by system_records_date DESC LIMIT {$page_limit} OFFSET {$page_offset}");
 	}
 
 	foreach($system_records_list as $system_records_item) {
@@ -109,7 +114,52 @@ echo "				</tr>";
 ?>
 			</tbody>
 		</table>
-		
+
+		<?php 
+			$count_system_records_list = count(list_system_records(" $specific_query"));
+			$count_pages = ceil($count_system_records_list/$page_limit);
+		?>
+
 		<br class="clear"/>
-		
+		<div class="table-tools table-tools-bottom">
+			<div class="paginator">
+
+				<?php if ($page > 1) : ?>
+				<span class="prev-btn">
+					<a href="<?php echo $base_url; ?>&page=<?php echo $page-1; ?>" rel="prev"> </a>
+				</span>
+				<?php endif; ?>
+
+				<span class="page-numbers">
+					<?php if ($page > 2) : ?>
+					<span><a href="<?php echo $base_url; ?>&page=1">1</a></span>
+					<span> ... </span>
+					<?php endif; ?>
+
+					<?php if ($page != 1) : ?>
+					<span><a href="<?php echo $base_url; ?>&page=<?php echo $page-1; ?>"><?php echo $page-1; ?></a></span>
+					<?php endif; ?>
+
+					<span class="current"><?php echo $page; ?></span>
+
+					<?php if ($page != $count_pages) : ?>
+					<span><a href="<?php echo $base_url; ?>&page=<?php echo $page+1; ?>"><?php echo $page+1; ?></a></span>	
+					<?php endif; ?>
+
+					<?php if ($page < $count_pages-1) : ?>
+					<span> ... </span>
+					<span><a href="<?php echo $base_url; ?>&page=<?php echo $count_pages; ?>"><?php echo $count_pages; ?></a></span>
+					<?php endif; ?>
+				</span>
+
+				
+
+				<?php if ($page < $count_pages) : ?>
+				<span class="next-btn">
+					<a href="<?php echo $base_url; ?>&page=<?php echo $page+1; ?>" rel="next"> </a>
+				</span>
+				<?php endif; ?>
+
+			</div>
+		</div>
 	</section>
