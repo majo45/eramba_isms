@@ -167,6 +167,7 @@ function include_from_db($section = null, $subsection = 'dashboard', $action = '
 	if ( $action == 'update' )
 		$action = 'list';
 
+
 	$query = runSmallQuery( 
 		"SELECT * FROM `system_authorization_tbl` WHERE 
 		`system_authorization_section_name`='" . $section . "' AND 
@@ -181,7 +182,10 @@ function include_from_db($section = null, $subsection = 'dashboard', $action = '
 	
 	$user_access = getUserAccess();
 
-	if ( (!is_array($user_access) && $user_access == 'admin') || (is_array($user_access) && in_array($query['system_authorization_id'], $user_access)) ) {
+	if ( $section == null ) {
+		include_once( 'default_landpage.php' );
+	}
+	else if ( (!is_array($user_access) && $user_access == 'admin') || (is_array($user_access) && in_array($query['system_authorization_id'], $user_access)) ) {
 		include_once( $query['system_authorization_target_url'] );
 	}
 	else if ($subsection != "dashboard") {
@@ -215,6 +219,26 @@ function getUserAccess() {
 	}
 
 	return $system_authorization_roles;
+}
+
+function error_message($error_text, $error_code) { 
+
+echo "<div id=\"centerbox-page-wrapper\" class=\"error\">";
+echo "	<div id=\"centerbox-page-overlay\">";
+echo "	</div>";
+echo "";
+echo "	<div id=\"centerbox-page-content\">";
+echo "		<div class=\"error-top\">";
+echo "			Error 404";
+echo "		</div>";
+echo "		<div class=\"error-bottom\">";
+echo "			<p>($error_code) - $error_text</p>";
+echo "			<p><a href=\"#\" class=\"goback\" onclick=\"history.go(-1);return false;\">Go back</a></p>";
+echo "		</div>";
+echo "	</div>";
+echo "</div>";
+
+
 }
 
 ?>
