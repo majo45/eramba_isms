@@ -1,23 +1,36 @@
 <?php
 	session_start();
+
 	include_once("lib/mysql_lib.php");
+	include_once("lib/system_security_lib.php");
 
 	if ( isset($_POST['login-submit']) ) {
 		var_dump($_POST);
 		$system_users_login = $_POST['login'];
-		$system_users_password = sha1( $_POST['password'] );
+		# $system_users_password = sha1( $_POST['password'] );
+		$system_users_password = $_POST['password'];
 
-		$query = runSmallQuery( 
-			"SELECT * FROM `system_users_tbl` WHERE 
-			`system_users_login`='" . $system_users_login . "' AND 
-			`system_users_password`='" . $system_users_password . "' AND 
-			`system_users_disabled`=0" 
-		);
+		#$query = runSmallQuery( 
+		#	"SELECT * FROM `system_users_tbl` WHERE 
+		#	`system_users_login`='" . $system_users_login . "' AND 
+		#	`system_users_password`='" . $system_users_password . "' AND 
+		#	`system_users_disabled`=0" 
+		#);
 
-		if ($query != null) {
-			$_SESSION['logged_user_id'] = $query['system_users_id'];
+		#if ($query != null) {
+		#	$_SESSION['logged_user_id'] = $query['system_users_id'];
+		#	header('Location: index.php');
+		#}
+		# i made this function to validate users against the right table (system_conf_pwd_tbl) !!
+		# the idea is not to use the table system_users_tbl for validating passwords
+		if(authenticate_user_credentials($system_users_login, $system_users_password)) {
 			header('Location: index.php');
-		}
+		} else {
+			echo "wrong user";
+			exit;
+		} 
+	
+
 	}
 
 	$logged_user = isset( $_SESSION['logged_user_id'] ) ? true : false;
