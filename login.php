@@ -22,10 +22,13 @@
 		#}
 		# i made this function to validate users against the right table (system_conf_pwd_tbl) !!
 		# the idea is not to use the table system_users_tbl for validating passwords
-		if(authenticate_user_credentials($system_users_login, $system_users_password)) {
+
+		if($user_id = authenticate_user_credentials($system_users_login, $system_users_password)) {
+			echo "good credentials for $user_id";
+			$_SESSION['logged_user_id'] = $user_id; 
 			header('Location: index.php');
 		} else {
-			echo "wrong user";
+			echo "wrong credentials";
 			exit;
 		} 
 	

@@ -17,7 +17,7 @@ function authenticate_user_credentials($username,$password) {
 			#now i get the list of password for this user_id
 			$list_of_passwords = list_system_conf_pwd(" WHERE system_conf_login_id = \"$user_information[system_users_id]\" and system_conf_pwd = \"$encrypted_password\""); 
 			if (!empty($list_of_passwords)) {
-				return 1;
+				return $user_information[system_users_id];
 			}
 		}
 	}
