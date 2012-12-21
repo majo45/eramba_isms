@@ -84,7 +84,7 @@ echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/chosen.css\" />";
 <? 
 
 	if ($login_error) {
-		error_message("Fuck off", "404");	
+		error_message("Wrong Credentials", "A01");	
 	} else {
 		
 echo "	<div id=\"centerbox-page-wrapper\" class=\"login\">";

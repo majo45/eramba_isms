@@ -229,7 +229,7 @@ echo "	</div>";
 echo "";
 echo "	<div id=\"centerbox-page-content\">";
 echo "		<div class=\"error-top\">";
-echo "			Error 404";
+echo "			Error $error_code";
 echo "		</div>";
 echo "		<div class=\"error-bottom\">";
 echo "			<p>($error_code) - $error_text</p>";
