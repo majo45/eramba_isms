@@ -35,7 +35,7 @@ echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/chosen.css\" />";
 		});
 	</script>
 	
-	<title>ERAMBA</title>
+	<title>eramba security manager</title>
 	
 	<script>
 	$(document).ready(function(){

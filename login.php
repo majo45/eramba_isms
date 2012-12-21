@@ -48,7 +48,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>ERAMBA LOGIN</title>
+	<title>eramba security manager</title>
 	<meta charset="UTF-8" />
 			
 	<meta name="description" content="" />
