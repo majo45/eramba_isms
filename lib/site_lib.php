@@ -217,4 +217,24 @@ function getUserAccess() {
 	return $system_authorization_roles;
 }
 
+function error_message($error_text, $error_code) { 
+
+echo "<div id=\"centerbox-page-wrapper\" class=\"error\">";
+echo "	<div id=\"centerbox-page-overlay\">";
+echo "	</div>";
+echo "";
+echo "	<div id=\"centerbox-page-content\">";
+echo "		<div class=\"error-top\">";
+echo "			Error 404";
+echo "		</div>";
+echo "		<div class=\"error-bottom\">";
+echo "			<p>($error_code) - $error_text</p>";
+echo "			<p><a href=\"#\" class=\"goback\" onclick=\"history.go(-1);return false;\">Go back</a></p>";
+echo "		</div>";
+echo "	</div>";
+echo "</div>";
+
+
+}
+
 ?>

@@ -3,6 +3,7 @@
 
 	include_once("lib/mysql_lib.php");
 	include_once("lib/system_security_lib.php");
+	include_once("lib/site_lib.php");
 
 	if ( isset($_POST['login-submit']) ) {
 		$system_users_login = $_POST['login'];
@@ -23,13 +24,14 @@
 		# i made this function to validate users against the right table (system_conf_pwd_tbl) !!
 		# the idea is not to use the table system_users_tbl for validating passwords
 
+		$login_error=0;
 		if($user_id = authenticate_user_credentials($system_users_login, $system_users_password)) {
-			echo "good credentials for $user_id";
+			# echo "good credentials for $user_id";
 			$_SESSION['logged_user_id'] = $user_id; 
 			header('Location: index.php');
 		} else {
-			echo "wrong credentials";
-			exit;
+			# echo "wrong credentials";
+			$login_error=1;	
 		} 
 	
 
@@ -78,30 +80,39 @@ echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/chosen.css\" />";
 </head>
 <body>
 
-	<div id="centerbox-page-wrapper" class="login">
-		<div id="centerbox-page-overlay">
-		</div>
-		<img src="img/centerbox-login-top.png" id="centerbox-login-top" width="131" height="47" />
 
-		<div id="centerbox-page-content">
-			<form id="login" name="login" method="POST">
-				<div class="centerbox-entry">
-					<label for="login">Login</label>
-					<input type="text" name="login" id="login" />
-				</div>
-				<div class="centerbox-entry">
-					<label for="password">Password</label>
-					<input type="password" name="password" id="password" />
-				</div>
-				<div class="centerbox-entry">
-					<input type="submit" name="login-submit" id="submit" value="Sign in" />
-				</div>
-				<!--<div class="centerbox-entry">
-					<p><a href="#">Forgot password?</a><span> or </span><a href="#">Create New</a></p>
-				</div>-->
-			</form>
-		</div>
-	</div>
+<? 
 
-</body>
+	if ($login_error) {
+		error_message("Fuck off", "404");	
+	} else {
+		
+echo "	<div id=\"centerbox-page-wrapper\" class=\"login\">";
+echo "		<div id=\"centerbox-page-overlay\">";
+echo "		</div>";
+echo "		<img src=\"img/centerbox-login-top.png\" id=\"centerbox-login-top\" width=\"131\" height=\"47\" />";
+echo "		<div id=\"centerbox-page-content\">";
+echo "			<form id=\"login\" name=\"login\" method=\"POST\">";
+echo "				<div class=\"centerbox-entry\">";
+echo "					<label for=\"login\">Login</label>";
+echo "					<input type=\"text\" name=\"login\" id=\"login\" />";
+echo "				</div>";
+echo "				<div class=\"centerbox-entry\">";
+echo "					<label for=\"password\">Password</label>";
+echo "					<input type=\"password\" name=\"password\" id=\"password\" />";
+echo "				</div>";
+echo "				<div class=\"centerbox-entry\">";
+echo "					<input type=\"submit\" name=\"login-submit\" id=\"submit\" value=\"Sign in\" />";
+echo "				</div>";
+echo "				<!--<div class=\"centerbox-entry\">";
+echo "					<p><a href=\"#\">Forgot password?</a><span> or </span><a href=\"#\">Create New</a></p>";
+echo "				</div>-->";
+echo "			</form>";
+echo "		</div>";
+echo "	</div>";
+echo "</body>";
+
+	}
+?>
+
 </html>
