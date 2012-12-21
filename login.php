@@ -3,7 +3,6 @@
 	include_once("lib/mysql_lib.php");
 
 	if ( isset($_POST['login-submit']) ) {
-		var_dump($_POST);
 		$system_users_login = $_POST['login'];
 		$system_users_password = sha1( $_POST['password'] );
 
