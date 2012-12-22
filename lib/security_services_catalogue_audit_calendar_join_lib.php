@@ -133,7 +133,3 @@ function export_security_services_catalogue_audit_calendar_join_csv() {
 }
 
 ?>
-
-
-
-

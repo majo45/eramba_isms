@@ -138,7 +138,3 @@ function export_service_contracts_security_services_csv() {
 }
 
 ?>
-
-
-
-

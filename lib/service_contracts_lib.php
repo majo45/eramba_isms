@@ -146,7 +146,3 @@ function export_service_contracts_csv() {
 }
 
 ?>
-
-
-
-
