@@ -750,6 +750,64 @@ INSERT INTO `risk_tbl` VALUES (1,'srobos','candado locos',34,2,2,34,0),(2,'virus
 UNLOCK TABLES;
 
 --
+-- Table structure for table `security_incident_status_tbl`
+--
+
+DROP TABLE IF EXISTS `security_incident_status_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `security_incident_status_tbl` (
+  `security_incident_status_id` int(11) NOT NULL AUTO_INCREMENT,
+  `security_incident_status_name` varchar(100) DEFAULT NULL,
+  `security_incident_status_disabled` int(11) DEFAULT '1',
+  PRIMARY KEY (`security_incident_status_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `security_incident_status_tbl`
+--
+
+LOCK TABLES `security_incident_status_tbl` WRITE;
+/*!40000 ALTER TABLE `security_incident_status_tbl` DISABLE KEYS */;
+INSERT INTO `security_incident_status_tbl` VALUES (1,'Reported',0),(2,'Ongoing',0),(3,'Closed',0);
+/*!40000 ALTER TABLE `security_incident_status_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `security_incident_tbl`
+--
+
+DROP TABLE IF EXISTS `security_incident_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `security_incident_tbl` (
+  `security_incident_id` int(11) NOT NULL AUTO_INCREMENT,
+  `security_incident_owner` varchar(45) DEFAULT NULL,
+  `security_incident_title` varchar(45) DEFAULT NULL,
+  `security_incident_date` date DEFAULT NULL,
+  `security_incident_description` text,
+  `security_incident_compromised_asset_id` int(11) DEFAULT NULL,
+  `security_incident_treatment_description` text,
+  `security_incident_open_date` date DEFAULT NULL,
+  `security_incident_closure_date` date DEFAULT NULL,
+  `security_incident_classification_id` int(11) DEFAULT NULL,
+  `security_incident_status_id` int(11) DEFAULT NULL,
+  `security_incident_disabled` int(11) DEFAULT '1',
+  PRIMARY KEY (`security_incident_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `security_incident_tbl`
+--
+
+LOCK TABLES `security_incident_tbl` WRITE;
+/*!40000 ALTER TABLE `security_incident_tbl` DISABLE KEYS */;
+/*!40000 ALTER TABLE `security_incident_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `security_services_audit_calendar_tbl`
 --
 
@@ -1304,4 +1362,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-12-22 15:23:15
+-- Dump completed on 2012-12-25 20:11:10

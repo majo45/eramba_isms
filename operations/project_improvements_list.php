@@ -95,6 +95,9 @@
 if ($action == "csv") {
 echo "					<li><a href=\"downloads/project_improvements_export.csv\">Dowload</a></li>";
 } else { 
+echo "					<li><a href=\"$base_url&action=csv\">Just an Idea Projects</a></li>";
+echo "					<li><a href=\"$base_url&action=csv\">On-Going Projects</a></li>";
+echo "					<li><a href=\"$base_url&action=csv\">Completed Projects</a></li>";
 echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
 }
 ?>
