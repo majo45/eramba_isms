@@ -12,7 +12,6 @@ function list_security_services_catalogue_audit_calendar_join($arguments) {
 	return $results;
 }
 
-# this function deletes form the table risk_classification_join_id all asociated items with risk $risk_id
 function delete_security_services_catalogue_audit_calendar_join($service_catalogue_id) {
 
 	if (!is_numeric($service_catalogue_id)) {

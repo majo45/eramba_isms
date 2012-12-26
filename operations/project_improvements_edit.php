@@ -12,7 +12,7 @@
 	$base_url = build_base_url($section,$subsection);
 
 	if (is_numeric($project_improvements_id)) {
-		$project_improvements_item = lookup_bu("project_improvements_id",$project_improvements_id);
+		$project_improvements_item = lookup_project_improvements("project_improvements_id",$project_improvements_id);
 	}
 
 ?>
@@ -76,8 +76,8 @@ echo "					<form name=\"edit\" method=\"GET\" action=\"$base_url\">";
 		<div class="controls-wrapper">
 
 				    <INPUT type="hidden" name="action" value="edit_bu">
-				    <INPUT type="hidden" name="section" value="organization">
-				    <INPUT type="hidden" name="subsection" value="bu">
+				    <INPUT type="hidden" name="section" value="operations">
+				    <INPUT type="hidden" name="subsection" value="project_improvements">
 <? echo " 			    <INPUT type=\"hidden\" name=\"project_improvements_id\" value=\"$project_improvements_item[project_improvements_id]\">"; ?>
 			<a>
 			    <INPUT type="submit" value="Submit" class="add-btn"> 

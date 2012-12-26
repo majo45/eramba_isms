@@ -1,5 +1,5 @@
 <?
-ini_set('display_errors', '0');
+# ini_set('display_errors', '0');
 session_start();
 include_once("lib/mysql_lib.php");
 
