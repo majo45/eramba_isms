@@ -35,41 +35,43 @@
 	#actions .. edit, update or disable - YOU MUST ADJUST THIS!
 	if ($action == "update" & is_numeric($project_improvements_id)) {
 		$project_improvements_update = array(
-			'project_improvements_threat' => $project_improvements_threat,
-			'project_improvements_vulnerabilities' => $project_improvements_vulnerabilities,
-			'project_improvements_classification_score' => $project_improvements_classification_score,
-			'project_improvements_mitigation_strategy_id' => $project_improvements_mitigation_strategy_id,
-			'project_improvements_periodicity_review' => $project_improvements_periodicity_review,
-			'project_improvements_residual_score' => $project_improvements_residual_score
+			'project_improvements_title' => $project_improvements_title,
+			'project_improvements_goal' => $project_improvements_goal,
+			'project_improvements_start' => $project_improvements_start,
+			'project_improvements_deadline' => $project_improvements_deadline,
+			'project_improvements_deadline' => $project_improvements_deadline,
+			'project_improvements_status_id' => $project_improvements_status_id,
+			'project_improvements_owner_id' => $project_improvements_owner_id
 		);	
 		update_project_improvements($project_improvements_update,$project_improvements_id);
-		add_system_records("project_improvements","project_improvements_management","$project_improvements_id","","Update","");
+		add_system_records("operations","project_improvements","$project_improvements_id","","Update","");
 
 
 	} elseif ($action == "update" & !empty($asset_id)) {
 
 		$project_improvements_update = array(
-			'project_improvements_threat' => $project_improvements_threat,
-			'project_improvements_vulnerabilities' => $project_improvements_vulnerabilities,
-			'project_improvements_classification_score' => $project_improvements_classification_score,
-			'project_improvements_mitigation_strategy_id' => $project_improvements_mitigation_strategy_id,
-			'project_improvements_periodicity_review' => $project_improvements_periodicity_review,
-			'project_improvements_residual_score' => $project_improvements_residual_score
+			'project_improvements_title' => $project_improvements_title,
+			'project_improvements_goal' => $project_improvements_goal,
+			'project_improvements_start' => $project_improvements_start,
+			'project_improvements_end' => $project_improvements_end,
+			'project_improvements_deadline' => $project_improvements_deadline,
+			'project_improvements_status_id' => $project_improvements_status_id,
+			'project_improvements_owner_id' => $project_improvements_owner_id
 		);	
 
-		add_project_improvements_asset_join($project_improvements_asset_join_update);
+		$id = add_project_improvements_asset_join($project_improvements_asset_join_update);
+		add_system_records("operations","project_improvements","$id","","Insert","");
 		
 	 }
 
 	if ($action == "disable" & is_numeric($project_improvements_id)) {
 		disable_project_improvements($project_improvements_id);
-		add_system_records("project_improvements","project_improvements_management","$project_improvements_id","","Disable","");
-		#i should also disable all project_improvements asociated items
+		add_system_records("operations","project_improvements","$project_improvements_id","","Disable","");
 	}
 
 	if ($action == "csv") {
 		export_project_improvements_csv();
-		add_system_records("project_improvements","project_improvements_management","$project_improvements_id","","Export","");
+		add_system_records("operations","project_improvements","$project_improvements_id","","Export","");
 	}
 
 	# ---- END TEMPLATE ------
@@ -95,9 +97,9 @@
 if ($action == "csv") {
 echo "					<li><a href=\"downloads/project_improvements_export.csv\">Dowload</a></li>";
 } else { 
-echo "					<li><a href=\"$base_url&action=csv\">Just an Idea Projects</a></li>";
-echo "					<li><a href=\"$base_url&action=csv\">On-Going Projects</a></li>";
-echo "					<li><a href=\"$base_url&action=csv\">Completed Projects</a></li>";
+echo "					<li><a href=\"$base_url&action=list&sort=1\">Just an Idea Projects</a></li>";
+echo "					<li><a href=\"$base_url&action=list&sort=2\">On-Going Projects</a></li>";
+echo "					<li><a href=\"$base_url&action=list&sort=3\">Completed Projects</a></li>";
 echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
 }
 ?>
@@ -114,7 +116,11 @@ echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
 	<br>
 			
 <?
-	$project_improvements_list = list_project_improvements(" WHERE project_improvements_disabled=\"0\" AND project_improvements_status_id =\"2\"");
+	if ($sort) {
+		$project_improvements_list = list_project_improvements(" WHERE project_improvements_disabled=\"0\" AND project_improvements_status_id =\"$sort\"");
+	} else {
+		$project_improvements_list = list_project_improvements(" WHERE project_improvements_disabled=\"0\" AND project_improvements_status_id =\"2\"");
+	}
 
 	foreach($project_improvements_list as $project_improvements_item) {
 
@@ -122,11 +128,11 @@ echo "			<li>";
 echo "				<div class=\"header\">";
 echo "					$project_improvements_item[project_improvements_title]";
 echo "					<span class=\"actions\">";
-echo "						<a class=\"edit\" href=\"$base_url&action=edit&project_improvements_id=$project_improvements_data[project_improvements_id]&asset_id=$asset_item[asset_id]\">edit</a>";
+echo "						<a class=\"edit\" href=\"$base_url&action=edit&project_improvements_id=$project_improvements_item[project_improvements_id]\">edit</a>";
 echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"delete\" href=\"?section=system&subsection=system_records&system_records_lookup_section=project_improvements&system_records_lookup_subsection=project_improvements_management&system_records_lookup_item_id=$project_improvements_data[project_improvements_id]\">records</a>";
+echo "						<a class=\"delete\" href=\"?section=system&subsection=system_records&system_records_lookup_section=project_improvements&system_records_lookup_subsection=project_improvements_management&system_records_lookup_item_id=$project_improvements_item[project_improvements_id]\">records</a>";
 echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"edit\" href=\"$base_url&action=disable&project_improvements_id=$project_improvements_data[project_improvements_id]&asset_id=$asset_item[asset_id]\">delete</a>";
+echo "						<a class=\"edit\" href=\"$base_url&action=disable&project_improvements_id=$project_improvements_item[project_improvements_id]\">delete</a>";
 echo "					</span>";
 echo "					<span class=\"icon\"></span>";
 echo "				</div>";

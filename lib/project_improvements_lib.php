@@ -17,8 +17,12 @@ function add_project_improvements($project_improvements_data) {
 		project_improvements_tbl
 		VALUES (
 		\"$project_improvements_data[project_improvements_id]\",
-		\"$project_improvements_data[project_improvements_name]\",
-		\"$project_improvements_data[project_improvements_description]\",
+		\"$project_improvements_data[title]\",
+		\"$project_improvements_data[goal]\",
+		\"$project_improvements_data[start]\",
+		\"$project_improvements_data[deadline]\",
+		\"$project_improvements_data[status_id]\",
+		\"$project_improvements_data[owner_id]\",
 		\"0\"
 		)
 		";	
@@ -30,8 +34,12 @@ function add_project_improvements($project_improvements_data) {
 function update_project_improvements($project_improvements_data, $project_improvements_id) {
 	$sql = "UPDATE project_improvements_tbl
 		SET
-		project_improvements_name=\"$project_improvements_data[project_improvements_name]\",
-		project_improvements_description=\"$project_improvements_data[project_improvements_description]\"
+		project_improvements_title=\"$project_improvements_data[project_improvements_title]\",
+		project_improvements_goal=\"$project_improvements_data[project_improvements_goal]\",
+		project_improvements_start=\"$project_improvements_data[project_improvements_start]\",
+		project_improvements_deadline=\"$project_improvements_data[project_improvements_deadline]\",
+		project_improvements_status_id=\"$project_improvements_data[project_improvements_status_id]\",
+		project_improvements_owner_id=\"$project_improvements_data[project_improvements_owner_id]\",
 		WHERE
 		project_improvements_id=\"$project_improvements_id\"
 		";	
@@ -119,9 +127,13 @@ function export_project_improvements_csv() {
 	$export_file = "downloads/project_improvements_export.csv";
 	$handler = fopen($export_file, 'w');
 	
-	fwrite($handler, "project_improvements_id,project_improvements_name,project_improvements_description,project_improvements_disabled\n");
+	fwrite($handler, "project_improvements_id,project_improvements_title,project_improvements_goal,project_improvements_start,project_improvements_deadline,project_improvements_status_name,project_improvements_owner,project_improvements_origin\n");
+
 	foreach($result as $line) {
-		fwrite($handler,"$line[project_improvements_id],$line[project_improvements_name],$line[project_improvements_descripion],$line[project_improvements_disabled]\n");
+	
+		$project_improvements_status = lookup_project_improvements_status("project_improvements_status_id", $line[project_improvements_status_id]);
+		
+		fwrite($handler,"$line[project_improvements_id],$line[project_improvements_title],$line[project_improvements_goal],$line[project_improvements_start],$line[project_improvements_deadline],$project_improvements_status[project_improvements_status_name],$line[project_improvements_owner_id],$project_improvements_origin\n");
 	}
 	
 	fclose($handler);
