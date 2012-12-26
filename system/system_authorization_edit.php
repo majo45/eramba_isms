@@ -49,7 +49,7 @@ echo "					<form name=\"system_group_role_edit\" method=\"GET\" action=\"$base_u
 <? echo "						<input type=\"text\" name=\"system_users_login\" id=\"system_users_login\" value=\"$item[system_users_login]\"/>";?>
 						<label for="name">Password</label>
 						<span class="description">Set a Password for this user!</span>
-<? echo "						<input type=\"password\" name=\"system_conf_admin_pwd\" id=\"system_conf_admin_pwd\" value=\"123456789\"/>";?>
+<? echo "						<input type=\"password\" name=\"system_conf_admin_pwd\" id=\"system_conf_admin_pwd\" value=\"untouched\"/>";?>
 						
 						<label for="legalType">Group Role</label>
 						<span class="description">Select the access Group Role this user requires</span>
