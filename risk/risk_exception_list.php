@@ -9,7 +9,8 @@
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_list = build_base_url($section,"risk_exception_list");
+	$base_url_edit = build_base_url($section,"risk_exception_edit");
 	
 	# local variables - YOU MUST ADJUST THIS! 
 	$risk_exception_id = $_GET["risk_exception_id"];
@@ -62,7 +63,7 @@
 		<br>
 		<div class="controls-wrapper">
 <?
-echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
+echo "			<a href=\"$base_url_edit&action=edit\" class=\"add-btn\">";
 ?>
 				<span class="add-icon"></span>
 				Add a new Risk Exception 
@@ -79,7 +80,7 @@ echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
 if ($action == "csv") {
 echo "					<li><a href=\"downloads/risk_exception_export.csv\">Dowload</a></li>";
 } else { 
-echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
+echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 }
 ?>
 				</ul>
@@ -92,10 +93,10 @@ echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
 				<tr>
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
-echo "					<th><a class=\"asc\" href=\"$base_url&sort=risk_exception_title\">Risk Exception Title</a></th>";
-echo "					<th><a href=\"$base_url&sort=risk_exception_description\">Description</a></th>";
-echo "					<th><center><a href=\"$base_url&sort=risk_exception_author\">Author</a></th>";
-# echo "					<th><center><a href=\"$base_url&sort=risk_exception_status\">Status</a></th>";
+echo "					<th><a class=\"asc\" href=\"$base_url_list&sort=risk_exception_title\">Risk Exception Title</a></th>";
+echo "					<th><a href=\"$base_url_list&sort=risk_exception_description\">Description</a></th>";
+echo "					<th><center><a href=\"$base_url_list&sort=risk_exception_author\">Author</a></th>";
+# echo "					<th><center><a href=\"$base_url_list&sort=risk_exception_status\">Status</a></th>";
 ?>
 				</tr>
 			</thead>
@@ -116,12 +117,12 @@ echo "						<div class=\"cell-label\">";
 echo "							$risk_exception_item[risk_exception_title]";
 echo "						</div>";
 echo "						<div class=\"cell-actions\">";
-echo "					<a href=\"$base_url&action=edit&risk_exception_id=$risk_exception_item[risk_exception_id]\" class=\"edit-action\">edit</a> ";
+echo "					<a href=\"$base_url_edit&action=edit&risk_exception_id=$risk_exception_item[risk_exception_id]\" class=\"edit-action\">edit</a> ";
 echo "						&nbsp;|&nbsp;";
-echo "					<a href=\"$base_url&action=disable&risk_exception_id=$risk_exception_item[risk_exception_id]\" class=\"delete-action\">delete</a>";
+echo "					<a href=\"$base_url_list&action=disable&risk_exception_id=$risk_exception_item[risk_exception_id]\" class=\"delete-action\">delete</a>";
 echo "						&nbsp;|&nbsp;";
 echo "					<a href=\"?section=system&subsection=system_records&system_records_lookup_section=risk&system_records_lookup_subsection=risk_exception&system_records_lookup_item_id=$risk_exception_item[risk_exception_id]\" class=\"edit-action delete-action\">records</a>";
-echo "					<a href=\"?action=edit&section=ciso&subsection=ciso_pmo&ciso_pmo_lookup_section=risk&ciso_pmo_lookup_subsection=risk_exception&ciso_pmo_lookup_item_id=$risk_exception_item[risk_exception_id]\" class=\"delete-action\">improve</a>";
+echo "					<a href=\"?action=edit&section=operations&subsection=project_improvements&ciso_pmo_lookup_subsection=risk_exception&ciso_pmo_lookup_item_id=$risk_exception_item[risk_exception_id]\" class=\"delete-action\">improve</a>";
 echo "						</div>";
 echo "					</td>";
 echo "					<td>$risk_exception_item[risk_exception_description]</td>";

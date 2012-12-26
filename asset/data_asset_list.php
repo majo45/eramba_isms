@@ -13,9 +13,11 @@
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
 	
-	$base_url = build_base_url($section,$subsection);
-	$asset_identification_url = build_base_url("asset","asset_identification");
-	$security_services_url = build_base_url("security_services","security_catalogue");
+	$base_url_list = build_base_url($section,"data_asset_list");
+	$base_url_edit = build_base_url($section,"data_asset_edit");
+	
+	$asset_identification_url = build_base_url("asset","asset_list");
+	$security_services_url = build_base_url("security_services","security_catalogue_list");
 	
 	# local variables - YOU MUST ADJUST THIS! 
 	$data_asset_id = $_GET["data_asset_id"];
@@ -94,7 +96,7 @@
 if ($action == "csv") {
 echo "					<li><a href=\"downloads/data_asset_export.csv\">Dowload</a></li>";
 } else { 
-echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
+echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 }
 ?>
 				</ul>
@@ -114,7 +116,7 @@ echo "					Business Unit: $asset_item[asset_name]";
 echo "					<span class=\"actions\">";
 echo "						<a class=\"edit\" href=\"$asset_identification_url&sort=$asset_item[asset_id]\">view this asset</a>";
 echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"edit\" href=\"$base_url&asset_id=$asset_item[asset_id]&action=edit\">add new analysis</a>";
+echo "						<a class=\"edit\" href=\"$base_url_edit&asset_id=$asset_item[asset_id]&action=edit\">add new analysis</a>";
 echo "					</span>";
 echo "					<span class=\"icon\"></span>";
 echo "				</div>";
@@ -135,12 +137,12 @@ echo "								<div class=\"cell-label\">";
 echo "					 When the data asset is: $data_asset_status_name[data_asset_status_name]";
 echo "								</div>";
 echo "								<div class=\"cell-actions\">";
-echo "							<a href=\"$base_url&action=edit&data_asset_id=$data_asset_item[data_asset_id]\" class=\"edit-action\">edit</a> ";
-echo "							<a href=\"$base_url&action=disable_data_asset&data_asset_id=$data_asset_item[data_asset_id]\" class=\"delete-action\">delete</a>";
+echo "							<a href=\"$base_url_edit&action=edit&data_asset_id=$data_asset_item[data_asset_id]\" class=\"edit-action\">edit</a> ";
+echo "							<a href=\"$base_url_list&action=disable_data_asset&data_asset_id=$data_asset_item[data_asset_id]\" class=\"delete-action\">delete</a>";
 echo "						&nbsp;|&nbsp;";
 echo "							<a href=\"?section=system&subsection=system_records&system_records_lookup_section=asset&system_records_lookup_subsection=data_asset&system_records_lookup_item_id=$data_asset_item[data_asset_id]\" class=\"delete-action\">records</a>";
 echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"delete\" href=\"?section=ciso&subsection=pmo&ciso_pmo_lookup_section=asset&ciso_pmo_lookup_subsection=asset_identification&ciso_pmo_lookup_item_id=$data_asset_item[data_asset_id]\">improve</a>";
+echo "						<a class=\"delete\" href=\"?section=operations&subsection=project_improvements&ciso_pmo_lookup_section=asset&ciso_pmo_lookup_subsection=asset_identification&ciso_pmo_lookup_item_id=$data_asset_item[data_asset_id]\">improve</a>";
 echo "								</div>";
 echo "							</td>";
 echo "							<td>$data_asset_item[data_asset_description]</td>";

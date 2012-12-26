@@ -75,7 +75,7 @@ echo "					<form name=\"edit\" method=\"GET\" action=\"$base_url\">";
 		
 		<div class="controls-wrapper">
 
-				    <INPUT type="hidden" name="action" value="edit_bu">
+				    <INPUT type="hidden" name="action" value="edit">
 				    <INPUT type="hidden" name="section" value="operations">
 				    <INPUT type="hidden" name="subsection" value="project_improvements">
 <? echo " 			    <INPUT type=\"hidden\" name=\"project_improvements_id\" value=\"$project_improvements_item[project_improvements_id]\">"; ?>

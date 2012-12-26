@@ -13,7 +13,8 @@
 	$data_asset_id = $_GET["data_asset_id"];
 	$asset_id = $_GET["asset_id"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_list = build_base_url($section,"data_asset_list");
+	$base_url_edit = build_base_url($section,"data_asset_edit");
 
 	if (is_numeric($data_asset_id)) {
 		$data_asset_item = lookup_data_asset("data_asset_id",$data_asset_id);
@@ -39,7 +40,7 @@
 			<div class="tab-content">
 				<div class="tab" id="tab1">
 <?
-echo "					<form name=\"data_asset_edit\" method=\"GET\" action=\"$base_url\">";
+echo "					<form name=\"data_asset_edit\" method=\"GET\" action=\"$base_url_edit\">";
 ?>
 						<label for="name">Data Asset Name</label>
 						<span class="description">This is the name of the asset being analysed.</span>
@@ -88,14 +89,14 @@ echo "					<form name=\"data_asset_edit\" method=\"GET\" action=\"$base_url\">";
 				    <INPUT type="hidden" name="action" value="update_data_asset">
 				<? echo "   <INPUT type=\"hidden\" name=\"asset_id\" value=\"$asset_id\">";?>
 				    <INPUT type="hidden" name="section" value="asset">
-				    <INPUT type="hidden" name="subsection" value="data_asset">
+				    <INPUT type="hidden" name="subsection" value="data_asset_list">
 <? echo " 			    <INPUT type=\"hidden\" name=\"data_asset_id\" value=\"$data_asset_item[data_asset_id]\">"; ?>
 			<a>
 			    <INPUT type="submit" value="Submit" class="add-btn"> 
 			</a>
 			
 <?
-echo "			<a href=\"$base_url\" class=\"cancel-btn\">";
+echo "			<a href=\"$base_url_list\" class=\"cancel-btn\">";
 ?>
 				Cancel
 				<span class="select-icon"></span>

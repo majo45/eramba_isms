@@ -8,7 +8,8 @@
 	$action = $_GET["action"];
 	$legal_id = $_GET["legal_id"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_list = build_base_url($section,"legal_list");
+	$base_url_edit  = build_base_url($section,"legal_edit");
 
 	if (is_numeric($legal_id)) {
 		$legal_item = lookup_legal("legal_id",$legal_id);
@@ -31,7 +32,7 @@
 			<div class="tab-content">
 				<div class="tab" id="tab1">
 <?
-echo "					<form name=\"legal_edit\" method=\"GET\" action=\"$base_url\">";
+echo "					<form name=\"legal_edit\" method=\"GET\" action=\"$base_url_list\">";
 ?>
 						<label for="name">Name</label>
 						<span class="description">Give a name to the legal constrain. Examples: Data Privacy Regulations, Customer Contractual Agreements, Etc. </span>
@@ -52,7 +53,7 @@ echo "					<form name=\"legal_edit\" method=\"GET\" action=\"$base_url\">";
 
 				    <INPUT type="hidden" name="action" value="update">
 				    <INPUT type="hidden" name="section" value="organization">
-				    <INPUT type="hidden" name="subsection" value="legal">
+				    <INPUT type="hidden" name="subsection" value="legal_list">
 <? echo " 			    <INPUT type=\"hidden\" name=\"legal_id\" value=\"$legal_item[legal_id]\">"; ?>
 
 			<a>
@@ -60,7 +61,7 @@ echo "					<form name=\"legal_edit\" method=\"GET\" action=\"$base_url\">";
 			</a>
 			
 <?
-echo "			<a href=\"$base_url\" class=\"cancel-btn\">";
+echo "			<a href=\"$base_url_list\" class=\"cancel-btn\">";
 ?>
 				Cancel
 				<span class="select-icon"></span>

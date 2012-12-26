@@ -21,8 +21,11 @@
 		$tp_id= $_POST["tp_id"];
 	}
 	
-	$base_url = build_base_url($section,$subsection);
-	$compliance_package_url = build_base_url("organization","tp");
+	$base_url_upload = build_base_url($section,"compliance_package_upload");
+	$base_url_list = build_base_url($section,"compliance_package_list");
+	$base_url_edit = build_base_url($section,"compliance_package_edit");
+	$base_url_item_edit = build_base_url($section,"compliance_package_item_edit");
+	$compliance_package_url = build_base_url("organization","tp_list");
 	
 	# local variables - YOU MUST ADJUST THIS! 
 	$compliance_package_id = $_GET["compliance_package_id"];
@@ -130,7 +133,7 @@
 		<br>
 		<div class="controls-wrapper">
 <?
-echo "			<a href=\"$base_url&action=edit_compliance_package\" class=\"add-btn\">";
+echo "			<a href=\"$base_url_edit&action=edit_compliance_package\" class=\"add-btn\">";
 ?>
 				<span class="add-icon"></span>
 				Add new Compliance Package 
@@ -147,7 +150,7 @@ echo "			<a href=\"$base_url&action=edit_compliance_package\" class=\"add-btn\">
 if ($action == "csv") {
 echo "					<li><a href=\"downloads/compliance_package_export.csv\">Dowload</a></li>";
 } else { 
-echo "					<li><a href=\"$base_url&action=show_upload_form\">Upload</a></li>";
+echo "					<li><a href=\"$base_url_upload&action=show_upload_form\">Upload</a></li>";
 }
 ?>
 				</ul>
@@ -169,7 +172,7 @@ echo "					1. Regulator or Compliance Authority: $provider_id[tp_name]";
 echo "					<span class=\"actions\">";
 echo "						<a class=\"edit\" href=\"$compliance_package_url&sort=$provider_id[tp_id]\">view this third party regulator</a>";
 echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"edit\" href=\"$base_url&compliance_package_tp_id=$compliance_package_provider_name_item[compliance_package_tp_id]&action=edit_compliance_package\">add a new compliance package</a>";
+echo "						<a class=\"edit\" href=\"$base_url_edit&compliance_package_tp_id=$compliance_package_provider_name_item[compliance_package_tp_id]&action=edit_compliance_package\">add a new compliance package</a>";
 echo "					</span>";
 echo "					<span class=\"icon\"></span>";
 echo "				</div>";
@@ -196,11 +199,11 @@ echo "								<div class=\"cell-label\">";
 echo "									$compliance_package_item[compliance_package_name]";
 echo "								</div>";
 echo "								<div class=\"cell-actions\">";
-echo "	<a href=\"$base_url&action=edit_compliance_package&compliance_package_id=$compliance_package_item[compliance_package_id]\" class=\"edit_action\">edit</a> ";
+echo "	<a href=\"$base_url__edit&action=edit_compliance_package&compliance_package_id=$compliance_package_item[compliance_package_id]\" class=\"edit_action\">edit</a> ";
 echo "						&nbsp;|&nbsp;";
-echo "	<a href=\"$base_url&action=disable_compliance_package&compliance_package_id=$compliance_package_item[compliance_package_id]\" class=\"delete_action\">delete</a>";
+echo "	<a href=\"$base_url_list&action=disable_compliance_package&compliance_package_id=$compliance_package_item[compliance_package_id]\" class=\"delete_action\">delete</a>";
 echo "						&nbsp;|&nbsp;";
-echo "	<a href=\"$base_url&action=edit_compliance_package_item&compliance_package_id=$compliance_package_item[compliance_package_id]\" class=\"delete_action\">add compliance package item</a>";
+echo "	<a href=\"$base_url_item_edit&action=edit_compliance_package_item&compliance_package_id=$compliance_package_item[compliance_package_id]\" class=\"delete_action\">add compliance package item</a>";
 echo "								</div>";
 echo "							</td>";
 echo "							<td>$compliance_package_item[compliance_package_description]</td>";
@@ -234,8 +237,8 @@ echo "									<div class=\"cell-label\">";
 echo "										$compliance_package_item_item[compliance_package_item_name]";
 echo "									</div>";
 echo "									<div class=\"cell-actions\">";
-echo "<a href=\"$base_url&action=edit_compliance_package_item&compliance_package_id=$compliance_package_item[compliance_package_id]&compliance_package_item_id=$compliance_package_item_item[compliance_package_item_id]\" class=\"edit-action\">edit</a> ";
-echo "	<a href=\"$base_url&action=disable_compliance_package_item&compliance_package_item_id=$compliance_package_item_item[compliance_package_item_id]\" class=\"delete-action\">delete</a>";
+echo "<a href=\"$base_url_item_edit&action=edit_compliance_package_item&compliance_package_id=$compliance_package_item[compliance_package_id]&compliance_package_item_id=$compliance_package_item_item[compliance_package_item_id]\" class=\"edit-action\">edit</a> ";
+echo "	<a href=\"$base_url_list&action=disable_compliance_package_item&compliance_package_item_id=$compliance_package_item_item[compliance_package_item_id]\" class=\"delete-action\">delete</a>";
 echo "									</div>";
 echo "								</td>";
 echo "								<td>$compliance_package_item_item[compliance_package_item_description]</td>";

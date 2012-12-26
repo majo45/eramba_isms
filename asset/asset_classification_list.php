@@ -9,7 +9,8 @@
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_edit = build_base_url($section,"asset_classification_edit");
+	$base_url_list = build_base_url($section,"asset_classification_list");
 	
 	# local variables - YOU MUST ADJUST THIS! 
 	$asset_classification_id = $_GET["asset_classification_id"];
@@ -71,7 +72,7 @@
 		<br>
 		<div class="controls-wrapper">
 <?
-echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
+echo "			<a href=\"$base_url_edit&action=edit\" class=\"add-btn\">";
 ?>
 				<span class="add-icon"></span>
 				Add new Classification 
@@ -88,7 +89,7 @@ echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
 if ($action == "csv") {
 echo "					<li><a href=\"downloads/asset_classification_export.csv\">Dowload</a></li>";
 } else { 
-echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
+echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 }
 ?>
 				</ul>
@@ -101,10 +102,10 @@ echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
 				<tr>
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
-echo "					<th><a class=\"asc\" href=\"$base_url&sort=asset_classification_name\">Classification Name</a></th>";
-echo "					<th><a href=\"$base_url&sort=asset_classification_criteria\">Classification Criteria</a></th>";
-echo "					<th><center><a href=\"$base_url&sort=asset_classification_type\">Type</a></th>";
-echo "					<th><center><a href=\"$base_url&sort=asset_classification_value\">Value</a></th>";
+echo "					<th><a class=\"asc\" href=\"$base_url_list&sort=asset_classification_name\">Classification Name</a></th>";
+echo "					<th><a href=\"$base_url_list&sort=asset_classification_criteria\">Classification Criteria</a></th>";
+echo "					<th><center><a href=\"$base_url_list&sort=asset_classification_type\">Type</a></th>";
+echo "					<th><center><a href=\"$base_url_list&sort=asset_classification_value\">Value</a></th>";
 ?>
 				</tr>
 			</thead>
@@ -125,8 +126,8 @@ echo "						<div class=\"cell-label\">";
 echo "							$asset_classification_item[asset_classification_name]";
 echo "						</div>";
 echo "						<div class=\"cell-actions\">";
-echo "							<a href=\"$base_url&action=edit&asset_classification_id=$asset_classification_item[asset_classification_id]\" class=\"edit-action\">edit</a> ";
-echo "							<a href=\"$base_url&action=disable&asset_classification_id=$asset_classification_item[asset_classification_id]\" class=\"delete-action\">delete</a>";
+echo "							<a href=\"$base_url_edit&action=edit&asset_classification_id=$asset_classification_item[asset_classification_id]\" class=\"edit-action\">edit</a> ";
+echo "							<a href=\"$base_url_list&action=disable&asset_classification_id=$asset_classification_item[asset_classification_id]\" class=\"delete-action\">delete</a>";
 echo "						</div>";
 echo "					</td>";
 echo "					<td>$asset_classification_item[asset_classification_criteria]</td>";

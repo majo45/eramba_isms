@@ -225,7 +225,7 @@ fclose($handler);
 
 function display_html_audit_items($service_id) {
 
-	$base_url = build_base_url("security_services","security_services_audit");
+	$base_url = build_base_url("security_services","security_services_audit_list");
 	
 	# here i need to start listing all the audits for this particular service_id
 	$audit_list = list_security_services_audit(" WHERE security_services_audit_security_service_id = \"$service_id\" 
@@ -255,7 +255,7 @@ if ($audit_item[security_services_audit_status] == "1") {
 
 echo "							<a href=\"$base_url&action=disable_security_services_audit&security_services_audit_id=$audit_item[security_services_audit_id]\" class=\"edit-action delete-action\">delete</a>";
 echo "							<a href=\"?section=system&subsection=system_records&system_records_lookup_section=security_services&system_records_lookup_subsection=security_services_audit&system_records_lookup_item_id=$audit_item[security_services_audit_id]\" class=\"edit-action delete-action\">records</a>";
-echo "							<a href=\"?section=ciso&subsection=ciso_pmo&action=edit&ciso_pmo_lookup_section=security_services&ciso_pmo_lookup_subsection=security_services_audit&ciso_pmo_lookup_item_id=$audit_item[security_services_audit_id]\" class=\"delete-action\">improve</a>";
+echo "							<a href=\"?section=operations&subsection=project_improvements&action=edit&project_improvements_lookup_section=security_services&project_improvements_lookup_subsection=security_services_audit&project_improvements_lookup_item_id=$audit_item[security_services_audit_id]\" class=\"delete-action\">improve</a>";
 
 echo "								</div>";
 echo "							</td>";

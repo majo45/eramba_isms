@@ -37,7 +37,7 @@ function update_compliance_management($compliance_management_data, $compliance_m
 		WHERE
 		compliance_management_id=\"$compliance_management_id\"
 		";	
-	echo "$sql";
+	# echo "$sql";
 	$result = runUpdateQuery($sql);
 	return $result;
 }

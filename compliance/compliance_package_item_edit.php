@@ -10,7 +10,7 @@
 	$compliance_package_item_id = $_GET["compliance_package_item_id"];
 	$compliance_package_id = $_GET["compliance_package_id"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_list  = build_base_url($section,"compliance_package_list");
 	
 	if (is_numeric($compliance_package_id)) {
 		$compliance_package_item = lookup_compliance_package("compliance_package_id",$compliance_package_id);
@@ -37,7 +37,7 @@
 			<div class="tab-content">
 				<div class="tab" id="tab1">
 <?
-echo "					<form name=\"compliance_package_edit\" method=\"GET\" action=\"$base_url\">";
+echo "					<form name=\"compliance_package_edit\" method=\"GET\" action=\"$base_url_list\">";
 ?>
 						<label for="name">Compliance Package Id</label>
 						<span class="description"></span>
@@ -65,17 +65,17 @@ echo "					<form name=\"compliance_package_edit\" method=\"GET\" action=\"$base_
 
 				    <INPUT type="hidden" name="action" value="update_compliance_package_item_id">
 				    <INPUT type="hidden" name="section" value="compliance">
-				    <INPUT type="hidden" name="subsection" value="compliance_package">
+				    <INPUT type="hidden" name="subsection" value="compliance_package_list">
 <? echo "    
 	 <INPUT type=\"hidden\" name=\"compliance_package_item_id\" value=\"$compliance_package_item_item[compliance_package_item_id]\">
 	 <INPUT type=\"hidden\" name=\"compliance_package_id\" value=\"$compliance_package_id\">
 "; ?>
-
-			    <INPUT type="submit" value="Send"> 
+			<a>
+			    <INPUT type="submit" value="Submit" class="add-btn"> 
 			</a>
 			
 <?
-echo "			<a href=\"$base_url\" class=\"cancel-btn\">";
+echo "			<a href=\"$base_url_list\" class=\"cancel-btn\">";
 ?>
 				Cancel
 				<span class="select-icon"></span>

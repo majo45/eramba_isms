@@ -168,11 +168,18 @@ function include_from_db($section = null, $subsection = 'dashboard', $action = '
 		$action = 'list';
 
 
+#	$query = runSmallQuery( 
+#		"SELECT * FROM `system_authorization_tbl` WHERE 
+#		`system_authorization_section_name`='" . $section . "' AND 
+#		`system_authorization_subsection_name`='" . $subsection . "' AND 
+#		`system_authorization_action_name`='" . $action . "' AND 
+#		`system_authorization_disabled`=0" 
+#	);
+	
 	$query = runSmallQuery( 
 		"SELECT * FROM `system_authorization_tbl` WHERE 
 		`system_authorization_section_name`='" . $section . "' AND 
 		`system_authorization_subsection_name`='" . $subsection . "' AND 
-		`system_authorization_action_name`='" . $action . "' AND 
 		`system_authorization_disabled`=0" 
 	);
 

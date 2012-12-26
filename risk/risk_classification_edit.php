@@ -9,7 +9,7 @@
 	$action = $_GET["action"];
 	$risk_classification_id = $_GET["risk_classification_id"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_list = build_base_url($section,"risk_classification_list");
 
 	if (is_numeric($risk_classification_id)) {
 		$risk_classification_item = lookup_risk_classification("risk_classification_id",$risk_classification_id);
@@ -32,7 +32,7 @@
 			<div class="tab-content">
 				<div class="tab" id="tab1">
 <?
-echo "					<form name=\"risk_classification_edit\" method=\"GET\" action=\"$base_url\">";
+echo "					<form name=\"risk_classification_edit\" method=\"GET\" action=\"$base_url_list\">";
 ?>
 						<label for="applicable">Classification Type</label>
 						<span class="description">This is the begining of the classification of risks. Let's say you are clasifying cars, an example of "Type" could be "Size". Later, you will name several options (names) for that Type of classification, such as "Big". "Small", Etc. Most regulations and standards require classifications such as "Confidentiality, Sensibility or Integrity" level, Etc. If you havent created a Classification type before, you will need to create one.</span>
@@ -63,7 +63,7 @@ echo "					<form name=\"risk_classification_edit\" method=\"GET\" action=\"$base
 
 				    <INPUT type="hidden" name="action" value="update">
 				    <INPUT type="hidden" name="section" value="risk">
-				    <INPUT type="hidden" name="subsection" value="risk_classification">
+				    <INPUT type="hidden" name="subsection" value="risk_classification_list">
 <? echo " 			    <INPUT type=\"hidden\" name=\"risk_classification_id\" value=\"$risk_classification_item[risk_classification_id]\">"; ?>
 
 			<a>
@@ -71,7 +71,7 @@ echo "					<form name=\"risk_classification_edit\" method=\"GET\" action=\"$base
 			</a>
 			
 <?
-echo "			<a href=\"$base_url\" class=\"cancel-btn\">";
+echo "			<a href=\"$base_url_list\" class=\"cancel-btn\">";
 ?>
 				Cancel
 				<span class="select-icon"></span>

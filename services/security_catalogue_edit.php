@@ -20,7 +20,8 @@
 	$action = $_GET["action"];
 	$security_services_id= $_GET["security_services_id"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_list = build_base_url($section,"security_catalogue_list");
+	$base_url_edit = build_base_url($section,"security_catalogue_edit");
 
 	if (is_numeric($security_services_id)) {
 		$security_services_item = lookup_security_services("security_services_id",$security_services_id);
@@ -46,7 +47,7 @@
 			<div class="tab-content">
 				<div class="tab" id="tab1">
 <?
-echo "					<form name=\"security_services_edit\" method=\"GET\" action=\"$base_url\">";
+echo "					<form name=\"security_services_edit\" method=\"GET\" action=\"$base_url_list\">";
 ?>
 						<label for="name">Name of the Service</label>
 						<span class="description">Give a name to the service your program is intended to deliver. Examples: Internet Gateways, Encryption, Physical Lockers, Etc.</span>
@@ -142,7 +143,7 @@ echo "				<input type=\"text\" name=\"security_services_cost_operational_resourc
 	foreach($pre_selected_list as $pre_selected_service_contracts) {
 			array_push($pre_selected_items,$pre_selected_service_contracts[service_contracts_id]);
 	}
-	print_r($pre_selected_items);
+	#print_r($pre_selected_items);
 	list_drop_menu_service_contracts($pre_selected_items, "");	
 ?>
 						</select>
@@ -157,14 +158,14 @@ echo "				<input type=\"text\" name=\"security_services_cost_operational_resourc
 		<div class="controls-wrapper">
 				    <INPUT type="hidden" name="action" value="update">
 				    <INPUT type="hidden" name="section" value="security_services">
-				    <INPUT type="hidden" name="subsection" value="security_catalogue">
+				    <INPUT type="hidden" name="subsection" value="security_catalogue_list">
 <? echo " 			    <INPUT type=\"hidden\" name=\"security_services_id\" value=\"$security_services_item[security_services_id]\">"; ?>
 			<a>
 			    <INPUT type="submit" value="Submit" class="add-btn"> 
 			</a>
 			
 <?
-echo "			<a href=\"$base_url\" class=\"cancel-btn\">";
+echo "			<a href=\"$base_url_list\" class=\"cancel-btn\">";
 ?>
 				Cancel
 				<span class="select-icon"></span>

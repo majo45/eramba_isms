@@ -9,7 +9,8 @@
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_list = build_base_url($section,"legal_list");
+	$base_url_edit  = build_base_url($section,"legal_edit");
 	
 	# local variables - YOU MUST ADJUST THIS! 
 	$legal_id = $_GET["legal_id"];
@@ -55,7 +56,7 @@
 		<br>
 		<div class="controls-wrapper">
 <?
-echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
+echo "			<a href=\"$base_url_edit&action=edit\" class=\"add-btn\">";
 ?>
 				<span class="add-icon"></span>
 				Add new Legal
@@ -72,7 +73,7 @@ echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
 if ($action == "csv") {
 echo "					<li><a href=\"downloads/legal_export.csv\">Dowload</a></li>";
 } else { 
-echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
+echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 }
 ?>
 				</ul>
@@ -85,10 +86,10 @@ echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
 				<tr>
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
-echo "					<th><a class=\"asc\" href=\"$base_url&sort=legal_name\">Legal name</a></th>";
+echo "					<th><a class=\"asc\" href=\"$base_url_list&sort=legal_name\">Legal name</a></th>";
 ?>
 <?
-echo "					<th><a href=\"$base_url&sort=legal_description\">Description</a></th>";
+echo "					<th><a href=\"$base_url_list&sort=legal_description\">Description</a></th>";
 ?>
 				</tr>
 			</thead>
@@ -109,13 +110,13 @@ echo "						<div class=\"cell-label\">";
 echo "							$legal_item[legal_name]";
 echo "						</div>";
 echo "						<div class=\"cell-actions\">";
-echo "							<a href=\"$base_url&action=edit&legal_id=$legal_item[legal_id]\" class=\"edit-action\">edit</a> ";
+echo "							<a href=\"$base_url_edit&action=edit&legal_id=$legal_item[legal_id]\" class=\"edit-action\">edit</a> ";
 echo "						&nbsp;|&nbsp;";
-echo "							<a href=\"$base_url&action=disable&legal_id=$legal_item[legal_id]\" class=\"delete-action\">delete</a>";
+echo "							<a href=\"$base_url_list&action=disable&legal_id=$legal_item[legal_id]\" class=\"delete-action\">delete</a>";
 echo "						&nbsp;|&nbsp;";
 echo "							<a href=\"?section=system&subsection=system_records&system_records_lookup_section=organization&system_records_lookup_subsection=legal&system_records_lookup_item_id=$legal_item[legal_id]\" class=\"delete-action\">records</a>";
 echo "						&nbsp;|&nbsp;";
-echo "							<a href=\"?section=system&subsection=system_records&system_records_lookup_section=organization&system_records_lookup_subsection=legal&system_records_lookup_item_id=$legal_item[legal_id]\" class=\"delete-action\">improve</a>";
+echo "							<a href=\"?section=operations&subsection=project_improvements&system_records_lookup_section=organization&system_records_lookup_subsection=legal&system_records_lookup_item_id=$legal_item[legal_id]\" class=\"delete-action\">improve</a>";
 echo "						</div>";
 echo "					</td>";
 echo "					<td>$legal_item[legal_description]</td>";

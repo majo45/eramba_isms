@@ -9,7 +9,7 @@
 	$action = $_GET["action"];
 	$risk_exception_id = $_GET["risk_exception_id"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_list = build_base_url($section,"risk_exception_list");
 
 	if (is_numeric($risk_exception_id)) {
 		$risk_exception_item = lookup_risk_exception("risk_exception_id",$risk_exception_id);
@@ -32,7 +32,7 @@
 			<div class="tab-content">
 				<div class="tab" id="tab1">
 <?
-echo "					<form name=\"risk_exception_edit\" method=\"GET\" action=\"$base_url\">";
+echo "					<form name=\"risk_exception_edit\" method=\"GET\" action=\"$base_url_list\">";
 ?>
 						<label for="applicable">Risk Exception Title</label>
 						<span class="description">Provide a descriptive title. Example: Mac-OS Antivirus</span>
@@ -54,7 +54,7 @@ echo "					<form name=\"risk_exception_edit\" method=\"GET\" action=\"$base_url\
 
 				    <INPUT type="hidden" name="action" value="update">
 				    <INPUT type="hidden" name="section" value="risk">
-				    <INPUT type="hidden" name="subsection" value="risk_exception">
+				    <INPUT type="hidden" name="subsection" value="risk_exception_list">
 <? echo " 			    <INPUT type=\"hidden\" name=\"risk_exception_id\" value=\"$risk_exception_item[risk_exception_id]\">"; ?>
 
 			<a>
@@ -62,7 +62,7 @@ echo "					<form name=\"risk_exception_edit\" method=\"GET\" action=\"$base_url\
 			</a>
 			
 <?
-echo "			<a href=\"$base_url\" class=\"cancel-btn\">";
+echo "			<a href=\"$base_url_list\" class=\"cancel-btn\">";
 ?>
 				Cancel
 				<span class="select-icon"></span>

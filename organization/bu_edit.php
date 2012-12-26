@@ -8,7 +8,8 @@
 	$action = $_GET["action"];
 	$bu_id = $_GET["bu_id"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_list = build_base_url($section,"bu_list");
+	$base_url_edit  = build_base_url($section,"bu_edit");
 
 	if (is_numeric($bu_id)) {
 		$bu_item = lookup_bu("bu_id",$bu_id);
@@ -31,7 +32,7 @@
 			<div class="tab-content">
 				<div class="tab" id="tab1">
 <?
-echo "					<form name=\"edit_bu\" method=\"GET\" action=\"$base_url\">";
+echo "					<form name=\"edit_bu\" method=\"GET\" action=\"$base_url_list\">";
 ?>
 						<label for="name">Name</label>
 						<span class="description">Register the main business units for your organization. A organizational chart could be usefull. Examples for this are: Finance, Legal, Human Resources, Production, Infrastructure, Security, Etc.</span>
@@ -50,16 +51,16 @@ echo "					<form name=\"edit_bu\" method=\"GET\" action=\"$base_url\">";
 		
 		<div class="controls-wrapper">
 
-				    <INPUT type="hidden" name="action" value="edit_bu">
+				    <INPUT type="hidden" name="action" value="update_bu">
 				    <INPUT type="hidden" name="section" value="organization">
-				    <INPUT type="hidden" name="subsection" value="bu">
+				    <INPUT type="hidden" name="subsection" value="bu_list">
 <? echo " 			    <INPUT type=\"hidden\" name=\"bu_id\" value=\"$bu_item[bu_id]\">"; ?>
 			<a>
 			    <INPUT type="submit" value="Submit" class="add-btn"> 
 			</a>
 			
 <?
-echo "			<a href=\"$base_url\" class=\"cancel-btn\">";
+echo "			<a href=\"$base_url_list\" class=\"cancel-btn\">";
 ?>
 				Cancel
 				<span class="select-icon"></span>

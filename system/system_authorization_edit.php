@@ -11,7 +11,7 @@
 	$action = $_GET["action"];
 	$system_users_id = $_GET["system_users_id"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_list = build_base_url($section,"system_authorization_list");
 
 	if (is_numeric($system_users_id)) {
 		$item = lookup_system_users("system_users_id",$system_users_id);
@@ -34,7 +34,7 @@
 			<div class="tab-content">
 				<div class="tab" id="tab1">
 <?
-echo "					<form name=\"system_group_role_edit\" method=\"GET\" action=\"$base_url\">";
+echo "					<form name=\"system_group_role_edit\" method=\"GET\" action=\"$base_url_list\">";
 ?>
 						<label for="name">Name</label>
 						<span class="description">User First Name</span>
@@ -70,7 +70,7 @@ echo "					<form name=\"system_group_role_edit\" method=\"GET\" action=\"$base_u
 
 				    <INPUT type="hidden" name="action" value="update">
 				    <INPUT type="hidden" name="section" value="system">
-				    <INPUT type="hidden" name="subsection" value="system_authorization">
+				    <INPUT type="hidden" name="subsection" value="system_authorization_list">
 <? echo " 			    <INPUT type=\"hidden\" name=\"system_users_id\" value=\"$item[system_users_id]\">"; ?>
 
 		<a>
@@ -78,7 +78,7 @@ echo "					<form name=\"system_group_role_edit\" method=\"GET\" action=\"$base_u
 			</a>
 			
 <?
-echo "			<a href=\"$base_url\" class=\"cancel-btn\">";
+echo "			<a href=\"$base_url_list\" class=\"cancel-btn\">";
 ?>
 				Cancel
 				<span class="select-icon"></span>

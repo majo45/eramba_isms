@@ -19,7 +19,8 @@
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_list = build_base_url($section,"risk_management_list");
+	$base_url_edit = build_base_url($section,"risk_management_edit");
 	
 	# local variables - YOU MUST ADJUST THIS! 
 	$asset_id = $_GET["asset_id"];
@@ -179,13 +180,12 @@
 					<span class="select-icon"></span>
 				</a>
 				<ul class="action-submenu">
-					<li><a href="#">Delete</a></li>
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 if ($action == "csv") {
 echo "					<li><a href=\"downloads/risk_export.csv\">Dowload</a></li>";
 } else { 
-echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
+echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 }
 ?>
 				</ul>
@@ -209,13 +209,13 @@ echo "			<li>";
 echo "				<div class=\"header\">";
 echo "					Asset being Risk Analysed: $asset_item[asset_name]";
 echo "					<span class=\"actions\">";
-echo "						<a class=\"edit\" href=\"$base_url&action=edit&risk_id=$risk_data[risk_id]&asset_id=$asset_item[asset_id]\">edit</a>";
+echo "						<a class=\"edit\" href=\"$base_url_edit&action=edit&risk_id=$risk_data[risk_id]&asset_id=$asset_item[asset_id]\">edit</a>";
 echo "						&nbsp;|&nbsp;";
 echo "						<a class=\"delete\" href=\"?section=system&subsection=system_records&system_records_lookup_section=risk&system_records_lookup_subsection=risk_management&system_records_lookup_item_id=$risk_data[risk_id]\">records</a>";
 echo "						&nbsp;|&nbsp;";
 # echo "						<a class=\"edit\" href=\"$base_url&action=disable&risk_id=$risk_data[risk_id]&asset_id=$asset_item[asset_id]\">delete</a>";
 # echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"delete\" href=\"?action=edit&section=ciso&subsection=ciso_pmo&ciso_pmo_lookup_section=risk&ciso_pmo_lookup_subsection=risk_management&ciso_pmo_lookup_item_id=$risk_data[risk_id]\">improve</a>";
+echo "						<a class=\"delete\" href=\"?action=edit&section=operations&subsection=project_improvements&ciso_pmo_lookup_section=risk&ciso_pmo_lookup_subsection=risk_management&ciso_pmo_lookup_item_id=$risk_data[risk_id]\">improve</a>";
 echo "					</span>";
 echo "					<span class=\"icon\"></span>";
 echo "				</div>";

@@ -9,7 +9,7 @@
 	$action = $_GET["action"];
 	$compliance_exception_id = $_GET["compliance_exception_id"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_list = build_base_url($section,"compliance_exception_list");
 
 	if (is_numeric($compliance_exception_id)) {
 		$compliance_exception_item = lookup_compliance_exception("compliance_exception_id",$compliance_exception_id);
@@ -32,7 +32,7 @@
 			<div class="tab-content">
 				<div class="tab" id="tab1">
 <?
-echo "					<form name=\"compliance_exception_edit\" method=\"GET\" action=\"$base_url\">";
+echo "					<form name=\"compliance_exception_edit\" method=\"GET\" action=\"$base_url_list\">";
 ?>
 						<label for="applicable">Compliance Exception Title</label>
 						<span class="description">Provide a descriptive title. Example: Mac-OS Antivirus</span>
@@ -54,7 +54,7 @@ echo "					<form name=\"compliance_exception_edit\" method=\"GET\" action=\"$bas
 
 				    <INPUT type="hidden" name="action" value="update">
 				    <INPUT type="hidden" name="section" value="compliance">
-				    <INPUT type="hidden" name="subsection" value="compliance_exception">
+				    <INPUT type="hidden" name="subsection" value="compliance_exception_list">
 <? echo " 			    <INPUT type=\"hidden\" name=\"compliance_exception_id\" value=\"$compliance_exception_item[compliance_exception_id]\">"; ?>
 
 			<a>
@@ -62,7 +62,7 @@ echo "					<form name=\"compliance_exception_edit\" method=\"GET\" action=\"$bas
 			</a>
 			
 <?
-echo "			<a href=\"$base_url\" class=\"cancel-btn\">";
+echo "			<a href=\"$base_url_list\" class=\"cancel-btn\">";
 ?>
 				Cancel
 				<span class="select-icon"></span>

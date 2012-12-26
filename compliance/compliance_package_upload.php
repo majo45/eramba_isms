@@ -9,7 +9,7 @@
 	$action = $_GET["action"];
 	$tp_id = $_GET["tp_id"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_list  = build_base_url($section,"compliance_package_list");
 
 ?>
 
@@ -28,7 +28,7 @@
 			<div class="tab-content">
 				<div class="tab" id="tab1">
 <?
-echo "					<form name=\"compliance_package_edit\" method=\"POST\" action=\"$base_url\" enctype=\"multipart/form-data\">";
+echo "					<form name=\"compliance_package_edit\" method=\"POST\" action=\"$base_url_list\" enctype=\"multipart/form-data\">";
 ?>
 						<label for="name">To which Third Party you'll associate this Package?</label>
 						<span class="description">Select one third party with whom you'll asociate this compliance package. If you dont have what you want, you can always create a new Third Party</span>
@@ -53,14 +53,14 @@ echo "					<form name=\"compliance_package_edit\" method=\"POST\" action=\"$base
 
 				    <INPUT type="hidden" name="action" value="upload_compliance_package">
 				    <INPUT type="hidden" name="section" value="compliance">
-				    <INPUT type="hidden" name="subsection" value="compliance_package">
+				    <INPUT type="hidden" name="subsection" value="compliance_package_list">
 
 			<a>
 			    <INPUT type="submit" value="Submit" class="add-btn"> 
 			</a>
 			
 <?
-echo "			<a href=\"$base_url\" class=\"cancel-btn\">";
+echo "			<a href=\"$base_url_list\" class=\"cancel-btn\">";
 ?>
 				Cancel
 				<span class="select-icon"></span>

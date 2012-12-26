@@ -28,7 +28,6 @@ function add_service_contracts($service_contracts_data) {
 		)
 		";	
 	
-	echo "Puta: $sql";
 	
 	$result = runUpdateQuery($sql);
 	return $result;
