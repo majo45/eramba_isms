@@ -49,7 +49,7 @@ function check_valid_date($date) {
 function show_menu_main() {
 	$user_access = getUserAccess();
 
-	$query = "SELECT * FROM `system_authorization_tbl` WHERE `system_authorization_action_type`='r' ORDER BY `system_authorization_section_cute_name`";
+	$query = "SELECT * FROM `system_authorization_tbl` WHERE `system_authorization_action_type`='r' ORDER BY `system_authorization_order`";
 
 	$result = mysql_query($query);
 	if (!$result) {
@@ -75,7 +75,7 @@ function show_menu_sub($section) {
 
 	$user_access = getUserAccess();
 	
-	$query = "SELECT * FROM `system_authorization_tbl` WHERE `system_authorization_section_name`='" . $section . "' AND `system_authorization_action_name`='list'";
+	$query = "SELECT * FROM `system_authorization_tbl` WHERE `system_authorization_section_name`='" . $section . "' AND `system_authorization_action_type`='r'";
 
 	$result = mysql_query($query);
 	if (!$result) {
