@@ -1,15 +1,18 @@
 <?
 
 	include_once("lib/security_incident_lib.php");
+	include_once("lib/security_incident_classification_lib.php");
+	include_once("lib/general_classification_lib.php");
 	include_once("lib/security_incident_status_lib.php");
 	include_once("lib/site_lib.php");
+	include_once("lib/asset_lib.php");
 
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
 	$security_incident_id = $_GET["security_incident_id"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_list = build_base_url($section,"security_incident_list");
 
 	if (is_numeric($security_incident_id)) {
 		$security_incident_item = lookup_bu("security_incident_id",$security_incident_id);
@@ -32,7 +35,7 @@
 			<div class="tab-content">
 				<div class="tab" id="tab1">
 <?
-echo "					<form name=\"edit\" method=\"GET\" action=\"$base_url\">";
+echo "					<form name=\"edit\" method=\"GET\" action=\"$base_url_list\">";
 ?>
 						<label for="name">Security Incident Title</label>
 						<span class="description">Give the Securty Incident a title, name or code so it's easily identified on the list list menu</span>
@@ -44,7 +47,7 @@ echo "					<form name=\"edit\" method=\"GET\" action=\"$base_url\">";
 	
 	<label for="legalType">Incident Classification</label>
 	<span class="description"></span>
-	<select name="tp_type_id" id="" class="chzn-select">
+	<select name="security_incident_classification_id" id="" class="chzn-select">
 	<option value="-1">Select the Incident Classification</option>
 <?
 	list_drop_menu_security_incident_classification($security_incident_item[security_incident_classification_id],"security_incident_classification_id");	
@@ -70,16 +73,13 @@ echo "					<form name=\"edit\" method=\"GET\" action=\"$base_url\">";
 						
 	<label for="legalType">Incident Status</label>
 	<span class="description"></span>
-	<select name="tp_type_id" id="" class="chzn-select">
+	<select name="security_incident_status_id" id="" class="chzn-select">
 	<option value="-1">Select the Incident Status</option>
 <?
 	list_drop_menu_security_incident_status($security_incident_item[security_incident_status_id],"security_incident_status_id");	
 ?>
 	</select>
 
-	<label for="description">Project Origin</label>
-	<span class="description">If this project came from an existing object (Risk, Service, Compliance, Etc.) this field will show the exact place. This is sometimes useful to remember why you started this project in the first time, what was the driver of this intiative.</span>
-<? echo "<input type=\"text\" name=\"\" disabled=\"disabled\" value=\"$security_incident_item[security_incident_source_section]/$security_incident_source_section[security_incident_source_subsection]/$security_incident_source_subsection[security_incident_source_item_id]\">";?>
 			</div>
 			<div class="tab" id="tab2">
 				advanced tab
@@ -89,16 +89,16 @@ echo "					<form name=\"edit\" method=\"GET\" action=\"$base_url\">";
 		
 		<div class="controls-wrapper">
 
-				    <INPUT type="hidden" name="action" value="edit_bu">
-				    <INPUT type="hidden" name="section" value="organization">
-				    <INPUT type="hidden" name="subsection" value="bu">
+				    <INPUT type="hidden" name="action" value="edit">
+				    <INPUT type="hidden" name="section" value="operations">
+				    <INPUT type="hidden" name="subsection" value="security_incident_list">
 <? echo " 			    <INPUT type=\"hidden\" name=\"security_incident_id\" value=\"$security_incident_item[security_incident_id]\">"; ?>
 			<a>
 			    <INPUT type="submit" value="Submit" class="add-btn"> 
 			</a>
 			
 <?
-echo "			<a href=\"$base_url\" class=\"cancel-btn\">";
+echo "			<a href=\"$base_url_list\" class=\"cancel-btn\">";
 ?>
 				Cancel
 				<span class="select-icon"></span>

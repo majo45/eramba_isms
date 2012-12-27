@@ -66,7 +66,7 @@
 ?>
 
 	<section id="content-wrapper">
-		<h3>Asset Classification Scheme</h3>
+		<h3>Risk Classification Scheme</h3>
 		<span class=description>As part of the process of managing Risks, the classification of them is a critical componenent to set clear priorities and leverage from the Risk analsys. Define your Risk classification criterias in a usefull way!
 		<br>
 		<br>
@@ -84,7 +84,6 @@ echo "			<a href=\"$base_url_edit&action=edit\" class=\"add-btn\">";
 					<span class="select-icon"></span>
 				</a>
 				<ul class="action-submenu">
-					<li><a href="#">Delete</a></li>
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 if ($action == "csv") {

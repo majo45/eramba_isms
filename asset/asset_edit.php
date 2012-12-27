@@ -1,4 +1,3 @@
-	
 <?
 
 	include_once("lib/general_classification_lib.php");

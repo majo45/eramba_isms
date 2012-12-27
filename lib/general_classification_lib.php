@@ -44,4 +44,26 @@ function risk_classification_type_html_drop_menu($preselected) {
 
 }
 
+# this will show an html drop menu for any given classification type
+function security_incident_classification_type_html_drop_menu($preselected) {
+	$sql = "SELECT 
+		DISTINCT(security_incident_classification_type)
+		from
+		security_incident_classification_tbl
+		WHERE
+		security_incident_classification_disabled = \"0\"
+		";
+
+	$results = runQuery($sql);
+
+	foreach($results as $item) {
+			if ($item[security_incident_classification_type] == $preselected) {
+				echo "<option selected=\"selected\" value=\"$item[security_incident_classification_type]\">$item[security_incident_classification_type]</option>\n";
+			} else {
+				echo "<option value=\"$item[security_incident_classification_type]\">$item[security_incident_classification_type]</option>\n";
+			} 
+	}
+
+}
+
 ?>
