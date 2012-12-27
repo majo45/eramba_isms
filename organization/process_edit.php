@@ -9,7 +9,7 @@
 	$process_id = $_GET["process_id"];
 	$bu_id = $_GET["bu_id"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_list = build_base_url($section,"bu_list");
 
 	if (is_numeric($process_id)) {
 		$process_item = lookup_process("process_id",$process_id);
@@ -32,7 +32,7 @@
 			<div class="tab-content">
 				<div class="tab" id="tab1">
 <?
-echo "					<form name=\"process_edit\" method=\"GET\" action=\"$base_url\">";
+echo "					<form name=\"process_edit\" method=\"GET\" action=\"$base_url_list\">";
 ?>
 						<label for="name">Name</label>
 						<span class="description">Give a clear name to the main processes. Examples could be: Build Systems, Hire Employees, Prepare Accounting, Manage Payments to Third Parties, Etc.</span>
@@ -56,7 +56,7 @@ echo "					<form name=\"process_edit\" method=\"GET\" action=\"$base_url\">";
 
 				    <INPUT type="hidden" name="action" value="update_process">
 				    <INPUT type="hidden" name="section" value="organization">
-				    <INPUT type="hidden" name="subsection" value="process">
+				    <INPUT type="hidden" name="subsection" value="bu_list">
 <? echo " 			    <INPUT type=\"hidden\" name=\"bu_id\" value=\"$bu_id\">"; ?>
 <? echo " 			    <INPUT type=\"hidden\" name=\"process_id\" value=\"$process_id\">"; ?>
 			<a>
@@ -65,7 +65,7 @@ echo "					<form name=\"process_edit\" method=\"GET\" action=\"$base_url\">";
 			</a>
 			
 <?
-echo "			<a href=\"$base_url\" class=\"cancel-btn\">";
+echo "			<a href=\"$base_url_list\" class=\"cancel-btn\">";
 ?>
 				Cancel
 				<span class="select-icon"></span>

@@ -22,7 +22,7 @@
 	$risk_id= $_GET["risk_id"];
 	$asset_id= $_GET["asset_id"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_list = build_base_url($section,"risk_management_list");
 
 	if (is_numeric($risk_id)) {
 		$risk_item = lookup_risk("risk_id",$risk_id);
@@ -48,7 +48,7 @@
 			<div class="tab-content">
 				<div class="tab" id="tab1">
 <?
-echo "					<form name=\"risk_edit\" method=\"GET\" action=\"$base_url\">";
+echo "					<form name=\"risk_edit\" method=\"GET\" action=\"$base_url_list\">";
 ?>
 						<label for="name">Threats</label>
 						<span class="description">Describe the applicable threats that apply to the asset we are Risk Analysing. This is a good time to get creative (realistic tough).</span>
@@ -151,7 +151,7 @@ echo "						<input type=\"text\" name=\"risk_periodicity_review\" id=\"\" value=
 		<div class="controls-wrapper">
 				    <INPUT type="hidden" name="action" value="update">
 				    <INPUT type="hidden" name="section" value="risk">
-				    <INPUT type="hidden" name="subsection" value="risk_management">
+				    <INPUT type="hidden" name="subsection" value="risk_management_list">
 <? echo "			    <INPUT type=\"hidden\" name=\"asset_id\" value=\"$asset_id\">"; ?>
 <? echo " 			    <INPUT type=\"hidden\" name=\"risk_id\" value=\"$risk_item[risk_id]\">"; ?>
 <? echo " 			    <INPUT type=\"hidden\" name=\"risk_id\" value=\"$risk_item[risk_id]\">"; ?>
@@ -161,7 +161,7 @@ echo "						<input type=\"text\" name=\"risk_periodicity_review\" id=\"\" value=
 			</a>
 			
 <?
-echo "			<a href=\"$base_url\" class=\"cancel-btn\">";
+echo "			<a href=\"$base_url_list\" class=\"cancel-btn\">";
 ?>
 				Cancel
 				<span class="select-icon"></span>

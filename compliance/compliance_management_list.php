@@ -7,7 +7,7 @@
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_step_two = build_base_url($section,"compliance_management_step_two");
 
 ?>
 
@@ -18,7 +18,7 @@
 		<div class="tab-wrapper"> 
 		<br> 	
 <?
-echo "					<form name=\"asset_classification_edit\" method=\"GET\" action=\"$base_url\">";
+echo "					<form name=\"asset_classification_edit\" method=\"GET\" action=\"$base_url_step_two\">";
 ?>
 						<select id="applicable" name="tp_id" class="chzn-select">
 <?
@@ -37,7 +37,7 @@ echo "					<form name=\"asset_classification_edit\" method=\"GET\" action=\"$bas
 
 				    <INPUT type="hidden" name="action" value="start_compliance_management">
 				    <INPUT type="hidden" name="section" value="compliance">
-				    <INPUT type="hidden" name="subsection" value="compliance_management">
+				    <INPUT type="hidden" name="subsection" value="compliance_management_step_two">
 			<a>
 			    <INPUT type="submit" value="Submit" class="add-btn"> 
 			</a>

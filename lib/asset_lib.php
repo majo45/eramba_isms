@@ -47,6 +47,7 @@ function update_asset($asset_data, $asset_id) {
 		WHERE
 		asset_id=\"$asset_id\"
 		";	
+
 	$result = runUpdateQuery($sql);
 	return $result;
 }

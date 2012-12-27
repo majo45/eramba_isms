@@ -18,7 +18,8 @@
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_list = build_base_url($section,"security_catalogue_list");
+	$base_url_edit = build_base_url($section,"security_catalogue_edit");
 	
 	# local variables - YOU MUST ADJUST THIS! 
 	$security_services_id = $_GET["security_services_id"];
@@ -142,7 +143,7 @@
 		<br>
 		<div class="controls-wrapper">
 <?
-echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
+echo "			<a href=\"$base_url_edit&action=edit\" class=\"add-btn\">";
 ?>
 				<span class="add-icon"></span>
 				Add new Service 
@@ -159,7 +160,7 @@ echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
 if ($action == "csv") {
 echo "					<li><a href=\"downloads/security_services_export.csv\">Dowload</a></li>";
 } else { 
-echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
+echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 }
 ?>
 				</ul>
@@ -185,13 +186,13 @@ echo "			<li>";
 echo "				<div class=\"header\">";
 echo "					Service: $security_services_item[security_services_name]";
 echo "					<span class=\"actions\">";
-echo "						<a class=\"edit\" href=\"$base_url&action=edit&security_services_id=$security_services_item[security_services_id]\">edit</a>";
+echo "						<a class=\"edit\" href=\"$base_url_edit&action=edit&security_services_id=$security_services_item[security_services_id]\">edit</a>";
 echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"delete\" href=\"$base_url&action=disable&security_services_id=$security_services_item[security_services_id]\">delete</a>";
+echo "						<a class=\"delete\" href=\"$base_url_list&action=disable&security_services_id=$security_services_item[security_services_id]\">delete</a>";
 echo "						&nbsp;|&nbsp;";
 echo "						<a class=\"delete\" href=\"?section=system&subsection=system_records&system_records_lookup_section=security_services&system_records_lookup_subsection=security_catalogue&system_records_lookup_item_id=$security_services_item[security_services_id]\">records</a>";
 echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"delete\" href=\"?action=edit&section=ciso&subsection=ciso_pmo&ciso_pmo_lookup_section=security_services&ciso_pmo_lookup_subsection=security_catalogue&ciso_pmo_lookup_item_id=$security_services_item[security_services_id]\">improve</a>";
+echo "						<a class=\"delete\" href=\"?action=edit&section=operations&subsection=project_improvements&ciso_pmo_lookup_section=security_services&ciso_pmo_lookup_subsection=security_catalogue&ciso_pmo_lookup_item_id=$security_services_item[security_services_id]\">improve</a>";
 echo "					</span>";
 echo "					<span class=\"icon\"></span>";
 echo "				</div>";

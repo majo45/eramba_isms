@@ -4,6 +4,7 @@
 	include_once("lib/mysql_lib.php");
 	include_once("lib/system_security_lib.php");
 	include_once("lib/site_lib.php");
+	include_once("lib/security_services_dashboard_lib.php");
 
 	if ( isset($_POST['login-submit']) ) {
 		$system_users_login = $_POST['login'];
@@ -28,6 +29,10 @@
 		if($user_id = authenticate_user_credentials($system_users_login, $system_users_password)) {
 			# echo "good credentials for $user_id";
 			$_SESSION['logged_user_id'] = $user_id; 
+
+			# everytime someone logs in the system, i need to make sure i add all the dashboard statistics
+			security_services_dashboard_data();
+	
 			header('Location: index.php');
 		} else {
 			# echo "wrong credentials";
@@ -48,7 +53,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>ERAMBA LOGIN</title>
+	<title>eramba security manager</title>
 	<meta charset="UTF-8" />
 			
 	<meta name="description" content="" />
@@ -84,7 +89,7 @@ echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/chosen.css\" />";
 <? 
 
 	if ($login_error) {
-		error_message("Fuck off", "404");	
+		error_message("Wrong Credentials", "A01");	
 	} else {
 		
 echo "	<div id=\"centerbox-page-wrapper\" class=\"login\">";

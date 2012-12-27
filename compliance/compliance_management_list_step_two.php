@@ -18,9 +18,10 @@
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
 	
-	$base_url = build_base_url($section,$subsection);
-	$security_services_url = build_base_url("security_services","security_catalogue");
-	$compliance_exception_url = build_base_url("compliance","compliance_exception");
+	$base_url_list  = build_base_url($section,"compliance_management_step_two");
+	$base_url_edit  = build_base_url($section,"compliance_management_edit");
+	$security_services_url = build_base_url("security_services","security_catalogue_list");
+	$compliance_exception_url = build_base_url("compliance","compliance_exception_list");
 	
 	# local variables - YOU MUST ADJUST THIS! 
 	$tp_id = $_GET["tp_id"];
@@ -94,7 +95,7 @@
 if ($action == "csv") {
 echo "					<li><a href=\"downloads/compliance_management_export.csv\">Dowload</a></li>";
 } else { 
-echo "					<li><a href=\"$base_url&action=csv&tp_id=$tp_id\">Export</a></li>";
+echo "					<li><a href=\"$base_url_list&action=csv&tp_id=$tp_id\">Export</a></li>";
 }
 ?>
 				</ul>
@@ -144,11 +145,11 @@ echo "			<div class=\"cell-label\">";
 echo "			$compliance_package_item_item[compliance_package_item_original_id] - $compliance_package_item_item[compliance_package_item_name]";
 echo "			</div>";
 echo "			<div class=\"cell-actions\">";
-echo "			<a href=\"$base_url&action=edit&tp_id=$tp_id&compliance_package_item=$compliance_package_item_item[compliance_package_item_id]\" class=\"edit-action\">edit</a> ";
+echo "			<a href=\"$base_url_edit&action=edit&tp_id=$tp_id&compliance_package_item=$compliance_package_item_item[compliance_package_item_id]\" class=\"edit-action\">edit</a> ";
 echo "			&nbsp;|&nbsp;";
 echo "			<a href=\"?section=system&subsection=system_records&system_records_lookup_section=compliance&system_records_lookup_subsection=compliance_management&system_records_lookup_item_id=$compliance_package_item_item[compliance_package_item_name]\" class=\"delete-action\">records</a>";
 echo "			&nbsp;|&nbsp;";
-echo "			<a href=\"?section=system&subsection=system_records&system_records_lookup_section=organization&system_records_lookup_subsection=tp&system_records_lookup_item_id=$tp_item[tp_id]\" class=\"delete-action\">improve</a>";
+echo "			<a href=\"?section=operations&subsection=project_improvements&system_records_lookup_section=organization&system_records_lookup_subsection=tp&system_records_lookup_item_id=$tp_item[tp_id]\" class=\"delete-action\">improve</a>";
 echo "			</div>";
 echo "		</td>";
 echo "			<td>$compliance_package_item_item[compliance_package_item_description]</td>";

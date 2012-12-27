@@ -10,7 +10,8 @@
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_list = build_base_url($section,"tp_list");
+	$base_url_edit = build_base_url($section,"tp_edit");
 	
 	# local variables - YOU MUST ADJUST THIS! 
 	$tp_id = $_GET["tp_id"];
@@ -53,13 +54,13 @@
 ?>
 
 	<section id="content-wrapper">
-		<h3>Legal Constrains</h3>
+		<h3>Third Parties</h3>
 		<span class=description>Most organization partners and executes busineses with many other parties. Understanding this links is necesary in order to develop a full picture of hte scope of your security program.</span>
 		<br>
 		<br>
 		<div class="controls-wrapper">
 <?
-echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
+echo "			<a href=\"$base_url_edit&action=edit\" class=\"add-btn\">";
 ?>
 				<span class="add-icon"></span>
 				Add new Third Party 
@@ -76,7 +77,7 @@ echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
 if ($action == "csv") {
 echo "					<li><a href=\"downloads/tp_export.csv\">Dowload</a></li>";
 } else { 
-echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
+echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 }
 ?>
 				</ul>
@@ -89,11 +90,11 @@ echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
 				<tr>
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
-echo "					<th><a class=\"asc\" href=\"$base_url&sort=tp_name\">Legal name</a></th>";
+echo "					<th><a class=\"asc\" href=\"$base_url_list&sort=tp_name\">Legal name</a></th>";
 ?>
 <?
-echo "					<th><a href=\"$base_url&sort=tp_type_id\">Type</a></th>";
-echo "					<th><a href=\"$base_url&sort=tp_description\">Description</a></th>";
+echo "					<th><a href=\"$base_url_list&sort=tp_type_id\">Type</a></th>";
+echo "					<th><a href=\"$base_url_list&sort=tp_description\">Description</a></th>";
 ?>
 				</tr>
 			</thead>
@@ -119,13 +120,13 @@ echo "						<div class=\"cell-label\">";
 echo "							$tp_item[tp_name]";
 echo "						</div>";
 echo "						<div class=\"cell-actions\">";
-echo "							<a href=\"$base_url&action=edit&tp_id=$tp_item[tp_id]\" class=\"edit-action\">edit</a> ";
+echo "							<a href=\"$base_url_edit&action=edit&tp_id=$tp_item[tp_id]\" class=\"edit-action\">edit</a> ";
 echo "						&nbsp;|&nbsp;";
-echo "							<a href=\"$base_url&action=disable&tp_id=$tp_item[tp_id]\" class=\"delete-action\">delete</a>";
+echo "							<a href=\"$base_url_list&action=disable&tp_id=$tp_item[tp_id]\" class=\"delete-action\">delete</a>";
 echo "						&nbsp;|&nbsp;";
 echo "							<a href=\"?section=system&subsection=system_records&system_records_lookup_section=organization&system_records_lookup_subsection=tp&system_records_lookup_item_id=$tp_item[tp_id]\" class=\"delete-action\">records</a>";
 echo "						&nbsp;|&nbsp;";
-echo "							<a href=\"?section=system&subsection=system_records&system_records_lookup_section=organization&system_records_lookup_subsection=tp&system_records_lookup_item_id=$tp_item[tp_id]\" class=\"delete-action\">improve</a>";
+echo "							<a href=\"?section=operations&subsection=project_improvements&system_records_lookup_section=organization&system_records_lookup_subsection=tp&system_records_lookup_item_id=$tp_item[tp_id]\" class=\"delete-action\">improve</a>";
 echo "						</div>";
 echo "					</td>";
 echo "					<td>$tp_type_name[tp_type_name]</td>";

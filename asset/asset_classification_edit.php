@@ -9,7 +9,8 @@
 	$action = $_GET["action"];
 	$asset_classification_id = $_GET["asset_classification_id"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_edit = build_base_url($section,"asset_classification_edit");
+	$base_url_list = build_base_url($section,"asset_classification_list");
 
 	if (is_numeric($asset_classification_id)) {
 		$asset_classification_item = lookup_asset_classification("asset_classification_id",$asset_classification_id);
@@ -32,7 +33,7 @@
 			<div class="tab-content">
 				<div class="tab" id="tab1">
 <?
-echo "					<form name=\"asset_classification_edit\" method=\"GET\" action=\"$base_url\">";
+echo "					<form name=\"asset_classification_edit\" method=\"GET\" action=\"$base_url_list\">";
 ?>
 						<label for="applicable">Classification Type</label>
 						<span class="description">This is the begining of the classification of assets. Let's say you are clasifying cars, an example of "Type" could be "Size". Later, you will name several options (names) for that Type of classification, such as "Big". "Small", Etc. Most regulations and standards require classifications such as "Confidentiality, Sensibility or Integrity" level, Etc. If you havent created a Classification type before, you will need to create one.</span>
@@ -63,14 +64,14 @@ echo "					<form name=\"asset_classification_edit\" method=\"GET\" action=\"$bas
 
 				    <INPUT type="hidden" name="action" value="update">
 				    <INPUT type="hidden" name="section" value="asset">
-				    <INPUT type="hidden" name="subsection" value="asset_classification">
+				    <INPUT type="hidden" name="subsection" value="asset_classification_list">
 <? echo " 			    <INPUT type=\"hidden\" name=\"asset_classification_id\" value=\"$asset_classification_item[asset_classification_id]\">"; ?>
 			<a>
 			    <INPUT type="submit" value="Submit" class="add-btn"> 
 			</a>
 			
 <?
-echo "			<a href=\"$base_url\" class=\"cancel-btn\">";
+echo "			<a href=\"$base_url_list\" class=\"cancel-btn\">";
 ?>
 				Cancel
 				<span class="select-icon"></span>

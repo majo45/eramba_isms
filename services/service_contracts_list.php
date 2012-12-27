@@ -12,8 +12,9 @@
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
 	
-	$base_url = build_base_url($section,$subsection);
-	$tp_url = build_base_url("organization","tp");
+	$base_url_list  = build_base_url($section,"service_contracts_list");
+	$base_url_edit  = build_base_url($section,"service_contracts_edit");
+	$tp_url = build_base_url("organization","tp_list");
 	
 	# local variables - YOU MUST ADJUST THIS! 
 	$service_contracts_id = $_GET["service_contracts_id"];
@@ -46,7 +47,7 @@
 			'service_contracts_start' => $service_contracts_start,
 			'service_contracts_provider_id' => $service_contracts_provider_id
 		);	
-		print_r($service_contracts_update);
+		# print_r($service_contracts_update);
 		$service_contracts_id = add_service_contracts($service_contracts_update);
 		add_system_records("security_catalogue","service_contracts","$service_contracts_id","","Insert","");
 	 }
@@ -84,13 +85,12 @@
 					<span class="select-icon"></span>
 				</a>
 				<ul class="action-submenu">
-					<li><a href="#">Delete</a></li>
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 if ($action == "csv") {
 echo "					<li><a href=\"downloads/service_contracts_export.csv\">Dowload</a></li>";
 } else { 
-echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
+echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 }
 ?>
 				</ul>
@@ -109,7 +109,7 @@ echo "					Provider: $tp_item[tp_name]";
 echo "					<span class=\"actions\">";
 echo "						<a class=\"edit\" href=\"$tp_url&sort=$tp_item[tp_id]\">view this third party</a>";
 echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"edit\" href=\"$base_url&service_contracts_id=$tp_item[tp_id]&action=edit_service_contracts\">add a new service contract to this provider</a>";
+echo "						<a class=\"edit\" href=\"$base_url_edit&service_contracts_id=$tp_item[tp_id]&action=edit_service_contracts\">add a new service contract to this provider</a>";
 echo "					</span>";
 echo "					<span class=\"icon\"></span>";
 echo "				</div>";
@@ -133,12 +133,12 @@ echo "								<div class=\"cell-label\">";
 echo "								 	$service_contracts_item[service_contracts_name]";
 echo "								</div>";
 echo "								<div class=\"cell-actions\">";
-echo "							<a href=\"$base_url&action=edit_service_contracts&service_contracts_id=$service_contracts_item[service_contracts_id]&service_contracts_id=$service_contracts_item[service_contracts_id]\" class=\"edit-action\">edit</a> ";
-echo "							<a href=\"$base_url&action=disable&service_contracts_id=$service_contracts_item[service_contracts_id]\" class=\"delete-action\">delete</a>";
+echo "							<a href=\"$base_url_edit&action=edit_service_contracts&service_contracts_id=$service_contracts_item[service_contracts_id]&service_contracts_id=$service_contracts_item[service_contracts_id]\" class=\"edit-action\">edit</a> ";
+echo "							<a href=\"$base_url_list&action=disable&service_contracts_id=$service_contracts_item[service_contracts_id]\" class=\"delete-action\">delete</a>";
 echo "						&nbsp;|&nbsp;";
 echo "							<a href=\"?section=system&subsection=system_records&system_records_lookup_section=security_services&system_records_lookup_subsection=service_contracts&system_records_lookup_item_id=$service_contracts_item[service_contracts_id]\" class=\"delete-action\">records</a>";
 echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"delete\" href=\"?section=ciso&subsection=pmo&ciso_pmo_lookup_section=asset&ciso_pmo_lookup_subsection=asset_identification&ciso_pmo_lookup_item_id=$service_contracts_item[service_contracts_id]\">improve</a>";
+echo "						<a class=\"delete\" href=\"?section=operations&subsection=project_improvements&operations_pmo_lookup_section=asset&operations_pmo_lookup_subsection=asset_identification&operations_pmo_lookup_item_id=$service_contracts_item[service_contracts_id]\">improve</a>";
 echo "								</div>";
 echo "							</td>";
 echo "							<td>$service_contracts_item[service_contracts_description]</td>";

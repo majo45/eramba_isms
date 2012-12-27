@@ -10,7 +10,7 @@
 	$action = $_GET["action"];
 	$system_group_role_id = $_GET["system_group_role_id"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_list = build_base_url($section,"system_roles_list");
 
 	if (is_numeric($system_group_role_id)) {
 		$system_group_role_item = lookup_system_group_role("system_group_role_id",$system_group_role_id);
@@ -23,7 +23,7 @@
 		<h3>Edit or Create a Group Role</h3>
 		<span class="description">Group permissions and give them a name ... you will need this to ensure the right level of access to the system users.</span>
 		<?
-echo "					<form name=\"system_group_role_edit\" method=\"GET\" action=\"$base_url\">";
+echo "					<form name=\"system_group_role_edit\" method=\"GET\" action=\"$base_url_list\">";
 ?>
 		<div class="tab-wrapper"> 
 			<ul class="tabs">
@@ -83,7 +83,7 @@ echo "					<form name=\"system_group_role_edit\" method=\"GET\" action=\"$base_u
 
 				    <INPUT type="hidden" name="action" value="update">
 				    <INPUT type="hidden" name="section" value="system">
-				    <INPUT type="hidden" name="subsection" value="system_roles">
+				    <INPUT type="hidden" name="subsection" value="system_roles_list">
 <? echo " 			<INPUT type=\"hidden\" name=\"system_group_role_id\" value=\"$system_group_role_item[system_group_role_id]\">"; ?>
 
 			<a>
@@ -91,7 +91,7 @@ echo "					<form name=\"system_group_role_edit\" method=\"GET\" action=\"$base_u
 			</a>
 			
 <?
-echo "			<a href=\"$base_url\" class=\"cancel-btn\">";
+echo "			<a href=\"$base_url_list\" class=\"cancel-btn\">";
 ?>
 				Cancel
 				<span class="select-icon"></span>

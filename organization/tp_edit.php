@@ -9,7 +9,8 @@
 	$action = $_GET["action"];
 	$tp_id = $_GET["tp_id"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_list = build_base_url($section,"tp_list");
+	$base_url_edit = build_base_url($section,"tp_edit");
 
 	if (is_numeric($tp_id)) {
 		$tp_item = lookup_tp("tp_id",$tp_id);
@@ -59,14 +60,15 @@ echo "					<form name=\"tp_edit\" method=\"GET\" action=\"$base_url\">";
 
 				    <INPUT type="hidden" name="action" value="update">
 				    <INPUT type="hidden" name="section" value="organization">
-				    <INPUT type="hidden" name="subsection" value="tp">
+				    <INPUT type="hidden" name="subsection" value="tp_list">
 <? echo " 			    <INPUT type=\"hidden\" name=\"tp_id\" value=\"$tp_item[tp_id]\">"; ?>
 
-			    <INPUT type="submit" value="Send"> 
+			<a>
+			    <INPUT type="submit" value="Submit" class="add-btn"> 
 			</a>
 			
 <?
-echo "			<a href=\"$base_url\" class=\"cancel-btn\">";
+echo "			<a href=\"$base_url_list\" class=\"cancel-btn\">";
 ?>
 				Cancel
 				<span class="select-icon"></span>

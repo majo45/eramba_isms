@@ -15,7 +15,7 @@
 	$tp_id = $_GET["tp_id"];
 	$compliance_package_item= $_GET["compliance_package_item"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_list = build_base_url($section,"compliance_management_step_two");
 
 	if (is_numeric($compliance_package_item)) {
 		$compliance_management_item = lookup_compliance_management("compliance_management_item_id",$compliance_package_item);
@@ -38,7 +38,7 @@
 			<div class="tab-content">
 				<div class="tab" id="tab1">
 <?
-echo "					<form name=\"risk_edit\" method=\"GET\" action=\"$base_url\">";
+echo "					<form name=\"risk_edit\" method=\"GET\" action=\"$base_url_list\">";
 ?>
 						<label for="legalType">Compliance Response Strategy</label>
 						<span class="description">What's your mitigation strategy for this compliance item</span>
@@ -95,7 +95,7 @@ echo "					<form name=\"risk_edit\" method=\"GET\" action=\"$base_url\">";
 		<div class="controls-wrapper">
 				    <INPUT type="hidden" name="action" value="update">
 				    <INPUT type="hidden" name="section" value="compliance">
-				    <INPUT type="hidden" name="subsection" value="compliance_management">
+				    <INPUT type="hidden" name="subsection" value="compliance_management_step_two">
 <? echo "			    <INPUT type=\"hidden\" name=\"compliance_management_id\" value=\"$compliance_management_item[compliance_management_id]\">"; ?>
 <? echo "			    <INPUT type=\"hidden\" name=\"compliance_management_item_id\" value=\"$compliance_package_item\">"; ?>
 <? echo "			    <INPUT type=\"hidden\" name=\"tp_id\" value=\"$tp_id\">"; ?>
@@ -105,7 +105,7 @@ echo "					<form name=\"risk_edit\" method=\"GET\" action=\"$base_url\">";
 			</a>
 			
 <?
-echo "			<a href=\"$base_url\" class=\"cancel-btn\">";
+echo "			<a href=\"$base_url_list\" class=\"cancel-btn\">";
 ?>
 				Cancel
 				<span class="select-icon"></span>

@@ -11,7 +11,8 @@
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_list = build_base_url($section,"system_roles_list");
+	$base_url_edit = build_base_url($section,"system_roles_edit");
 	
 	# local variables - YOU MUST ADJUST THIS! 
 	$system_group_role_id = $_GET["system_group_role_id"];
@@ -88,7 +89,7 @@
 		<br>
 		<div class="controls-wrapper">
 <?
-echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
+echo "			<a href=\"$base_url_edit&action=edit\" class=\"add-btn\">";
 ?>
 				<span class="add-icon"></span>
 				Add a new Group Role 
@@ -101,7 +102,7 @@ echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
 if ($action == "csv") {
 echo "					<li><a href=\"downloads/system_group_role_export.csv\">Dowload</a></li>";
 } else { 
-echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
+echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 }
 ?>
 				</ul>
@@ -114,7 +115,7 @@ echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
 				<tr>
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
-echo "					<th><a class=\"asc\" href=\"$base_url&sort=system_group_role_name\">Role Group Name</a></th>";
+echo "					<th><a class=\"asc\" href=\"$base_url_list&sort=system_group_role_name\">Role Group Name</a></th>";
 ?>
 <?
 echo "					<th>Description</th>";
@@ -139,9 +140,9 @@ echo "						<div class=\"cell-label\">";
 echo "							$system_group_role_item[system_group_role_name]";
 echo "						</div>";
 echo "						<div class=\"cell-actions\">";
-echo "							<a href=\"$base_url&action=edit&system_group_role_id=$system_group_role_item[system_group_role_id]\" class=\"edit-action\">edit</a> ";
+echo "							<a href=\"$base_url_edit&action=edit&system_group_role_id=$system_group_role_item[system_group_role_id]\" class=\"edit-action\">edit</a> ";
 echo "						&nbsp;|&nbsp;";
-echo "							<a href=\"$base_url&action=disable&system_group_role_id=$system_group_role_item[system_group_role_id]\" class=\"delete-action\">delete</a>";
+echo "							<a href=\"$base_url_list&action=disable&system_group_role_id=$system_group_role_item[system_group_role_id]\" class=\"delete-action\">delete</a>";
 echo "						&nbsp;|&nbsp;";
 echo "							<a href=\"?section=system&subsection=system_records&system_records_lookup_section=organization&system_records_lookup_subsection=system_group_role&system_records_lookup_item_id=$system_group_role_item[system_group_role_id]\" class=\"delete-action\">records</a>";
 echo "						</div>";

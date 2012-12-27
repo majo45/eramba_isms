@@ -10,7 +10,9 @@
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_list = build_base_url($section,"bu_list");
+	$base_url_edit_process= build_base_url($section,"process_edit");
+	$base_url_edit = build_base_url($section,"bu_edit");
 	
 	# local variables - YOU MUST ADJUST THIS! 
 	$bu_id = $_GET["bu_id"];
@@ -91,7 +93,7 @@
 		<br>
 		<div class="controls-wrapper">
 <?
-echo "			<a href=\"$base_url&action=edit_bu\" class=\"add-btn\">";
+echo "			<a href=\"$base_url_edit&action=edit_bu\" class=\"add-btn\">";
 ?>
 				<span class="add-icon"></span>
 				Add new Business Unit 
@@ -113,7 +115,7 @@ echo "			<a href=\"$base_url&action=edit_bu\" class=\"add-btn\">";
 if ($action == "csv") {
 echo "					<li><a href=\"downloads/legal_export.csv\">Dowload</a></li>";
 } else { 
-echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
+echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 }
 ?>
 				</ul>
@@ -130,15 +132,15 @@ echo "			<li>";
 echo "				<div class=\"header\">";
 echo "					Business Unit: $bu_item[bu_name]";
 echo "					<span class=\"actions\">";
-echo "						<a class=\"edit\" href=\"$base_url&action=edit_bu&bu_id=$bu_item[bu_id]\">edit</a>";
+echo "						<a class=\"edit\" href=\"$base_url_edit&action=edit&bu_id=$bu_item[bu_id]\">edit</a>";
 echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"delete\" href=\"$base_url&action=disable_bu&bu_id=$bu_item[bu_id]\">delete</a>";
+echo "						<a class=\"delete\" href=\"$base_url_list&action=disable_bu&bu_id=$bu_item[bu_id]\">delete</a>";
 echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"delete\" href=\"$base_url&action=edit_process&bu_id=$bu_item[bu_id]\">add new business process here</a>";
+echo "						<a class=\"delete\" href=\"$base_url_edit_process&action=edit_process&bu_id=$bu_item[bu_id]\">add new business process here</a>";
 echo "						&nbsp;|&nbsp;";
 echo "						<a class=\"delete\" href=\"?section=system&subsection=system_records&system_records_lookup_section=organization&system_records_lookup_subsection=bu&system_records_lookup_item_id=$bu_item[bu_id]\">records</a>";
 echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"delete\" href=\"?section=ciso&subsection=pmo&ciso_pmo_lookup_section=organization&ciso_pmo_lookup_subsection=bu&ciso_pmo_lookup_item_id=$bu_item[bu_id]\">improve</a>";
+echo "						<a class=\"delete\" href=\"?section=operations&subsection=project_improvements&ciso_pmo_lookup_section=organization&ciso_pmo_lookup_subsection=bu&ciso_pmo_lookup_item_id=$bu_item[bu_id]\">improve</a>";
 echo "					</span>";
 echo "					<span class=\"icon\"></span>";
 echo "				</div>";
@@ -158,12 +160,12 @@ echo "								<div class=\"cell-label\">";
 echo "								 	$process_item[process_name]";
 echo "								</div>";
 echo "								<div class=\"cell-actions\">";
-echo "							<a href=\"$base_url&action=edit_process&process_id=$process_item[process_id]&bu_id=$bu_item[bu_id]\" class=\"edit-action\">edit</a> ";
-echo "							<a href=\"$base_url&action=disable_process&process_id=$process_item[process_id]\" class=\"delete-action\">delete</a>";
+echo "							<a href=\"$base_url_edit_process&action=edit_process&process_id=$process_item[process_id]&bu_id=$bu_item[bu_id]\" class=\"edit-action\">edit</a> ";
+echo "							<a href=\"$base_url_list&action=disable_process&process_id=$process_item[process_id]\" class=\"delete-action\">delete</a>";
 echo "						&nbsp;|&nbsp;";
 echo "							<a href=\"?section=system&subsection=system_records&system_records_lookup_section=organization&system_records_lookup_subsection=bu-process&system_records_lookup_item_id=$process_item[process_id]\" class=\"delete-action\">records</a>";
 echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"delete\" href=\"?section=ciso&subsection=pmo&ciso_pmo_lookup_section=asset&ciso_pmo_lookup_subsection=asset_identification&ciso_pmo_lookup_item_id=$process_item[process_id]\">improve</a>";
+echo "						<a class=\"delete\" href=\"?section=operations&subsection=project_improvements&ciso_pmo_lookup_section=asset&ciso_pmo_lookup_subsection=asset_identification&ciso_pmo_lookup_item_id=$process_item[process_id]\">improve</a>";
 echo "								</div>";
 echo "							</td>";
 echo "							<td>$process_item[process_description]</td>";

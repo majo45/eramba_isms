@@ -14,8 +14,9 @@
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
 	
-	$base_url = build_base_url($section,$subsection);
-	$service_catalogue_url = build_base_url($section,"security_catalogue");
+	$base_url_list  = build_base_url($section,"security_services_audit_list");
+	$base_url_edit  = build_base_url($section,"security_services_audit_edit");
+	$service_catalogue_url = build_base_url($section,"security_catalogue_list");
 	
 	# local variables - YOU MUST ADJUST THIS! 
 	$security_services_audit_id = $_GET["security_services_audit_id"];
@@ -116,14 +117,14 @@
 				</a>
 				<ul class="action-submenu">
 <?
-echo "					<li><a href=\"$base_url&sort=this_month\">This Month Audits</a></li>";
-echo "					<li><a href=\"$base_url&sort=future_months\">Comming Audits</a></li>";
-echo "					<li><a href=\"$base_url&sort=past_months\">Past Audits</a></li>";
+echo "					<li><a href=\"$base_url_list&sort=this_month\">This Month Audits</a></li>";
+echo "					<li><a href=\"$base_url_list&sort=future_months\">Comming Audits</a></li>";
+echo "					<li><a href=\"$base_url_list&sort=past_months\">Past Audits</a></li>";
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 if ($action == "csv") {
 echo "					<li><a href=\"downloads/security_services_audit_export.csv\">Dowload</a></li>";
 } else { 
-echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
+echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 }
 ?>
 				</ul>

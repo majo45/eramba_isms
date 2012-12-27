@@ -15,7 +15,7 @@
 	$action = $_GET["action"];
 	$service_contracts_id= $_GET["service_contracts_id"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_list = build_base_url($section,"service_contracts_edit");
 
 	if (is_numeric($service_contracts_id)) {
 		$service_contracts_item = lookup_service_contracts("service_contracts_id",$service_contracts_id);
@@ -41,7 +41,7 @@
 			<div class="tab-content">
 				<div class="tab" id="tab1">
 <?
-echo "					<form name=\"service_contracts_edit\" method=\"GET\" action=\"$base_url\">";
+echo "					<form name=\"service_contracts_edit\" method=\"GET\" action=\"$base_url_list\">";
 ?>
 						<label for="name">Service Contract Name</label>
 						<span class="description">Give a name to the contract you have in between this provider and your organization. Examples: Firewall Hardware Support, Firewall Consulting Time, Etc.</span>
@@ -82,7 +82,7 @@ echo "						<input type=\"text\" name=\"service_contracts_end\" value=\"$service
 		<div class="controls-wrapper">
 				    <INPUT type="hidden" name="action" value="update_service_contracts">
 				    <INPUT type="hidden" name="section" value="security_services">
-				    <INPUT type="hidden" name="subsection" value="service_contracts">
+				    <INPUT type="hidden" name="subsection" value="service_contracts_list">
 <?
  echo " 			    <INPUT type=\"hidden\" name=\"service_contracts_id\" value=\"$service_contracts_item[service_contracts_id]\">"; 
  echo " 			    <INPUT type=\"hidden\" name=\"service_contracts_provider_id\" value=\"$service_contracts_id\">"; 
@@ -92,7 +92,7 @@ echo "						<input type=\"text\" name=\"service_contracts_end\" value=\"$service
 			</a>
 			
 <?
-echo "			<a href=\"$base_url\" class=\"cancel-btn\">";
+echo "			<a href=\"$base_url_list\" class=\"cancel-btn\">";
 ?>
 				Cancel
 				<span class="select-icon"></span>

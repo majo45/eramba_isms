@@ -9,7 +9,8 @@
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_list = build_base_url($section,"risk_classification_list");
+	$base_url_edit = build_base_url($section,"risk_classification_edit");
 	
 	# local variables - YOU MUST ADJUST THIS! 
 	$risk_classification_id = $_GET["risk_classification_id"];
@@ -71,7 +72,7 @@
 		<br>
 		<div class="controls-wrapper">
 <?
-echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
+echo "			<a href=\"$base_url_edit&action=edit\" class=\"add-btn\">";
 ?>
 				<span class="add-icon"></span>
 				Add new Classification 
@@ -89,7 +90,7 @@ echo "			<a href=\"$base_url&action=edit\" class=\"add-btn\">";
 if ($action == "csv") {
 echo "					<li><a href=\"downloads/risk_classification_export.csv\">Dowload</a></li>";
 } else { 
-echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
+echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 }
 ?>
 				</ul>
@@ -102,10 +103,10 @@ echo "					<li><a href=\"$base_url&action=csv\">Export All</a></li>";
 				<tr>
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
-echo "					<th><a class=\"asc\" href=\"$base_url&sort=risk_classification_name\">Classification Name</a></th>";
-echo "					<th><a href=\"$base_url&sort=risk_classification_criteria\">Classification Criteria</a></th>";
-echo "					<th><center><a href=\"$base_url&sort=risk_classification_type\">Type</a></th>";
-echo "					<th><center><a href=\"$base_url&sort=risk_classification_value\">Value</a></th>";
+echo "					<th><a class=\"asc\" href=\"$base_url_list&sort=risk_classification_name\">Classification Name</a></th>";
+echo "					<th><a href=\"$base_url_list&sort=risk_classification_criteria\">Classification Criteria</a></th>";
+echo "					<th><center><a href=\"$base_url_list&sort=risk_classification_type\">Type</a></th>";
+echo "					<th><center><a href=\"$base_url_list&sort=risk_classification_value\">Value</a></th>";
 ?>
 				</tr>
 			</thead>
@@ -126,8 +127,8 @@ echo "						<div class=\"cell-label\">";
 echo "							$risk_classification_item[risk_classification_name]";
 echo "						</div>";
 echo "						<div class=\"cell-actions\">";
-echo "							<a href=\"$base_url&action=edit&risk_classification_id=$risk_classification_item[risk_classification_id]\" class=\"edit-action\">edit</a> ";
-echo "							<a href=\"$base_url&action=disable&risk_classification_id=$risk_classification_item[risk_classification_id]\" class=\"delete-action\">delete</a>";
+echo "							<a href=\"$base_url_edit&action=edit&risk_classification_id=$risk_classification_item[risk_classification_id]\" class=\"edit-action\">edit</a> ";
+echo "							<a href=\"$base_url_list&action=disable&risk_classification_id=$risk_classification_item[risk_classification_id]\" class=\"delete-action\">delete</a>";
 echo "						</div>";
 echo "					</td>";
 echo "					<td>$risk_classification_item[risk_classification_criteria]</td>";

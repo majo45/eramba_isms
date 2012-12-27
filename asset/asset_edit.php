@@ -14,7 +14,8 @@
 	$action = $_GET["action"];
 	$asset_id= $_GET["asset_id"];
 	
-	$base_url = build_base_url($section,$subsection);
+	$base_url_edit = build_base_url($section,"asset_edit");
+	$base_url_list = build_base_url($section,"asset_list");
 
 	if (is_numeric($asset_id)) {
 		$asset_item = lookup_asset("asset_id",$asset_id);
@@ -40,7 +41,7 @@
 			<div class="tab-content">
 				<div class="tab" id="tab1">
 <?
-echo "					<form name=\"asset_edit\" method=\"GET\" action=\"$base_url\">";
+echo "					<form name=\"asset_edit\" method=\"GET\" action=\"$base_url_list\">";
 ?>
 						<label for="name">Name</label>
 						<span class="description">Give a name to the asset your program is intended to protect.</span>
@@ -129,27 +130,13 @@ foreach($asset_classification_types as $asset_classification_types_item) {
 						
 				</div>
 				
-				<div class="tab" id="tab2">
-
-						<label for="name">Name</label>
-						<span class="description">Give a name to the asset your program is intended to protect.</span>
-<?
-echo "						<input type=\"text\" name=\"asset_name\" id=\"\" value=\"$asset_item[asset_name]\"/>";
-?>
-						
-						<label for="description">Description</label>
-						<span class="description">Give a brief description on what the asset is.</span>
-<?
-echo "						<textarea id=\"\" name=\"asset_description\">$asset_item[asset_description]</textarea>";
-?>
-				</div>
 			</div>
 		</div>
 		
 		<div class="controls-wrapper">
 				    <INPUT type="hidden" name="action" value="update">
 				    <INPUT type="hidden" name="section" value="asset">
-				    <INPUT type="hidden" name="subsection" value="asset_identification">
+				    <INPUT type="hidden" name="subsection" value="asset_list">
 <? echo " 			    <INPUT type=\"hidden\" name=\"asset_id\" value=\"$asset_item[asset_id]\">"; ?>
 
 			<a>
@@ -157,7 +144,7 @@ echo "						<textarea id=\"\" name=\"asset_description\">$asset_item[asset_descr
 			</a>
 			
 <?
-echo "			<a href=\"$base_url\" class=\"cancel-btn\">";
+echo "			<a href=\"$base_url_list\" class=\"cancel-btn\">";
 ?>
 				Cancel
 				<span class="select-icon"></span>
