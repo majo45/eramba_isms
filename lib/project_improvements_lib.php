@@ -17,12 +17,15 @@ function add_project_improvements($project_improvements_data) {
 		project_improvements_tbl
 		VALUES (
 		\"$project_improvements_data[project_improvements_id]\",
-		\"$project_improvements_data[title]\",
-		\"$project_improvements_data[goal]\",
-		\"$project_improvements_data[start]\",
-		\"$project_improvements_data[deadline]\",
-		\"$project_improvements_data[status_id]\",
-		\"$project_improvements_data[owner_id]\",
+		\"$project_improvements_data[project_improvements_title]\",
+		\"$project_improvements_data[project_improvements_goal]\",
+		\"$project_improvements_data[project_improvements_start]\",
+		\"$project_improvements_data[project_improvements_deadline]\",
+		\"$project_improvements_data[project_improvements_status_id]\",
+		\"$project_improvements_data[project_improvements_source_section]\",
+		\"$project_improvements_data[project_improvements_source_subsection]\",
+		\"$project_improvements_data[project_improvements_source_item_id]\",
+		\"$project_improvements_data[project_improvements_owner_id]\",
 		\"0\"
 		)
 		";	
@@ -39,7 +42,7 @@ function update_project_improvements($project_improvements_data, $project_improv
 		project_improvements_start=\"$project_improvements_data[project_improvements_start]\",
 		project_improvements_deadline=\"$project_improvements_data[project_improvements_deadline]\",
 		project_improvements_status_id=\"$project_improvements_data[project_improvements_status_id]\",
-		project_improvements_owner_id=\"$project_improvements_data[project_improvements_owner_id]\",
+		project_improvements_owner_id=\"$project_improvements_data[project_improvements_owner_id]\"
 		WHERE
 		project_improvements_id=\"$project_improvements_id\"
 		";	
