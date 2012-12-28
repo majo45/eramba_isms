@@ -93,7 +93,6 @@ echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/chosen.css\" />";
 	<section id="header-wrapper">
 		<div id="header-inner">
 			<a href="/" id="logo">
-				<img src="img/logo.png" alt="Admin logo" />
 			</a>
 			<div id="user-box">
 				<div id="user-links">
