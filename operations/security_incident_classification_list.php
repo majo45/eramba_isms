@@ -53,7 +53,7 @@
 
 	<section id="content-wrapper">
 		<h3>Security Incident Classification Scheme</h3>
-		<span class=description>As part of the process of managing Risks, the classification of them is a critical componenent to set clear priorities and leverage from the Risk analsys. Define your Risk classification criterias in a usefull way!
+		<span class=description>Define how you would like Security Incidents to be classied at the time of creating them</span>
 		<br>
 		<br>
 		<div class="controls-wrapper">

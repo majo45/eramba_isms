@@ -18,8 +18,8 @@
 ?>
 
 	<section id="content-wrapper">
-		<h3>Edit or Create an Asset Classification</h3>
-		<span class="description">Usually there's many risks around in a organization. Trough classification (according to <i>your</i> needs) you will be able to set priorities and profile them in a way their treatment and handling is systematic. Btw, this is a basic requirement for most Security related regulations.</span>
+		<h3>Edit or Create an Security Incident Classification</h3>
+		<span class="description">Define your Security Incident Classification</span>
 		<div class="tab-wrapper"> 
 			<ul class="tabs">
 				<li class="first active">
