@@ -63,9 +63,6 @@ echo "					<form name=\"edit\" method=\"GET\" action=\"$base_url_list\">";
 ?>
 	</select>
 
-	<label for="description">Project Origin</label>
-	<span class="description">If this project came from an existing object (Risk, Service, Compliance, Etc.) this field will show the exact place. This is sometimes useful to remember why you started this project in the first time, what was the driver of this intiative.</span>
-<? echo "<input type=\"text\" name=\"\" disabled=\"disabled\" value=\"$project_improvements_item[project_improvements_source_section]/$project_improvements_source_section[project_improvements_source_subsection]/$project_improvements_source_subsection[project_improvements_source_item_id]\">";?>
 			</div>
 			<div class="tab" id="tab2">
 				advanced tab

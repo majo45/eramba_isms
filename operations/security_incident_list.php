@@ -1,6 +1,9 @@
 <?
 	include_once("lib/security_incident_lib.php");
+	include_once("lib/security_incident_classification_lib.php");
+	include_once("lib/security_incident_status_lib.php");
 	include_once("lib/site_lib.php");
+	include_once("lib/asset_lib.php");
 	include_once("lib/system_records_lib.php");
 
 	# general variables - YOU SHOULDNT NEED TO CHANGE THIS
@@ -25,9 +28,9 @@
 	$security_incident_disabled = $_GET["security_incident_disabled"];
 	 
 	#actions .. edit, update or disable - YOU MUST ADJUST THIS!
-	if ($action == "update" && is_numeric($security_incident_id)) {
+	if ($action == "edit" && is_numeric($security_incident_id)) {
 		$security_incident_update = array(
-			'security_incident_owner_id' => $security_incident_description,
+			'security_incident_owner_id' => $security_incident_owner_id,
 			'security_incident_title' => $security_incident_title,
 			'security_incident_open_date' => $security_incident_open_date,
 			'security_incident_description' => $security_incident_description,
@@ -38,9 +41,9 @@
 		);	
 		update_security_incident($security_incident_update,$security_incident_id);
 		add_system_records("operations","security_incident","$security_incident_id","","Update","");
-	} elseif ($action == "update") {
+	} elseif ($action == "edit") {
 		$security_incident_update = array(
-			'security_incident_owner_id' => $security_incident_description,
+			'security_incident_owner_id' => $security_incident_owner_id,
 			'security_incident_title' => $security_incident_title,
 			'security_incident_open_date' => $security_incident_open_date,
 			'security_incident_description' => $security_incident_description,
@@ -105,11 +108,13 @@ echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 echo "					<th><a class=\"asc\" href=\"$base_url_list&sort=security_incident_name\">Incident Title</a></th>";
+echo "					<th><a href=\"$base_url_list&sort=security_incident_description\">Description</a></th>";
 echo "					<th><a href=\"$base_url_list&sort=security_incident_classification_id\">Classification</a></th>";
-echo "					<th><a href=\"$base_url_list&sort=security_incident_date\">Date</a></th>";
 echo "					<th><a href=\"$base_url_list&sort=security_incident_status_id\">Status</a></th>";
+echo "					<th><a href=\"$base_url_list&sort=security_incident_date\">Open Date</a></th>";
+echo "					<th><a href=\"$base_url_list&sort=security_incident_date\">Closure Date</a></th>";
 echo "					<th><a href=\"$base_url_list&sort=security_incident_owner_id\">Owner</a></th>";
-echo "					<th><a href=\"$base_url_list&sort=security_incident_compromised_asset_id\">Compromised Asset</a></th>";
+echo "					<th><a href=\"$base_url_list&sort=security_incident_compromised_asset_id\">Asset</a></th>";
 ?>
 				</tr>
 			</thead>
@@ -127,7 +132,7 @@ echo "					<th><a href=\"$base_url_list&sort=security_incident_compromised_asset
 echo "				<tr class=\"even\">";
 echo "					<td class=\"action-cell\">";
 echo "						<div class=\"cell-label\">";
-echo "							$security_incident_item[security_incident_name]";
+echo "							$security_incident_item[security_incident_title]";
 echo "						</div>";
 echo "						<div class=\"cell-actions\">";
 echo "							<a href=\"$base_url_edit&action=edit&security_incident_id=$security_incident_item[security_incident_id]\" class=\"edit-action\">edit</a> ";
@@ -136,10 +141,19 @@ echo "							<a href=\"$base_url_list&action=disable&security_incident_id=$secur
 echo "						&nbsp;|&nbsp;";
 echo "							<a href=\"?section=system&subsection=system_records&system_records_lookup_section=operations&system_records_lookup_subsection=security_incident&system_records_lookup_item_id=$security_incident_item[security_incident_id]\" class=\"delete-action\">records</a>";
 echo "						&nbsp;|&nbsp;";
-echo "							<a href=\"?section=operations&subsection=project_improvements&system_records_lookup_section=operations&system_records_lookup_subsection=security_incident&system_records_lookup_item_id=$security_incident_item[security_incident_id]\" class=\"delete-action\">improve</a>";
+echo "							<a href=\"?section=operations&subsection=project_improvements_edit&system_records_lookup_section=operations&system_records_lookup_subsection=security_incident&system_records_lookup_item_id=$security_incident_item[security_incident_id]\" class=\"delete-action\">improve</a>";
 echo "						</div>";
 echo "					</td>";
-echo "					<td>$security_incident_item[security_incident_description]</td>";
+	$classification_name = lookup_security_incident_classification("security_incident_classification_id",$security_incident_item[security_incident_classification_id]);
+echo "					<td><a href=\"$base_url_edit&action=edit&security_incident_id=$security_incident_item[security_incident_id]\">".substr($security_incident_item[security_incident_description],0,50)."...</a></td>";
+echo "					<td>$classification_name[security_incident_classification_name]</td>";
+	$status_name = lookup_security_incident_status("security_incident_status_id",$security_incident_item[security_incident_status_id]);
+echo "					<td>$status_name[security_incident_status_name]</td>";
+echo "					<td>$security_incident_item[security_incident_open_date]</td>";
+echo "					<td>$security_incident_item[security_incident_closure_date]</td>";
+echo "					<td>$security_incident_item[security_incident_owner_id]</td>";
+	$asset_name = lookup_asset("asset_id",$security_incident_item[security_incident_compromised_asset_id]);
+echo "					<td>$asset_name[asset_name]</td>";
 echo "				</tr>";
 	}
 

@@ -163,7 +163,6 @@ echo "							<th class=\"center\">Status</th>";
 echo "							<th class=\"center\">Start</th>";
 echo "							<th class=\"center\">Planned End</th>";
 echo "							<th class=\"center\">Owner</th>";
-echo "							<th class=\"center\">Origin</th>";
 echo "						</tr>";
 
 echo "						<tr>";
@@ -173,7 +172,6 @@ echo "							<td><center>$project_improvements_item[project_improvements_start]<
 echo "							<td><center>$project_improvements_item[project_improvements_deadline]</td>";
 				$owner_item = lookup_system_users("system_users_id",$project_improvements_item[project_improvements_owner_id]);
 echo "							<td><center>$owner_item[system_users_name]</td>";
-echo "							<td><center></td>";
 echo "						</tr>";
 	#}
 echo "					</table>";

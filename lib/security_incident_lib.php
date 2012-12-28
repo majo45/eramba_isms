@@ -17,8 +17,14 @@ function add_security_incident($security_incident_data) {
 		security_incident_tbl
 		VALUES (
 		\"$security_incident_data[security_incident_id]\",
-		\"$security_incident_data[security_incident_name]\",
+		\"$security_incident_data[security_incident_owner_id]\",
+		\"$security_incident_data[security_incident_title]\",
+		\"$security_incident_data[security_incident_open_date]\",
 		\"$security_incident_data[security_incident_description]\",
+		\"$security_incident_data[security_incident_compromised_asset_id]\",
+		\"$security_incident_data[security_incident_closure_date]\",
+		\"$security_incident_data[security_incident_classification_id]\",
+		\"$security_incident_data[security_incident_status_id]\",
 		\"0\"
 		)
 		";	
@@ -30,8 +36,14 @@ function add_security_incident($security_incident_data) {
 function update_security_incident($security_incident_data, $security_incident_id) {
 	$sql = "UPDATE security_incident_tbl
 		SET
-		security_incident_name=\"$security_incident_data[security_incident_name]\",
-		security_incident_description=\"$security_incident_data[security_incident_description]\"
+		security_incident_owner_id=\"$security_incident_data[security_incident_owner_id]\",
+		security_incident_title=\"$security_incident_data[security_incident_title]\",
+		security_incident_open_date=\"$security_incident_data[security_incident_open_date]\",
+		security_incident_description=\"$security_incident_data[security_incident_description]\",
+		security_incident_compromised_asset_id=\"$security_incident_data[security_incident_compromised_asset_id]\",
+		security_incident_closure_date=\"$security_incident_data[security_incident_closure_date]\",
+		security_incident_classification_id=\"$security_incident_data[security_incident_classification_id]\",
+		security_incident_status_id=\"$security_incident_data[security_incident_status_id]\"
 		WHERE
 		security_incident_id=\"$security_incident_id\"
 		";	

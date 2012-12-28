@@ -15,7 +15,7 @@
 	$base_url_list = build_base_url($section,"security_incident_list");
 
 	if (is_numeric($security_incident_id)) {
-		$security_incident_item = lookup_bu("security_incident_id",$security_incident_id);
+		$security_incident_item = lookup_security_incident("security_incident_id",$security_incident_id);
 	}
 
 ?>
@@ -39,7 +39,7 @@ echo "					<form name=\"edit\" method=\"GET\" action=\"$base_url_list\">";
 ?>
 						<label for="name">Security Incident Title</label>
 						<span class="description">Give the Securty Incident a title, name or code so it's easily identified on the list list menu</span>
-<? echo "						<input type=\"text\" title=\"security_incident_title\" id=\"security_incident_title\" value=\"$security_incident_item[security_incident_title]\"/>";?>
+<? echo "						<input type=\"text\" name=\"security_incident_title\" id=\"security_incident_title\" value=\"$security_incident_item[security_incident_title]\"/>";?>
 						
 	<label for="description">Incident Description</label>
 	<span class="description">Describe the Security Incident in detail (when, what, where, why, whom, how).</span>
@@ -65,11 +65,15 @@ echo "					<form name=\"edit\" method=\"GET\" action=\"$base_url_list\">";
 						
 	<label for="description">Security Incident Owner</label>
 	<span class="description">Describe who is assigned on this incident and is responsible for it's treatment</span>
-<? echo "<input type=\"text\" owner=\"security_incident_owner\" id=\"security_incident_owner\" value=\"$security_incident_item[security_incident_owner]\"/>";?>
+<? echo "<input type=\"text\" name=\"security_incident_owner_id\" id=\"security_incident_owner\" value=\"$security_incident_item[security_incident_owner_id]\"/>";?>
 						
-	<label for="description">Security Incident Date</label>
+	<label for="description">Security Incident Open Date</label>
 	<span class="description">Describe the time when the Incident has been reported</span>
-<? echo "<input type=\"text\" date=\"security_incident_date\" id=\"security_incident_date\" value=\"$security_incident_item[security_incident_date]\"/>";?>
+<? echo "<input type=\"text\" name=\"security_incident_open_date\" id=\"security_incident_date\" value=\"$security_incident_item[security_incident_open_date]\"/>";?>
+	
+	<label for="description">Security Incident Closure Date</label>
+	<span class="description">Describe the time when the Incident has been closed</span>
+<? echo "<input type=\"text\" name=\"security_incident_closure_date\" id=\"security_incident_date\" value=\"$security_incident_item[security_incident_closure_date]\"/>";?>
 						
 	<label for="legalType">Incident Status</label>
 	<span class="description"></span>

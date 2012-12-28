@@ -75,7 +75,7 @@ function show_menu_sub($section) {
 
 	$user_access = getUserAccess();
 	
-	$query = "SELECT * FROM `system_authorization_tbl` WHERE `system_authorization_section_name`='" . $section . "' AND `system_authorization_action_type`='r'";
+	$query = "SELECT * FROM `system_authorization_tbl` WHERE `system_authorization_section_name`='" . $section . "' AND `system_authorization_action_type`='r' AND `system_authorization_subsection_submenu`=1";
 
 	$result = mysql_query($query);
 	if (!$result) {
