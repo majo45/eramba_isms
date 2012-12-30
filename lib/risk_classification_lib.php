@@ -245,7 +245,3 @@ function export_risk_classification_csv() {
 }
 
 ?>
-
-
-
-

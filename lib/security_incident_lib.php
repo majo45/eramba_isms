@@ -141,7 +141,3 @@ function export_security_incident_csv() {
 }
 
 ?>
-
-
-
-

@@ -5,7 +5,11 @@
 	include_once("lib/system_security_lib.php");
 	include_once("lib/site_lib.php");
 	include_once("lib/security_services_dashboard_lib.php");
+	include_once("lib/risk_dashboard_lib.php");
 	include_once("lib/system_records_lib.php");
+	include_once("lib/asset_dashboard_lib.php");
+	include_once("lib/compliance_dashboard_lib.php");
+	include_once("lib/security_operations_dashboard_lib.php");
 
 	if ( isset($_POST['login-submit']) ) {
 		$system_users_login = $_POST['login'];
@@ -36,6 +40,10 @@
 
 			# everytime someone logs in the system, i need to make sure i add all the dashboard statistics
 			security_services_dashboard_data();
+			risk_dashboard_data();
+			asset_dashboard_data();
+			compliance_dashboard_data();
+			security_operations_dashboard_data();
 	
 			header('Location: index.php');
 		} else {

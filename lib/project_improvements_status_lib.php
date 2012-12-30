@@ -129,7 +129,3 @@ function export_project_improvements_status_csv() {
 }
 
 ?>
-
-
-
-

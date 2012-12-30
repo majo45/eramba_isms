@@ -147,7 +147,3 @@ function export_data_asset_csv() {
 }
 
 ?>
-
-
-
-

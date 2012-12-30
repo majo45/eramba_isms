@@ -20,7 +20,8 @@ function add_compliance_management($compliance_management_data) {
 		\"$compliance_management_data[compliance_management_item_id]\",
 		\"$compliance_management_data[compliance_management_response_id]\",
 		\"$compliance_management_data[compliance_management_status_id]\",
-		\"$compliance_management_data[compliance_management_exception_id]\"
+		\"$compliance_management_data[compliance_management_exception_id]\",
+		\"0\"
 		)
 		";	
 	$result = runUpdateQuery($sql);
@@ -168,7 +169,3 @@ function export_compliance_management_csv($tp_id) {
 }
 
 ?>
-
-
-
-

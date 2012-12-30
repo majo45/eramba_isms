@@ -232,7 +232,3 @@ function lookup_risk_asset_join($asset_id) {
 }
 
 ?>
-
-
-
-

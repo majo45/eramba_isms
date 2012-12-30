@@ -129,7 +129,3 @@ function export_security_incident_status_csv() {
 }
 
 ?>
-
-
-
-

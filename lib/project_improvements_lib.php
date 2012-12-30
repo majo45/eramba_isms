@@ -144,7 +144,3 @@ function export_project_improvements_csv() {
 }
 
 ?>
-
-
-
-
