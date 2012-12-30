@@ -46,6 +46,10 @@ echo "					<form name=\"risk_exception_edit\" method=\"GET\" action=\"$base_url_
 						<span class="description">The identity of the person who will approve this Risk Exception.</span>
 <? echo "	<input type=\"text\" name=\"risk_exception_author\" id=\"\" value=\"$risk_exception_item[risk_exception_author]\"/>";?>
 						
+			<label for="name">Expiration</label>
+						<span class="description">Set the deadline for this Risk Exception. At the expiration day, a full re-assesment on this exception is usually done.</span>
+<? echo "	<input type=\"text\" name=\"risk_exception_expiration\" id=\"\" value=\"$risk_exception_item[risk_exception_expiration]\"/>";?>
+						
 				</div>
 			</div>
 		</div>

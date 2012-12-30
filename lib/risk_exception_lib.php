@@ -20,7 +20,7 @@ function add_risk_exception($risk_exception_data) {
 		\"$risk_exception_data[risk_exception_title]\",
 		\"$risk_exception_data[risk_exception_description]\",
 		\"$risk_exception_data[risk_exception_author]\",
-		\"$risk_exception_data[risk_exception_status]\",
+		\"$risk_exception_data[risk_exception_expiration]\"
 		\"0\"
 		)
 		";	
@@ -35,7 +35,7 @@ function update_risk_exception($risk_exception_data, $risk_exception_id) {
 		risk_exception_title=\"$risk_exception_data[risk_exception_title]\",
 		risk_exception_description=\"$risk_exception_data[risk_exception_description]\",
 		risk_exception_author=\"$risk_exception_data[risk_exception_author]\",
-		risk_exception_status=\"$risk_exception_data[risk_exception_status]\"
+		risk_exception_expiration=\"$risk_exception_data[risk_exception_expiration]\"
 		WHERE
 		risk_exception_id=\"$risk_exception_id\"
 		";	

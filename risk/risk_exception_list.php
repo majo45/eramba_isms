@@ -17,6 +17,7 @@
 	$risk_exception_title = $_GET["risk_exception_title"];
 	$risk_exception_description = $_GET["risk_exception_description"];
 	$risk_exception_author = $_GET["risk_exception_author"];
+	$risk_exception_expiration = $_GET["risk_exception_expiration"];
 	$risk_exception_status = $_GET["risk_exception_status"];
 
 	$risk_exception_disabled = $_GET["risk_exception_disabled"];
@@ -27,6 +28,7 @@
 			'risk_exception_title' => $risk_exception_title,
 			'risk_exception_description' => $risk_exception_description,
 			'risk_exception_author' => $risk_exception_author,
+			'risk_exception_expiration' => $risk_exception_expiration,
 			'risk_exception_status' => $risk_exception_status
 		);	
 		update_risk_exception($risk_exception_update,$risk_exception_id);
@@ -36,6 +38,7 @@
 			'risk_exception_title' => $risk_exception_title,
 			'risk_exception_description' => $risk_exception_description,
 			'risk_exception_author' => $risk_exception_author,
+			'risk_exception_expiration' => $risk_exception_expiration,
 			'risk_exception_status' => $risk_exception_status
 		);	
 		add_risk_exception($risk_exception_update);
@@ -96,7 +99,7 @@ echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 echo "					<th><a class=\"asc\" href=\"$base_url_list&sort=risk_exception_title\">Risk Exception Title</a></th>";
 echo "					<th><a href=\"$base_url_list&sort=risk_exception_description\">Description</a></th>";
 echo "					<th><center><a href=\"$base_url_list&sort=risk_exception_author\">Author</a></th>";
-# echo "					<th><center><a href=\"$base_url_list&sort=risk_exception_status\">Status</a></th>";
+echo "					<th><center><a href=\"$base_url_list&sort=risk_exception_expiration\">Expiration</a></th>";
 ?>
 				</tr>
 			</thead>
@@ -104,7 +107,7 @@ echo "					<th><center><a href=\"$base_url_list&sort=risk_exception_author\">Aut
 			<tbody>
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
-	if ($sort == "risk_exception_title" OR $sort == "risk_exception_description" OR $sort == "risk_exception_author" OR $sort == "risk_exception_status") {
+	if ($sort == "risk_exception_title" OR $sort == "risk_exception_description" OR $sort == "risk_exception_author" OR $sort == "risk_exception_status" OR $sort == "risk_exception_expiration") {
 	$risk_exception_list = list_risk_exception(" WHERE risk_exception_disabled = 0 ORDER by $sort");
 	} else {
 	$risk_exception_list = list_risk_exception(" WHERE risk_exception_disabled = 0 ORDER by risk_exception_title");
@@ -127,7 +130,7 @@ echo "						</div>";
 echo "					</td>";
 echo "					<td>$risk_exception_item[risk_exception_description]</td>";
 echo "					<td><center>$risk_exception_item[risk_exception_author]</td>";
-# echo "					<td><center>$risk_exception_item[risk_exception_status]</td>";
+echo "					<td><center>$risk_exception_item[risk_exception_expiration]</td>";
 echo "				</tr>";
 	}
 
