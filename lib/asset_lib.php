@@ -4,6 +4,7 @@
 # IF YOU WANT TO USE, YOU MUST RENAME FUNCTIONS!! :s/asset/asset/ - SAMEPLE
 
 include_once("mysql_lib.php");
+include_once("data_asset_lib.php");
 
 function list_asset($arguments) {
 	# MUST EDIT
@@ -119,6 +120,13 @@ function disable_asset($item_id) {
 	# MUST EDIT
 	$sql = "UPDATE asset_tbl SET asset_disabled=\"1\" WHERE asset_id = \"$item_id\""; 
 	$result = runUpdateQuery($sql);
+
+	# i need to remove all data_asset analysis if i delete an asset with the type "data_asset"
+	$data_asset_list = list_data_asset(" WHERE data_asset_asset_id = \"$item_id\"");
+	foreach($data_asset_list as $data_asset_item) {
+		disable_data_asset($data_asset_item[data_asset_id]);
+	}
+	
 	return;
 }
 

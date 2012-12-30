@@ -199,7 +199,7 @@ echo "								<div class=\"cell-label\">";
 echo "									$compliance_package_item[compliance_package_name]";
 echo "								</div>";
 echo "								<div class=\"cell-actions\">";
-echo "	<a href=\"$base_url__edit&action=edit_compliance_package&compliance_package_id=$compliance_package_item[compliance_package_id]\" class=\"edit_action\">edit</a> ";
+echo "	<a href=\"$base_url_edit&action=edit_compliance_package&compliance_package_id=$compliance_package_item[compliance_package_id]\" class=\"edit_action\">edit</a> ";
 echo "						&nbsp;|&nbsp;";
 echo "	<a href=\"$base_url_list&action=disable_compliance_package&compliance_package_id=$compliance_package_item[compliance_package_id]\" class=\"delete_action\">delete</a>";
 echo "						&nbsp;|&nbsp;";

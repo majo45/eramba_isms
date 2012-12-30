@@ -5,6 +5,8 @@
 
 include_once("mysql_lib.php");
 include_once("tp_lib.php");
+include_once("compliance_package_item_lib.php");
+include_once("compliance_management_lib.php");
 
 function list_compliance_package($arguments) {
 	# MUST EDIT
@@ -117,6 +119,15 @@ function disable_compliance_package($item_id) {
 	# MUST EDIT
 	$sql = "UPDATE compliance_package_tbl SET compliance_package_disabled=\"1\" WHERE compliance_package_id = \"$item_id\""; 
 	$result = runUpdateQuery($sql);
+
+	# must delete from compliance_package_item_tbl & compliance_management_tbl (you cant on this last table!)
+	$compliance_package_item_list = list_compliance_package_item(" WHERE compliance_package_id = \"$item_id\"");
+	foreach($compliance_package_item_list as $compliance_package_item_item) {
+		disable_compliance_package_item($compliance_package_item_item[compliance_package_item_id]);	
+		#$compliance_management_item_to_disable = lookup_compliance_management($compliance_package_item_item[compliance_package_item_id]);
+		#disable_compliance_management($compliance_management_item_to_disable[compliance_management_id]);
+	}  
+
 	return;
 }
 

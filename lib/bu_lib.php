@@ -102,9 +102,17 @@ function disable_bu($item_id) {
 	if (!is_numeric($item_id)) {
 		return;
 	}
+
 	# MUST EDIT
 	$sql = "UPDATE bu_tbl SET bu_disabled=\"1\" WHERE bu_id = \"$item_id\""; 
 	$result = runUpdateQuery($sql);
+	
+	# I must also remove all asociated processes
+	$process_list = list_process(" WHERE bu_id = \"$item_id\"");
+	foreach($process_list as $process_item) {
+		disable_process($process_item[process_id]);	
+	}
+
 	return;
 }
 

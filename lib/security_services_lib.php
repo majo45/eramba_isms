@@ -121,6 +121,15 @@ function disable_security_services($item_id) {
 	# MUST EDIT
 	$sql = "UPDATE security_services_tbl SET security_services_disabled=\"1\" WHERE security_services_id = \"$item_id\""; 
 	$result = runUpdateQuery($sql);
+
+	# i need to remove all the asociated audit stuff
+	# form tables: security_services_catalogue_audit_calendar_join & security_services_audit_tbl
+	delete_security_services_catalogue_audit_calendar_join($item_id);
+	$security_services_audit_list = list_security_services_audit(" WHERE security_services_audit_security_service_id = \"$item_id\"");
+	foreach($security_services_audit_list as $security_services_audit_item) {
+		disable_security_services_audit($security_services_audit_item[security_services_audit_id]);	
+	}
+
 	return;
 }
 

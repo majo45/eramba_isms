@@ -127,7 +127,3 @@ function export_system_records_csv() {
 }
 
 ?>
-
-
-
-
