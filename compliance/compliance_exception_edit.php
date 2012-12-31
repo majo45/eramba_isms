@@ -46,6 +46,10 @@ echo "					<form name=\"compliance_exception_edit\" method=\"GET\" action=\"$bas
 						<span class="description">The identity of the person who will approve this Compliance Exception.</span>
 <? echo "	<input type=\"text\" name=\"compliance_exception_author\" id=\"\" value=\"$compliance_exception_item[compliance_exception_author]\"/>";?>
 						
+			<label for="name">Expiration</label>
+						<span class="description">Set an expiration day for this exception. At that point in time you want to re-assess the decision to grant an exception. As always, the date format is YYYY-MM-DD.</span>
+<? echo "	<input type=\"text\" name=\"compliance_exception_expiration\" id=\"\" value=\"$compliance_exception_item[compliance_exception_expiration]\"/>";?>
+						
 				</div>
 			</div>
 		</div>

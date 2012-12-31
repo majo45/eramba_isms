@@ -17,7 +17,7 @@
 	$compliance_exception_title = $_GET["compliance_exception_title"];
 	$compliance_exception_description = $_GET["compliance_exception_description"];
 	$compliance_exception_author = $_GET["compliance_exception_author"];
-	$compliance_exception_status = $_GET["compliance_exception_status"];
+	$compliance_exception_expiration = $_GET["compliance_exception_expiration"];
 
 	$compliance_exception_disabled = $_GET["compliance_exception_disabled"];
 	 
@@ -27,7 +27,7 @@
 			'compliance_exception_title' => $compliance_exception_title,
 			'compliance_exception_description' => $compliance_exception_description,
 			'compliance_exception_author' => $compliance_exception_author,
-			'compliance_exception_status' => $compliance_exception_status
+			'compliance_exception_expiration' => $compliance_exception_expiration
 		);	
 		update_compliance_exception($compliance_exception_update,$compliance_exception_id);
 		add_system_records("compliance","compliance_exception","$compliance_exception_id","","Update","");
@@ -36,7 +36,7 @@
 			'compliance_exception_title' => $compliance_exception_title,
 			'compliance_exception_description' => $compliance_exception_description,
 			'compliance_exception_author' => $compliance_exception_author,
-			'compliance_exception_status' => $compliance_exception_status
+			'compliance_exception_expiration' => $compliance_exception_expiration
 		);	
 		$compliance_exception_id = add_compliance_exception($compliance_exception_update);
 		add_system_records("compliance","compliance_exception","$compliance_exception_id","","Insert","");
@@ -96,7 +96,7 @@ echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 echo "					<th><a class=\"asc\" href=\"$base_url_list&sort=compliance_exception_title\">Compliance Exception Title</a></th>";
 echo "					<th><a href=\"$base_url_list&sort=compliance_exception_description\">Description</a></th>";
 echo "					<th><center><a href=\"$base_url_list&sort=compliance_exception_author\">Author</a></th>";
-# echo "					<th><center><a href=\"$base_url&sort=compliance_exception_status\">Status</a></th>";
+echo "					<th><center><a href=\"$base_url&sort=compliance_exception_expiration\">Expiration</a></th>";
 ?>
 				</tr>
 			</thead>
@@ -104,7 +104,7 @@ echo "					<th><center><a href=\"$base_url_list&sort=compliance_exception_author
 			<tbody>
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
-	if ($sort == "compliance_exception_title" OR $sort == "compliance_exception_description" OR $sort == "compliance_exception_author" OR $sort == "compliance_exception_status") {
+	if ($sort == "compliance_exception_title" OR $sort == "compliance_exception_description" OR $sort == "compliance_exception_author" OR $sort == "compliance_exception_expiration") {
 	$compliance_exception_list = list_compliance_exception(" WHERE compliance_exception_disabled = 0 ORDER by $sort");
 	} elseif (is_numeric($sort)) {
 	$compliance_exception_list = list_compliance_exception(" WHERE compliance_exception_disabled = 0 AND compliance_exception_id = \"$sort\" ORDER by $sort");
@@ -129,7 +129,7 @@ echo "						</div>";
 echo "					</td>";
 echo "					<td>$compliance_exception_item[compliance_exception_description]</td>";
 echo "					<td><center>$compliance_exception_item[compliance_exception_author]</td>";
-# echo "					<td><center>$compliance_exception_item[compliance_exception_status]</td>";
+echo "					<td><center>$compliance_exception_item[compliance_exception_expiration]</td>";
 echo "				</tr>";
 	}
 

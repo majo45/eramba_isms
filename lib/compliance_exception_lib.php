@@ -20,7 +20,7 @@ function add_compliance_exception($compliance_exception_data) {
 		\"$compliance_exception_data[compliance_exception_title]\",
 		\"$compliance_exception_data[compliance_exception_description]\",
 		\"$compliance_exception_data[compliance_exception_author]\",
-		\"$compliance_exception_data[compliance_exception_status]\",
+		\"$compliance_exception_data[compliance_exception_expiration]\",
 		\"0\"
 		)
 		";	
@@ -35,7 +35,7 @@ function update_compliance_exception($compliance_exception_data, $compliance_exc
 		compliance_exception_title=\"$compliance_exception_data[compliance_exception_title]\",
 		compliance_exception_description=\"$compliance_exception_data[compliance_exception_description]\",
 		compliance_exception_author=\"$compliance_exception_data[compliance_exception_author]\",
-		compliance_exception_status=\"$compliance_exception_data[compliance_exception_status]\"
+		compliance_exception_expiration=\"$compliance_exception_data[compliance_exception_expiration]\"
 		WHERE
 		compliance_exception_id=\"$compliance_exception_id\"
 		";	
