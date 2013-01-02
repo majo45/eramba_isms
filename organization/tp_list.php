@@ -90,7 +90,7 @@ echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 				<tr>
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
-echo "					<th><a class=\"asc\" href=\"$base_url_list&sort=tp_name\">Legal name</a></th>";
+echo "					<th><a class=\"asc\" href=\"$base_url_list&sort=tp_name\">Third Party name</a></th>";
 ?>
 <?
 echo "					<th><a href=\"$base_url_list&sort=tp_type_id\">Type</a></th>";
