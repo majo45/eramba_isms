@@ -151,7 +151,7 @@ echo "						<div class=\"cell-actions\">";
 echo "							<a href=\"$base_url_edit&action=edit&system_users_id=$system_users_item[system_users_id]\" class=\"edit-action\">edit</a> ";
 if ($system_users_item['system_users_group_role_id'] != -1) {
 echo "						&nbsp;|&nbsp;";
-echo "							<a href=\"$base_ur_listl&action=disable&system_users_id=$system_users_item[system_users_id]\" class=\"delete-action\">delete</a>";
+echo "							<a href=\"$base_ur_list&action=disable&system_users_id=$system_users_item[system_users_id]\" class=\"delete-action\">delete</a>";
 }
 echo "						&nbsp;|&nbsp;";
 echo "							<a href=\"?section=system&subsection=system_records&system_records_lookup_section=organization&system_records_lookup_subsection=system_users&system_records_lookup_item_id=$system_users_item[system_users_id]\" class=\"delete-action\">records</a>";
