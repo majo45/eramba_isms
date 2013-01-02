@@ -126,7 +126,7 @@ echo "							<a href=\"$base_url_list&action=disable&tp_id=$tp_item[tp_id]\" cla
 echo "						&nbsp;|&nbsp;";
 echo "							<a href=\"?section=system&subsection=system_records&system_records_lookup_section=organization&system_records_lookup_subsection=tp&system_records_lookup_item_id=$tp_item[tp_id]\" class=\"delete-action\">records</a>";
 echo "						&nbsp;|&nbsp;";
-echo "							<a href=\"?section=operations&subsection=project_improvements&system_records_lookup_section=organization&system_records_lookup_subsection=tp&system_records_lookup_item_id=$tp_item[tp_id]\" class=\"delete-action\">improve</a>";
+echo "							<a href=\"?section=operations&subsection=project_improvements_list&system_records_lookup_section=organization&system_records_lookup_subsection=tp&system_records_lookup_item_id=$tp_item[tp_id]\" class=\"delete-action\">improve</a>";
 echo "						</div>";
 echo "					</td>";
 echo "					<td>$tp_type_name[tp_type_name]</td>";

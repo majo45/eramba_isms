@@ -124,7 +124,7 @@ echo "						&nbsp;|&nbsp;";
 echo "					<a href=\"$base_url_list&action=disable&compliance_exception_id=$compliance_exception_item[compliance_exception_id]\" class=\"delete-action\">delete</a>";
 echo "						&nbsp;|&nbsp;";
 echo "					<a href=\"?section=system&subsection=system_records&system_records_lookup_section=compliance&system_records_lookup_subsection=compliance_exception&system_records_lookup_item_id=$compliance_exception_item[compliance_exception_id]\" class=\"edit-action delete-action\">records</a>";
-echo "					<a href=\"?action=edit&section=operations&subsection=project_improvements&ciso_pmo_lookup_section=compliance&ciso_pmo_lookup_subsection=compliance_exception&ciso_pmo_lookup_item_id=$compliance_exception_item[compliance_exception_id]\" class=\"delete-action\">improve</a>";
+echo "					<a href=\"?action=edit&section=operations&subsection=project_improvements_edit&ciso_pmo_lookup_section=compliance&ciso_pmo_lookup_subsection=compliance_exception&ciso_pmo_lookup_item_id=$compliance_exception_item[compliance_exception_id]\" class=\"delete-action\">improve</a>";
 echo "						</div>";
 echo "					</td>";
 echo "					<td>$compliance_exception_item[compliance_exception_description]</td>";

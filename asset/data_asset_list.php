@@ -142,7 +142,7 @@ echo "							<a href=\"$base_url_list&action=disable_data_asset&data_asset_id=$d
 echo "						&nbsp;|&nbsp;";
 echo "							<a href=\"?section=system&subsection=system_records&system_records_lookup_section=asset&system_records_lookup_subsection=data_asset&system_records_lookup_item_id=$data_asset_item[data_asset_id]\" class=\"delete-action\">records</a>";
 echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"delete\" href=\"?section=operations&subsection=project_improvements&ciso_pmo_lookup_section=asset&ciso_pmo_lookup_subsection=asset_identification&ciso_pmo_lookup_item_id=$data_asset_item[data_asset_id]\">improve</a>";
+echo "						<a class=\"delete\" href=\"?section=operations&subsection=project_improvements_edit&ciso_pmo_lookup_section=asset&ciso_pmo_lookup_subsection=asset_identification&ciso_pmo_lookup_item_id=$data_asset_item[data_asset_id]\">improve</a>";
 echo "								</div>";
 echo "							</td>";
 echo "							<td>$data_asset_item[data_asset_description]</td>";

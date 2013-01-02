@@ -147,7 +147,7 @@ echo "							<a href=\"$base_url_list&action=disable&service_contracts_id=$servi
 echo "						&nbsp;|&nbsp;";
 echo "							<a href=\"?section=system&subsection=system_records&system_records_lookup_section=security_services&system_records_lookup_subsection=service_contracts&system_records_lookup_item_id=$service_contracts_item[service_contracts_id]\" class=\"delete-action\">records</a>";
 echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"delete\" href=\"?section=operations&subsection=project_improvements&operations_pmo_lookup_section=asset&operations_pmo_lookup_subsection=asset_identification&operations_pmo_lookup_item_id=$service_contracts_item[service_contracts_id]\">improve</a>";
+echo "						<a class=\"delete\" href=\"?section=operations&subsection=project_improvements_edit&operations_pmo_lookup_section=asset&operations_pmo_lookup_subsection=asset_identification&operations_pmo_lookup_item_id=$service_contracts_item[service_contracts_id]\">improve</a>";
 echo "								</div>";
 echo "							</td>";
 echo "							<td>$service_contracts_item[service_contracts_description]</td>";

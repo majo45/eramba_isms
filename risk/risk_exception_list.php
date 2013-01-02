@@ -125,7 +125,7 @@ echo "						&nbsp;|&nbsp;";
 echo "					<a href=\"$base_url_list&action=disable&risk_exception_id=$risk_exception_item[risk_exception_id]\" class=\"delete-action\">delete</a>";
 echo "						&nbsp;|&nbsp;";
 echo "					<a href=\"?section=system&subsection=system_records&system_records_lookup_section=risk&system_records_lookup_subsection=risk_exception&system_records_lookup_item_id=$risk_exception_item[risk_exception_id]\" class=\"edit-action delete-action\">records</a>";
-echo "					<a href=\"?action=edit&section=operations&subsection=project_improvements&ciso_pmo_lookup_subsection=risk_exception&ciso_pmo_lookup_item_id=$risk_exception_item[risk_exception_id]\" class=\"delete-action\">improve</a>";
+echo "					<a href=\"?action=edit&section=operations&subsection=project_improvements_edit&ciso_pmo_lookup_subsection=risk_exception&ciso_pmo_lookup_item_id=$risk_exception_item[risk_exception_id]\" class=\"delete-action\">improve</a>";
 echo "						</div>";
 echo "					</td>";
 echo "					<td>$risk_exception_item[risk_exception_description]</td>";

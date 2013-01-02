@@ -140,7 +140,7 @@ echo "						<a class=\"delete\" href=\"$base_url_edit_process&action=edit_proces
 echo "						&nbsp;|&nbsp;";
 echo "						<a class=\"delete\" href=\"?section=system&subsection=system_records&system_records_lookup_section=organization&system_records_lookup_subsection=bu&system_records_lookup_item_id=$bu_item[bu_id]\">records</a>";
 echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"delete\" href=\"?section=operations&subsection=project_improvements&ciso_pmo_lookup_section=organization&ciso_pmo_lookup_subsection=bu&ciso_pmo_lookup_item_id=$bu_item[bu_id]\">improve</a>";
+echo "						<a class=\"delete\" href=\"?section=operations&subsection=project_improvements_edit&ciso_pmo_lookup_section=organization&ciso_pmo_lookup_subsection=bu&ciso_pmo_lookup_item_id=$bu_item[bu_id]\">improve</a>";
 echo "					</span>";
 echo "					<span class=\"icon\"></span>";
 echo "				</div>";
@@ -165,7 +165,7 @@ echo "							<a href=\"$base_url_list&action=disable_process&process_id=$process
 echo "						&nbsp;|&nbsp;";
 echo "							<a href=\"?section=system&subsection=system_records&system_records_lookup_section=organization&system_records_lookup_subsection=bu-process&system_records_lookup_item_id=$process_item[process_id]\" class=\"delete-action\">records</a>";
 echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"delete\" href=\"?section=operations&subsection=project_improvements&ciso_pmo_lookup_section=asset&ciso_pmo_lookup_subsection=asset_identification&ciso_pmo_lookup_item_id=$process_item[process_id]\">improve</a>";
+echo "						<a class=\"delete\" href=\"?section=operations&subsection=project_improvements_edit&ciso_pmo_lookup_section=asset&ciso_pmo_lookup_subsection=asset_identification&ciso_pmo_lookup_item_id=$process_item[process_id]\">improve</a>";
 echo "								</div>";
 echo "							</td>";
 echo "							<td>$process_item[process_description]</td>";

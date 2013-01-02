@@ -116,7 +116,7 @@ echo "							<a href=\"$base_url_list&action=disable&legal_id=$legal_item[legal_
 echo "						&nbsp;|&nbsp;";
 echo "							<a href=\"?section=system&subsection=system_records&system_records_lookup_section=organization&system_records_lookup_subsection=legal&system_records_lookup_item_id=$legal_item[legal_id]\" class=\"delete-action\">records</a>";
 echo "						&nbsp;|&nbsp;";
-echo "							<a href=\"?section=operations&subsection=project_improvements&system_records_lookup_section=organization&system_records_lookup_subsection=legal&system_records_lookup_item_id=$legal_item[legal_id]\" class=\"delete-action\">improve</a>";
+echo "							<a href=\"?section=operations&subsection=project_improvements_edit&system_records_lookup_section=organization&system_records_lookup_subsection=legal&system_records_lookup_item_id=$legal_item[legal_id]\" class=\"delete-action\">improve</a>";
 echo "						</div>";
 echo "					</td>";
 echo "					<td>$legal_item[legal_description]</td>";

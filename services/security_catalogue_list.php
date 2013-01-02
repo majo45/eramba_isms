@@ -191,7 +191,7 @@ echo "						<a class=\"delete\" href=\"$base_url_list&action=disable&security_se
 echo "						&nbsp;|&nbsp;";
 echo "						<a class=\"delete\" href=\"?section=system&subsection=system_records&system_records_lookup_section=security_services&system_records_lookup_subsection=security_catalogue&system_records_lookup_item_id=$security_services_item[security_services_id]\">records</a>";
 echo "						&nbsp;|&nbsp;";
-echo "						<a class=\"delete\" href=\"?action=edit&section=operations&subsection=project_improvements&ciso_pmo_lookup_section=security_services&ciso_pmo_lookup_subsection=security_catalogue&ciso_pmo_lookup_item_id=$security_services_item[security_services_id]\">improve</a>";
+echo "						<a class=\"delete\" href=\"?action=edit&section=operations&subsection=project_improvements_edit&ciso_pmo_lookup_section=security_services&ciso_pmo_lookup_subsection=security_catalogue&ciso_pmo_lookup_item_id=$security_services_item[security_services_id]\">improve</a>";
 echo "					</span>";
 echo "					<span class=\"icon\"></span>";
 echo "				</div>";

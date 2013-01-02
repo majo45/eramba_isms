@@ -149,7 +149,7 @@ echo "			<a href=\"$base_url_edit&action=edit&tp_id=$tp_id&compliance_package_it
 echo "			&nbsp;|&nbsp;";
 echo "			<a href=\"?section=system&subsection=system_records&system_records_lookup_section=compliance&system_records_lookup_subsection=compliance_management&system_records_lookup_item_id=$compliance_package_item_item[compliance_package_item_name]\" class=\"delete-action\">records</a>";
 echo "			&nbsp;|&nbsp;";
-echo "			<a href=\"?section=operations&subsection=project_improvements&system_records_lookup_section=organization&system_records_lookup_subsection=tp&system_records_lookup_item_id=$tp_item[tp_id]\" class=\"delete-action\">improve</a>";
+echo "			<a href=\"?section=operations&subsection=project_improvements_edit&system_records_lookup_section=organization&system_records_lookup_subsection=tp&system_records_lookup_item_id=$tp_item[tp_id]\" class=\"delete-action\">improve</a>";
 echo "			</div>";
 echo "		</td>";
 echo "			<td>$compliance_package_item_item[compliance_package_item_description]</td>";
