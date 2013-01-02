@@ -28,6 +28,12 @@ echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/chosen.css\" />";
 echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/chosen.css\" />";
 ?>
 
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+
+    <script type="text/javascript">
+      google.load('visualization', '1', {packages: ['corechart']});
+    </script>
+
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.2/themes/base/jquery-ui.css" />
 	<script>
 		$(function() {
