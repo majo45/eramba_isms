@@ -79,7 +79,7 @@ CREATE TABLE `asset_dashboard_tbl` (
   `asset_dashboard_date` date DEFAULT NULL,
   `asset_dashboard_disabled` int(11) DEFAULT '1',
   PRIMARY KEY (`asset_dashboard_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -88,6 +88,7 @@ CREATE TABLE `asset_dashboard_tbl` (
 
 LOCK TABLES `asset_dashboard_tbl` WRITE;
 /*!40000 ALTER TABLE `asset_dashboard_tbl` DISABLE KEYS */;
+INSERT INTO `asset_dashboard_tbl` VALUES (2,0,0,0,'2013-01-02',0);
 /*!40000 ALTER TABLE `asset_dashboard_tbl` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -191,7 +192,7 @@ CREATE TABLE `compliance_dashboard_tbl` (
   `compliance_dashboard_date` date DEFAULT NULL,
   `compliance_dashboard_disabled` int(11) DEFAULT '1',
   PRIMARY KEY (`compliance_dashboard_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -200,6 +201,7 @@ CREATE TABLE `compliance_dashboard_tbl` (
 
 LOCK TABLES `compliance_dashboard_tbl` WRITE;
 /*!40000 ALTER TABLE `compliance_dashboard_tbl` DISABLE KEYS */;
+INSERT INTO `compliance_dashboard_tbl` VALUES (4,0,0,0,0,0,0,0,'2013-01-02',0);
 /*!40000 ALTER TABLE `compliance_dashboard_tbl` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -675,7 +677,7 @@ CREATE TABLE `risk_dashboard_tbl` (
   `risk_dashboard_date` date DEFAULT NULL,
   `risk_dashboard_disabled` int(11) DEFAULT '1',
   PRIMARY KEY (`risk_dashboard_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -684,6 +686,7 @@ CREATE TABLE `risk_dashboard_tbl` (
 
 LOCK TABLES `risk_dashboard_tbl` WRITE;
 /*!40000 ALTER TABLE `risk_dashboard_tbl` DISABLE KEYS */;
+INSERT INTO `risk_dashboard_tbl` VALUES (2,0,0,'2013-01-02',0);
 /*!40000 ALTER TABLE `risk_dashboard_tbl` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -913,7 +916,7 @@ CREATE TABLE `security_operations_dashboard_tbl` (
   `security_operations_dashboard_date` date DEFAULT NULL,
   `security_operations_dashboard_disabled` int(11) DEFAULT '1',
   PRIMARY KEY (`security_operations_dashboard_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -922,6 +925,7 @@ CREATE TABLE `security_operations_dashboard_tbl` (
 
 LOCK TABLES `security_operations_dashboard_tbl` WRITE;
 /*!40000 ALTER TABLE `security_operations_dashboard_tbl` DISABLE KEYS */;
+INSERT INTO `security_operations_dashboard_tbl` VALUES (2,0,0,0,0,0,0,0,0,'2013-01-02',0);
 /*!40000 ALTER TABLE `security_operations_dashboard_tbl` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1076,7 +1080,7 @@ CREATE TABLE `security_services_dashboard_tbl` (
   `security_services_dashboard_date` date DEFAULT NULL,
   `security_services_dashboard_disabled` int(11) DEFAULT '1',
   PRIMARY KEY (`security_services_dashboard_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1085,6 +1089,7 @@ CREATE TABLE `security_services_dashboard_tbl` (
 
 LOCK TABLES `security_services_dashboard_tbl` WRITE;
 /*!40000 ALTER TABLE `security_services_dashboard_tbl` DISABLE KEYS */;
+INSERT INTO `security_services_dashboard_tbl` VALUES (5,0,0,0,0,0,0,0,0,0,'2013-01-02',0);
 /*!40000 ALTER TABLE `security_services_dashboard_tbl` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1273,6 +1278,7 @@ CREATE TABLE `system_conf_pwd_tbl` (
 
 LOCK TABLES `system_conf_pwd_tbl` WRITE;
 /*!40000 ALTER TABLE `system_conf_pwd_tbl` DISABLE KEYS */;
+INSERT INTO `system_conf_pwd_tbl` VALUES (1,1355339512,1,'5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8');
 /*!40000 ALTER TABLE `system_conf_pwd_tbl` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1290,7 +1296,7 @@ CREATE TABLE `system_dashboard_tbl` (
   `system_dashboard_date` date DEFAULT NULL,
   `system_dashboard_disabled` int(11) DEFAULT '1',
   PRIMARY KEY (`system_dashboard_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1299,6 +1305,7 @@ CREATE TABLE `system_dashboard_tbl` (
 
 LOCK TABLES `system_dashboard_tbl` WRITE;
 /*!40000 ALTER TABLE `system_dashboard_tbl` DISABLE KEYS */;
+INSERT INTO `system_dashboard_tbl` VALUES (3,1,1,'2013-01-02',0);
 /*!40000 ALTER TABLE `system_dashboard_tbl` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1345,7 +1352,7 @@ CREATE TABLE `system_records_tbl` (
   `system_records_notes` text,
   `system_records_date` datetime DEFAULT NULL,
   PRIMARY KEY (`system_records_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5545 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5547 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1354,6 +1361,7 @@ CREATE TABLE `system_records_tbl` (
 
 LOCK TABLES `system_records_tbl` WRITE;
 /*!40000 ALTER TABLE `system_records_tbl` DISABLE KEYS */;
+INSERT INTO `system_records_tbl` VALUES (5543,'system','system_roles','','','Insert','','2013-01-02 21:13:35'),(5544,'system','system_roles','5','','Update','','2013-01-02 21:13:42'),(5545,'system','system_authorization','','admin','Wrong Login','','2013-01-02 21:18:17'),(5546,'system','system_authorization','1','admin','Login','','2013-01-02 21:21:39');
 /*!40000 ALTER TABLE `system_records_tbl` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1446,4 +1454,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-01-02 21:14:17
+-- Dump completed on 2013-01-02 21:22:32
