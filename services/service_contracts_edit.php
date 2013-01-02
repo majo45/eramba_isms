@@ -43,6 +43,7 @@
 <?
 echo "					<form name=\"service_contracts_edit\" method=\"GET\" action=\"$base_url_list\">";
 ?>
+
 						<label for="name">Service Contract Name</label>
 						<span class="description">Give a name to the contract you have in between this provider and your organization. Examples: Firewall Hardware Support, Firewall Consulting Time, Etc.</span>
 <?
@@ -61,14 +62,16 @@ echo "						<textarea id=\"\" name=\"service_contracts_description\">$service_co
 echo "						<input type=\"text\" name=\"service_contracts_value\" id=\"\" value=\"$service_contracts_item[service_contracts_value]\"/>";
 ?>
 						
-				<label for="name">Service Contract Start and End Dates</label>
+				<label for="name">Service Contract Start Date</label>
 				<span class="description">Service contracts usually have a start and end dates. This will help you to keep track of renovations (altough service providers are quite good at reminding that to us ... right?) ... the date format is YYYY-MM-DD</span>
 <?
 echo "						<input type=\"text\" name=\"service_contracts_start\" value=\"$service_contracts_item[service_contracts_start]\"/>";
-echo "<br>";
-echo "<br>";
-echo "						<input type=\"text\" name=\"service_contracts_end\" value=\"$service_contracts_item[service_contracts_end]\"/>";
+?>
 
+				<label for="name">Service Contract Start Date</label>
+				<span class="description">Service contracts usually have a start and end dates. This will help you to keep track of renovations (altough service providers are quite good at reminding that to us ... right?) ... the date format is YYYY-MM-DD</span>
+<?
+echo "						<input type=\"text\" name=\"service_contracts_end\" value=\"$service_contracts_item[service_contracts_end]\"/>";
 ?>
 
 				</div>

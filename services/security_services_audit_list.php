@@ -191,8 +191,7 @@ echo "			</li>";
 
 
 	$this_month = give_me_this_month();
-	$this_month++;
-	$three_months = $this_month+3;
+	$three_months = 12-($this_month+1);
 
 	$list_of_planned_audits = list_security_services_audit_unique(" WHERE security_services_audit_disabled =\"0\" and security_services_audit_calendar_id > \"$this_month\" and security_services_audit_calendar_id < \"$three_months\"");
 
@@ -279,7 +278,6 @@ echo "			</li>";
 	}
 
 	} else {
-	echo "end";
 	}
 	
 ?>

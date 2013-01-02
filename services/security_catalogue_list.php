@@ -93,7 +93,7 @@
 			'security_services_cost_operational_resource' => $security_services_cost_operational_resource,
 			'security_services_cost_disabled' => $security_services_cost_disabled
 		);	
-		$security_service_id = add_security_services($security_services_update);
+		$security_services_id = add_security_services($security_services_update);
 		# when inserting security catalogues i need to look at the asociated reviews (audit)
 		# add_security_services_audit_v2($security_service_id);	
 
@@ -116,7 +116,6 @@
 		
 		# add all service contracts
 		foreach($service_contracts_id as $service_contracts_item) {
-			echo "puta .. agregando: $service_contracts_item, $security_services_id<br>";
 			add_service_contracts_security_services($service_contracts_item, $security_services_id);
 		}
 	 }

@@ -41,7 +41,7 @@ echo "					<form name=\"compliance_package_edit\" method=\"GET\" action=\"$base_
 						<select name="compliance_package_tp_id" id="" class="chzn-select">
 						<option value="-1">Select a Third Party</option>
 <?
-						list_drop_menu_tp($compliance_package_tp_id,"tp_name");	
+						list_drop_menu_tp($compliance_package_item[compliance_package_tp_id],"tp_name");	
 ?>
 						</select>
 						<label for="name">Compliance Package Id</label>

@@ -204,6 +204,7 @@ $result = runQuery($sql);
 
 # open file
 $export_file = "downloads/security_services_audit_export.csv";
+
 $handler = fopen($export_file, 'w');
 	
 fwrite($handler, "security_services_audit_id,security_service_name,security_services_audit_status,planned_execution,security_services_audit_metric,security_services_audit_criteria,security_services_audit_start_audit_date,security_services_audit_end_audit_date,security_services_audit_auditor,security_services_audit_result,security_services_audit_result_description,security_services_audit_disabled\n");

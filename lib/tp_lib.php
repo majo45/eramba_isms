@@ -58,7 +58,7 @@ function lookup_tp($search_parameter, $item_id) {
 function list_drop_menu_tp($pre_selected_items='', $order_clause='') {
 
 	if ($order_clause) {
-		$order_clause = " ORDER BY ".$order_clause."";
+	$order_clause = " ORDER BY ".$order_clause."";
 	}
 
 	# MUST EDIT

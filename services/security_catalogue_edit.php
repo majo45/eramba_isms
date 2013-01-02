@@ -106,8 +106,8 @@ echo "				<textarea id=\"\" name=\"security_services_audit_success_criteria\">$s
 ?>
 						</select>
 
-		<label for="name">Service Cost</label>
-		<span class="description">For those of you who must keep budgets tidy, it's important to keep as clear as possible how much effort is required to operate the service in financial (OPEX, CAPEX) and human terms (operational resource utilization).</span>
+		<label for="name">Service Cost (OPEX)</label>
+		<span class="description">For those of you who must keep budgets tidy, it's important to keep as clear as possible how much effort is required to operate the service in financial (OPEX).</span>
 
 <?
 				if (empty($security_services_item[security_services_cost_opex])) { 
@@ -116,14 +116,19 @@ echo "				<input type=\"text\" name=\"security_services_cost_opex\" value=\"Exam
 echo "				<input type=\"text\" name=\"security_services_cost_opex\" value=\"$security_services_item[security_services_cost_opex]\"/>";
 				}
 
-echo "<br><br>";
+echo "		<label for=\"name\">Service Cost (CAPEX)</label>";
+echo "		<span class=\"description\">For those of you who must keep budgets tidy, it's important to keep as clear as possible how much effort is required to operate the service in financial (CAPEX)</span>";
+
 				if (empty($security_services_item[security_services_cost_capex])) { 
 echo "				<input type=\"text\" name=\"security_services_cost_capex\" value=\"Example: 600\"/>";
 				} else {
 echo "				<textarea id=\"\" name=\"security_services_cost_capex\">$security_services_item[security_services_cost_capex]</textarea>";
 				}
 
-echo "<br><br>";
+echo "		<label for=\"name\">Service Cost (Resource Utilization)</label>";
+echo "		<span class=\"description\">Define what resource utilization in FTE (full time employees) this control requires. Example: 1.5 (one full time and a half)</span>";
+
+
 
 				if (empty($security_services_item[security_services_cost_operational_resource])) { 
 echo "				<input type=\"text\" name=\"security_services_cost_operational_resource\" value=\"Example: 1.5\"/>";

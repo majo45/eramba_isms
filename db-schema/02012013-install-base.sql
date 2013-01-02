@@ -950,6 +950,7 @@ CREATE TABLE `security_services_audit_calendar_tbl` (
 
 LOCK TABLES `security_services_audit_calendar_tbl` WRITE;
 /*!40000 ALTER TABLE `security_services_audit_calendar_tbl` DISABLE KEYS */;
+INSERT INTO `security_services_audit_calendar_tbl` VALUES (1,'Jan',1),(2,'Feb',2),(3,'Mar',3),(4,'Apr',4),(5,'May',5),(6,'Jun',6),(7,'Jul',7),(8,'Aug',8),(9,'Sep',9),(10,'Oct',10),(11,'Nov',11),(12,'Dec',12);
 /*!40000 ALTER TABLE `security_services_audit_calendar_tbl` ENABLE KEYS */;
 UNLOCK TABLES;
 

@@ -74,10 +74,12 @@
 		<br>
 		<div class="controls-wrapper">
 			
-			<!--<a href="#" class="actions-btn">
-				Actions
-				<span class="select-icon"></span>
-			</a>-->
+<?
+echo "			<a href=\"$base_url_edit\" class=\"add-btn\">";
+?>
+				<span class="add-icon"></span>
+				Add new Service Contract 
+			</a>
 
 			<div class="actions-wraper">
 				<a href="#" class="actions-btn">
@@ -102,6 +104,13 @@ echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 			
 <?
 	$tp_list = list_tp(" WHERE tp_disabled = \"0\" AND tp_type_id = \"2\"");
+
+	if (count($tp_list) == "0") {
+		echo "<br>";
+		echo "You first need to define Suppliers using the Third Party section";
+		exit;
+	}
+
 	foreach($tp_list as $tp_item) {
 echo "			<li>";
 echo "				<div class=\"header\">";
