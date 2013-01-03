@@ -15,7 +15,7 @@
 	$action = $_GET["action"];
 	$service_contracts_id= $_GET["service_contracts_id"];
 	
-	$base_url_list = build_base_url($section,"service_contracts_edit");
+	$base_url_list = build_base_url($section,"service_contracts_list");
 
 	if (is_numeric($service_contracts_id)) {
 		$service_contracts_item = lookup_service_contracts("service_contracts_id",$service_contracts_id);

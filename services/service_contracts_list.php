@@ -74,12 +74,6 @@
 		<br>
 		<div class="controls-wrapper">
 			
-<?
-echo "			<a href=\"$base_url_edit\" class=\"add-btn\">";
-?>
-				<span class="add-icon"></span>
-				Add new Service Contract 
-			</a>
 
 			<div class="actions-wraper">
 				<a href="#" class="actions-btn">
