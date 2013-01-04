@@ -109,8 +109,12 @@ function disable_system_users($item_id) {
 		return;
 	}
 	# MUST EDIT
-	$sql = "UPDATE system_users_tbl SET system_users_disabled=\"1\" WHERE system_users_id = \"$item_id\""; 
-	$result = runUpdateQuery($sql);
+	$sql = "SELECT system_users_group_role_id FROM system_users_tbl WHERE system_users_id = \"$item_id\"";
+	$result = runSmallQuery($sql);
+	if ($result['system_users_group_role_id'] != -1) {
+		$sql = "UPDATE system_users_tbl SET system_users_disabled=\"1\" WHERE system_users_id = \"$item_id\"";
+		$result = runUpdateQuery($sql);
+	}	
 	return;
 }
 

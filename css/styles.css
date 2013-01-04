@@ -127,6 +127,7 @@ ul {
 	height: 40px;
 }
 #menu-top ul#menu-items {
+	overflow: hidden;
 }
 #menu-top ul#menu-items li {
 	float: left;
